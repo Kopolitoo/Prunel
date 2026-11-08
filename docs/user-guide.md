@@ -210,3 +210,6 @@ rights). Updates keep it.
 - Tested with the Tobii Dynavox PCEye 5 only.
 - The game mode with relative mouse movement has not been tested yet.
 - The personal dictionary is shared between languages.
+- With the PCEye 5, Windows Hello face recognition uses the eyetracker's camera: while it
+  recognises your face, the circle stays frozen. Confirm with your PIN instead (Windows Settings ›
+  Accounts › Sign-in options), or use another camera that works with Windows Hello.
