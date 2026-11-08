@@ -213,3 +213,12 @@ rights). Updates keep it.
 - With the PCEye 5, Windows Hello face recognition uses the eyetracker's camera: while it
   recognises your face, the circle stays frozen. Confirm with your PIN instead (Windows Settings ›
   Accounts › Sign-in options), or use another camera that works with Windows Hello.
+- The circle can jitter, above all at the bottom of the screen, when the eyes are half closed
+  (tiredness) or when a strong light dazzles the eyetracker's camera (sun from the side, for
+  example). It is a limit of the eyetracker: its own software (TD Control) does the same. What
+  helps: close a curtain or a blind; calibrate again in these conditions (Settings, "Tools" tab);
+  save a calmer [settings profile](#settings) (for example "Tired"), to load at these moments:
+  lower **Smoothing** ("Gaze" tab, for example 0.05) and a larger **Fixation radius**
+  ("Fixation" tab, for example 2.6). The circle is calmer, but follows the gaze a bit later. To
+  compare, the **Diagnostic** window ("Tools" tab) shows how steady the gaze is at the top, the
+  middle and the bottom of the screen.

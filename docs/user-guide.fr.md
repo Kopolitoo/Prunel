@@ -234,3 +234,13 @@ gardent.
   l'eyetracker : pendant qu'elle reconnaît le visage, le cercle reste figé. Validez plutôt avec le
   code PIN (Paramètres Windows › Comptes › Options de connexion), ou utilisez une autre caméra
   compatible Windows Hello.
+- Le cercle peut sautiller, surtout en bas de l'écran, quand les yeux sont plissés (fatigue) ou
+  qu'une lumière forte éblouit la caméra de l'eyetracker (le soleil de côté, par exemple). C'est
+  une limite de l'eyetracker : son propre logiciel (TD Control) fait pareil. Ce qui aide : fermer
+  un rideau ou un store ; refaire la calibration dans ces conditions (Paramètres, onglet
+  « Outils ») ; enregistrer un [profil de réglages](#paramètres) plus calme (par exemple
+  « Fatigue »), à charger à ces moments-là : un **Lissage** plus petit (onglet « Regard », par
+  exemple 0.05) et un **Rayon de fixation** plus grand (onglet « Fixation », par exemple 2.6). Le
+  cercle est plus calme, mais suit le regard un peu plus tard. Pour comparer, la fenêtre
+  **Diagnostic** (onglet « Outils ») montre la stabilité du regard en haut, au milieu et en bas de
+  l'écran.
