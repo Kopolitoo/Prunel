@@ -259,7 +259,10 @@ de cliquer (voix, souris) pendant l'installation.
    « Terminer » avec « Exécuter Prunel » coché : Prunel démarre et le journal dit « UI access:
    yes ».
 2. `C:\Program Files\Prunel` existe, Prunel est dans le menu Démarrer et dans « Paramètres >
-   Applications » de Windows.
+   Applications » de Windows. L'installateur a montré une seule page, « Créer une icône sur le
+   Bureau » cochée, avec un bouton « Installer » (pas de « Suivant » en plus) : un raccourci
+   Prunel est sur le Bureau et le démarre. La désinstallation retire ce raccourci. L'épinglage à
+   la main (menu Démarrer, clic droit sur Prunel, « Épingler à la barre des tâches ») marche.
 3. Ouvrir le menu Démarrer de Windows : le cercle du regard reste visible au-dessus, et un regard
    fixe puis un clic gauche ouvre un élément du menu.
 4. Lancer le Bloc-notes en administrateur (clic droit, « Exécuter en tant qu'administrateur ») :

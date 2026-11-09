@@ -217,14 +217,20 @@ Pour installer ou mettre à jour :
    protégé votre ordinateur » ; cliquer sur « Informations complémentaires », puis « Exécuter
    quand même ». Windows demande ensuite « Voulez-vous autoriser cette application à apporter des
    modifications à votre appareil ? » : répondre « Oui ».
-3. L'installateur parle la langue de Windows. Cliquer sur « Installer », puis « Terminer » avec
+3. L'installateur parle la langue de Windows. « Créer une icône sur le Bureau » est coché
+   (décocher si vous n'en voulez pas). Cliquer sur « Installer », puis « Terminer » avec
    « Exécuter Prunel » coché : Prunel démarre depuis `C:\Program Files\Prunel`.
+
+Pour épingler Prunel à la barre des tâches : Windows ne laisse pas un programme s'épingler
+lui-même, mais quelques regards suffisent. Ouvrir le menu Démarrer, trouver Prunel (taper ou dire
+« Prunel » dans la recherche), faire un clic droit dessus (choix d'action), puis « Épingler à la
+barre des tâches ».
 
 Ce que fait l'installateur : il copie Prunel dans `C:\Program Files\Prunel`, crée un
 certificat sur cet ordinateur, le fait approuver par l'ordinateur, signe `Prunel.exe` avec, puis
 supprime la clé privée du certificat (plus rien ne pourra jamais être signé avec). Un nouveau
-certificat est créé à chaque mise à jour. Il ajoute aussi Prunel au menu Démarrer et à
-« Paramètres > Applications » de Windows. Vos réglages sont gardés. Si « Démarrer avec Windows »
+certificat est créé à chaque mise à jour. Il ajoute aussi Prunel au menu Démarrer, au Bureau si la case est
+cochée, et à « Paramètres > Applications » de Windows. Vos réglages sont gardés. Si « Démarrer avec Windows »
 est activé, Prunel met lui-même à jour son lancement au démarrage. Il met aussi à jour une copie
 installée par l'ancien script `Install.cmd`.
 

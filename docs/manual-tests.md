@@ -241,7 +241,11 @@ Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull 
    click "Install", then "Finish" with "Launch Prunel" ticked: Prunel starts and the log says
    "UI access: yes".
 2. `C:\Program Files\Prunel` exists, Prunel is in the Start menu and in "Settings > Apps"
-   of Windows.
+   of Windows. The installer showed one page, "Create a desktop shortcut" ticked, with an
+   "Install" button (no extra "Next"): a Prunel shortcut is on the desktop and starts it.
+   Running the installer again with the box unticked removes nothing by itself, but uninstalling
+   removes the desktop shortcut. Pinning by hand (Start menu, right click on Prunel, "Pin to
+   taskbar") works.
 3. Open the Windows Start menu: the gaze circle stays visible above it, and a fixed gaze then a
    left click opens an item of the menu.
 4. Start Notepad as administrator (right click, "Run as administrator"): a click by gaze puts

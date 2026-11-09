@@ -200,13 +200,19 @@ To install or update:
 2. The installer is not signed by a known publisher, so Windows may show "Windows protected
    your PC": click "More info", then "Run anyway". Windows then asks "Do you want to allow this
    app to make changes to your device?": answer "Yes".
-3. The installer speaks the language of Windows. Click "Install", then "Finish" with "Launch
-   Prunel" ticked: Prunel starts from `C:\Program Files\Prunel`.
+3. The installer speaks the language of Windows. "Create a desktop shortcut" is ticked (untick
+   it if you do not want one). Click "Install", then "Finish" with "Launch Prunel" ticked: Prunel
+   starts from `C:\Program Files\Prunel`.
+
+To pin Prunel to the taskbar: Windows does not let a program pin itself, but it takes a few
+looks. Open the Start menu, find Prunel (type or say "Prunel" in the search), right click on it
+(action choice), then "Pin to taskbar".
 
 What the installer does: it copies Prunel to `C:\Program Files\Prunel`, creates a certificate
 on this computer, makes the computer trust it, signs `Prunel.exe` with it, then deletes the
 certificate's private key (nothing else can ever be signed with it). A new certificate is made at
-each update. It also adds Prunel to the Start menu and to "Settings > Apps" of Windows. Your
+each update. It also adds Prunel to the Start menu, to the desktop if the box is ticked, and to
+"Settings > Apps" of Windows. Your
 settings are kept. If "Start with Windows" is on, Prunel updates the startup entry itself. It
 also updates a copy installed by the old `Install.cmd` script.
 

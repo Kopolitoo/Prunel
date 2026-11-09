@@ -2,7 +2,8 @@
 ;
 ; Installs the "full installation" build (with UI access, see Platform/UiAccess.cs) in
 ; C:\Program Files\Prunel, signs Prunel.exe with a certificate made on the user's computer,
-; adds Prunel to the Start menu and to "Settings > Apps" of Windows (to uninstall it).
+; adds Prunel to the Start menu, optionally to the desktop (ticked by default), and to
+; "Settings > Apps" of Windows (to uninstall it).
 ; The settings (%APPDATA%\Prunel) and the log (%LOCALAPPDATA%\Prunel) are never touched.
 ;
 ; Compiled by .github/scripts/make-setup.ps1:
@@ -45,6 +46,9 @@ UsePreviousAppDir=no
 ; folder to choose; the language is the one of Windows (French or English).
 DisableDirPage=yes
 DisableProgramGroupPage=yes
+; The only page before the copy is the "Desktop shortcut" box (issue #93): its button becomes
+; "Install", so the box costs no extra click.
+DisableReadyPage=yes
 ShowLanguageDialog=no
 LanguageDetectionMethod=uilanguage
 ; Prunel is closed by the [Code] below, without asking.
@@ -69,6 +73,12 @@ en.RemoveFailed=The Prunel certificate could not be removed.%n%nReason: %1
 fr.RemoveFailed=Le certificat de Prunel n'a pas pu être retiré.%n%nRaison : %1
 en.UnknownReason=unknown (exit code %1)
 fr.UnknownReason=inconnue (code de sortie %1)
+
+[Tasks]
+; Desktop shortcut, ticked by default (the box keeps the user's last choice on an update).
+; Pinning to the taskbar is not offered: Windows does not let a program pin itself (only
+; programs approved by Microsoft can even ask). The user guide explains how to do it by gaze.
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
 
 [InstallDelete]
 ; Data folders of the program: emptied before the copy, so that no old file stays (the
@@ -96,6 +106,8 @@ Source: "..\README.fr.md"; DestDir: "{app}"; Flags: ignoreversion
 [Icons]
 ; For all the users of the computer (same shortcut as the old Install.cmd script).
 Name: "{autoprograms}\Prunel"; Filename: "{app}\Prunel.exe"; WorkingDir: "{app}"
+; On the desktop of all the users, if the box is ticked. Removed at uninstall.
+Name: "{autodesktop}\Prunel"; Filename: "{app}\Prunel.exe"; WorkingDir: "{app}"; Tasks: desktopicon
 
 [Run]
 ; Last page: "Launch Prunel" (ticked). Prunel starts as the normal user, not as administrator.
