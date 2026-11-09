@@ -262,6 +262,22 @@ Uniquement au regard, clavier du regard ouvert sur la page des lettres.
    lettres comme d'habitude.
 5. Marche pareil avec « Répétition » désactivée (Paramètres, onglet du clavier).
 
+## 22. Fondu du fond noir (issue #116)
+
+Uniquement au regard.
+
+1. Fixer un point en mode mouvement : l'écran noir du choix d'action arrive en douceur
+   (environ 0,2 s) au lieu d'un coup. Les boutons marchent tout de suite.
+2. « Retour » : l'écran noir s'efface en fondu (environ 0,15 s), l'écran réel revient sans
+   flash. Pareil après un clic gauche : le clic se fait comme d'habitude (un lien s'ouvre, un
+   champ prend le focus).
+3. Loupe (depuis le choix d'action ou directement) : son écran noir arrive et part aussi en
+   fondu. La photo du choix d'action et de la loupe ne montre jamais l'écran noir lui-même.
+4. Défilement et glisser-déposer depuis le choix d'action : l'écran noir s'efface pendant que
+   le mode démarre ; défiler et déposer marchent comme avant.
+5. « Configurer les icônes » (paramètres, onglet Icônes) et les listes du clavier : ils arrivent en fondu ;
+   changer de page dans une liste ne refait pas de fondu.
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,

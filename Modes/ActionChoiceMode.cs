@@ -133,8 +133,9 @@ namespace Prunel
         {
             _aimer.Reset();
 
-            // 1. CAPTURE: hide everything Prunel draws, and wait a bit before the photo.
-            Manager.Layer.HideAll();
+            // 1. CAPTURE: hide everything Prunel draws (at once, no fade), and wait a bit
+            //    before the photo.
+            Manager.Layer.HideAll(true);
             _step = Step.Capture;
             _stepStartMs = gaze.NowMs;
         }
@@ -183,8 +184,9 @@ namespace Prunel
         public override void Quit()
         {
             // The black screen is hidden and cleared (the photo is no longer needed).
-            Manager.Layer.HideChoiceScreen();
-            Manager.Layer.ChoiceScreen.Children.Clear();
+            // It fades out (issue #116); its content is cleared at the end of the fade.
+            Manager.Layer.HideChoiceScreen(true);
+            Manager.Layer.ClearChoiceScreen();
             _buttons.Clear();
             _actions.Clear();
             _gazeCircle = null;
@@ -280,9 +282,10 @@ namespace Prunel
                 return;
             }
 
-            // 3. EXECUTION: hide the black screen, and wait for it to disappear before the click.
+            // 3. EXECUTION: hide the black screen, and wait a bit before the click. The black
+            //    screen fades out (issue #116); the overlay lets the click through anyway.
             _chosenAction = action;
-            Manager.Layer.HideChoiceScreen();
+            Manager.Layer.HideChoiceScreen(true);
             _step = Step.Execution;
             _stepStartMs = Manager.Gaze.NowMs;
         }

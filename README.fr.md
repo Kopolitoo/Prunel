@@ -24,10 +24,10 @@ installateur remplace l'ancien GazeBar.
 
 ## État du projet
 
-Prunel est un projet jeune (version 0.x) : des versions prêtes à lancer sont sur la page
-[Releases](https://github.com/Kopolitoo/Prunel/releases), sans installateur pour l'instant.
-Prévu ensuite : retour sonore, pause automatique, thèmes de couleur, assistant de premier
-lancement, synthèse vocale.
+Prunel est un projet jeune (version 0.x), utilisé tous les jours par son auteur. Chaque version
+est sur la page [Releases](https://github.com/Kopolitoo/Prunel/releases) sous forme
+d'installateur Windows (`Prunel-x.y.z-setup.exe`). Déjà là : retour sonore, pause automatique.
+Prévu ensuite : thèmes de couleur, assistant de premier lancement, synthèse vocale.
 
 ## Prérequis
 

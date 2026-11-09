@@ -34,6 +34,7 @@ défilement, écriture…). Ce guide explique comment s'en servir. Pour l'instal
 ## Choix d'action
 
 Un écran noir montre la zone fixée, agrandie deux fois, avec une croix sur le point exact.
+Il apparaît et disparaît en fondu (un cinquième de seconde), pour que l'écran ne flashe pas.
 Autour, des icônes : clic gauche, double clic, clic droit, loupe, glisser-déposer (bouton
 gauche, bouton droit, android), défilement. On regarde une icône jusqu'à ce que son anneau soit
 plein pour l'utiliser. Au bord gauche : **Ctrl**, **Maj**, **Alt** (un regard les active, le bord

@@ -243,6 +243,22 @@ Gaze only, gaze keyboard open on the letters page.
 4. Look at "123.!", then look away and back at "ABC": it goes to the letters page as usual.
 5. Works the same with "Repeat" off (Settings, keyboard tab).
 
+## 22. Black screen fades in and out (issue #116)
+
+Gaze only.
+
+1. Stare at a point in movement mode: the action choice black screen comes in gently (about
+   0.2 s) instead of at once. The buttons work right away.
+2. "Back": the black screen fades out (about 0.15 s), the real screen comes back without a
+   flash. Same after a left click: the click happens as usual (a link opens, a field gets the
+   focus).
+3. Magnifier (from the action choice or directly): its black screen also fades in and out. The
+   photo of the action choice and of the magnifier never shows the black screen itself.
+4. Scroll and drag and drop from the action choice: the black screen fades out while the mode
+   starts; scrolling and dropping work as before.
+5. "Configure the icons" (settings, Icons tab) and the keyboard lists: they fade in; changing page in a
+   list does not fade again.
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,
