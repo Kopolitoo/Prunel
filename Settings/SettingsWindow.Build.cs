@@ -294,17 +294,18 @@ namespace Prunel
         }
 
         /// <summary>
-        /// "Général" tab: a big "Mes mots" button, below
+        /// "Général" tab: a medium "Mes mots" button (small enough not to catch the
+        /// gaze by mistake, issue #57), below
         /// the settings file reminder. It opens the list of words added to the keyboard's
         /// personal dictionary (KeyboardListMode), to remove some. The Clavier tab had no room
         /// left (five settings). E82D = dictionary.
         /// </summary>
         private void BuildMyWordsButton()
         {
-            AddTarget(LeftContent, 640, 570, 180, BigButton("\uE82D", Texts.Get("settings.myWords")),
+            AddTarget(LeftContent + 55, 670, 460, 120, BigButton("\uE82D", Texts.Get("settings.myWords")),
                          () => Notify(MyWordsRequested), false, false);
             // The interface language, next to "Mes mots". E774 = globe.
-            AddTarget(LeftContent + 630, 640, 570, 180, BigButton("\uE774", Texts.LanguageName),
+            AddTarget(LeftContent + 665, 670, 460, 120, BigButton("\uE774", Texts.LanguageName),
                          NextLanguage, false, false);
             // Below the buttons: the message of the language button if there is one, otherwise
             // the explanation.
@@ -349,8 +350,10 @@ namespace Prunel
         }
 
         /// <summary>
-        /// "Outils" tab: two big buttons one above the other, with a wide gap
-        /// between them so that aiming at one does not activate the other.
+        /// "Outils" tab: two medium buttons one above the other, with a wide gap
+        /// between them so that aiming at one does not activate the other. They are
+        /// smaller than the other big buttons so that the gaze can rest on the tab
+        /// without activating them by mistake (issue #57).
         ///   E890 = eye (Calibration), E9D9 = diagnostic (curve).
         /// Below the buttons: the possible message (calibration impossible…).
         /// </summary>
@@ -367,9 +370,9 @@ namespace Prunel
             texts.Children.Add(explanation);
             Place(texts, LeftContent, TopRow + 20);
 
-            AddTarget(LeftContent + 170, 320, 800, 180, BigButton("\uE890", Texts.Get("settings.tools.calibration")),
+            AddTarget(LeftContent + 290, 340, 560, 120, BigButton("\uE890", Texts.Get("settings.tools.calibration")),
                          () => Notify(CalibrationRequested), false, false);
-            AddTarget(LeftContent + 170, 620, 800, 180, BigButton("\uE9D9", Texts.Get("settings.tools.diagnostic")),
+            AddTarget(LeftContent + 290, 660, 560, 120, BigButton("\uE9D9", Texts.Get("settings.tools.diagnostic")),
                          () => Notify(DiagnosticRequested), false, false);
 
             BuildMessage();

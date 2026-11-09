@@ -16,7 +16,7 @@ namespace Prunel
     internal sealed partial class SettingsWindow : Window
     {
         /// <summary>
-        /// "Profils" tab: an explanation with the profiles folder, then two big
+        /// "Profils" tab: an explanation with the profiles folder, then two medium
         /// buttons one above the other (same height as those of "Outils", but wider for the
         /// long text, with the same wide gap). E74E = floppy disk (Enregistrer), E8E5 = open
         /// folder (Charger). Below the buttons: the message ("Réglages enregistrés dans…").
@@ -40,9 +40,9 @@ namespace Prunel
             texts.Children.Add(folder);
             Place(texts, LeftContent, TopRow + 20);
 
-            AddTarget(LeftContent + 70, 320, 1000, 180, BigButton("\uE74E", Texts.Get("settings.profiles.save")),
+            AddTarget(LeftContent + 130, 340, 880, 120, BigButton("\uE74E", Texts.Get("settings.profiles.save")),
                          SaveProfile, false, false);
-            AddTarget(LeftContent + 70, 620, 1000, 180, BigButton("\uE8E5", Texts.Get("settings.profiles.load")),
+            AddTarget(LeftContent + 130, 660, 880, 120, BigButton("\uE8E5", Texts.Get("settings.profiles.load")),
                          () => Notify(ProfileListRequested), false, false);
 
             BuildMessage();
