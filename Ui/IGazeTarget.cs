@@ -24,6 +24,13 @@ namespace Prunel
         bool Contains(double x, double y);
 
         /// <summary>
+        /// True if the target can also be aimed at with a gaze OFF the screen. This is the case
+        /// of the "Back" buttons of the right edge, whose zone goes on beyond the edge (issue
+        /// #53). For the other targets, a gaze off the screen aims at nothing.
+        /// </summary>
+        bool ReachesOffScreen { get; }
+
+        /// <summary>
         /// Updates the target's look: progress from 0 to 1 (ring or bar), hover,
         /// and whether the label is shown.
         /// </summary>

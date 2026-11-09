@@ -147,6 +147,7 @@ namespace Prunel
             yClose = Math.Max(size / 2 + margin, Math.Min(height - size / 2 - margin, yClose));
             _close = new GazeButton("", null, Texts.Get("keyboard.close"));
             _close.ZoneFactor = CloseZoneFactor;
+            _close.StretchToRightEdge(width);
             _close.Place(_layer, surface,
                            width - margin - size / 2,
                            yClose,

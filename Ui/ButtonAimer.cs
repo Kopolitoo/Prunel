@@ -11,7 +11,8 @@ namespace Prunel
     /// small class, shared by the modes.
     ///
     /// The rules:
-    ///  - on each NEW gaze measure, we look for the button underneath;
+    ///  - on each NEW gaze measure, we look for the button underneath (a gaze off the screen
+    ///    only finds the buttons whose zone goes beyond the edge, see ReachesOffScreen);
     ///  - to switch to another button (or to "none"), [_measuresToChange] measures in a row at
     ///    the same place are needed: an isolated measure (a small jump of the gaze) is ignored;
     ///  - the gaze resting on an active button for the activation delay activates it; its
@@ -126,9 +127,10 @@ namespace Prunel
             }
             else if (gaze.Number != _lastNumber)
             {
-                // New measure: which button is it on? (off screen → none)
+                // New measure: which button is it on? Off screen, only a button whose zone goes
+                // beyond the edge can be aimed at (the "Back" buttons of the right edge).
                 _lastNumber = gaze.Number;
-                int seen = gaze.OffScreen ? -1 : ButtonUnder(gaze.X, gaze.Y);
+                int seen = ButtonUnder(gaze.X, gaze.Y, gaze.OffScreen);
                 if (_blockFirst)
                 {
                     // First measure after the buttons were replaced: the one under the gaze is
@@ -207,11 +209,18 @@ namespace Prunel
             }
         }
 
-        /// <summary>The index of the button under this gaze point, or -1.</summary>
-        private int ButtonUnder(double x, double y)
+        /// <summary>
+        /// The index of the button under this gaze point, or -1. offScreen: the point is off
+        /// the screen; then only the buttons that reach beyond the edge are looked at.
+        /// </summary>
+        private int ButtonUnder(double x, double y, bool offScreen)
         {
             for (int i = 0; i < _buttons.Count; i++)
             {
+                if (offScreen && !_buttons[i].ReachesOffScreen)
+                {
+                    continue;
+                }
                 if (_buttons[i].Contains(x, y))
                 {
                     return i;

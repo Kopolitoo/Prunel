@@ -85,6 +85,15 @@ namespace Prunel
         private static readonly Brush ActiveTrack = Freeze(new SolidColorBrush(Color.FromRgb(0x0D, 0x6E, 0xFD)));   // Bootstrap blue
         private const double RightLeft = 1700;      // right column (Défaut, Retour)
         private const double RightSide = 160;
+
+        // How far the gaze zone of "Retour" goes beyond the right edge of the page (issue
+        // #53), in page units: 100 = about 200 pixels on a 4K screen, the margin of the
+        // "Back" buttons of the other modes (GazeButton.StretchToRightEdge).
+        private const double BeyondRightEdge = 100;
+
+        // How much the gaze zone of "Retour" grows above and below (page units): "Défaut" is
+        // far above, nothing is below.
+        private const double BackGrow = 40;
         private const double GazeDotDiameter = 50;
 
         // ── Colours.
@@ -415,9 +424,9 @@ namespace Prunel
         /// <summary>
         /// Creates a gaze target at this place, with this content. It also responds to mouse
         /// clicks (for the caregiver). repeat: true for "−" and "+"; chosen: true for the
-        /// shown tab or the current choice (Non / Oui), framed in blue.
+        /// shown tab or the current choice (Non / Oui), framed in blue. Returns the target.
         /// </summary>
-        private void AddTarget(double x, double y, double width, double height, UIElement content,
+        private SettingTarget AddTarget(double x, double y, double width, double height, UIElement content,
                                   Action action, bool repeat, bool chosen)
         {
             SettingTarget target = new SettingTarget(new Rect(x, y, width, height), content, action, repeat, chosen);
@@ -428,6 +437,7 @@ namespace Prunel
             };
             Place(target.Background, x, y);
             _targets.Add(target);
+            return target;
         }
 
         private void Place(UIElement element, double x, double y)

@@ -223,6 +223,10 @@ namespace Prunel
             double xBack = Manager.ScreenWidth - size / 2 - ScreenMetrics.Px(10);
             double yBack = Manager.ScreenHeight / 2;
             GazeButton back = new GazeButton("", null, Texts.Get("drag.cancel"));
+            // Easier to aim at (issue #53): a zone 50 % larger (no other button nearby), which
+            // goes on to the right edge and beyond it.
+            back.ZoneFactor = 1.5;
+            back.StretchToRightEdge(Manager.ScreenWidth);
             back.Place(layer, surface, xBack, yBack, size);
             _buttons.Add(back);
 

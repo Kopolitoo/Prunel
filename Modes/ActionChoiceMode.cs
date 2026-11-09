@@ -447,8 +447,9 @@ namespace Prunel
                 }
             }
 
-            // ── The "back" icon, on the right
-            AddButton(layer, screen, ChoiceAction.Back, placed.Back.X, placed.Back.Y, size);
+            // ── The "back" icon, on the right. Its zone goes on to the edge and beyond (#53).
+            AddButton(layer, screen, ChoiceAction.Back, placed.Back.X, placed.Back.Y, size)
+                .StretchToRightEdge(Manager.ScreenWidth);
 
             // ── The small gaze circle, added LAST: it is thus drawn on top of the photo and the
             //    buttons. It will appear at the first on-screen measure.

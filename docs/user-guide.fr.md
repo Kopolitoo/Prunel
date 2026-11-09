@@ -40,6 +40,10 @@ plein pour l'utiliser. Au bord gauche : **Ctrl**, **Maj**, **Alt** (un regard le
 devient vert ; ils sont appuyés pendant l'action suivante). En haut : **Copier**, **Couper**,
 **Coller**. À droite : **Retour**. Après une action, on revient au mode mouvement.
 
+Les boutons **Retour** à droite de l'écran (choix d'action, loupe, glisser-déposer,
+défilement, paramètres, listes, et « Fermer » du clavier) sont faciles à viser : regarder le
+bord de l'écran à leur hauteur, ou un peu au-delà, marche aussi.
+
 Le double clic fait une courte pause entre ses deux clics (pour fermer deux onglets du
 navigateur à la suite, par exemple). Pour la changer : Paramètres, onglet « Délais », « Pause du
 double clic » (en millisecondes, 200 par défaut ; 0 = aucune pause).

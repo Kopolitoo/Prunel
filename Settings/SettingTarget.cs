@@ -32,11 +32,16 @@ namespace Prunel
 
         private readonly Rect _zone;
         private readonly bool _chosen;
+
+        // The zone where the gaze activates the target: the drawn zone, stretched to the
+        // right for "Retour" (see StretchToRight).
+        private Rect _gazeZone;
         private readonly Rectangle _bar;
 
         public SettingTarget(Rect zone, UIElement content, Action action, bool repeat, bool chosen)
         {
             _zone = zone;
+            _gazeZone = zone;
             _chosen = chosen;
             Action = action;
             Repeat = repeat;
@@ -81,9 +86,25 @@ namespace Prunel
             get { return true; }
         }
 
+        /// <summary>True after StretchToRight: the gaze slightly off the screen counts.</summary>
+        public bool ReachesOffScreen { get; private set; }
+
+        /// <summary>
+        /// For "Retour", near the right edge (issue #53: hard to aim at): the gaze zone
+        /// stretches to the right up to [right] (page units), beyond the edge of the page, and
+        /// grows by [grow] above and below. The drawing does not change.
+        /// </summary>
+        public void StretchToRight(double right, double grow)
+        {
+            double top = _gazeZone.Y - grow;
+            double width = Math.Max(right, _gazeZone.Right) - _gazeZone.X;
+            _gazeZone = new Rect(_gazeZone.X, top, width, _gazeZone.Height + 2 * grow);
+            ReachesOffScreen = true;
+        }
+
         public bool Contains(double x, double y)
         {
-            return _zone.Contains(x, y);
+            return _gazeZone.Contains(x, y);
         }
 
         public void Draw(double progress, bool hover, bool showLabel)

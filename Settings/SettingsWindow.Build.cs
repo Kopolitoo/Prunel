@@ -99,8 +99,11 @@ namespace Prunel
                 AddTarget(RightLeft, 60, RightSide, RightSide, SymbolAndWord("", Texts.Get("settings.defaults")),
                              RequestDefaults, false, false);
             }
-            AddTarget(RightLeft, (PageHeight - RightSide) / 2, RightSide, RightSide,
+            //    "Retour" is easier to aim at: its gaze zone goes on up to the edge of the page
+            //    and beyond it (issue #53).
+            SettingTarget back = AddTarget(RightLeft, (PageHeight - RightSide) / 2, RightSide, RightSide,
                          SymbolAndWord("", Texts.Get("common.back")), RequestBack, false, false);
+            back.StretchToRight(PageWidth + BeyondRightEdge, BackGrow);
 
             Version++;
         }
