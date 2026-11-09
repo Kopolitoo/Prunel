@@ -247,8 +247,10 @@ namespace Prunel
                 }
             }
 
-            AddButton(layer, screen, ActionCatalog.CreateButton(ChoiceAction.Back), BackToSettings,
-                          placed.Back.X, placed.Back.Y, size, targets);
+            // "Back": its zone goes on to the right edge of the screen and beyond (issue #53).
+            GazeButton back = ActionCatalog.CreateButton(ChoiceAction.Back);
+            back.StretchToRightEdge(Manager.ScreenWidth);
+            AddButton(layer, screen, back, BackToSettings, placed.Back.X, placed.Back.Y, size, targets);
 
             if (_listOpen)
             {

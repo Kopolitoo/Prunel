@@ -224,6 +224,26 @@ Uniquement au regard et à la voix : pas besoin de toucher la souris ni le câbl
    10 s (ou « Défaut »). Le journal indique « Automatic pause: gaze lost for 5 s » et ne contient
    aucune position du regard.
 
+## 20. Boutons « Retour » au bord droit (issue #53)
+
+Uniquement au regard. Pour chaque écran ci-dessous, regarder le bord droit de l'écran à la
+hauteur de « Retour », entre le bouton et le bord, puis un peu au-delà du bord (hors de
+l'écran) : le bouton s'éclaire, son anneau se remplit, et il revient en arrière comme d'habitude.
+
+1. Choix d'action : « Retour » ramène au mode mouvement.
+2. Loupe (depuis le choix d'action) : « Retour » revient en arrière.
+3. Glisser-déposer, choix du point d'arrivée : « Retour » annule. Un point d'arrivée ailleurs
+   marche toujours.
+4. Défilement : « Retour » termine le défilement. Regarder hors de l'écran à droite le termine
+   toujours au bout d'une seconde.
+5. Paramètres : « Retour » (milieu de la colonne de droite) ramène au mode mouvement.
+   « Défaut », au-dessus, ne réagit pas à un regard hors de l'écran.
+6. Paramètres, « Configurer les icônes » : « Retour » ramène aux paramètres. Listes
+   (« Disposition du clavier », « Mes mots », profils) : « Retour » revient en arrière.
+7. Regarder hors de l'écran loin à droite (une largeur de main ou plus), ou bien au-dessus ou
+   en dessous de « Retour » : rien ne se passe. En mode mouvement, le menu s'ouvre toujours en
+   regardant sous l'écran.
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,

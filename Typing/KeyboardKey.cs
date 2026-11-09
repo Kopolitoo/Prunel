@@ -269,6 +269,12 @@ namespace Prunel
         }
 
         /// <summary>True if the gaze point (screen pixels) is in the key's cell.</summary>
+        /// <summary>A key is never aimed at from off the screen.</summary>
+        public bool ReachesOffScreen
+        {
+            get { return false; }
+        }
+
         public bool Contains(double x, double y)
         {
             return x >= _left && x < _right && y >= _top && y < _bottom;

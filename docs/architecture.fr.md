@@ -144,7 +144,10 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   anneau, libellé au survol), dessiné sur le calque. Il peut être vide (« + » grisé),
   indisponible (son symbole, grisé) ou allumé (bord vert, pour un interrupteur).
 - `ButtonAimer` (étape 4) : décide quel bouton est regardé et quand il s'active ; partagé par
-  le choix d'action et le menu.
+  le choix d'action et le menu. Un regard hors de l'écran ne vise qu'une cible dont
+  `ReachesOffScreen` vaut vrai : les boutons « Retour » du bord droit, dont la zone va jusqu'au
+  bord et environ 200 px (4K) au-delà (`GazeButton.StretchToRightEdge`,
+  `SettingTarget.StretchToRight`, issue #53).
 - `Modes/MenuMode` (étape 4) : regarder en bas, hors de l'écran, pendant `MenuDelay` (0,5 s)
   ouvre une barre centrée en bas de l'écran (boutons seuls, sans fond, espacés de 100 px sur
   un écran 4K : issue #54), uniquement depuis les modes mouvement et pause

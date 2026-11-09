@@ -332,8 +332,10 @@ namespace Prunel
             double rightMargin = width - (left + l);
             double xBack = left + l + rightMargin / 2;
             double yBack = height / 2;
-            AddButton(layer, screen, new GazeButton("", null, backName), Back,
-                          xBack, yBack, size);
+            //    Its zone goes on to the right edge of the screen and beyond (issue #53).
+            GazeButton back = new GazeButton("", null, backName);
+            back.StretchToRightEdge(width);
+            AddButton(layer, screen, back, Back, xBack, yBack, size);
             AddCenteredText(layer, screen, backName, xBack, yBack + size / 2 + nameFont * 0.4,
                                rightMargin - space / 2, nameFont, Soft, false);
 

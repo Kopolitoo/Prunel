@@ -379,6 +379,7 @@ namespace Prunel
             string backLabel = _drag != null ? Texts.Get("drag.cancel") : Texts.Get("common.back");
             GazeButton back = new GazeButton("", null, backLabel);
             back.ZoneFactor = BackZoneFactor;
+            back.StretchToRightEdge(width);   // zone up to the edge and beyond (issue #53)
             back.Place(layer, screen, xBack, cyScreen, size);
             _buttons.Add(back);
 

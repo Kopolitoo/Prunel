@@ -210,6 +210,24 @@ Gaze and voice only: no need to touch the mouse or the USB cable.
    10 s (or "Default"). The log says "Automatic pause: gaze lost for 5 s" and holds no gaze
    position.
 
+## 20. "Back" buttons on the right edge (issue #53)
+
+Gaze only. For each screen below, look at the right edge of the screen at the height of
+"Back", between the button and the edge, then a little beyond the edge (off the screen): the
+button lights up, its ring fills up, and it goes back as usual.
+
+1. Action choice: "Back" goes back to movement mode.
+2. Magnifier (from the action choice): "Back" goes back.
+3. Drag and drop, choosing the drop point: "Back" cancels. A drop point elsewhere still works.
+4. Scroll: "Back" ends scrolling. Looking off the screen on the right still ends it after one
+   second.
+5. Settings: "Back" (middle of the right column) goes back to movement mode. "Default", above
+   it, does not react to a gaze off the screen.
+6. Settings, "Configure the icons": "Back" goes back to the settings. Lists ("Keyboard layout",
+   "My words", profiles): "Back" goes back.
+7. Look off the screen far to the right (a hand width or more) or well above or below "Back":
+   nothing happens. In movement mode, the menu still opens when looking below the screen.
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,

@@ -323,13 +323,51 @@ namespace Prunel
         public double ZoneFactor { get; set; } = 1.0;
 
         /// <summary>
+        /// How far the zone of a button stretched to the right edge goes BEYOND the edge, in
+        /// pixels of the 4K screen (gaze distance): the same margin as scroll mode. Further
+        /// away, the PCEye measures the gaze too poorly.
+        /// </summary>
+        private const double BeyondRightEdge4K = 200;
+
+        // Right end of the activation zone, in screen pixels; NaN = the usual square.
+        private double _zoneRight = double.NaN;
+
+        /// <summary>
+        /// For a "Back" button near the right edge of the screen (issue #53: hard to aim at).
+        /// Its activation zone stretches to the right up to the edge of the screen, and on
+        /// beyond it by [BeyondRightEdge4K]: looking at the edge, or slightly past it, at the
+        /// height of the button, aims at it. The drawing does not change. The height of the zone
+        /// stays [Size] × [ZoneFactor], so that the zone never reaches another button.
+        /// screenWidth: width of the screen in pixels (the gaze uses the same pixels).
+        /// </summary>
+        public void StretchToRightEdge(double screenWidth)
+        {
+            _zoneRight = screenWidth + ScreenMetrics.GazePx(BeyondRightEdge4K);
+        }
+
+        /// <summary>True after StretchToRightEdge: the gaze slightly off the screen counts.</summary>
+        public bool ReachesOffScreen
+        {
+            get { return !double.IsNaN(_zoneRight); }
+        }
+
+        /// <summary>
         /// True if the gaze point (screen pixels) is in the activation zone of the button: a
-        /// square of side [Size] × [ZoneFactor], centered on the button.
+        /// square of side [Size] × [ZoneFactor], centered on the button, stretched to the
+        /// right after StretchToRightEdge.
         /// </summary>
         public bool Contains(double x, double y)
         {
             double halfSide = Size * ZoneFactor / 2;
-            return Math.Abs(x - X) <= halfSide && Math.Abs(y - Y) <= halfSide;
+            if (Math.Abs(y - Y) > halfSide)
+            {
+                return false;
+            }
+            if (ReachesOffScreen)
+            {
+                return x >= X - halfSide && x <= Math.Max(_zoneRight, X + halfSide);
+            }
+            return Math.Abs(x - X) <= halfSide;
         }
 
         /// <summary>
