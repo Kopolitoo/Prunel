@@ -81,8 +81,10 @@ namespace Prunel
         ///      an older file, it keeps its default value.
         ///  16: issue #91 — MagnifierDelay. Missing from an older file, it takes the value of
         ///      FixationDelay, which the magnifier used until then: nothing changes for the user.
+        ///  17: step auto-pause — AutoPause (yes) and AutoPauseDelay (30 s). Nothing to fix:
+        ///      missing from an older file, they keep their default value.
         /// </summary>
-        public const int CurrentVersion = 16;
+        public const int CurrentVersion = 17;
 
         /// <summary>Format number of the file, so it can evolve one day without breaking everything.</summary>
         [DataMember(Order = 0)]
@@ -226,6 +228,18 @@ namespace Prunel
         /// <summary>Gaze duration outside the menu bar before it closes, in seconds.</summary>
         [DataMember(Order = 42)]
         public double MenuCloseDelay { get; set; }
+
+        /// <summary>
+        /// Automatic pause (yes / no). Yes by default: in movement and fixed gaze modes, when
+        /// the gaze is lost for [AutoPauseDelay], Prunel goes to pause mode by itself, with a
+        /// "Resume" button in the middle of the screen (see ModeManager.WatchAutoPause).
+        /// </summary>
+        [DataMember(Order = 44)]
+        public bool AutoPause { get; set; }
+
+        /// <summary>Duration of a lost gaze before the automatic pause, in seconds.</summary>
+        [DataMember(Order = 45)]
+        public double AutoPauseDelay { get; set; }
 
         // ───────────────────────── Magnifier ─────────────────────────
 

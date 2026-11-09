@@ -204,7 +204,13 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   input, either "tracking" or "gamepad" (`GameRelative`, `GameSensitivity`). The menu opens
   from this mode ("Quit the game").
 - `Modes/PauseMode` (step 4): nothing follows the gaze any more; only the menu can still open
-  ("Resume" button).
+  ("Resume" button). **Automatic pause** (step auto-pause): `ModeManager.WatchAutoPause`
+  starts `PauseMode(true)` when the gaze is lost (no recent measure) for `AutoPauseDelay`
+  (30 s) in movement or fixed gaze mode only; a gaze below or beside the screen does not
+  count. This pause shows a round "Resume" button in the middle of the screen (on the
+  drag-and-drop surface, free during the pause), which goes back to movement mode. Settings
+  `AutoPause` (yes) and `AutoPauseDelay`, "Pause" tab of the "Gaze" category (`settings.json`
+  version 17).
 - `EyetrackerLoader`: finds and loads the eyetracker DLLs (Tobii.Interaction) at startup; they
   are not shipped with Prunel (see "Installation"). The .NET DLLs are given to .NET through the
   `AssemblyResolve` event; the native DLL is loaded beforehand with `LoadLibrary`, in 32-bit.

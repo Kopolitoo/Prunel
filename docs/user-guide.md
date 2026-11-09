@@ -72,6 +72,14 @@ game mode. Buttons:
 - **Keyboard**: the gaze keyboard.
 - **Pause** / **Resume**: nothing follows your gaze any more, until you open the menu again
   and choose "Resume".
+
+**Automatic pause**: when the eyetracker no longer sees your eyes for 30 seconds (eyes closed,
+head turned, away from the computer), Prunel pauses by itself, so that nothing is clicked when
+your eyes come back. A round "Resume" button then shows in the middle of the screen: look at it
+to go back to movement mode (the menu's "Resume" and Escape work too). It only starts from
+movement mode and fixed gaze, never during the action choice, the magnifier, scrolling, the
+game or the settings. Looking below or beside the screen does not count. To change the delay
+or turn it off: Settings, "Gaze" category, "Pause" tab.
 - **Mouse tracking**: on / off (green border when on).
 - **Quit Prunel**: asks "Yes" or "No" first.
 

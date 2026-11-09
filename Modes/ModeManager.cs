@@ -30,6 +30,9 @@ namespace Prunel
     /// It also opens the menu: when the gaze stays down, below the screen, for
     /// [MenuDelay], we switch to menu mode. Only movement, pause and game
     /// modes allow it (Mode.MenuAllowed property).
+    ///
+    /// And it starts the automatic pause: gaze lost for [AutoPauseDelay] in movement or fixed
+    /// gaze mode → pause mode with a "Resume" button (see WatchAutoPause).
     /// </summary>
     internal sealed class ModeManager
     {
@@ -49,6 +52,10 @@ namespace Prunel
 
         // Time (ms) when the gaze went down below the screen; -1 = it is not there.
         private double _belowStartMs = -1;
+
+        // Time (ms) when the gaze was lost, for the automatic pause; -1 = gaze present
+        // (or a mode without automatic pause).
+        private double _lostStartMs = -1;
 
         // For the log: the gaze situation at the previous tick (see NoteGazePosition).
         // Only the situation is logged, never the gaze coordinates.
@@ -262,6 +269,12 @@ namespace Prunel
                     return;
                 }
 
+                // Does the automatic pause start? If so, same thing.
+                if (WatchAutoPause(state))
+                {
+                    return;
+                }
+
                 CurrentMode.Update(state);
             }
             catch (Exception ex)
@@ -303,6 +316,41 @@ namespace Prunel
                 // classic bar.
                 bool keyboardMenu = Keyboard.IsOpen && CurrentMode is MovementMode;
                 ChangeMode(new MenuMode(keyboardMenu));
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Starts the automatic pause when the gaze stays LOST (no recent measure: eyes
+        /// closed, head turned, nobody in front of the eyetracker...) for [AutoPauseDelay],
+        /// in movement mode or fixed gaze mode only, with or without the gaze keyboard.
+        /// A gaze below the screen or beside it does not count: it is still measured (menu,
+        /// looking elsewhere). The timer starts again from zero as soon as a measure comes
+        /// back. Returns true if the pause just started.
+        /// </summary>
+        private bool WatchAutoPause(GazeState state)
+        {
+            AppSettings p = AppSettings.Current;
+            bool watched = p.AutoPause &&
+                           (CurrentMode is MovementMode || CurrentMode is FixedGazeMode);
+            if (!watched || state.Available)
+            {
+                _lostStartMs = -1;
+                return false;
+            }
+
+            if (_lostStartMs < 0)
+            {
+                _lostStartMs = state.NowMs;
+                return false;
+            }
+
+            if (state.NowMs - _lostStartMs >= p.AutoPauseDelay * 1000.0)
+            {
+                _lostStartMs = -1;
+                App.Log("Automatic pause: gaze lost for " + p.AutoPauseDelay + " s");
+                ChangeMode(new PauseMode(true));
                 return true;
             }
             return false;
