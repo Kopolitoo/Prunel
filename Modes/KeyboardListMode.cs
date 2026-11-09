@@ -167,8 +167,9 @@ namespace Prunel
 
         public override void Quit()
         {
-            Manager.Layer.HideChoiceScreen();
-            Manager.Layer.ChoiceScreen.Children.Clear();
+            // It fades out (issue #116); its content is cleared at the end of the fade.
+            Manager.Layer.HideChoiceScreen(true);
+            Manager.Layer.ClearChoiceScreen();
             _buttons.Clear();
             _actions.Clear();
             _gazeCircle = null;

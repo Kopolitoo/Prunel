@@ -31,6 +31,7 @@ type…). This guide explains how to use it. To install it, see the [README](../
 ## Action choice
 
 A black screen shows the area you stared at, enlarged twice, with a cross on the exact point.
+It fades in and out gently (a fifth of a second), so the screen does not flash.
 Around it, icons: left click, double click, right click, magnifier, drag and drop (left button,
 right button, android), scroll. Look at an icon until its ring is full to use it. On the left
 edge: **Ctrl**, **Shift**, **Alt** (look once to turn on, the border turns green; they are

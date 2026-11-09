@@ -379,13 +379,18 @@ namespace Prunel
             OptionsLabel.Visibility = Visibility.Collapsed;
         }
 
-        /// <summary>Hides everything drawn on the overlay (black screen included).</summary>
-        public void HideAll()
+        /// <summary>
+        /// Hides everything drawn on the overlay (black screen included).
+        /// beforeCapture = true: the black screen disappears AT ONCE, a screenshot follows
+        /// (action choice, magnifier). Otherwise, a black screen still shown fades out
+        /// (issue #116), for example when the action choice opens scroll mode.
+        /// </summary>
+        public void HideAll(bool beforeCapture = false)
         {
             HideCircle();
             HideRing();
             HideIcon();
-            HideChoiceScreen();
+            HideChoiceScreen(!beforeCapture);
             HideMenuBar();
             HideDragSurface();
             HideKeyboardSurface();
@@ -408,6 +413,14 @@ namespace Prunel
         /// </summary>
         public void PrepareChoiceScreen()
         {
+            // A fade-out still running (previous screen) ends now: the new content must not
+            // disappear at its end.
+            if (_choiceClosing != null)
+            {
+                _choiceClosing = null;
+                ChoiceScreen.Visibility = Visibility.Collapsed;
+                RestoreChoiceScreen();
+            }
             ChoiceScreen.Children.Clear();
             ChoiceScreen.Width = ActualWidth;
             ChoiceScreen.Height = ActualHeight;
@@ -415,15 +428,109 @@ namespace Prunel
             Canvas.SetTop(ChoiceScreen, 0);
         }
 
+        /// <summary>
+        /// Duration of the black screen's fade-in and fade-out, in milliseconds (issue #116:
+        /// a black screen appearing or disappearing at once makes the screen flash, which tires
+        /// the eyes). Short, so as not to slow anything down: the buttons work during the fade.
+        /// </summary>
+        private const double ChoiceFadeInMs = 200;
+        private const double ChoiceFadeOutMs = 150;
+
+        // The fade-out in progress, or null (same idea as _menuClosing).
+        private DoubleAnimation _choiceClosing;
+
+        /// <summary>
+        /// Shows the black screen, fading in from transparent in [ChoiceFadeInMs] (issue #116).
+        /// Already shown (screen rebuilt, for example a new page of a list): nothing changes,
+        /// no new fade.
+        /// </summary>
         public void ShowChoiceScreen()
         {
+            if (ChoiceScreen.Visibility == Visibility.Visible && _choiceClosing == null)
+            {
+                return;
+            }
+
+            // A fade-out still running is cancelled: the fade-in starts from where it is.
+            _choiceClosing = null;
+            bool wasHidden = ChoiceScreen.Visibility != Visibility.Visible;
             ChoiceScreen.Visibility = Visibility.Visible;
+
+            CubicEase slowed = new CubicEase();
+            slowed.EasingMode = EasingMode.EaseOut;
+            DoubleAnimation fade = new DoubleAnimation();
+            if (wasHidden)
+            {
+                fade.From = 0;
+            }
+            fade.To = 1;
+            fade.Duration = new Duration(TimeSpan.FromMilliseconds(ChoiceFadeInMs));
+            fade.EasingFunction = slowed;
+            ChoiceScreen.BeginAnimation(OpacityProperty, fade);
         }
 
-        /// <summary>Hides the black screen (its content is kept until the next PrepareChoiceScreen).</summary>
-        public void HideChoiceScreen()
+        /// <summary>
+        /// Hides the black screen (its content is kept until the next PrepareChoiceScreen).
+        /// animate = true: it fades out in [ChoiceFadeOutMs] (issue #116), back to the real
+        /// screen. The overlay lets clicks through, so a click can be sent during the fade.
+        /// animate = false (default): it disappears at once. This is the case of HideAll,
+        /// called before a screenshot (magnifier, action choice): nothing must wait there.
+        /// </summary>
+        public void HideChoiceScreen(bool animate = false)
         {
-            ChoiceScreen.Visibility = Visibility.Collapsed;
+            if (!animate || ChoiceScreen.Visibility != Visibility.Visible)
+            {
+                _choiceClosing = null;
+                ChoiceScreen.Visibility = Visibility.Collapsed;
+                RestoreChoiceScreen();
+                return;
+            }
+            if (_choiceClosing != null)
+            {
+                return;   // already fading out
+            }
+
+            CubicEase accelerated = new CubicEase();
+            accelerated.EasingMode = EasingMode.EaseIn;
+            DoubleAnimation fade = new DoubleAnimation();
+            fade.To = 0;   // from the current opacity (a fade-in may not be finished)
+            fade.Duration = new Duration(TimeSpan.FromMilliseconds(ChoiceFadeOutMs));
+            fade.EasingFunction = accelerated;
+
+            // At the end: hidden for good, unless it was shown again or hidden at once
+            // in the meantime (then _choiceClosing changed).
+            _choiceClosing = fade;
+            fade.Completed += (s, e) =>
+            {
+                if (_choiceClosing == fade)
+                {
+                    _choiceClosing = null;
+                    ChoiceScreen.Visibility = Visibility.Collapsed;
+                    ChoiceScreen.Children.Clear();
+                    RestoreChoiceScreen();
+                }
+            };
+            ChoiceScreen.BeginAnimation(OpacityProperty, fade);
+        }
+
+        /// <summary>
+        /// Clears the black screen's content (photo, buttons) when a mode quits. During a
+        /// fade-out, the content stays until the end of the fade (otherwise the photo would
+        /// vanish at once and only black would fade): it is cleared there.
+        /// </summary>
+        public void ClearChoiceScreen()
+        {
+            if (_choiceClosing == null)
+            {
+                ChoiceScreen.Children.Clear();
+            }
+        }
+
+        /// <summary>Removes the fade animation: the black screen is opaque again.</summary>
+        private void RestoreChoiceScreen()
+        {
+            ChoiceScreen.BeginAnimation(OpacityProperty, null);
+            ChoiceScreen.Opacity = 1;
         }
 
         // ───────────────────────── Menu bar ─────────────────────────
