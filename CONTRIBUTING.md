@@ -59,8 +59,7 @@ startup.
 1. On GitHub, "Actions" tab, "Release" on the left, "Run workflow": keep the `main` branch,
    type the number (for example `0.1.0`), click "Run workflow".
 2. GitHub compiles Prunel, checks that no eyetracker DLL and no personal file is inside, makes
-   `Prunel-0.1.0.zip` (simple) and the installer `Prunel-0.1.0-setup.exe` (full installation,
-   with UI access, made with Inno Setup) and prepares a **draft** release (`.github/workflows/release.yml`).
+   the installer `Prunel-0.1.0-setup.exe` (with UI access, made with Inno Setup) and prepares a **draft** release (`.github/workflows/release.yml`).
 3. "Releases" page (right column of the repository home page): open the draft, read the list
    of changes, then "Publish release". The tag `v0.1.0` is created on this code at that moment.
 4. Then raise `<Version>` in `Prunel.csproj` in the next pull request.
@@ -70,4 +69,5 @@ startup.
 Prunel is tested by its user on a Tobii PCEye 5. Please say clearly in your pull request
 what was compiled and what was tested on real hardware, using the
 [manual tests](docs/manual-tests.md). Every pull request is compiled automatically on GitHub
-(see `.github/workflows/build.yml`).
+(see `.github/workflows/build.yml`); its files ("Artifacts" on the build page) can be
+downloaded to test it, until the pull request is merged or closed.

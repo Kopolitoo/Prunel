@@ -2,9 +2,9 @@
 #
 # Started by hand: "Actions" tab > "Release" > "Run workflow", type the version number
 # (for example 0.1.0). GitHub then compiles Prunel on a Windows machine, checks that no
-# eyetracker DLL and no personal file is inside, makes Prunel-0.1.0.zip (simple: unzip and
-# start) and the installer Prunel-0.1.0-setup.exe (full installation, with UI access) and
-# prepares a DRAFT release with these two files. Nothing is public yet: open the "Releases" page, read the draft and
+# eyetracker DLL and no personal file is inside, makes the installer Prunel-0.1.0-setup.exe
+# (with UI access) and prepares a DRAFT release with it. (Up to 0.3.1, a simple zip was also
+# shipped.) Nothing is public yet: open the "Releases" page, read the draft and
 # click "Publish release". The tag v0.1.0 is created at that moment.
 # See CONTRIBUTING.md, "Publishing a version".
 
@@ -65,26 +65,11 @@ jobs:
         shell: pwsh
         run: ./.github/scripts/check-data-files.ps1
 
-      # The version typed above replaces the <Version> of Prunel.csproj, without the commit
-      # identifier, so that the log says exactly "Prunel 0.1.0 starting".
-      - name: Compile Prunel (Release, x86)
-        run: dotnet build Prunel.csproj --configuration Release -p:Version=${{ env.VERSION }} -p:IncludeSourceRevisionInInformationalVersion=false
-
-      # The "full installation" build, with UI access (see Platform/UiAccess.cs), in its own
-      # folders. It ships in the installer (Setup.exe).
-      - name: Compile the full installation build (UI access)
+      # The build with UI access (see Platform/UiAccess.cs), in its own folders. It ships in the
+      # installer (Setup.exe). The version typed above replaces the <Version> of Prunel.csproj,
+      # without the commit identifier, so that the log says exactly "Prunel 0.1.0 starting".
+      - name: Compile Prunel with UI access
         run: dotnet build Prunel.csproj --configuration Release -p:UiAccess=true -p:OutDir=${{ github.workspace }}/bin/uiaccess/ -p:IntermediateOutputPath=obj/uiaccess/ -p:Version=${{ env.VERSION }} -p:IncludeSourceRevisionInInformationalVersion=false
-
-      - name: Make the folder to ship
-        shell: pwsh
-        run: |
-          $folder = "release/Prunel-$env:VERSION"
-          New-Item -ItemType Directory -Force $folder | Out-Null
-          # The program and its data files (languages, keyboards, public dictionaries).
-          # Debug files (.pdb) are left out.
-          Copy-Item bin/Release/net48/* $folder -Recurse -Exclude '*.pdb'
-          # The licences and the short presentation.
-          Copy-Item LICENSE.txt, THIRD-PARTY-NOTICES.md, THIRD-PARTY-NOTICES.fr.md, README.md, README.fr.md $folder
 
       # The installer is made from bin/uiaccess, checked by the step below (the installer
       # script also leaves out the eyetracker DLLs and the debug files).
@@ -106,17 +91,12 @@ jobs:
           }
           Write-Host 'OK: nothing forbidden in the folder to ship.'
 
-      - name: Make the zip
-        shell: pwsh
-        run: |
-          Compress-Archive -Path "release/Prunel-$env:VERSION" -DestinationPath "release/Prunel-$env:VERSION.zip"
-
       # The draft lists the pull requests merged since the previous version (--generate-notes).
       # The tag v<version> is created on this commit when the draft is published.
       - name: Prepare the draft release
         shell: pwsh
         run: |
-          gh release create "v$env:VERSION" "release/Prunel-$env:VERSION.zip" "release/Prunel-$env:VERSION-setup.exe" `
+          gh release create "v$env:VERSION" "release/Prunel-$env:VERSION-setup.exe" `
             --draft `
             --target "${{ github.sha }}" `
             --title "Prunel $env:VERSION" `

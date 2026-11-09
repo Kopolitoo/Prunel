@@ -1,0 +1,44 @@
+# Deleting the downloadable files of a closed pull request.
+#
+# Each build of a pull request keeps its installer for 14 days (see build.yml, "Artifacts" on
+# the build page), to test it before merging. Once the pull request is merged or closed, these
+# files are no longer needed: a version ("release") is always compiled again by release.yml and
+# never uses them. This workflow deletes them as soon as the pull request is closed.
+#
+# Only for pull requests of this repository: for a pull request from another person's copy
+# ("fork"), GitHub gives a read-only access and the files simply expire after 14 days.
+
+name: Clean up
+
+on:
+  pull_request:
+    types: [closed]
+
+# Write access to Actions only: needed to delete the files of the builds.
+permissions:
+  actions: write
+
+jobs:
+  delete-artifacts:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    env:
+      GH_TOKEN: ${{ github.token }}
+      BRANCH: ${{ github.event.pull_request.head.ref }}
+
+    steps:
+      # Lists all the files kept by the builds, keeps those of the pull request's branch and
+      # deletes them one by one.
+      - name: Delete the files of the pull request's builds
+        shell: bash
+        run: |
+          ids=$(gh api --paginate "repos/${{ github.repository }}/actions/artifacts?per_page=100" \
+            --jq ".artifacts[] | select(.workflow_run.head_branch == \"$BRANCH\") | .id")
+          count=0
+          for id in $ids; do
+            gh api -X DELETE "repos/${{ github.repository }}/actions/artifacts/$id"
+            count=$((count + 1))
+          done
+          echo "Deleted $count file(s) of branch $BRANCH."

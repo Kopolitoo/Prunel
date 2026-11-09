@@ -320,7 +320,7 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   L'« accès à l'interface » (UI access) met le cercle du regard au-dessus du menu Démarrer et
   permet aux clics et aux touches d'atteindre les fenêtres lancées en administrateur. Windows ne
   lance un tel programme que s'il est signé par un certificat approuvé et installé dans
-  `C:\Program Files` : Visual Studio et le .zip simple gardent donc `app.manifest`. La
+  `C:\Program Files` : Visual Studio garde donc `app.manifest` ; seul l'installateur est livré. La
   compilation automatique vérifie que les deux manifestes ne diffèrent que par `uiAccess`.
   `UiAccess.IsActive()` écrit « UI access: yes » ou « no » dans le journal au démarrage. L'installateur (étape
   `installer`) livre cette version : `Install/Prunel.iss` fabrique `Prunel-<version>-setup.exe`
@@ -407,10 +407,12 @@ Pour ajouter une langue : copier `en.json` en `xx.json`, traduire les valeurs (j
 `.github/workflows/build.yml` compile Prunel sous Windows pour chaque pull request et chaque
 envoi sur `main`. `.github/scripts/check-data-files.ps1` vérifie que les fichiers JSON des
 claviers et des langues sont valides, et que chaque langue a les mêmes clés et les mêmes `{n}`
-que `en.json`.
+que `en.json`. Pour une pull request, la compilation garde les fichiers compilés (« artifacts »)
+14 jours au plus : `.github/workflows/cleanup-artifacts.yml` les supprime dès que la pull
+request est fusionnée ou fermée.
 
 `.github/workflows/release.yml`, lancé à la main, compile une version avec le numéro tapé
-(`-p:Version=…`, qui remplace `<Version>` de `Prunel.csproj`), vérifie qu'aucune DLL de
-l'eyetracker ni aucun fichier personnel n'est dans le dossier à livrer, le zippe avec les
-licences et prépare un brouillon de release GitHub. `App.Version` relit ce numéro (version
+(`-p:Version=…`, qui remplace `<Version>` de `Prunel.csproj`), avec accès à
+l'interface, vérifie qu'aucune DLL de l'eyetracker ni aucun fichier personnel n'est dans le
+dossier à livrer, fabrique l'installateur et prépare avec lui un brouillon de release GitHub. `App.Version` relit ce numéro (version
 informative de l'assembly) pour le journal.

@@ -227,7 +227,7 @@ Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull 
 6. Uninstall it from "Settings > Apps": the folder, the shortcut and the certificate "Prunel
    local signature" (`certlm.msc`, "Trusted Root Certification Authorities") are gone; the
    settings are still in `%APPDATA%\Prunel`.
-7. The simple zip and Visual Studio still work as before, with "UI access: no" in the log.
+7. Visual Studio (F5) still works as before, with "UI access: no" in the log.
 
 ## Coming from GazeBar (version 0.3.0)
 
@@ -248,9 +248,8 @@ a personal word and a saved profile:
 
 ## Before publishing a version
 
-Download the zip of the draft release and unzip it in a new folder (not the Visual Studio
-folder). It contains `Prunel.exe`, the `Languages`, `Keyboards` and `Dictionaries` folders, the
-licences, and no `Tobii.*.dll`. Start `Prunel.exe` (Windows may ask "Run anyway"): the gaze
-works, the gaze keyboard suggests words, and the first lines of
-`%LOCALAPPDATA%\Prunel\prunel.log` say "Prunel 0.1.0 starting" (the number of the version).
-The draft also has `Prunel-0.1.0-setup.exe`: run the "Full installation" test above with it.
+Download `Prunel-0.1.0-setup.exe` of the draft release (its only file) and run the "Full
+installation" test above with it. Also check: the gaze works, the gaze keyboard suggests words,
+`C:\Program Files\Prunel` holds no `Tobii.*.dll` (unless an `Eyetracker` folder was copied there
+by hand), and the first lines of `%LOCALAPPDATA%\Prunel\prunel.log` say "Prunel 0.1.0 starting"
+(the number of the version).

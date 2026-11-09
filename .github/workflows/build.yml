@@ -1,7 +1,8 @@
 # Automatic build (continuous integration, "CI").
 #
 # On every pull request and every push to main, GitHub starts a Windows machine,
-# compiles Prunel and checks the data files. The result (green tick or red cross)
+# compiles Prunel (the build with UI access, the only one shipped), makes its installer and
+# checks the data files. The result (green tick or red cross)
 # shows on the pull request. Nothing is published: it is only a check.
 #
 # The eyetracker DLLs are not needed: the Tobii.Interaction package is downloaded from
@@ -46,9 +47,10 @@ jobs:
         shell: powershell
         run: ./.github/scripts/check-install-scripts.ps1
 
-      # First the "full installation" build, with UI access (UiAccess=true, see
-      # Prunel.csproj), in its own folders (bin/uiaccess, obj/uiaccess), apart from the normal build.
-      - name: Compile the full installation build (UI access)
+      # The build with UI access (UiAccess=true, see Prunel.csproj), in its own folders
+      # (bin/uiaccess, obj/uiaccess). The build without UI access (app.manifest) is the one of
+      # Visual Studio: it is no longer compiled here, check-manifests.ps1 checks its manifest.
+      - name: Compile Prunel with UI access
         run: dotnet build Prunel.csproj --configuration Release -p:UiAccess=true -p:OutDir=${{ github.workspace }}/bin/uiaccess/ -p:IntermediateOutputPath=obj/uiaccess/
 
       # The installer (Setup.exe, made with Inno Setup) of this same build. Its version number
@@ -58,13 +60,6 @@ jobs:
         run: |
           $version = ([xml](Get-Content Prunel.csproj)).Project.PropertyGroup.Version | Where-Object { $_ } | Select-Object -First 1
           ./.github/scripts/make-setup.ps1 bin/uiaccess $version bin/setup
-
-      - name: Compile Prunel (Release, x86)
-        run: dotnet build Prunel.csproj --configuration Release
-
-      - name: Check that the normal build does not ask for UI access
-        shell: pwsh
-        run: ./.github/scripts/check-exe-manifest.ps1 bin/Release/net48/Prunel.exe false
 
       - name: Check that no eyetracker DLL is in the output
         shell: pwsh
@@ -76,18 +71,13 @@ jobs:
           }
           Write-Host 'OK: no eyetracker DLL in the output.'
 
-      # The compiled program can be downloaded from the build page for 14 days
-      # (for testing a pull request without compiling it yourself).
-      - name: Keep the compiled program
-        uses: actions/upload-artifact@v6
-        with:
-          name: Prunel-${{ github.sha }}
-          path: bin/Release/net48/
-          retention-days: 14
-
-      # The installer, to test it before a release: double-click Prunel-<version>-setup.exe
-      # in the downloaded zip (see docs/manual-tests.md, "Installer (Setup.exe)").
+      # The installer, to test a pull request without compiling it yourself: double-click
+      # Prunel-<version>-setup.exe in the downloaded zip (see docs/manual-tests.md,
+      # "Full installation"). Kept 14 days at most: cleanup-artifacts.yml deletes it as soon as
+      # the pull request is merged or closed. Not kept for a push to main (nobody tests it:
+      # a version is compiled again by release.yml).
       - name: Keep the installer
+        if: github.event_name != 'push'
         uses: actions/upload-artifact@v6
         with:
           name: Prunel-setup-${{ github.sha }}

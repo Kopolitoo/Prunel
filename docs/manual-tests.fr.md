@@ -241,7 +241,7 @@ de cliquer (voix, souris) pendant l'installation.
 6. Le désinstaller depuis « Paramètres > Applications » : le dossier, le raccourci et le
    certificat « Prunel local signature » (`certlm.msc`, « Autorités de certification racines de
    confiance ») ont disparu ; les réglages sont toujours dans `%APPDATA%\Prunel`.
-7. Le zip simple et Visual Studio marchent comme avant, avec « UI access: no » dans le journal.
+7. Visual Studio (F5) marche comme avant, avec « UI access: no » dans le journal.
 
 ## Venir de GazeBar (version 0.3.0)
 
@@ -262,10 +262,8 @@ activé, un mot personnel et un profil enregistré :
 
 ## Avant de publier une version
 
-Télécharger le zip du brouillon de release et le décompresser dans un nouveau dossier (pas le
-dossier de Visual Studio). Il contient `Prunel.exe`, les dossiers `Languages`, `Keyboards` et
-`Dictionaries`, les licences, et aucun `Tobii.*.dll`. Lancer `Prunel.exe` (Windows peut demander
-« Exécuter quand même ») : le regard fonctionne, le clavier du regard propose des mots, et les
-premières lignes de `%LOCALAPPDATA%\Prunel\prunel.log` disent « Prunel 0.1.0 starting » (le
-numéro de la version). Le brouillon contient aussi `Prunel-0.1.0-setup.exe` : faire avec lui le
-test « Installation complète » ci-dessus.
+Télécharger `Prunel-0.1.0-setup.exe` du brouillon de release (son seul fichier) et faire avec
+lui le test « Installation complète » ci-dessus. Vérifier aussi : le regard fonctionne, le
+clavier du regard propose des mots, `C:\Program Files\Prunel` ne contient aucun `Tobii.*.dll`
+(sauf un dossier `Eyetracker` copié là à la main), et les premières lignes de
+`%LOCALAPPDATA%\Prunel\prunel.log` disent « Prunel 0.1.0 starting » (le numéro de la version).

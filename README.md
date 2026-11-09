@@ -38,18 +38,21 @@ text-to-speech.
 
 ## Installation
 
+Prunel comes only as an installer, on purpose: to be useful, it must reach all of Windows,
+including the system windows and pop-ups (Start menu, notifications, "Do you want to allow…"
+prompts, programs started as administrator). Windows allows this only to a program that is
+signed and installed in `C:\Program Files`, which the installer does. Without it, Prunel would
+be of little use.
+
 1. Install the eyetracker driver from the manufacturer's website.
-2. On the [Releases](https://github.com/Kopolitoo/Prunel/releases) page, download
-   `Prunel-x.y.z.zip` (under "Assets") and unzip it, for example in `Documents\Prunel`.
-3. Start `Prunel.exe`. The program is not signed, so Windows may show "Windows protected your
-   PC": click "More info", then "Run anyway".
-4. The eyetracker DLLs are not shipped with Prunel: Prunel looks for them in the eyetracker
+2. On the [Releases](https://github.com/Kopolitoo/Prunel/releases) page, download the installer
+   `Prunel-x.y.z-setup.exe` (under "Assets") and double-click it. It is not signed by a known
+   publisher, so Windows may show "Windows protected your PC": click "More info", then "Run
+   anyway". Answer "Yes" when Windows asks for permission, then "Install" and "Finish": see
+   [Installation](docs/user-guide.md#full-installation-ui-access).
+3. The eyetracker DLLs are not shipped with Prunel: Prunel looks for them in the eyetracker
    software. If the Diagnostic window says they are missing, see
    [Eyetracker files](docs/user-guide.md#eyetracker-files).
-
-For the **full installation** (circle above the Start menu, clicks in administrator windows),
-download the installer `Prunel-x.y.z-setup.exe` instead and double-click it: see
-[Full installation](docs/user-guide.md#full-installation-ui-access).
 
 To compile it yourself instead: clone this repository, open `Prunel.slnx` in Visual Studio,
 press F5.
