@@ -159,6 +159,8 @@
   "setting.menuDelay.help": "Regard en bas, hors de l'écran",
   "setting.menuCloseDelay.name": "Fermeture du menu",
   "setting.menuCloseDelay.help": "Regard hors de la barre",
+  "setting.doubleClickGap.name": "Pause du double clic",
+  "setting.doubleClickGap.help": "Entre les deux clics (0 = aucune)",
   "setting.autoPause.name": "Pause automatique",
   "setting.autoPause.help": "Pause quand le regard est perdu longtemps",
   "setting.autoPauseDelay.name": "Délai avant la pause",

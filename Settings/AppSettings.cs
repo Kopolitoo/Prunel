@@ -83,8 +83,10 @@ namespace Prunel
         ///      FixationDelay, which the magnifier used until then: nothing changes for the user.
         ///  17: step auto-pause — AutoPause (yes) and AutoPauseDelay (10 s). Nothing to fix:
         ///      missing from an older file, they keep their default value.
+        ///  18: issue #59 — DoubleClickGap (0 ms). Nothing to fix: missing from an older file,
+        ///      it keeps its default value (the double click stays as before).
         /// </summary>
-        public const int CurrentVersion = 17;
+        public const int CurrentVersion = 18;
 
         /// <summary>Format number of the file, so it can evolve one day without breaking everything.</summary>
         [DataMember(Order = 0)]
@@ -275,6 +277,16 @@ namespace Prunel
         /// </summary>
         [DataMember(Order = 61)]
         public double DragDuration { get; set; }
+
+        /// <summary>
+        /// Pause between the two clicks of a double click, in milliseconds (issue #59). 0 by
+        /// default: the two clicks follow each other at once. A pause helps when the first
+        /// click changes what is under the cursor (closing two browser tabs in a row).
+        /// MouseInjector.DoubleClick keeps it shorter than the Windows double-click time,
+        /// otherwise Windows would see two single clicks.
+        /// </summary>
+        [DataMember(Order = 62)]
+        public double DoubleClickGap { get; set; }
 
         // ───────────────────────── Scrolling ─────────────────────────
 
