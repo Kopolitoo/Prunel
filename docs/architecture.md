@@ -392,7 +392,8 @@ to `main`. `.github/scripts/check-data-files.ps1` checks that the keyboard and l
 files are valid and that every language has the same keys and `{n}` placeholders as `en.json`.
 For a pull request, the build keeps the compiled files ("artifacts") for 14 days at most:
 `.github/workflows/cleanup-artifacts.yml` deletes them as soon as the pull request is merged or
-closed.
+closed. `.github/workflows/cleanup-runs.yml` deletes, every Sunday, the workflow runs (with
+their logs) older than 30 days, except those of `release.yml`.
 
 `.github/workflows/release.yml`, started by hand, builds a version with the number typed
 (`-p:Version=…`, which replaces `<Version>` of `Prunel.csproj`) with UI access, checks that no
