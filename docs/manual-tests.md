@@ -183,6 +183,29 @@ in the band you were looking at. "Reset the measures" puts everything back to 0.
 reopen the window: everything starts from 0 again. No new file appears in
 `%LOCALAPPDATA%\Prunel\` and the log holds no gaze position.
 
+## 19. Automatic pause
+
+Gaze and voice only: no need to touch the mouse or the USB cable.
+
+1. Settings, "Gaze" category, "Pause" tab: "Automatic pause" is on, "Delay before the pause"
+   is 10 s. Set the delay to 5 s, then go back to movement mode.
+2. Close your eyes (or turn your head away from the eyetracker) for about 6 seconds, then look
+   at the screen again: the circle is gone and a round "Resume" button is in the middle of the
+   screen. Elsewhere on the screen, nothing is clicked and the cursor does not move.
+3. Look at "Resume": its ring fills up, then the circle comes back (movement mode).
+4. Close your eyes for only 3 seconds: no pause.
+5. Look below the screen for 6 seconds: the menu opens, no automatic pause. Close the menu.
+6. Open the gaze keyboard, close your eyes 6 seconds: automatic pause, the keyboard is hidden;
+   after "Resume", the keyboard comes back.
+7. Automatic pause again, then look below the screen: the menu shows only "Resume" and the
+   centre button disappears; let the menu close: the centre button comes back. Escape (said to
+   Dragon) also goes back to movement mode.
+8. Open the settings and close your eyes 6 seconds: no pause (the settings stay open). Same in
+   the magnifier and the action choice.
+9. Turn "Automatic pause" off: closing your eyes no longer starts it. Put the delay back to
+   10 s (or "Default"). The log says "Automatic pause: gaze lost for 5 s" and holds no gaze
+   position.
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,

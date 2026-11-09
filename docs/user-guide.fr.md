@@ -76,6 +76,14 @@ le mode jeu. Boutons :
 - **Clavier** : le clavier du regard.
 - **Pause** / **Reprendre** : plus rien ne suit le regard, jusqu'à ce qu'on rouvre le menu et
   qu'on choisisse « Reprendre ».
+
+**Pause automatique** : quand l'eyetracker ne voit plus les yeux pendant 10 secondes (yeux
+fermés, tête tournée, absence), Prunel se met en pause tout seul, pour que rien ne soit cliqué au
+retour du regard. Un bouton rond « Reprendre » apparaît alors au centre de l'écran : le regarder
+ramène au mode mouvement (le « Reprendre » du menu et Échap marchent aussi). Elle ne démarre que
+depuis le mode mouvement et le regard fixe, jamais pendant le choix d'action, la loupe, le
+défilement, le jeu ou les paramètres. Regarder sous l'écran ou à côté ne compte pas. Pour changer
+le délai ou la désactiver : Paramètres, catégorie « Regard », onglet « Pause ».
 - **Suivi souris** : activé / désactivé (bord vert quand il est activé).
 - **Quitter Prunel** : demande d'abord « Oui » ou « Non ».
 

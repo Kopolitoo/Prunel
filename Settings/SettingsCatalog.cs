@@ -369,7 +369,7 @@ namespace Prunel
         /// </summary>
         public static readonly List<SettingsCategory> Categories = new List<SettingsCategory>
         {
-            new SettingsCategory("category.gaze", "\uE890", "tab.gaze", "tab.fixation", "tab.delays"),
+            new SettingsCategory("category.gaze", "\uE890", "tab.gaze", "tab.fixation", "tab.delays", "tab.pause"),
             new SettingsCategory("category.actions", "\uE7C9", "tab.magnifierDrag", "tab.scroll", IconsTabName),
             new SettingsCategory("category.display", "\uE7F4", "tab.display", "tab.keyboard", "tab.sound", "tab.game"),
             new SettingsCategory("category.system", "\uE770", GeneralTabName, ProfilesTabName, ToolsTabName)
@@ -443,6 +443,14 @@ namespace Prunel
                                p => p.MenuDelay, (p, v) => p.MenuDelay = v),
                 Setting.Number("setting.menuCloseDelay", " s", 0.1,
                                p => p.MenuCloseDelay, (p, v) => p.MenuCloseDelay = v)),
+
+            // E769 = pause ("Pause"): the automatic pause (see ModeManager.WatchAutoPause).
+            // A tab of its own: a page holds at most 5 setting rows, and "Delays" has 4.
+            new SettingsTab("tab.pause", "\uE769",
+                Setting.YesOrNo("setting.autoPause",
+                                 p => p.AutoPause, (p, v) => p.AutoPause = v),
+                Setting.Number("setting.autoPauseDelay", " s", 5,
+                               p => p.AutoPauseDelay, (p, v) => p.AutoPauseDelay = v)),
 
             // E7F4 = screen ("Display")
             new SettingsTab("tab.display", "",

@@ -51,6 +51,8 @@ namespace Prunel
             OptionsIconDelay = 0.3;
             MenuDelay = 0.5;
             MenuCloseDelay = 1.0;
+            AutoPause = true;
+            AutoPauseDelay = 10;
 
             MagnifierBeforeAction = true;
             MagnifierZoom = 4;
@@ -126,6 +128,7 @@ namespace Prunel
             OptionsIconDelay = Clamp(OptionsIconDelay, 0.1, 10);
             MenuDelay = Clamp(MenuDelay, 0.1, 10);
             MenuCloseDelay = Clamp(MenuCloseDelay, 0.1, 10);
+            AutoPauseDelay = Clamp(AutoPauseDelay, 5, 300);
 
             MagnifierZoom = Clamp(MagnifierZoom, 1, 10);
             MagnifierDelay = Clamp(MagnifierDelay, 0.1, 10);
@@ -301,6 +304,9 @@ namespace Prunel
                 MagnifierDelay = FixationDelay;
                 App.Log("Settings: updated to version 16 (magnifier delay)");
             }
+
+            // Version 17 (AutoPause, AutoPauseDelay): nothing to fix, the settings keep their
+            // default value (yes, 10 s).
 
             FileVersion = CurrentVersion;
             return true;

@@ -213,7 +213,13 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   souris pour les jeux qui lisent l'entrée brute, en mode « tracking » ou « gamepad »
   (`GameRelative`, `GameSensitivity`). Le menu s'ouvre depuis ce mode (« Quitter le jeu »).
 - `Modes/PauseMode` (étape 4) : plus rien ne suit le regard ; seul le menu peut encore s'ouvrir
-  (bouton « Reprendre »).
+  (bouton « Reprendre »). **Pause automatique** (étape auto-pause) : `ModeManager.WatchAutoPause`
+  lance `PauseMode(true)` quand le regard est perdu (aucune mesure récente) pendant
+  `AutoPauseDelay` (10 s), seulement en mode mouvement ou regard fixe ; un regard sous l'écran ou
+  à côté ne compte pas. Cette pause affiche un bouton rond « Reprendre » au centre de l'écran (sur
+  la surface du glisser-déposer, libre pendant la pause), qui ramène au mode mouvement. Réglages
+  `AutoPause` (oui) et `AutoPauseDelay`, onglet « Pause » de la catégorie « Regard »
+  (`settings.json` version 17).
 - `EyetrackerLoader` (02/11/2026) : trouve et charge au démarrage les DLL de l'eyetracker
   (Tobii.Interaction), qui ne sont pas livrées avec Prunel (voir « Installation »). Les DLL .NET sont fournies à .NET par l'événement
   `AssemblyResolve` ; la DLL native est chargée à l'avance par `LoadLibrary`, en 32 bits.
