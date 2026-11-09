@@ -442,7 +442,10 @@ namespace Prunel
                 Setting.Number("setting.menuDelay", " s", 0.1,
                                p => p.MenuDelay, (p, v) => p.MenuDelay = v),
                 Setting.Number("setting.menuCloseDelay", " s", 0.1,
-                               p => p.MenuCloseDelay, (p, v) => p.MenuCloseDelay = v)),
+                               p => p.MenuCloseDelay, (p, v) => p.MenuCloseDelay = v),
+                // Issue #59: pause between the two clicks of the action choice double click.
+                Setting.Number("setting.doubleClickGap", " ms", 50,
+                               p => p.DoubleClickGap, (p, v) => p.DoubleClickGap = v)),
 
             // E769 = pause ("Pause"): the automatic pause (see ModeManager.WatchAutoPause).
             // A tab of its own: a page holds at most 5 setting rows, and "Delays" has 4.
