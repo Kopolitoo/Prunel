@@ -76,18 +76,22 @@ jobs:
           }
           Write-Host 'OK: no eyetracker DLL in the output.'
 
-      # The compiled program can be downloaded from the build page for 14 days
-      # (for testing a pull request without compiling it yourself).
+      # The compiled program, same rules as the installer below.
       - name: Keep the compiled program
+        if: github.event_name != 'push'
         uses: actions/upload-artifact@v6
         with:
           name: Prunel-${{ github.sha }}
           path: bin/Release/net48/
           retention-days: 14
 
-      # The installer, to test it before a release: double-click Prunel-<version>-setup.exe
-      # in the downloaded zip (see docs/manual-tests.md, "Installer (Setup.exe)").
+      # The installer, to test a pull request without compiling it yourself: double-click
+      # Prunel-<version>-setup.exe in the downloaded zip (see docs/manual-tests.md,
+      # "Full installation"). Kept 14 days at most: cleanup-artifacts.yml deletes it as soon as
+      # the pull request is merged or closed. Not kept for a push to main (nobody tests it:
+      # a version is compiled again by release.yml).
       - name: Keep the installer
+        if: github.event_name != 'push'
         uses: actions/upload-artifact@v6
         with:
           name: Prunel-setup-${{ github.sha }}

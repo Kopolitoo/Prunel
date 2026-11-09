@@ -407,7 +407,9 @@ Pour ajouter une langue : copier `en.json` en `xx.json`, traduire les valeurs (j
 `.github/workflows/build.yml` compile Prunel sous Windows pour chaque pull request et chaque
 envoi sur `main`. `.github/scripts/check-data-files.ps1` vérifie que les fichiers JSON des
 claviers et des langues sont valides, et que chaque langue a les mêmes clés et les mêmes `{n}`
-que `en.json`.
+que `en.json`. Pour une pull request, la compilation garde les fichiers compilés (« artifacts »)
+14 jours au plus : `.github/workflows/cleanup-artifacts.yml` les supprime dès que la pull
+request est fusionnée ou fermée.
 
 `.github/workflows/release.yml`, lancé à la main, compile une version avec le numéro tapé
 (`-p:Version=…`, qui remplace `<Version>` de `Prunel.csproj`), vérifie qu'aucune DLL de

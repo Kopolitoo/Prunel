@@ -70,4 +70,5 @@ startup.
 Prunel is tested by its user on a Tobii PCEye 5. Please say clearly in your pull request
 what was compiled and what was tested on real hardware, using the
 [manual tests](docs/manual-tests.md). Every pull request is compiled automatically on GitHub
-(see `.github/workflows/build.yml`).
+(see `.github/workflows/build.yml`); its files ("Artifacts" on the build page) can be
+downloaded to test it, until the pull request is merged or closed.
