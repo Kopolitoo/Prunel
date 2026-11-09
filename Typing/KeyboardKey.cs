@@ -268,13 +268,19 @@ namespace Prunel
             _background.Background = FlashBackground;
         }
 
-        /// <summary>True if the gaze point (screen pixels) is in the key's cell.</summary>
         /// <summary>A key is never aimed at from off the screen.</summary>
         public bool ReachesOffScreen
         {
             get { return false; }
         }
 
+        /// <summary>Centre of the key's cell, in screen pixels.</summary>
+        public Point Center
+        {
+            get { return new Point((_left + _right) / 2, (_top + _bottom) / 2); }
+        }
+
+        /// <summary>True if the gaze point (screen pixels) is in the key's cell.</summary>
         public bool Contains(double x, double y)
         {
             return x >= _left && x < _right && y >= _top && y < _bottom;

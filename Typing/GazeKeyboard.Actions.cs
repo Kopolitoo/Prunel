@@ -29,8 +29,26 @@ namespace Prunel
 
             AppSettings p = AppSettings.Current;
             int num = _aimer.Update(gaze, p.KeyDelay, p.ShowLabels);
+
+            // The gaze left the page key that appeared under it: it is an ordinary key again.
+            if (_pageToggleKey >= 0 && _aimer.Aimed != _pageToggleKey)
+            {
+                _pageToggleKey = -1;
+            }
             if (num < 0)
             {
+                return;
+            }
+
+            if (num == _pageToggleKey)
+            {
+                // The gaze stayed on the page key since the last page change: back to the
+                // previous page, whatever the key says (issue #106). Staying longer toggles
+                // between the two pages.
+                Point center = _keys[num].Center;
+                _keys[num].Flash();
+                ChangePage("back");
+                AimPageKeyAt(center);
                 return;
             }
 
@@ -78,7 +96,9 @@ namespace Prunel
             else if (d.Page != null)
             {
                 // The page changes: the keys are replaced (see Build).
+                Point center = key.Center;
                 ChangePage(d.Page);
+                AimPageKeyAt(center);
                 return;
             }
             else if (d.Modifier != null)
@@ -104,6 +124,28 @@ namespace Prunel
                 _aimer.BlockUntilExit();
             }
             RefreshState();
+        }
+
+        /// <summary>
+        /// After a page change (issue #106): if the new page has a page key at the same place
+        /// (for example "ABC" where "123.!" was), it is not blocked. If the gaze stays on it, it
+        /// activates after [KeyDelay] and goes back to the PREVIOUS page, even if the key
+        /// itself leads elsewhere ("123.!" where "[(/" was): a page key pressed by mistake is
+        /// undone without looking away (see Update). Always on, whatever [KeyRepeat]: it is the
+        /// way back, not a repetition. Any other key at that place stays blocked until the gaze
+        /// leaves it, as before.
+        /// </summary>
+        private void AimPageKeyAt(Point center)
+        {
+            for (int i = 0; i < _keys.Count; i++)
+            {
+                if (_keys[i].Description.Page != null && _keys[i].Contains(center.X, center.Y))
+                {
+                    _aimer.ResetAndAim(i);
+                    _pageToggleKey = i;
+                    return;
+                }
+            }
         }
 
         // ───────────────────────── Actions ─────────────────────────

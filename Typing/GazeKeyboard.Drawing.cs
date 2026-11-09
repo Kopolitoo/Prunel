@@ -24,6 +24,7 @@ namespace Prunel
             _targets.Clear();
             _keys.Clear();
             _close = null;
+            _pageToggleKey = -1;
             if (!IsOpen || _layout == null || !_layer.Ready)
             {
                 Hide();

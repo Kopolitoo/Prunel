@@ -96,6 +96,10 @@ namespace Prunel
         private GazeButton _close;
         private readonly ButtonAimer _aimer;
 
+        // Index of the page key that appeared under the gaze after a page change, while the
+        // gaze has not left it; -1 = none (issue #106, see AimPageKeyAt).
+        private int _pageToggleKey = -1;
+
         // True when the keyboard is really drawn on screen.
         private bool _visible;
 

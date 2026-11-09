@@ -100,6 +100,17 @@ namespace Prunel
         }
 
         /// <summary>
+        /// Forgets everything (the buttons were just replaced), but the button [index] stays
+        /// aimed at and is NOT blocked: if the gaze is still on it, its timer starts again from
+        /// zero and it activates after the delay. For the keyboard page buttons (issue #106).
+        /// </summary>
+        public void ResetAndAim(int index)
+        {
+            Reset();
+            Aimed = index;
+        }
+
+        /// <summary>
         /// Prevents the aimed button from activating again until the gaze has left it.
         /// </summary>
         public void BlockUntilExit()
