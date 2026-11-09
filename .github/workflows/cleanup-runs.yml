@@ -1,0 +1,55 @@
+# Deleting the old history of the workflows ("runs" in the Actions tab).
+#
+# Every build, release and clean-up leaves a line in the Actions tab, with its log. They are
+# useful for a few weeks (to see why a build failed), then only take up room. Every Sunday,
+# this workflow deletes the runs older than 30 days. The runs of "Release" are kept: they say
+# how each published version was made. Can also be started by hand from the Actions tab
+# ("Clean up old runs" > "Run workflow"), with another number of days.
+#
+# Deleting a run also deletes its log and its files ("artifacts"). Releases themselves (the
+# Releases page and their Setup.exe) are not touched.
+
+name: Clean up old runs
+
+on:
+  schedule:
+    # Every Sunday at 03:00 (UTC).
+    - cron: '0 3 * * 0'
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Delete the runs older than this number of days"
+        required: true
+        default: '30'
+
+# Write access to Actions only: needed to delete runs.
+permissions:
+  actions: write
+
+jobs:
+  delete-runs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    env:
+      GH_TOKEN: ${{ github.token }}
+      DAYS: ${{ inputs.days || '30' }}
+
+    steps:
+      - name: Delete the runs older than the limit (except Release)
+        shell: bash
+        run: |
+          if ! [[ "$DAYS" =~ ^[0-9]+$ ]]; then
+            echo "::error::'$DAYS' is not a number of days."
+            exit 1
+          fi
+          limit=$(date -u -d "$DAYS days ago" +%Y-%m-%dT%H:%M:%SZ)
+          echo "Deleting the finished runs created before $limit (Release runs kept)."
+          ids=$(gh api --paginate "repos/${{ github.repository }}/actions/runs?per_page=100&created=<$limit" \
+            --jq '.workflow_runs[] | select(.status == "completed" and .name != "Release") | .id')
+          count=0
+          for id in $ids; do
+            gh api -X DELETE "repos/${{ github.repository }}/actions/runs/$id"
+            count=$((count + 1))
+          done
+          echo "Deleted $count run(s)."
