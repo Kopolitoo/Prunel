@@ -58,7 +58,7 @@
          dotnet build Prunel.csproj -c Release -p:UiAccess=true
        It uses app.uiaccess.manifest (uiAccess="true"). Such a Prunel.exe only starts once
        signed and installed in C:\Program Files: it can NOT be started from Visual Studio
-       or from the build folder. Without this property (Visual Studio, simple .zip),
+       or from the build folder. Without this property (Visual Studio),
        app.manifest is used and Prunel starts from anywhere. -->
   <PropertyGroup Condition="'$(UiAccess)' == 'true'">
     <ApplicationManifest>app.uiaccess.manifest</ApplicationManifest>

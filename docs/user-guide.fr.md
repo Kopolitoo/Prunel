@@ -190,11 +190,12 @@ licence de Tobii :
 
 ## Installation complète (accès à l'interface)
 
-Le zip simple se lance depuis n'importe quel dossier, mais Windows lui interdit deux choses : le
-menu Démarrer, la recherche et les notifications passent au-dessus du cercle du regard, et les
-fenêtres lancées « en administrateur » ignorent ses clics et ses touches. L'**installation
-complète** enlève ces deux limites. Windows ne donne cet « accès à l'interface » qu'à un programme
-signé et installé dans `C:\Program Files` : elle a donc son propre installateur.
+Prunel s'installe avec son installateur (`Prunel-x.y.z-setup.exe`). Grâce à lui, le cercle du
+regard reste au-dessus du menu Démarrer, de la recherche et des notifications, et les clics et
+les touches atteignent les fenêtres lancées « en administrateur ». Windows ne donne cet « accès à
+l'interface » qu'à un programme signé et installé dans `C:\Program Files` : l'installateur
+s'occupe des deux. (Jusqu'à la version 0.3.1, un zip simple sans ces deux possibilités était
+aussi proposé.)
 
 Pour installer ou mettre à jour :
 
@@ -232,9 +233,10 @@ gardent.
 ## Limites connues
 
 - Un seul écran.
-- Avec le zip simple, une fenêtre lancée « en tant qu'administrateur » ignore les clics et les
-  touches de Prunel, et le menu Démarrer de Windows peut cacher le cercle.
-  L'[installation complète](#installation-complète-accès-à-linterface) enlève ces deux limites.
+- Lancé depuis Visual Studio (développeurs), Prunel n'a pas l'accès à l'interface : une
+  fenêtre lancée « en tant qu'administrateur » ignore ses clics et ses touches, et le menu
+  Démarrer de Windows peut cacher le cercle.
+  L'[installateur](#installation-complète-accès-à-linterface) n'a aucune de ces deux limites.
 - Testé uniquement avec le Tobii Dynavox PCEye 5.
 - Le mode jeu avec déplacement relatif de la souris n'a pas encore été testé.
 - Le dictionnaire personnel est commun à toutes les langues.

@@ -176,11 +176,11 @@ If the Diagnostic window says they are missing, get them yourself, accepting Tob
 
 ## Full installation (UI access)
 
-The simple zip runs from any folder, but Windows keeps two things out of its reach: the Start
-menu, search and notifications are drawn above the gaze circle, and windows started "as
-administrator" ignore its clicks and keys. The **full installation** removes both limits. Windows
-allows this "UI access" only to a program that is signed and installed in `C:\Program Files`, so
-it comes with its own installer.
+Prunel is installed with its installer (`Prunel-x.y.z-setup.exe`). Thanks to it, the gaze
+circle stays above the Start menu, search and notifications, and clicks and keys reach windows
+started "as administrator". Windows allows this "UI access" only to a program that is signed and
+installed in `C:\Program Files`: the installer takes care of both. (Up to version 0.3.1, a
+simple zip without these two things was also offered.)
 
 To install or update:
 
@@ -212,9 +212,9 @@ rights). Updates keep it.
 ## Known limits
 
 - One screen only.
-- With the simple zip, a window started "as administrator" ignores Prunel's clicks and keys,
-  and the Windows Start menu can hide the circle. The
-  [full installation](#full-installation-ui-access) removes these two limits.
+- Started from Visual Studio (developers), Prunel has no UI access: a window started "as
+  administrator" ignores its clicks and keys, and the Windows Start menu can hide the circle.
+  The [installer](#full-installation-ui-access) has neither limit.
 - Tested with the Tobii Dynavox PCEye 5 only.
 - The game mode with relative mouse movement has not been tested yet.
 - The personal dictionary is shared between languages.

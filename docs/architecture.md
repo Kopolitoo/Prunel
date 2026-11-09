@@ -306,7 +306,7 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   the "full installation" build (`dotnet build -p:UiAccess=true`). "UI access" puts the gaze
   circle above the Start menu and lets clicks and keys reach windows started as administrator.
   Windows starts such a program only if it is signed by a trusted certificate and installed in
-  `C:\Program Files`, so Visual Studio and the simple .zip keep `app.manifest`. The automatic
+  `C:\Program Files`, so Visual Studio keeps `app.manifest`; only the installer ships. The automatic
   build checks that the two manifests differ only by `uiAccess`. `UiAccess.IsActive()` writes
   "UI access: yes" or "no" to the log at startup. The installer (step `installer`) ships this build:
   `Install/Prunel.iss` makes `Prunel-<version>-setup.exe` with
@@ -395,7 +395,7 @@ For a pull request, the build keeps the compiled files ("artifacts") for 14 days
 closed.
 
 `.github/workflows/release.yml`, started by hand, builds a version with the number typed
-(`-p:Version=…`, which replaces `<Version>` of `Prunel.csproj`), checks that no eyetracker DLL
-and no personal file is in the folder to ship, zips it with the licences and prepares a draft
-GitHub release. `App.Version` reads the number back (assembly informational version) for the
+(`-p:Version=…`, which replaces `<Version>` of `Prunel.csproj`) with UI access, checks that no
+eyetracker DLL and no personal file is in the folder to ship, makes the installer and prepares a
+draft GitHub release with it. `App.Version` reads the number back (assembly informational version) for the
 log.
