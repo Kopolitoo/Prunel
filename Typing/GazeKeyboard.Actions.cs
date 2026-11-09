@@ -28,7 +28,14 @@ namespace Prunel
             }
 
             AppSettings p = AppSettings.Current;
-            int num = _aimer.Update(gaze, p.KeyDelay, p.ShowLabels);
+            // The way back of a page key (issue #106) waits longer than a normal key, so that
+            // the pages alternate slowly while the gaze stays.
+            double delay = p.KeyDelay;
+            if (_pageToggleKey >= 0 && _aimer.Aimed == _pageToggleKey)
+            {
+                delay *= PageToggleDelayFactor;
+            }
+            int num = _aimer.Update(gaze, delay, p.ShowLabels);
 
             // The gaze left the page key that appeared under it: it is an ordinary key again.
             if (_pageToggleKey >= 0 && _aimer.Aimed != _pageToggleKey)

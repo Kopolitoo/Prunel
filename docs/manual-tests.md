@@ -235,7 +235,7 @@ button lights up, its ring fills up, and it goes back as usual.
 Gaze only, gaze keyboard open on the letters page.
 
 1. Look at "123.!" and keep looking: the numbers page appears ("ABC" at the same place), then
-   after the key delay the letters page comes back, then numbers again… Look away: it stops.
+   after twice the key delay (slower than typing) the letters page comes back, then numbers again… Look away: it stops.
 2. Same with "[(/": symbols, then back to letters (not to numbers, although "123.!" is at that
    place on the symbols page).
 3. Same with "À,È,Ê" (accents ↔ letters) and, from the numbers page, "F1..F12" (F keys ↔

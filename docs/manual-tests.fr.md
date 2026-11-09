@@ -252,7 +252,7 @@ l'écran) : le bouton s'éclaire, son anneau se remplit, et il revient en arriè
 Uniquement au regard, clavier du regard ouvert sur la page des lettres.
 
 1. Regarder « 123.! » et continuer à regarder : la page des chiffres apparaît (« ABC » au même
-   endroit), puis après le délai des touches la page des lettres revient, puis les chiffres…
+   endroit), puis après deux fois le délai des touches (plus lent que pour écrire) la page des lettres revient, puis les chiffres…
    Détourner le regard : ça s'arrête.
 2. Pareil avec « [(/ » : symboles, puis retour aux lettres (pas aux chiffres, bien que
    « 123.! » soit à cet endroit sur la page des symboles).
