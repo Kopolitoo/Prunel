@@ -90,6 +90,10 @@ namespace Prunel
         // #53), in page units: 100 = about 200 pixels on a 4K screen, the margin of the
         // "Back" buttons of the other modes (GazeButton.StretchToRightEdge).
         private const double BeyondRightEdge = 100;
+
+        // How much the gaze zone of "Retour" grows above and below (page units): "Défaut" is
+        // far above, nothing is below.
+        private const double BackGrow = 40;
         private const double GazeDotDiameter = 50;
 
         // ── Colours.

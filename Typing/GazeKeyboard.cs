@@ -64,8 +64,13 @@ namespace Prunel
         // by mistake while typing on the top row (60 px was still too near, issue #56).
         private const double CloseGap4K = 120;
 
-        /// <summary>Activation zone of the Close button: 20 % larger than its drawing.</summary>
-        private const double CloseZoneFactor = 1.2;
+        /// <summary>
+        /// Activation zone of the Close button: 60 % larger than its drawing, and stretched to
+        /// the right edge of the screen and beyond (issue #53: looking just next to the cross
+        /// did not close the keyboard). With the 120 px gap, about 85 px (4K) stay between the
+        /// zone and the top row of keys.
+        /// </summary>
+        private const double CloseZoneFactor = 1.6;
 
         /// <summary>Height of the input box, relative to a row of keys.</summary>
         private const double InputBoxRatio = 0.7;

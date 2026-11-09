@@ -91,15 +91,14 @@ namespace Prunel
 
         /// <summary>
         /// For "Retour", near the right edge (issue #53: hard to aim at): the gaze zone
-        /// stretches to the right up to [right] (page units), beyond the edge of the page.
-        /// The drawing does not change; the height of the zone neither.
+        /// stretches to the right up to [right] (page units), beyond the edge of the page, and
+        /// grows by [grow] above and below. The drawing does not change.
         /// </summary>
-        public void StretchToRight(double right)
+        public void StretchToRight(double right, double grow)
         {
-            if (right > _gazeZone.Right)
-            {
-                _gazeZone = new Rect(_gazeZone.X, _gazeZone.Y, right - _gazeZone.X, _gazeZone.Height);
-            }
+            double top = _gazeZone.Y - grow;
+            double width = Math.Max(right, _gazeZone.Right) - _gazeZone.X;
+            _gazeZone = new Rect(_gazeZone.X, top, width, _gazeZone.Height + 2 * grow);
             ReachesOffScreen = true;
         }
 

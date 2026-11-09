@@ -225,7 +225,9 @@ button lights up, its ring fills up, and it goes back as usual.
    it, does not react to a gaze off the screen.
 6. Settings, "Configure the icons": "Back" goes back to the settings. Lists ("Keyboard layout",
    "My words", profiles): "Back" goes back.
-7. Look off the screen far to the right (a hand width or more) or well above or below "Back":
+7. Gaze keyboard: staring just next to the "Close" cross (left of it, below it, or at the
+   right edge of the screen) closes the keyboard. Typing on the top row of keys never closes it.
+8. Look off the screen far to the right (a hand width or more) or well above or below "Back":
    nothing happens. In movement mode, the menu still opens when looking below the screen.
 
 ## Full installation (Setup.exe, UI access)

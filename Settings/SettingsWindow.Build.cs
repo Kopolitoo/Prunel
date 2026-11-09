@@ -103,7 +103,7 @@ namespace Prunel
             //    and beyond it (issue #53).
             SettingTarget back = AddTarget(RightLeft, (PageHeight - RightSide) / 2, RightSide, RightSide,
                          SymbolAndWord("", Texts.Get("common.back")), RequestBack, false, false);
-            back.StretchToRight(PageWidth + BeyondRightEdge);
+            back.StretchToRight(PageWidth + BeyondRightEdge, BackGrow);
 
             Version++;
         }

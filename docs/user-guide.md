@@ -38,8 +38,8 @@ pressed during the next action). At the top: **Copy**, **Cut**, **Paste**. On th
 **Back**. After an action, you are back in movement mode.
 
 The **Back** buttons on the right of the screen (action choice, magnifier, drag and drop,
-scroll, settings, lists) are easy to aim at: looking at the edge of the screen at their height,
-or slightly beyond it, also works.
+scroll, settings, lists, and the keyboard's "Close") are easy to aim at: looking at the edge of
+the screen at their height, or slightly beyond it, also works.
 
 The double click makes a short pause between its two clicks (to close two browser tabs in a
 row, for example). To change it: Settings, "Delays" tab, "Double click pause" (in milliseconds,

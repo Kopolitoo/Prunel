@@ -142,7 +142,7 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   action choice and the menu. A gaze off the screen only aims at a target whose
   `ReachesOffScreen` is true: the "Back" buttons of the right edge, whose zone goes on to the
   edge and about 200 px (4K) beyond it (`GazeButton.StretchToRightEdge`,
-  `SettingTarget.StretchToRight`, issue #53).
+  `SettingTarget.StretchToRight`, issue #53; also the gaze keyboard's Close, zone ×1.6).
 - `Modes/MenuMode` (step 4): looking at the bottom, off the screen, for `MenuDelay` (0.5 s)
   opens a bar centred at the bottom of the screen (buttons only, no background, 100 px apart
   on a 4K screen: issue #54), only from the movement, pause and game modes

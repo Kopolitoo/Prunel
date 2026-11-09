@@ -240,7 +240,10 @@ l'écran) : le bouton s'éclaire, son anneau se remplit, et il revient en arriè
    « Défaut », au-dessus, ne réagit pas à un regard hors de l'écran.
 6. Paramètres, « Configurer les icônes » : « Retour » ramène aux paramètres. Listes
    (« Disposition du clavier », « Mes mots », profils) : « Retour » revient en arrière.
-7. Regarder hors de l'écran loin à droite (une largeur de main ou plus), ou bien au-dessus ou
+7. Clavier du regard : fixer juste à côté de la croix « Fermer » (à sa gauche, en dessous, ou au
+   bord droit de l'écran) ferme le clavier. Taper sur la rangée de touches du haut ne le ferme
+   jamais.
+8. Regarder hors de l'écran loin à droite (une largeur de main ou plus), ou bien au-dessus ou
    en dessous de « Retour » : rien ne se passe. En mode mouvement, le menu s'ouvre toujours en
    regardant sous l'écran.
 
