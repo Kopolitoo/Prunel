@@ -247,6 +247,21 @@ l'écran) : le bouton s'éclaire, son anneau se remplit, et il revient en arriè
    en dessous de « Retour » : rien ne se passe. En mode mouvement, le menu s'ouvre toujours en
    regardant sous l'écran.
 
+## 21. Touches de page qui reviennent en arrière (issue #106)
+
+Uniquement au regard, clavier du regard ouvert sur la page des lettres.
+
+1. Regarder « 123.! » et continuer à regarder : la page des chiffres apparaît (« ABC » au même
+   endroit), puis après deux fois le délai des touches (plus lent que pour écrire) la page des lettres revient, puis les chiffres…
+   Détourner le regard : ça s'arrête.
+2. Pareil avec « [(/ » : symboles, puis retour aux lettres (pas aux chiffres, bien que
+   « 123.! » soit à cet endroit sur la page des symboles).
+3. Pareil avec « À,È,Ê » (accents ↔ lettres) et, depuis la page des chiffres, « F1..F12 »
+   (touches F ↔ chiffres).
+4. Regarder « 123.! », puis détourner le regard et revenir sur « ABC » : on va à la page des
+   lettres comme d'habitude.
+5. Marche pareil avec « Répétition » désactivée (Paramètres, onglet du clavier).
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,

@@ -96,6 +96,16 @@ namespace Prunel
         private GazeButton _close;
         private readonly ButtonAimer _aimer;
 
+        // Index of the page key that appeared under the gaze after a page change, while the
+        // gaze has not left it; -1 = none (issue #106, see AimPageKeyAt).
+        private int _pageToggleKey = -1;
+
+        /// <summary>
+        /// Delay of the way back of a page key (issue #106), as a multiple of [KeyDelay]: twice
+        /// as long, so that the pages alternate slowly. The normal key delay does not change.
+        /// </summary>
+        private const double PageToggleDelayFactor = 2.0;
+
         // True when the keyboard is really drawn on screen.
         private bool _visible;
 

@@ -102,7 +102,9 @@ Regarder hors de la barre pendant une seconde la ferme.
 Menu, « Clavier ». Le clavier occupe la moitié basse de l'écran. On regarde une touche : elle
 s'allume, clignote en vert et écrit. Au-dessus du clavier, le cercle fonctionne comme d'habitude
 (on peut cliquer ailleurs). Cinq pages : lettres, accents, chiffres et ponctuation, symboles et
-navigation, F1 à F12.
+navigation, F1 à F12. Une touche de page regardée par erreur (« 123.! », « [(/ », « F1..F12 »…)
+s'annule en gardant le regard au même endroit : après deux fois le délai des touches, le clavier
+revient à la page d'avant.
 
 On peut aussi placer « Clavier » sur la couronne du choix d'action (configuration des icônes).
 On fixe le champ où l'on veut écrire, puis on choisit « Clavier » : Prunel clique d'abord à cet

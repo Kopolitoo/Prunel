@@ -230,6 +230,19 @@ button lights up, its ring fills up, and it goes back as usual.
 8. Look off the screen far to the right (a hand width or more) or well above or below "Back":
    nothing happens. In movement mode, the menu still opens when looking below the screen.
 
+## 21. Keyboard page keys toggle back (issue #106)
+
+Gaze only, gaze keyboard open on the letters page.
+
+1. Look at "123.!" and keep looking: the numbers page appears ("ABC" at the same place), then
+   after twice the key delay (slower than typing) the letters page comes back, then numbers again… Look away: it stops.
+2. Same with "[(/": symbols, then back to letters (not to numbers, although "123.!" is at that
+   place on the symbols page).
+3. Same with "À,È,Ê" (accents ↔ letters) and, from the numbers page, "F1..F12" (F keys ↔
+   numbers).
+4. Look at "123.!", then look away and back at "ABC": it goes to the letters page as usual.
+5. Works the same with "Repeat" off (Settings, keyboard tab).
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,
