@@ -108,8 +108,8 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   circle (half of `CircleRadius`), above everything, shows where the gaze is. Looking at an icon
   for `ActivationDelay` activates it (progress ring). Before the click, the black screen is
   hidden and Prunel waits 60 ms for it to disappear; then back to movement mode. The double
-  click waits `DoubleClickGap` (0 ms by default, "Delays" tab, `settings.json` version 18,
-  issue #59) between its two clicks, kept 50 ms shorter than the Windows double-click time.
+  click waits 200 ms between its two clicks (`MouseInjector.DoubleClickGapMs`, issue #59), kept
+  50 ms shorter than the Windows double-click time.
 - `Modes/MagnifierMode` (step 5): refines the cursor position. The same area is captured, then
   shown enlarged ×`MagnifierZoom` (×4, i.e. 800 × 800 px) in the middle of a black screen; a
   small 50 px circle follows the gaze. When the gaze fixes on the picture (same detection as in

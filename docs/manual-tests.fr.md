@@ -23,10 +23,8 @@ On fixe un fichier dans l'Explorateur, on regarde l'icône d'options, l'écran
 noir montre la zone agrandie ; on regarde « double clic » : l'écran noir disparaît et le fichier
 s'ouvre, sans toucher la souris.
 
-Pause du double clic (issue #59) : Paramètres, onglet « Délais », « Pause du double clic » à
-200 ms. Dans le navigateur, ouvrir trois onglets, faire un double clic sur la croix de fermeture
-de l'un d'eux : deux onglets se ferment. Remettre 0 ms : un fichier de l'Explorateur s'ouvre
-toujours par double clic.
+Double clic avec une pause (issue #59) : dans le navigateur, ouvrir trois onglets, faire un
+double clic sur la croix de fermeture de l'un d'eux : deux onglets se ferment.
 
 ## 3. Menu et pause
 

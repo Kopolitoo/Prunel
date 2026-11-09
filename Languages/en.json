@@ -159,8 +159,6 @@
   "setting.menuDelay.help": "Gaze down, below the screen",
   "setting.menuCloseDelay.name": "Menu closing",
   "setting.menuCloseDelay.help": "Gaze outside the bar",
-  "setting.doubleClickGap.name": "Double click pause",
-  "setting.doubleClickGap.help": "Between the two clicks (0 = none)",
   "setting.autoPause.name": "Automatic pause",
   "setting.autoPause.help": "Pause when the gaze is lost for a long time",
   "setting.autoPauseDelay.name": "Delay before the pause",

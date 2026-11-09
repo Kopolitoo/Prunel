@@ -86,17 +86,23 @@ namespace Prunel
         }
 
         /// <summary>
-        /// A left double click: two clicks, with a pause of "gapMs" milliseconds between them
-        /// (setting DoubleClickGap, 0 = right after each other).
+        /// Pause between the two clicks of a double click, in milliseconds (issue #59). Without
+        /// it, the second click can arrive before the window has reacted to the first one
+        /// (closing two browser tabs in a row only closed one).
+        /// </summary>
+        private const int DoubleClickGapMs = 200;
+
+        /// <summary>
+        /// A left double click: two clicks, [DoubleClickGapMs] apart.
         /// Windows recognizes them as a double click if they arrive within the "double-click
         /// time" set in Windows (500 ms by default) and at the same place (the cursor does not
         /// move). So the pause is kept at least 50 ms shorter than that time.
-        /// The pause blocks the interface thread, but only for a moment (450 ms at most), and
-        /// the black screen of the action choice is already hidden.
+        /// The pause blocks the interface thread for a moment, but the black screen of the
+        /// action choice is already hidden.
         /// </summary>
-        public static void DoubleClick(double gapMs)
+        public static void DoubleClick()
         {
-            int gap = (int)Math.Round(Math.Min(gapMs, NativeMethods.GetDoubleClickTime() - 50.0));
+            int gap = (int)Math.Min(DoubleClickGapMs, NativeMethods.GetDoubleClickTime() - 50.0);
 
             Click(MouseSide.Left);
             if (gap > 0)

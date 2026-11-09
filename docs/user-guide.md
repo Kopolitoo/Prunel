@@ -37,10 +37,6 @@ edge: **Ctrl**, **Shift**, **Alt** (look once to turn on, the border turns green
 pressed during the next action). At the top: **Copy**, **Cut**, **Paste**. On the right:
 **Back**. After an action, you are back in movement mode.
 
-If the double click is too fast (for example to close two browser tabs in a row), add a pause
-between its two clicks: Settings, "Delays" tab, "Double click pause" (in milliseconds, 0 by
-default).
-
 The icons can be moved or removed: Settings, "Icons" tab, "Configure the icons".
 
 ## Magnifier

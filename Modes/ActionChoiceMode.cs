@@ -307,7 +307,7 @@ namespace Prunel
                     MouseInjector.Click(MouseSide.Right);
                     break;
                 case ChoiceAction.DoubleClick:
-                    MouseInjector.DoubleClick(AppSettings.Current.DoubleClickGap);
+                    MouseInjector.DoubleClick();
                     break;
                 case ChoiceAction.Copy:
                     CtrlShortcut(NativeMethods.VK_C);

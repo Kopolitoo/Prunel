@@ -21,9 +21,8 @@ Stare at a file in File Explorer, look at the options icon, the black screen sho
 the enlarged area; look at "Double click": the black screen disappears and the file opens,
 without touching the mouse.
 
-Double click pause (issue #59): Settings, "Delays" tab, "Double click pause" at 200 ms. In the
-browser, open three tabs, double click on the close button (×) of one of them: two tabs close.
-Set it back to 0 ms: a file in File Explorer still opens with a double click.
+Double click with a pause (issue #59): in the browser, open three tabs, double click on the
+close button (×) of one of them: two tabs close.
 
 ## 3. Menu and pause
 
