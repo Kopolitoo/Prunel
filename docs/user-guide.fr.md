@@ -194,7 +194,9 @@ Prunel s'installe avec son installateur (`Prunel-x.y.z-setup.exe`). Grâce à lu
 regard reste au-dessus du menu Démarrer, de la recherche et des notifications, et les clics et
 les touches atteignent les fenêtres lancées « en administrateur ». Windows ne donne cet « accès à
 l'interface » qu'à un programme signé et installé dans `C:\Program Files` : l'installateur
-s'occupe des deux. (Jusqu'à la version 0.3.1, un zip simple sans ces deux possibilités était
+s'occupe des deux. C'est pourquoi Prunel n'existe qu'avec un installateur : une commande au
+regard qui n'atteint ni le menu Démarrer, ni les notifications, ni les pop-ups du système de
+Windows aurait peu d'intérêt. (Jusqu'à la version 0.3.1, un zip simple sans ces deux possibilités était
 aussi proposé.)
 
 Pour installer ou mettre à jour :

@@ -38,6 +38,12 @@ text-to-speech.
 
 ## Installation
 
+Prunel comes only as an installer, on purpose: to be useful, it must reach all of Windows,
+including the system windows and pop-ups (Start menu, notifications, "Do you want to allow…"
+prompts, programs started as administrator). Windows allows this only to a program that is
+signed and installed in `C:\Program Files`, which the installer does. Without it, Prunel would
+be of little use.
+
 1. Install the eyetracker driver from the manufacturer's website.
 2. On the [Releases](https://github.com/Kopolitoo/Prunel/releases) page, download the installer
    `Prunel-x.y.z-setup.exe` (under "Assets") and double-click it. It is not signed by a known

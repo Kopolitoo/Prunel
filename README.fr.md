@@ -40,6 +40,12 @@ lancement, synthèse vocale.
 
 ## Installation
 
+Prunel n'existe qu'avec un installateur, et c'est voulu : pour être utile, il doit atteindre
+tout Windows, y compris les fenêtres et les pop-ups du système (menu Démarrer, notifications,
+fenêtres « Voulez-vous autoriser… », programmes lancés en administrateur). Windows ne le permet
+qu'à un programme signé et installé dans `C:\Program Files`, ce que fait l'installateur. Sans
+cela, Prunel aurait peu d'intérêt.
+
 1. Installer le pilote de l'eyetracker depuis le site du fabricant.
 2. Sur la page [Releases](https://github.com/Kopolitoo/Prunel/releases), télécharger
    l'installateur `Prunel-x.y.z-setup.exe` (sous « Assets ») et double-cliquer dessus. Il n'est

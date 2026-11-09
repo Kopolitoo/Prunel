@@ -179,7 +179,9 @@ If the Diagnostic window says they are missing, get them yourself, accepting Tob
 Prunel is installed with its installer (`Prunel-x.y.z-setup.exe`). Thanks to it, the gaze
 circle stays above the Start menu, search and notifications, and clicks and keys reach windows
 started "as administrator". Windows allows this "UI access" only to a program that is signed and
-installed in `C:\Program Files`: the installer takes care of both. (Up to version 0.3.1, a
+installed in `C:\Program Files`: the installer takes care of both. This is why Prunel comes
+only as an installer: a gaze control that cannot reach the Start menu, the notifications or
+the system pop-ups of Windows would be of little use. (Up to version 0.3.1, a
 simple zip without these two things was also offered.)
 
 To install or update:
