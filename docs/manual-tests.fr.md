@@ -200,7 +200,7 @@ n'apparaît dans `%LOCALAPPDATA%\Prunel\` et le journal ne contient aucune posit
 Uniquement au regard et à la voix : pas besoin de toucher la souris ni le câble USB.
 
 1. Paramètres, catégorie « Regard », onglet « Pause » : « Pause automatique » est activée,
-   « Délai avant la pause » vaut 30 s. Régler le délai sur 5 s, puis revenir au mode mouvement.
+   « Délai avant la pause » vaut 10 s. Régler le délai sur 5 s, puis revenir au mode mouvement.
 2. Fermer les yeux (ou tourner la tête loin de l'eyetracker) environ 6 secondes, puis regarder
    de nouveau l'écran : le cercle a disparu et un bouton rond « Reprendre » est au centre de
    l'écran. Ailleurs sur l'écran, rien n'est cliqué et le curseur ne bouge pas.
@@ -216,7 +216,7 @@ Uniquement au regard et à la voix : pas besoin de toucher la souris ni le câbl
 8. Ouvrir les paramètres et fermer les yeux 6 secondes : pas de pause (les paramètres restent
    ouverts). Pareil dans la loupe et le choix d'action.
 9. Désactiver « Pause automatique » : fermer les yeux ne la déclenche plus. Remettre le délai à
-   30 s (ou « Défaut »). Le journal indique « Automatic pause: gaze lost for 5 s » et ne contient
+   10 s (ou « Défaut »). Le journal indique « Automatic pause: gaze lost for 5 s » et ne contient
    aucune position du regard.
 
 ## Installation complète (Setup.exe, accès à l'interface)

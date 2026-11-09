@@ -206,7 +206,7 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
 - `Modes/PauseMode` (step 4): nothing follows the gaze any more; only the menu can still open
   ("Resume" button). **Automatic pause** (step auto-pause): `ModeManager.WatchAutoPause`
   starts `PauseMode(true)` when the gaze is lost (no recent measure) for `AutoPauseDelay`
-  (30 s) in movement or fixed gaze mode only; a gaze below or beside the screen does not
+  (10 s) in movement or fixed gaze mode only; a gaze below or beside the screen does not
   count. This pause shows a round "Resume" button in the middle of the screen (on the
   drag-and-drop surface, free during the pause), which goes back to movement mode. Settings
   `AutoPause` (yes) and `AutoPauseDelay`, "Pause" tab of the "Gaze" category (`settings.json`

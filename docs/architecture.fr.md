@@ -215,7 +215,7 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
 - `Modes/PauseMode` (étape 4) : plus rien ne suit le regard ; seul le menu peut encore s'ouvrir
   (bouton « Reprendre »). **Pause automatique** (étape auto-pause) : `ModeManager.WatchAutoPause`
   lance `PauseMode(true)` quand le regard est perdu (aucune mesure récente) pendant
-  `AutoPauseDelay` (30 s), seulement en mode mouvement ou regard fixe ; un regard sous l'écran ou
+  `AutoPauseDelay` (10 s), seulement en mode mouvement ou regard fixe ; un regard sous l'écran ou
   à côté ne compte pas. Cette pause affiche un bouton rond « Reprendre » au centre de l'écran (sur
   la surface du glisser-déposer, libre pendant la pause), qui ramène au mode mouvement. Réglages
   `AutoPause` (oui) et `AutoPauseDelay`, onglet « Pause » de la catégorie « Regard »

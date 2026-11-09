@@ -52,7 +52,7 @@ namespace Prunel
             MenuDelay = 0.5;
             MenuCloseDelay = 1.0;
             AutoPause = true;
-            AutoPauseDelay = 30;
+            AutoPauseDelay = 10;
 
             MagnifierBeforeAction = true;
             MagnifierZoom = 4;
@@ -306,7 +306,7 @@ namespace Prunel
             }
 
             // Version 17 (AutoPause, AutoPauseDelay): nothing to fix, the settings keep their
-            // default value (yes, 30 s).
+            // default value (yes, 10 s).
 
             FileVersion = CurrentVersion;
             return true;

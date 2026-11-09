@@ -81,7 +81,7 @@ namespace Prunel
         ///      an older file, it keeps its default value.
         ///  16: issue #91 — MagnifierDelay. Missing from an older file, it takes the value of
         ///      FixationDelay, which the magnifier used until then: nothing changes for the user.
-        ///  17: step auto-pause — AutoPause (yes) and AutoPauseDelay (30 s). Nothing to fix:
+        ///  17: step auto-pause — AutoPause (yes) and AutoPauseDelay (10 s). Nothing to fix:
         ///      missing from an older file, they keep their default value.
         /// </summary>
         public const int CurrentVersion = 17;
