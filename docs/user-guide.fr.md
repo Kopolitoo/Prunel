@@ -40,6 +40,10 @@ plein pour l'utiliser. Au bord gauche : **Ctrl**, **Maj**, **Alt** (un regard le
 devient vert ; ils sont appuyés pendant l'action suivante). En haut : **Copier**, **Couper**,
 **Coller**. À droite : **Retour**. Après une action, on revient au mode mouvement.
 
+Le double clic fait une courte pause entre ses deux clics (pour fermer deux onglets du
+navigateur à la suite, par exemple). Pour la changer : Paramètres, onglet « Délais », « Pause du
+double clic » (en millisecondes, 200 par défaut ; 0 = aucune pause).
+
 Les icônes peuvent être déplacées ou retirées : Paramètres, onglet « Icônes », « Configurer les
 icônes ».
 

@@ -31,6 +31,13 @@ namespace Prunel
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool GetCursorPos(out POINT point);
 
+        /// <summary>
+        /// The Windows "double-click time", in milliseconds (500 by default): two clicks
+        /// further apart than this are two single clicks.
+        /// </summary>
+        [DllImport("user32.dll")]
+        internal static extern uint GetDoubleClickTime();
+
         /// <summary>Moves the cursor to the given position (in screen pixels).</summary>
         [DllImport("user32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]

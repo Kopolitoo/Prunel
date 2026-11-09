@@ -113,7 +113,9 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   Un emplacement vide serait dessiné grisé avec un « + », pour montrer qu'on pourra le configurer. À droite, une icône « retour ». Un petit cercle (moitié de
   `CircleRadius`), par-dessus tout, montre où est le regard. Regarder une icône pendant
   `ActivationDelay` l'active (anneau de progression). Avant le clic, l'écran noir est caché et
-  l'on attend 60 ms qu'il ait disparu ; puis retour au mode mouvement.
+  l'on attend 60 ms qu'il ait disparu ; puis retour au mode mouvement. Le double clic attend
+  `DoubleClickGap` (200 ms par défaut, onglet « Délais », `settings.json` version 18, issue #59)
+  entre ses deux clics, toujours 50 ms de moins que le délai de double clic de Windows.
 - `Modes/MagnifierMode` (étape 5) : affine la position du curseur. La même zone est photographiée,
   puis affichée agrandie ×`MagnifierZoom` (×4, soit 800 × 800 px) au centre d'un écran noir ; un
   petit cercle de 50 px suit le regard. Quand le regard se fixe sur la photo (même détection

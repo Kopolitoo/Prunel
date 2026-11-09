@@ -60,6 +60,7 @@ namespace Prunel
 
             AndroidPauseDuration = 1.0;
             DragDuration = 0.5;
+            DoubleClickGap = 200;
 
             MaxScrollSpeed = 5;
             ScrollInactiveWindows = true;
@@ -135,6 +136,7 @@ namespace Prunel
 
             AndroidPauseDuration = Clamp(AndroidPauseDuration, 0, 10);
             DragDuration = Clamp(DragDuration, 0.05, 10);
+            DoubleClickGap = Clamp(DoubleClickGap, 0, 450);
 
             MaxScrollSpeed = Clamp(MaxScrollSpeed, 1, 100);
 
@@ -306,7 +308,8 @@ namespace Prunel
             }
 
             // Version 17 (AutoPause, AutoPauseDelay): nothing to fix, the settings keep their
-            // default value (yes, 10 s).
+            // default value (yes, 10 s). Version 18 (DoubleClickGap): nothing to fix either,
+            // it gets its default value (200 ms).
 
             FileVersion = CurrentVersion;
             return true;

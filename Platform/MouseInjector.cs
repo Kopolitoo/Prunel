@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace Prunel
 {
@@ -85,14 +86,23 @@ namespace Prunel
         }
 
         /// <summary>
-        /// A left double click: two clicks sent right after each other.
+        /// A left double click: two clicks, with a pause of "gapMs" milliseconds between them
+        /// (setting DoubleClickGap, 0 = right after each other).
         /// Windows recognizes them as a double click if they arrive within the "double-click
-        /// time" set in Windows (500 ms by default) and at the same place: this is the case
-        /// here, since they are a few microseconds apart without moving the cursor.
+        /// time" set in Windows (500 ms by default) and at the same place (the cursor does not
+        /// move). So the pause is kept at least 50 ms shorter than that time.
+        /// The pause blocks the interface thread, but only for a moment (450 ms at most), and
+        /// the black screen of the action choice is already hidden.
         /// </summary>
-        public static void DoubleClick()
+        public static void DoubleClick(double gapMs)
         {
+            int gap = (int)Math.Round(Math.Min(gapMs, NativeMethods.GetDoubleClickTime() - 50.0));
+
             Click(MouseSide.Left);
+            if (gap > 0)
+            {
+                Thread.Sleep(gap);
+            }
             Click(MouseSide.Left);
         }
 
