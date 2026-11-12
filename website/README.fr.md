@@ -12,6 +12,10 @@ Le petit site qui présente Prunel aux visiteurs non techniciens, à l'adresse
 - `contact.js` : affiche l'adresse e-mail de contact seulement après un clic, pour qu'elle
   ne soit jamais écrite en clair dans les pages (protection contre les robots qui collectent
   les adresses pour le spam). L'adresse se règle dans ce fichier.
+- `theme.js` : mode clair ou sombre. Par défaut, le site suit le mode du système
+  (`prefers-color-scheme`, couleurs dans `style.css`) ; le bouton de thème de la barre du haut
+  impose l'autre mode et s'en souvient dans le navigateur. Rechoisir le mode du système fait de
+  nouveau suivre le système. Les textes du bouton sont dans les pages HTML.
 - `images/` : logo et icône (copies de `docs/images` et de l'icône de l'application, réduites).
 - `favicon.ico` : copie de `Resources/Prunel.ico`.
 
