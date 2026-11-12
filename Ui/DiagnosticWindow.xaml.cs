@@ -46,6 +46,10 @@ namespace Prunel
             ResetButton.Content = Texts.Get("diagnostic.reset");
             StabilityTitleText.Text = Texts.Get("diagnostic.stabilityTitle");
             StabilityHelpText.Text = Texts.Get("diagnostic.stabilityHelp");
+            PerformanceHelpText.Text = Texts.Get("diagnostic.performanceHelp");
+            RenderingText.Text = RenderingLine();
+            PerformanceText.Text = Texts.Get("diagnostic.performanceWaiting");
+            RenderStats.Restart();
 
             _sampler = new CursorSampler();
             _sampler.Start();
@@ -115,6 +119,35 @@ namespace Prunel
             UpdateReadouts();
             UpdateMap();
             UpdateStability();
+            UpdatePerformance();
+        }
+
+        // ───────────────────────── Performance ─────────────────────────
+
+        /// <summary>The WPF rendering tier, in words (see RenderStats.Tier).</summary>
+        private static string RenderingLine()
+        {
+            int tier = RenderStats.Tier;
+            string key = tier >= 2 ? "diagnostic.renderingCard"
+                       : tier == 1 ? "diagnostic.renderingPartial"
+                       : "diagnostic.renderingSoftware";
+            return Texts.Format("diagnostic.rendering", Texts.Get(key), tier);
+        }
+
+        /// <summary>
+        /// Processor, clock and circle rates, averaged over two seconds (a shorter period
+        /// would make the numbers jump too much to be read).
+        /// </summary>
+        private void UpdatePerformance()
+        {
+            if (!RenderStats.Measure(2000))
+            {
+                return;
+            }
+            PerformanceText.Text = Texts.Format("diagnostic.performance",
+                                                RenderStats.ProcessorPercent.ToString("F1"),
+                                                RenderStats.ClockTicksPerSecond.ToString("F0"),
+                                                RenderStats.CircleMovesPerSecond.ToString("F0"));
         }
 
         private void OnStabilityTick(object sender, EventArgs e)

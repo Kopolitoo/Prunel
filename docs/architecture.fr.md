@@ -50,7 +50,7 @@ l'explication de la classe.
 | `Actions` | ce que propose le choix d'action : `ActionCatalog`, `ActionChoiceLayout`, `Modifiers`, `DragGesture` |
 | `Typing` | le clavier au regard et la prédiction de mots : `GazeKeyboard`, `KeyboardKey`, `KeyboardLayout`, `WordPredictor` |
 | `Settings` | le fichier des réglages, les profils et la fenêtre des paramètres : `AppSettings`, `SettingsCatalog`, `SettingsProfiles`, `SettingsWindow`, `SettingTarget` |
-| `Ui` | fenêtres et boutons au regard : `OverlayWindow`, `DiagnosticWindow`, `CursorSampler`, `GazeButton`, `ButtonAimer`, `IGazeTarget`, `Texts` |
+| `Ui` | fenêtres et boutons au regard : `OverlayWindow`, `DiagnosticWindow`, `CursorSampler`, `RenderStats`, `GazeButton`, `ButtonAimer`, `IGazeTarget`, `Texts` |
 | `Platform` | appels à Windows : `NativeMethods`, `MouseInjector`, `KeyboardInjector`, `KeyboardHook`, `MouseClickHook`, `WheelScroller`, `CursorWaker`, `ScreenCapture`, `ScreenMetrics`, `WindowsStartup`, `UiAccess`, `SoundFeedback` |
 | `Languages`, `Keyboards`, `Dictionaries` | fichiers de données copiés à côté de `Prunel.exe` (textes, dispositions de clavier, dictionnaires de prédiction) |
 | `Resources` | l'icône du programme |
@@ -406,6 +406,9 @@ Pour ajouter une langue : copier `en.json` en `xx.json`, traduire les valeurs (j
 - `GazeStability` (dossier `Gaze`), affiché dans la fenêtre Diagnostic, compte la stabilité du
   regard dans trois bandes de l'écran (agitation, pas trop rapides pour la fixation, pertes, hors
   écran). Il ne garde que des compteurs, jamais une position, et oublie tout à la fermeture.
+- `RenderStats` (dossier `Ui`), affiché dans la fenêtre Diagnostic : niveau de rendu WPF (2 = carte
+  graphique), processeur utilisé par Prunel, tours d'horloge des modes et déplacements du cercle
+  par seconde. De simples compteurs ; le niveau de rendu est aussi écrit au démarrage dans le journal.
 
 ## Vérification de la compilation (CI)
 

@@ -259,6 +259,20 @@ Gaze only.
 5. "Configure the icons" (settings, Icons tab) and the keyboard lists: they fade in; changing page in a
    list does not fade again.
 
+## 23. Performance in the Diagnostic window
+
+Gaze only.
+
+1. Settings, "Tools" tab, "Diagnostic". Below the screen size, a "Rendering" line says "by the
+   graphics card (WPF tier 2)" on a PC with a graphics card.
+2. After about 2 seconds, the "Processor used by Prunel" line shows a percentage, the clock
+   ticks per second (about the screen refresh rate, usually 60) and the circle moves per second.
+   The numbers change every 2 seconds.
+3. Close the settings and leave Diagnostic open, move the gaze in movement mode, then fixate a
+   point, then pause: write down the three numbers in each case.
+4. The log `%LOCALAPPDATA%\Prunel\prunel.log` holds a "Rendering tier: 2" line at startup and
+   no gaze position.
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,

@@ -73,6 +73,9 @@ namespace Prunel
             // "UI access" (see Platform/UiAccess.cs): only the "full installation" has it.
             Log("UI access: " + (UiAccess.IsActive() ? "yes" : "no"));
 
+            // WPF rendering tier (see Ui/RenderStats.cs): 2 = drawn by the graphics card.
+            Log("Rendering tier: " + RenderStats.Tier);
+
             // Safety nets: whatever the error, release the mouse buttons and the Ctrl, Shift,
             // Alt keys (a button or key left pressed would disturb the whole computer),
             // and write the error to the log.

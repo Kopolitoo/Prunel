@@ -278,6 +278,20 @@ Uniquement au regard.
 5. « Configurer les icônes » (paramètres, onglet Icônes) et les listes du clavier : ils arrivent en fondu ;
    changer de page dans une liste ne refait pas de fondu.
 
+## 23. Performances dans la fenêtre Diagnostic
+
+Uniquement au regard.
+
+1. Paramètres, onglet « Outils », « Diagnostic ». Sous la taille de l'écran, une ligne
+   « Rendu » indique « par la carte graphique (niveau WPF 2) » sur un PC avec carte graphique.
+2. Après environ 2 secondes, la ligne « Processeur utilisé par Prunel » affiche un pourcentage,
+   le nombre de tours d'horloge par seconde (environ la fréquence de l'écran, 60 en général) et
+   le nombre de déplacements du cercle par seconde. Les chiffres changent toutes les 2 secondes.
+3. Fermer les paramètres en laissant Diagnostic ouvert, bouger le regard en mode mouvement, puis
+   fixer un point, puis mettre en pause : noter les trois chiffres dans chaque cas.
+4. Le journal `%LOCALAPPDATA%\Prunel\prunel.log` contient au démarrage une ligne
+   « Rendering tier: 2 » et aucune position du regard.
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,

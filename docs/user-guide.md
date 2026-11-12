@@ -141,7 +141,8 @@ repeat) or a yes / no switch. Changes apply at once and are saved.
   choice, options icon, settings). The sound plays at the Windows volume.
 - **Tools** tab: **Calibration** (starts the eyetracker calibration) and **Diagnostic** (shows
   the gaze and the cursor live, and how steady the gaze is at the top, middle and bottom of the
-  screen; nothing is saved).
+  screen, and the performance: rendering by the graphics card or not, processor used by Prunel;
+  nothing is saved).
 
 ## For the caregiver
 

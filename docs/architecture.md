@@ -47,7 +47,7 @@ The three biggest classes are "partial" classes: one class written in several fi
 | `Actions` | what the action choice offers: `ActionCatalog`, `ActionChoiceLayout`, `Modifiers`, `DragGesture` |
 | `Typing` | the gaze keyboard and word prediction: `GazeKeyboard`, `KeyboardKey`, `KeyboardLayout`, `WordPredictor` |
 | `Settings` | the settings file, profiles and settings window: `AppSettings`, `SettingsCatalog`, `SettingsProfiles`, `SettingsWindow`, `SettingTarget` |
-| `Ui` | windows and gaze buttons: `OverlayWindow`, `DiagnosticWindow`, `CursorSampler`, `GazeButton`, `ButtonAimer`, `IGazeTarget`, `Texts` |
+| `Ui` | windows and gaze buttons: `OverlayWindow`, `DiagnosticWindow`, `CursorSampler`, `RenderStats`, `GazeButton`, `ButtonAimer`, `IGazeTarget`, `Texts` |
 | `Platform` | calls to Windows: `NativeMethods`, `MouseInjector`, `KeyboardInjector`, `KeyboardHook`, `MouseClickHook`, `WheelScroller`, `CursorWaker`, `ScreenCapture`, `ScreenMetrics`, `WindowsStartup`, `UiAccess`, `SoundFeedback` |
 | `Languages`, `Keyboards`, `Dictionaries` | data files copied next to `Prunel.exe` (texts, keyboard layouts, prediction dictionaries) |
 | `Resources` | the program icon |
@@ -389,6 +389,9 @@ To add a language: copy `en.json` to `xx.json` and translate the values (never t
 - `GazeStability` (folder `Gaze`), shown in the Diagnostic window, counts how steady the gaze is
   in three bands of the screen (agitation, steps too fast for the fixation, losses, off screen).
   It keeps only counters, never a position, and forgets everything when the window closes.
+- `RenderStats` (folder `Ui`), shown in the Diagnostic window: WPF rendering tier (2 = graphics
+  card), processor used by Prunel, modes clock ticks and circle moves per second. Plain counters;
+  the rendering tier is also written to the log at startup.
 
 ## Build check (CI)
 

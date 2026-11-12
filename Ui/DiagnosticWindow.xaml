@@ -8,6 +8,8 @@
     - a thumbnail of the screen with a dot (the cursor) and its recent trail.
     - the gaze steadiness in three bands of the screen (top, middle, bottom), see
       GazeStability.cs: only counters, no position.
+    - the performance: WPF rendering tier, processor used by Prunel, modes clock rate and
+      circle moves per second (see RenderStats.cs).
   Nothing is written to disk: the eyetracker licence forbids storing gaze data.
 
   The thumbnail is a Canvas: an area where elements are placed at exact coordinates.
@@ -31,6 +33,12 @@
         <TextBlock x:Name="GazeReadText" FontSize="24" Margin="0,6,0,0" Foreground="#81C995" Text="…" />
         <TextBlock x:Name="IdleText" FontSize="22" Margin="0,2,0,0" Text="" />
         <TextBlock x:Name="ScreenInfoText" FontSize="18" Margin="0,2,0,10" Foreground="#9AA0A6" Text="" />
+
+        <!-- Performance (filled in code, see RenderStats.cs). -->
+        <TextBlock x:Name="RenderingText" FontSize="20" Text="" />
+        <TextBlock x:Name="PerformanceText" FontSize="20" Margin="0,2,0,0" Text="" />
+        <TextBlock x:Name="PerformanceHelpText" FontSize="16" Margin="0,2,0,10" Foreground="#9AA0A6"
+                   TextWrapping="Wrap" MaxWidth="680" HorizontalAlignment="Left" Text="" />
 
         <Border BorderBrush="#5F6368" BorderThickness="1" HorizontalAlignment="Left">
             <Canvas x:Name="MapCanvas" Background="#101114" ClipToBounds="True" />

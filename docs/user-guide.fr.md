@@ -151,7 +151,8 @@ sont enregistrés.
   suit le volume de Windows.
 - Onglet **Outils** : **Calibration** (lance la calibration de l'eyetracker) et **Diagnostic**
   (montre le regard et le curseur en direct, et la stabilité du regard en haut, au milieu et en
-  bas de l'écran ; rien n'est enregistré).
+  bas de l'écran, ainsi que les performances : rendu par la carte graphique ou non, processeur
+  utilisé par Prunel ; rien n'est enregistré).
 
 ## Pour l'aidant
 

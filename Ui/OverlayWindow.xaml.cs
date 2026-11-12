@@ -280,9 +280,24 @@ namespace Prunel
             Point center = PointFromScreen(new Point(xPixels, yPixels));
             double radius = PixelsToWpf(radiusPixels);
 
+            // Performance counter (Diagnostic window): counts only the real moves; WPF
+            // redraws nothing when the same values are set again.
+            if (!_circlePlaced || center != _placedCenter || radius != _placedRadius)
+            {
+                RenderStats.CountCircleMove();
+                _circlePlaced = true;
+                _placedCenter = center;
+                _placedRadius = radius;
+            }
+
             PlaceEllipse(CircleBackground, center, PixelsToWpf(radiusPixels + ScreenMetrics.Px(2)));
             PlaceEllipse(Circle, center, radius);
         }
+
+        // Last place of the circle (WPF units), for the performance counter.
+        private bool _circlePlaced;
+        private Point _placedCenter;
+        private double _placedRadius;
 
         /// <summary>Centre of the circle as drawn, in screen pixels (valid if CircleShown).</summary>
         public double CircleX { get; private set; }
@@ -299,6 +314,7 @@ namespace Prunel
         public void HideCircle()
         {
             CircleShown = false;
+            _circlePlaced = false;
             CircleBackground.Visibility = Visibility.Collapsed;
             Circle.Visibility = Visibility.Collapsed;
         }

@@ -251,5 +251,12 @@
   "diagnostic.bandTop": "Top",
   "diagnostic.bandMiddle": "Middle",
   "diagnostic.bandBottom": "Bottom",
-  "diagnostic.stabilityLine": "{0}: agitation {1} px · too fast {2} % · losses {3}/min · off screen {4} % · {5} measures"
+  "diagnostic.stabilityLine": "{0}: agitation {1} px · too fast {2} % · losses {3}/min · off screen {4} % · {5} measures",
+  "diagnostic.rendering": "Rendering: {0} (WPF tier {1})",
+  "diagnostic.renderingCard": "by the graphics card",
+  "diagnostic.renderingPartial": "partly by the graphics card",
+  "diagnostic.renderingSoftware": "by the processor only, without the graphics card",
+  "diagnostic.performanceWaiting": "Processor: measuring…",
+  "diagnostic.performance": "Processor used by Prunel: {0} %   ·   clock: {1} per second   ·   circle moved: {2} times per second",
+  "diagnostic.performanceHelp": "Average over 2 seconds. The processor percentage counts the whole processor, like the Task Manager. This window adds a little itself (cursor reads). Compare movement mode, fixed gaze and pause."
 }

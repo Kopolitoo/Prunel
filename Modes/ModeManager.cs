@@ -258,6 +258,7 @@ namespace Prunel
 
         private void Tick()
         {
+            RenderStats.CountClockTick();
 
             GazeState state = ReadGaze();
 
