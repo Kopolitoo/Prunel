@@ -10,6 +10,7 @@
   <link rel="icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="images/prunel-icon.png">
   <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -20,10 +21,17 @@
         <img src="images/prunel-icon.png" alt="" width="52" height="52">
         <span>Prunel</span>
       </a>
-      <a class="lang-switch" href="en.html" hreflang="en" lang="en">
-        <img src="images/flag-gb.svg" alt="" width="36" height="18">
-        English
-      </a>
+      <div class="top-actions">
+        <button class="theme-switch" id="theme-switch" type="button" hidden
+                data-dark="Mode sombre" data-light="Mode clair">
+          <span class="theme-icon" aria-hidden="true"></span>
+          <span class="theme-label">Mode sombre</span>
+        </button>
+        <a class="lang-switch" href="en.html" hreflang="en" lang="en">
+          <img src="images/flag-gb.svg" alt="" width="36" height="18">
+          English
+        </a>
+      </div>
     </div>
   </header>
 

@@ -12,6 +12,10 @@ The small website that presents Prunel to non-technical visitors, at
 - `contact.js`: shows the contact e-mail address only after a click, so that it is never
   written as plain text in the pages (protection against spam robots). The address is set in
   this file.
+- `theme.js`: light or dark mode. The site follows the mode of the system by default
+  (`prefers-color-scheme`, colours in `style.css`); the theme button in the top bar forces the
+  other mode and remembers it in the browser. Choosing the system mode again goes back to
+  following the system. The button texts are in the HTML pages.
 - `images/`: logo and icon (copies of `docs/images` and the application icon, resized).
 - `favicon.ico`: copy of `Resources/Prunel.ico`.
 

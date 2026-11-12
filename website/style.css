@@ -2,18 +2,68 @@
    Large text, large buttons and strong contrast, because visitors may use
    an eyetracker, a head mouse or a screen magnifier. */
 
+/* Colours. The site follows the light or dark mode of the system; the theme button
+   (theme.js) can force one of them with data-theme="light" or data-theme="dark" on <html>. */
 :root {
+  color-scheme: light;
   --text: #0d1b3e;
   --text-soft: #3a4766;
   --background: #ffffff;
   --band: #f2f5fb;
+  --surface: #ffffff;
   --line: #d5dcea;
   --blue: #1557d6;
   --blue-dark: #0e3f9e;
+  --on-blue: #ffffff;
+  --link: #1557d6;
+  --link-hover: #0e3f9e;
+  --shadow: rgba(13, 27, 62, 0.18);
+  --notice-background: #fff6e8;
+  --notice-line: #f0b75e;
+  --logo-glow: none;
   --focus: #ff7a00;
   --gradient: linear-gradient(90deg, #00b4ff, #3b5bff 30%, #c13cff 60%, #ff3d7f 80%, #ff8a00);
   --radius: 18px;
   --max: 1080px;
+}
+
+/* Dark colours: same contrast rules, light text on a dark blue background. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --text: #e8edf8;
+    --text-soft: #b4bfd6;
+    --background: #0d1424;
+    --band: #151f36;
+    --surface: #1b2742;
+    --line: #2f3d5e;
+    --blue: #2f6cf0;
+    --blue-dark: #1c55cf;
+    --link: #8db4ff;
+    --link-hover: #b8d0ff;
+    --shadow: rgba(0, 0, 0, 0.5);
+    --notice-background: #3a2a10;
+    --notice-line: #b9852e;
+    --logo-glow: drop-shadow(0 0 1px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.35));
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --text: #e8edf8;
+  --text-soft: #b4bfd6;
+  --background: #0d1424;
+  --band: #151f36;
+  --surface: #1b2742;
+  --line: #2f3d5e;
+  --blue: #2f6cf0;
+  --blue-dark: #1c55cf;
+  --link: #8db4ff;
+  --link-hover: #b8d0ff;
+  --shadow: rgba(0, 0, 0, 0.5);
+  --notice-background: #3a2a10;
+  --notice-line: #b9852e;
+  --logo-glow: drop-shadow(0 0 1px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.35));
 }
 
 * {
@@ -45,12 +95,12 @@ img {
 }
 
 a {
-  color: var(--blue);
+  color: var(--link);
   text-underline-offset: 0.18em;
 }
 
 a:hover {
-  color: var(--blue-dark);
+  color: var(--link-hover);
 }
 
 :focus-visible {
@@ -73,13 +123,13 @@ a:hover {
   top: -100px;
   padding: 0.6rem 1rem;
   background: var(--text);
-  color: #fff;
+  color: var(--background);
   z-index: 10;
 }
 
 .skip-link:focus {
   top: 1rem;
-  color: #fff;
+  color: var(--background);
 }
 
 /* ---------- Top bar ---------- */
@@ -133,6 +183,46 @@ a:hover {
   text-decoration: none;
 }
 
+/* Right side of the top bar: theme button and language switch. */
+.top-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.8rem;
+}
+
+/* Theme button: same large target as the language switch. Hidden until theme.js runs. */
+.theme-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+  gap: 0.5rem;
+  padding: 0.4rem 1.2rem;
+  border: 2px solid var(--blue);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--link);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.theme-switch[hidden] {
+  display: none;
+}
+
+.theme-switch:hover {
+  background: var(--blue);
+  color: var(--on-blue);
+}
+
+.theme-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
 .lang-switch img {
   height: 18px;
   width: auto;
@@ -142,7 +232,7 @@ a:hover {
 
 .lang-switch:hover {
   background: var(--blue);
-  color: #fff;
+  color: var(--on-blue);
 }
 
 /* ---------- Hero ---------- */
@@ -154,6 +244,7 @@ a:hover {
 
 .hero-logo {
   display: block;
+  filter: var(--logo-glow); /* thin white outline in dark mode: the dark blue letters stay readable */
   width: 100%;
   max-width: 720px;
   margin: 0 auto 1.5rem;
@@ -203,19 +294,23 @@ a:hover {
 
 .button-main {
   background: var(--blue);
-  color: #fff;
-  box-shadow: 0 6px 18px rgba(21, 87, 214, 0.3);
+  color: var(--on-blue);
+  box-shadow: 0 6px 18px var(--shadow);
 }
 
 .button-main:hover {
   background: var(--blue-dark);
-  color: #fff;
+  color: var(--on-blue);
 }
 
 .button-second {
   border: 2px solid var(--blue);
-  color: var(--blue);
-  background: #fff;
+  color: var(--link);
+  background: var(--surface);
+}
+
+.button-second:hover {
+  color: var(--link-hover);
 }
 
 .button-second:hover {
@@ -271,7 +366,7 @@ p {
 }
 
 .card {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 1.3rem 1.4rem;
@@ -314,7 +409,7 @@ p {
   border-radius: var(--radius);
   overflow: hidden;
   background: #000;
-  box-shadow: 0 6px 18px rgba(13, 27, 62, 0.18);
+  box-shadow: 0 6px 18px var(--shadow);
 }
 
 .shot img {
@@ -341,8 +436,8 @@ p {
 
 .notice {
   max-width: 40em;
-  background: #fff6e8;
-  border: 2px solid #f0b75e;
+  background: var(--notice-background);
+  border: 2px solid var(--notice-line);
   border-radius: var(--radius);
   padding: 1.2rem 1.4rem;
 }
@@ -404,6 +499,21 @@ footer p {
 
   .top-name span {
     display: none;
+  }
+
+  /* On phones the theme button keeps only its icon; its name stays for screen readers. */
+  .theme-switch {
+    min-width: 60px;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .theme-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 
   .button {
