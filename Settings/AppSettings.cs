@@ -85,8 +85,11 @@ namespace Prunel
         ///      missing from an older file, they keep their default value.
         ///  18: issue #59 — DoubleClickGap (200 ms). Nothing to fix: missing from an older
         ///      file, it gets its default value.
+        ///  19: step color-themes — CircleColor ("gray"), CircleThickness (100 %) and
+        ///      HighContrast (no). Nothing to fix: missing from an older file, they keep their
+        ///      default value, which is the circle as it was.
         /// </summary>
-        public const int CurrentVersion = 18;
+        public const int CurrentVersion = 19;
 
         /// <summary>Format number of the file, so it can evolve one day without breaking everything.</summary>
         [DataMember(Order = 0)]
@@ -207,6 +210,36 @@ namespace Prunel
         /// <summary>Show an action's label when its icon is hovered (learning mode).</summary>
         [DataMember(Order = 32)]
         public bool ShowLabels { get; set; }
+
+        // ───────────────────────── Colours (step color-themes) ─────────────────────────
+
+        /// <summary>
+        /// Colour of the gaze circle, as a word: "gray" (default, the former circle), "white",
+        /// "yellow", "green", "lightBlue", "pink". See Ui/CircleColors.cs.
+        /// </summary>
+        [DataMember(Order = 34)]
+        public string CircleColor { get; set; }
+
+        /// <summary>The place of [CircleColor] in the list of colours (for settings mode). Not saved.</summary>
+        public int CircleColorIndex
+        {
+            get { return CircleColors.IndexOf(CircleColor); }
+            set { CircleColor = CircleColors.NameAt(value); }
+        }
+
+        /// <summary>
+        /// Thickness of the circle's lines, in % of the normal thickness (100 = as before,
+        /// 200 = twice as thick).
+        /// </summary>
+        [DataMember(Order = 35)]
+        public double CircleThickness { get; set; }
+
+        /// <summary>
+        /// Reinforced contrast (yes / no): the circle is opaque and edged in black, and the
+        /// progress ring is thicker. Easier to see on a busy background or with tired eyes.
+        /// </summary>
+        [DataMember(Order = 36)]
+        public bool HighContrast { get; set; }
 
         // ───────────────────────── Delays ─────────────────────────
 

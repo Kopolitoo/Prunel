@@ -126,8 +126,8 @@ namespace Prunel
             List<int> openTabs = SettingsCatalog.TabsOf(openCategory);
 
             // Number of rows in the column: all categories + the tabs of the open category.
-            // Rows share the page height, without exceeding the maximum height (140): with 8
-            // rows (category "Interface" open), each one is about 105 high.
+            // Rows share the page height, without exceeding the maximum height (140): with 9
+            // rows (category "Interface" open, 5 tabs), each one is about 107 high.
             int rowCount = SettingsCatalog.Categories.Count + openTabs.Count;
             double step = Math.Min(TabMaxHeight + TabGap,
                                   (BottomTabs - TopTabs + TabGap) / Math.Max(1, rowCount));
@@ -230,15 +230,19 @@ namespace Prunel
                 return;
             }
 
-            // "−" (U+2212, the true minus sign), the value, "+". Both buttons repeat.
-            AddTarget(x, y, SideButton, SideButton, Word("−", 72), () => ChangeNumber(setting, -1), true, false);
+            // "−" (U+2212, the true minus sign), the value, "+". For a number, both buttons
+            // repeat. For a choice among words (circle colour...) they do not: one look = one
+            // word further, so the gaze has time to see each word.
+            bool repeat = !setting.IsChoice;
+            AddTarget(x, y, SideButton, SideButton, Word("−", 72), () => ChangeNumber(setting, -1), repeat, false);
             AddTarget(x + SideButton + Gap + ValueWidth + Gap, y, SideButton, SideButton, Word("+", 72),
-                         () => ChangeNumber(setting, +1), true, false);
+                         () => ChangeNumber(setting, +1), repeat, false);
 
             // The value: a frame that is NOT a gaze target. The caregiver clicks on it to type
             // a value on the keyboard.
             ValueFrame frame = new ValueFrame();
-            frame.Value = Text(setting.Text(P), 50, White, true);
+            // A word ("Bleu clair") is longer than a number: a bit smaller, so it fits.
+            frame.Value = Text(setting.Text(P), setting.IsChoice ? 40 : 50, White, true);
             frame.Value.HorizontalAlignment = HorizontalAlignment.Center;
             AppSettings defaults = new AppSettings();
             TextBlock callbackFn = Text(Texts.Format("settings.defaultValue", setting.Text(defaults)), 20, Soft, false);
@@ -256,14 +260,18 @@ namespace Prunel
             frame.Border.BorderThickness = new Thickness(2);
             frame.Border.BorderBrush = Border;
             frame.Border.Background = ValueBackground;
-            frame.Border.Cursor = Cursors.IBeam;
-            frame.Border.ToolTip = Texts.Get("settings.typeValueTooltip");
             frame.Border.Child = display;
-            frame.Border.MouseLeftButtonUp += (s, e) =>
+            if (!setting.IsChoice)
             {
-                StartInput(setting);
-                e.Handled = true;
-            };
+                // A number can be typed; a choice among words cannot (only "−" and "+").
+                frame.Border.Cursor = Cursors.IBeam;
+                frame.Border.ToolTip = Texts.Get("settings.typeValueTooltip");
+                frame.Border.MouseLeftButtonUp += (s, e) =>
+                {
+                    StartInput(setting);
+                    e.Handled = true;
+                };
+            }
             Place(frame.Border, x + SideButton + Gap, y);
             _frames[setting] = frame;
         }

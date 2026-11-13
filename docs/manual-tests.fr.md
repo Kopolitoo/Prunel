@@ -292,6 +292,25 @@ Uniquement au regard.
    le guide d'utilisation sur GitHub, dans la langue de l'interface.
 4. Changer de langue (onglet Général) et revenir : les textes et les adresses suivent la langue.
 
+## 24. Couleurs du cercle (étape color-themes)
+
+1. Paramètres, catégorie « Interface » : un onglet « Couleurs » vient juste après
+   « Affichage », avec trois lignes : « Couleur du cercle » (Gris), « Épaisseur du cercle »
+   (100 %), « Contraste renforcé » (non). Avec ces valeurs, le cercle est exactement comme avant.
+2. Regarder « + » sur « Couleur du cercle » : un regard = une couleur de plus (Blanc, Jaune,
+   Vert, Bleu clair, Rose, puis Gris à nouveau) ; garder le regard sur « + » ne fait pas défiler
+   la liste. « − » revient en arrière. Cliquer sur la valeur à la souris n'ouvre pas de zone de
+   saisie.
+3. Choisir Jaune, revenir au mode mouvement : le cercle est jaune ; en regard fixe il est jaune
+   aussi, plus visible. En mode défilement il est jaune et plus pâle.
+4. « Épaisseur du cercle » 200 % : les traits sont deux fois plus épais ; 50 % : plus fins. La
+   valeur s'arrête à 50 et 400 %.
+5. « Contraste renforcé » oui : le cercle est opaque avec un bord noir des deux côtés, sur une
+   page blanche comme sur une page sombre ; l'anneau de progression du clic direct est plus
+   épais.
+6. « Défaut » : les trois lignes reviennent à Gris, 100 %, non. Redémarrer Prunel : les choix
+   sont gardés. Un ancien fichier de réglages (version 18) s'ouvre avec le cercle habituel.
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,

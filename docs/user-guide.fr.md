@@ -145,6 +145,12 @@ sont enregistrés.
   cette langue.
 - **Profils** (onglet « Profils ») : enregistrer les réglages actuels sous un nom, et les
   recharger plus tard au regard (par exemple un profil « Matin » et un profil « Soir »).
+- Onglet **Couleurs** (catégorie « Interface ») : l'aspect du cercle qui suit le regard.
+  **Couleur du cercle** : gris (le cercle habituel), blanc, jaune, vert, bleu clair ou rose ;
+  « − » et « + » passent d'une couleur à la suivante. **Épaisseur du cercle** : 100 % est le trait
+  habituel, 200 % deux fois plus épais (de 50 à 400 %). **Contraste renforcé** : le cercle devient
+  opaque et bordé de noir, et l'anneau de progression est plus épais ; utile sur un fond chargé ou
+  quand les yeux sont fatigués.
 - Onglet **Sons** : deux options oui / non, toutes deux désactivées au départ. **Son des
   touches** : un petit « tic » à chaque touche du clavier du regard. **Son des boutons** : un petit
   son pour tous les autres boutons (menu, choix d'action, icône d'options, paramètres). Le son

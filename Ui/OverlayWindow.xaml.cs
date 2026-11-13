@@ -222,10 +222,11 @@ namespace Prunel
 
         // ───────────────────────── Drawing ─────────────────────────
 
-        // Colours of the circle's top stroke: discreet in movement, lighter in fixed gaze.
+        // The colours of the circle's top stroke come from the [CircleColor] setting (see
+        // CircleColors). The under stroke is light grey, or black with [HighContrast].
         // "Freeze" locks the brush: WPF then draws it faster.
-        private static readonly SolidColorBrush MovementBrush = Freeze(new SolidColorBrush(Colors.DarkGray));
-        private static readonly SolidColorBrush FixedBrush = Freeze(new SolidColorBrush(Colors.LightGray));
+        private static readonly SolidColorBrush UnderBrush = Freeze(new SolidColorBrush(Colors.LightGray));
+        private static readonly SolidColorBrush ContrastUnderBrush = Freeze(new SolidColorBrush(Colors.Black));
 
         private static SolidColorBrush Freeze(SolidColorBrush brush)
         {
@@ -262,12 +263,39 @@ namespace Prunel
             CircleY = yPixels;
             CircleShown = true;
 
-            Circle.Stroke = fixedValue ? FixedBrush : MovementBrush;
+            AppSettings p = AppSettings.Current;
+            // [CircleThickness]: 100 % = the usual lines, 200 % = twice as thick.
+            double thickness = p.CircleThickness / 100;
+
+            Circle.Stroke = CircleColors.Brush(p.CircleColor, fixedValue);
             // Thicknesses in reference-screen units, converted (see ScreenMetrics.cs).
-            Circle.StrokeThickness = ScreenMetrics.Units(fixedValue ? 1.5 : 1);
-            Circle.Opacity = (fixedValue ? 0.6 : 0.3) * damping;
-            CircleBackground.StrokeThickness = ScreenMetrics.Units(fixedValue ? 2.5 : 2);
-            CircleBackground.Opacity = (fixedValue ? 0.7 : 0.5) * damping;
+            double top = ScreenMetrics.Units(fixedValue ? 1.5 : 1) * thickness;
+            Circle.StrokeThickness = top;
+            double underRadiusPixels;
+            if (p.HighContrast)
+            {
+                // Reinforced contrast: an opaque coloured line, edged on both sides by an
+                // opaque black line (the under circle, wider). It stays visible on a light
+                // background as well as a dark one. WPF draws an ellipse's line INSIDE its
+                // size: the under circle is therefore larger by the width of one edge, so
+                // the black shows outside the coloured line as well as inside.
+                double edge = 1.5 * thickness;
+                Circle.Opacity = damping;
+                CircleBackground.Stroke = ContrastUnderBrush;
+                CircleBackground.StrokeThickness = top + 2 * ScreenMetrics.Units(edge);
+                CircleBackground.Opacity = damping;
+                // Px takes 4K pixels, Units takes units of the 4K screen at 200 %: × 2.
+                underRadiusPixels = radiusPixels + ScreenMetrics.Px(2 * edge);
+            }
+            else
+            {
+                // Usual circle: discreet, half transparent, with a light line just outside.
+                Circle.Opacity = (fixedValue ? 0.6 : 0.3) * damping;
+                CircleBackground.Stroke = UnderBrush;
+                CircleBackground.StrokeThickness = ScreenMetrics.Units(fixedValue ? 2.5 : 2) * thickness;
+                CircleBackground.Opacity = (fixedValue ? 0.7 : 0.5) * damping;
+                underRadiusPixels = radiusPixels + ScreenMetrics.Px(2) * thickness;
+            }
 
             // Not shown on screen yet: nothing to draw (PointFromScreen would fail).
             if (PresentationSource.FromVisual(this) == null)
@@ -280,7 +308,7 @@ namespace Prunel
             Point center = PointFromScreen(new Point(xPixels, yPixels));
             double radius = PixelsToWpf(radiusPixels);
 
-            PlaceEllipse(CircleBackground, center, PixelsToWpf(radiusPixels + ScreenMetrics.Px(2)));
+            PlaceEllipse(CircleBackground, center, PixelsToWpf(underRadiusPixels));
             PlaceEllipse(Circle, center, radius);
         }
 
@@ -309,7 +337,8 @@ namespace Prunel
         /// </summary>
         public void ShowRing(double xPixels, double yPixels, double radiusPixels, double progress)
         {
-            Ring.StrokeThickness = ScreenMetrics.Units(6);
+            // Thicker with [HighContrast], to see the progress better.
+            Ring.StrokeThickness = ScreenMetrics.Units(AppSettings.Current.HighContrast ? 9 : 6);
             DrawArc(Ring, xPixels, yPixels, radiusPixels, progress);
         }
 

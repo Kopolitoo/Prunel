@@ -18,10 +18,11 @@
   Its position and size (the whole screen) are computed in code, taking the Windows
   scaling into account (125 %, 150 %...).
 
-  The circle is drawn twice, one on top of the other: a black line underneath and a thinner
-  green line on top, half transparent (Opacity="0.5") to stay discreet. This way it stays
-  visible on a light background as well as a dark one. In fixed gaze mode, the top line
-  becomes white and opaque: one sees at once that the circle is frozen.
+  The circle is drawn twice, one on top of the other: a light line underneath and a thinner
+  line on top, half transparent to stay discreet. In fixed gaze mode, the lines become
+  lighter and more opaque: one sees at once that the circle is frozen. The colour of the top
+  line, the thickness of both and the "reinforced contrast" (opaque line edged in black) are
+  settings of the "Colours" tab (step color-themes), applied in code (ShowCircle).
 
   Movement mode:
     Ring              the progress ring: a thick arc filling up on the edge of the circle,

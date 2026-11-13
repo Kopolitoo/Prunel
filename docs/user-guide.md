@@ -136,6 +136,11 @@ repeat) or a yes / no switch. Changes apply at once and are saved.
   language.
 - **Profiles** ("Profiles" tab): save the current settings under a name, and load them later
   with your eyes (for example a "Morning" and an "Evening" profile).
+- **Colours** tab ("Interface" category): the look of the gaze circle. **Circle colour**: grey
+  (the usual circle), white, yellow, green, light blue or pink; "−" and "+" go from one colour to
+  the next. **Circle thickness**: 100 % is the usual line, 200 % twice as thick (50 to 400 %).
+  **Reinforced contrast**: the circle becomes opaque and edged in black, and the progress ring is
+  thicker; useful on a busy background or when the eyes are tired.
 - **Sound** tab: two yes / no options, both off at first. **Key sound**: a short "tick" for each
   key of the gaze keyboard. **Button sound**: a short sound for every other button (menu, action
   choice, options icon, settings). The sound plays at the Windows volume.
