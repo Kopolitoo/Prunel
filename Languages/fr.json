@@ -124,6 +124,7 @@
   "settings.about.help": "Logiciel libre et gratuit pour commander l'ordinateur avec le regard. Les boutons ouvrent le site et le guide d'utilisation dans le navigateur ; Prunel revient alors en mode mouvement.",
   "settings.about.website": "Site web",
   "settings.about.author": "Créé par {0}",
+  "settings.about.helpedBy": "avec l'aide de Claude, une IA d'Anthropic",
   "settings.about.guide": "Guide d'utilisation",
   "settings.about.websiteUrl": "https://prunel.kopol.xyz/",
   "settings.about.guideUrl": "https://github.com/Kopolitoo/Prunel/blob/main/docs/user-guide.fr.md",

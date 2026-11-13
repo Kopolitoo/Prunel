@@ -283,7 +283,7 @@ Uniquement au regard.
 1. Paramètres, catégorie « Système » : le dernier onglet est « À propos ». Il montre « Prunel »,
    « Version 0.5.0 » (le numéro de la version installée, sans le « + » et les lettres qui
    peuvent suivre), les deux boutons « Site web » et « Guide d'utilisation », et à droite
-   l'image de l'auteur avec « Créé par Kopolito » dessous. Il n'y a pas de bouton « Défaut ».
+   l'image de l'auteur avec « Créé par Kopolito » et « avec l'aide de Claude, une IA d'Anthropic » dessous. Il n'y a pas de bouton « Défaut ».
    Regarder l'image ne fait rien.
 2. Regarder « Site web » : le navigateur par défaut ouvre le site de Prunel (la page en
    français quand l'interface est en français, en anglais sinon) et Prunel revient au mode

@@ -124,6 +124,7 @@
   "settings.about.help": "Free and open-source software to control the computer with the eyes. The buttons open the website and the user guide in the browser; Prunel then goes back to movement mode.",
   "settings.about.website": "Website",
   "settings.about.author": "Created by {0}",
+  "settings.about.helpedBy": "with the help of Claude, an AI by Anthropic",
   "settings.about.guide": "User guide",
   "settings.about.websiteUrl": "https://prunel.kopol.xyz/en.html",
   "settings.about.guideUrl": "https://github.com/Kopolitoo/Prunel/blob/main/docs/user-guide.md",

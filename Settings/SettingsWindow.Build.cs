@@ -390,7 +390,8 @@ namespace Prunel
         /// "À propos" tab (issue #92): the name and version of Prunel, then two medium buttons on
         /// the left (same size and same wide gap as those of the "Outils" tab):
         ///   E774 = globe (website), E8A5 = document (user guide);
-        /// on the right, the author's picture (chosen by him) with "Créé par Kopolito" below it.
+        /// on the right, the author's picture (chosen by him) with "Créé par Kopolito" and
+        /// "avec l'aide de Claude, une IA d'Anthropic" below it.
         /// The addresses come from the language file: the French site and guide for French,
         /// the English ones for English (a new language can point to its own guide).
         /// Below the buttons: the possible message (browser impossible to open…).
@@ -420,7 +421,8 @@ namespace Prunel
         }
 
         /// <summary>
-        /// The author's picture (300 × 300, rounded corners) and, below it, "Créé par Kopolito".
+        /// The author's picture (300 × 300, rounded corners) and, below it, "Créé par Kopolito"
+        /// and the help of Claude.
         /// The picture is built into Prunel.exe (Resources/Author.jpg, "Resource" in
         /// Prunel.csproj). It is only a picture: looking at it does nothing.
         /// </summary>
@@ -447,6 +449,14 @@ namespace Prunel
             caption.TextAlignment = TextAlignment.Center;
             caption.Margin = new Thickness(0, 12, 0, 0);
             author.Children.Add(caption);
+            // The help of Claude (the AI that wrote the code with him), mentioned at the
+            // author's request, out of honesty.
+            TextBlock helpedBy = Text(Texts.Get("settings.about.helpedBy"), 22, Soft, false);
+            helpedBy.Width = 300;
+            helpedBy.TextAlignment = TextAlignment.Center;
+            helpedBy.TextWrapping = TextWrapping.Wrap;
+            helpedBy.Margin = new Thickness(0, 4, 0, 0);
+            author.Children.Add(helpedBy);
             Place(author, left, top);
         }
 

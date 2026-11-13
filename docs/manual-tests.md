@@ -264,7 +264,7 @@ Gaze only.
 1. Settings, "System" category: the last tab is "About". It shows "Prunel", "Version 0.5.0"
    (the number of the installed version, without "+" and letters after it), the two buttons
    "Website" and "User guide", and on the right the author's picture with "Created by
-   Kopolito" below it. There is no "Default" button. Looking at the picture does nothing.
+   Kopolito" and "with the help of Claude, an AI by Anthropic" below it. There is no "Default" button. Looking at the picture does nothing.
 2. Look at "Website": the default browser opens the Prunel site (the English page when the
    interface is in English, the French page in French) and Prunel is back in movement mode.
 3. Open the settings again, "About" tab, "User guide": the browser opens the user guide on
