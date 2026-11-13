@@ -80,7 +80,11 @@ namespace Prunel
 
         // Input box colours (frozen: WPF draws them faster).
         private static readonly Brush InputBoxBackground = Freeze(Color.FromArgb(0xFF, 0x26, 0x27, 0x2A));
-        private static readonly Brush InputBoxText = Freeze(Colors.White);
+        // Softer with [NightMode] (see Palette).
+        private static Brush InputBoxText
+        {
+            get { return Palette.Text; }
+        }
         private static readonly Brush InputBoxEmptyText = Freeze(Color.FromArgb(0xFF, 0x80, 0x80, 0x80));
 
         private readonly OverlayWindow _layer;

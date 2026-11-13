@@ -197,7 +197,7 @@ namespace Prunel
             _rowBackground.Opacity = 0.5;
             _rowBackground.Visibility = Visibility.Collapsed;
             _row = new Line();
-            _row.Stroke = Brushes.White;
+            _row.Stroke = Palette.Text;
             _row.StrokeThickness = ScreenMetrics.Units(3);
             // Dots: 3 line thicknesses, then 2 thicknesses of gap, and so on.
             _row.StrokeDashArray = new DoubleCollection(new double[] { 3, 2 });
@@ -209,7 +209,7 @@ namespace Prunel
             Point startPoint = layer.ToWpf(_drag.StartX, _drag.StartY);
             double r = layer.LengthToWpf(ScreenMetrics.Px(StartDotRadius));
             Ellipse point = new Ellipse();
-            point.Fill = Brushes.White;
+            point.Fill = Palette.Text;
             point.Stroke = Brushes.Black;
             point.StrokeThickness = ScreenMetrics.Units(2);
             point.Width = r * 2;

@@ -73,8 +73,15 @@ namespace Prunel
         // Colors (frozen once and for all, WPF then draws them faster).
         private static readonly Brush NormalBackground = Freeze(new SolidColorBrush(Color.FromArgb(0xE0, 0x20, 0x21, 0x24)));
         private static readonly Brush HoverBackground = Freeze(new SolidColorBrush(Color.FromArgb(0xFF, 0x3C, 0x40, 0x43)));
-        private static readonly Brush White = Freeze(new SolidColorBrush(Colors.White));
-        private static readonly Brush Green = Freeze(new SolidColorBrush(Color.FromArgb(0xFF, 0x00, 0xC8, 0x53)));
+        // Bright colours: softer with [NightMode] (see Palette).
+        private static Brush White
+        {
+            get { return Palette.Text; }
+        }
+        private static Brush Green
+        {
+            get { return Palette.Green; }
+        }
         private static readonly Brush EmptyBackground = Freeze(new SolidColorBrush(Color.FromArgb(0x80, 0x50, 0x50, 0x50)));
         private static readonly Brush EmptyHoverBackground = Freeze(new SolidColorBrush(Color.FromArgb(0xA0, 0x60, 0x60, 0x60)));
         private static readonly Brush Gray = Freeze(new SolidColorBrush(Color.FromArgb(0xFF, 0x90, 0x90, 0x90)));

@@ -393,7 +393,7 @@ namespace Prunel
             _gazeCircleBackground.Opacity = 0.6;
             _gazeCircleBackground.Visibility = Visibility.Collapsed;
             _gazeCircle = new Ellipse();
-            _gazeCircle.Stroke = Brushes.LimeGreen;
+            _gazeCircle.Stroke = Palette.GazeGreen;   // softer with [NightMode]
             _gazeCircle.StrokeThickness = ScreenMetrics.Units(2);
             _gazeCircle.Visibility = Visibility.Collapsed;
             screen.Children.Add(_gazeCircleBackground);

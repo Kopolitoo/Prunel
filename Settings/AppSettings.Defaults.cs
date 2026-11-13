@@ -50,6 +50,7 @@ namespace Prunel
             CircleColor = CircleColors.DefaultName;
             CircleThickness = 100;
             HighContrast = false;
+            NightMode = false;
 
             ActivationDelay = 0.6;
             OptionsIconDelay = 0.3;
@@ -317,7 +318,8 @@ namespace Prunel
             // Version 17 (AutoPause, AutoPauseDelay): nothing to fix, the settings keep their
             // default value (yes, 10 s). Version 18 (DoubleClickGap): nothing to fix either,
             // it gets its default value (200 ms). Version 19 (CircleColor, CircleThickness,
-            // HighContrast): nothing to fix, the defaults draw the circle as before.
+            // HighContrast): nothing to fix, the defaults draw the circle as before. Version 20
+            // (NightMode): nothing to fix, it keeps its default value (no).
 
             FileVersion = CurrentVersion;
             return true;

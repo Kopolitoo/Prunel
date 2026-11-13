@@ -192,6 +192,8 @@
   "setting.circleThickness.help": "100 % = usual line, 200 % = twice as thick",
   "setting.highContrast.name": "Reinforced contrast",
   "setting.highContrast.help": "Opaque circle edged in black, thicker ring",
+  "setting.nightMode.name": "Night mode",
+  "setting.nightMode.help": "Softer colours for the evening (less bright white and green)",
   "circleColor.gray": "Grey",
   "circleColor.white": "White",
   "circleColor.yellow": "Yellow",

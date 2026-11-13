@@ -551,7 +551,7 @@ namespace Prunel
             {
                 TextBlock text = new TextBlock();
                 text.Text = _message;
-                text.Foreground = Brushes.White;
+                text.Foreground = Palette.Text;
                 // The message follows the Windows text size.
                 text.FontSize = ScreenMetrics.Font(28);
                 Border frame = new Border();

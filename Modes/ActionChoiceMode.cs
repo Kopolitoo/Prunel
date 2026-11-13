@@ -462,7 +462,7 @@ namespace Prunel
             _gazeCircleBackground.Opacity = 0.6;
             _gazeCircleBackground.Visibility = Visibility.Collapsed;
             _gazeCircle = new Ellipse();
-            _gazeCircle.Stroke = Brushes.LimeGreen;
+            _gazeCircle.Stroke = Palette.GazeGreen;   // softer with [NightMode]
             _gazeCircle.StrokeThickness = ScreenMetrics.Units(2);
             _gazeCircle.Visibility = Visibility.Collapsed;
             screen.Children.Add(_gazeCircleBackground);
@@ -542,8 +542,8 @@ namespace Prunel
 
             AddLine(screen, center.X - half, center.Y, center.X + half, center.Y, Brushes.Black, thick);
             AddLine(screen, center.X, center.Y - half, center.X, center.Y + half, Brushes.Black, thick);
-            AddLine(screen, center.X - half, center.Y, center.X + half, center.Y, Brushes.White, end);
-            AddLine(screen, center.X, center.Y - half, center.X, center.Y + half, Brushes.White, end);
+            AddLine(screen, center.X - half, center.Y, center.X + half, center.Y, Palette.Text, end);
+            AddLine(screen, center.X, center.Y - half, center.X, center.Y + half, Palette.Text, end);
         }
 
         private static void AddLine(Canvas screen, double x1, double y1, double x2, double y2,

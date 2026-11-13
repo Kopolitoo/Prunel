@@ -532,7 +532,10 @@ namespace Prunel
                 Setting.Number("setting.circleThickness", " %", 25,
                                p => p.CircleThickness, (p, v) => p.CircleThickness = v),
                 Setting.YesOrNo("setting.highContrast",
-                                 p => p.HighContrast, (p, v) => p.HighContrast = v)),
+                                 p => p.HighContrast, (p, v) => p.HighContrast = v),
+                // Softer colours on Prunel's screens (see Palette).
+                Setting.YesOrNo("setting.nightMode",
+                                 p => p.NightMode, (p, v) => p.NightMode = v)),
 
             // E71E = magnifier ("Magnifier, drag")
             new SettingsTab("tab.magnifierDrag", "",

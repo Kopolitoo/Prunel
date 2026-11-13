@@ -291,6 +291,20 @@ Gaze only.
 6. "Default": the three rows go back to Grey, 100 %, no. Restart Prunel: the choices are kept.
    An older settings file (version 18) opens with the usual circle.
 
+## 25. Night mode (step color-themes)
+
+1. Settings, "Colours" tab: a fourth row "Night mode" (no). The four rows and the preview fit on
+   the page without overlapping.
+2. Turn it on: at once the settings texts become light grey instead of white, the switches a
+   darker blue, the progress bars a darker green. The circle colour does not change.
+3. Back to movement mode: the options icon (fixed gaze) is grey with a darker green flash; the
+   progress ring of a direct click is darker green.
+4. Open the menu bar, the action choice, the magnifier, the keyboard (with the input box) and
+   the keyboard list: symbols and texts are light grey, flashes and rings darker green, the
+   gaze circle of the full-screen modes darker green, the "+ myword" cell a darker amber.
+5. Turn it off: everything is back to the day colours (at the next opening of each screen).
+   Restart Prunel: the choice is kept. "Default" of the tab turns it off.
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,

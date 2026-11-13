@@ -64,9 +64,10 @@ namespace Prunel
             }
             else
             {
+                double step = tab.Name == SettingsCatalog.ColorsTabName ? CompactStepRow : StepRow;
                 for (int i = 0; i < tab.Settings.Count; i++)
                 {
-                    BuildRow(tab.Settings[i], TopRow + i * StepRow);
+                    BuildRow(tab.Settings[i], TopRow + i * step);
                 }
                 if (tab.Name == SettingsCatalog.GeneralTabName)
                 {
@@ -79,7 +80,7 @@ namespace Prunel
                 }
                 if (tab.Name == SettingsCatalog.ColorsTabName)
                 {
-                    BuildCirclePreview(TopRow + tab.Settings.Count * StepRow);
+                    BuildCirclePreview(TopRow + tab.Settings.Count * step);
                 }
                 if (tab.Name == SettingsCatalog.IconsTabName)
                 {
@@ -303,12 +304,16 @@ namespace Prunel
 
         // Two panels: one dark, one light, as the circle is seen on dark and light pages.
         private const double PreviewWidth = 580;   // 2 × 580 + 40 stops before the right column (1700)
-        private const double PreviewHeight = 380;
+        // 4 rows of 164 from 92, then 10 of margin: 758 + 300 stays above the bottom (1080).
+        private const double PreviewHeight = 300;
         private const double PreviewGap = 40;
         private static readonly Brush PreviewDark = Freeze(new SolidColorBrush(Color.FromRgb(0x20, 0x21, 0x24)));
         private static readonly Brush PreviewLight = Freeze(new SolidColorBrush(Color.FromRgb(0xF2, 0xF2, 0xF2)));
         private static readonly Brush PreviewDarkText = Freeze(new SolidColorBrush(Color.FromRgb(0x5F, 0x63, 0x68)));
-        private static readonly Brush RingBrush = Freeze(new SolidColorBrush(Color.FromRgb(0x00, 0xC8, 0x53)));
+        private static Brush RingBrush
+        {
+            get { return Palette.Green; }
+        }
 
         /// <summary>
         /// The surface of the preview, or null if the shown tab has none. Redrawn after each
@@ -328,7 +333,7 @@ namespace Prunel
             _preview.Width = 2 * PreviewWidth + PreviewGap;
             _preview.Height = PreviewHeight;
             _preview.IsHitTestVisible = false;
-            Place(_preview, LeftContent, top + 20);
+            Place(_preview, LeftContent, top + 10);
             RefreshPreview();
         }
 

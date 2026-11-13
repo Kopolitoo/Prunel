@@ -50,7 +50,7 @@ l'explication de la classe.
 | `Actions` | ce que propose le choix d'action : `ActionCatalog`, `ActionChoiceLayout`, `Modifiers`, `DragGesture` |
 | `Typing` | le clavier au regard et la prédiction de mots : `GazeKeyboard`, `KeyboardKey`, `KeyboardLayout`, `WordPredictor` |
 | `Settings` | le fichier des réglages, les profils et la fenêtre des paramètres : `AppSettings`, `SettingsCatalog`, `SettingsProfiles`, `SettingsWindow`, `SettingTarget` |
-| `Ui` | fenêtres et boutons au regard : `OverlayWindow`, `DiagnosticWindow`, `CursorSampler`, `GazeButton`, `ButtonAimer`, `IGazeTarget`, `Texts`, `CircleColors` |
+| `Ui` | fenêtres et boutons au regard : `OverlayWindow`, `DiagnosticWindow`, `CursorSampler`, `GazeButton`, `ButtonAimer`, `IGazeTarget`, `Texts`, `CircleColors`, `Palette` |
 | `Platform` | appels à Windows : `NativeMethods`, `MouseInjector`, `KeyboardInjector`, `KeyboardHook`, `MouseClickHook`, `WheelScroller`, `CursorWaker`, `ScreenCapture`, `ScreenMetrics`, `WindowsStartup`, `UiAccess`, `SoundFeedback` |
 | `Languages`, `Keyboards`, `Dictionaries` | fichiers de données copiés à côté de `Prunel.exe` (textes, dispositions de clavier, dictionnaires de prédiction) |
 | `Resources` | l'icône du programme |
@@ -85,6 +85,9 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   l'anneau de progression et l'icône d'options. La couleur, l'épaisseur et le contraste renforcé
   du cercle viennent des paramètres (onglet « Couleurs ») ; `CircleColors` contient la liste des
   couleurs et leurs pinceaux.
+- `Palette` : les couleurs vives des écrans de Prunel (texte blanc, verts, bleus, ambre), en
+  version jour et en version nuit plus douce, choisie par le réglage « Mode nuit ». Les écrans
+  les lisent quand ils dessinent : un changement se voit à leur prochain dessin.
 - `Modes/ModeManager` : connaît le mode courant et fait passer d'un mode à l'autre ; environ
   60 fois par seconde, il donne la position du regard (`GazeState`) au mode courant.
 - `Modes/Mode` : modèle commun à tous les modes (`Enter`, `Update`, `Quit`).

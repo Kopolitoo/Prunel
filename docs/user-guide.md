@@ -143,6 +143,10 @@ repeat) or a yes / no switch. Changes apply at once and are saved.
   thicker; useful on a busy background or when the eyes are tired. Below the settings, a
   **preview** shows the circle as it will look, on a dark and on a light background: the movement
   circle on the left, the fixed gaze circle with its progress ring on the right.
+  **Night mode**: softer colours on Prunel's own screens (keyboard, menu bar, action choice,
+  magnifier, settings, options icon): light grey instead of white, darker greens and blues, so
+  they dazzle less in the evening. The settings page changes at once; the other screens at their
+  next opening. The colour of the gaze circle stays the one you chose.
 - **Sound** tab: two yes / no options, both off at first. **Key sound**: a short "tick" for each
   key of the gaze keyboard. **Button sound**: a short sound for every other button (menu, action
   choice, options icon, settings). The sound plays at the Windows volume.
