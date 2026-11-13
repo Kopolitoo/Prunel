@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace Prunel
@@ -87,11 +88,15 @@ namespace Prunel
                 {
                     BuildProfilesTab();
                 }
+                if (tab.Name == SettingsCatalog.AboutTabName)
+                {
+                    BuildAboutTab();
+                }
             }
 
             // ── The right column: "Défaut" at the top, "Retour" in the middle of the edge.
             //    E72C = circular arrows (restore), E72B = back arrow.
-            //    No "Défaut" for a tab with nothing to restore ("Outils", "Profils"): a button
+            //    No "Défaut" for a tab with nothing to restore ("Outils", "Profils", "À propos"): a button
             //    that does nothing would be confusing.
             bool hasDefaults = tab.Settings.Count > 0 || tab.Name == SettingsCatalog.IconsTabName;
             if (hasDefaults)
@@ -379,6 +384,101 @@ namespace Prunel
                          () => Notify(DiagnosticRequested), false, false);
 
             BuildMessage();
+        }
+
+        /// <summary>
+        /// "À propos" tab (issue #92): the name and version of Prunel, then two medium buttons on
+        /// the left (same size and same wide gap as those of the "Outils" tab):
+        ///   E774 = globe (website), E8A5 = document (user guide);
+        /// on the right, the author's picture (chosen by him) with "Créé par Kopolito" and
+        /// "avec l'aide de Claude, une IA d'Anthropic" below it.
+        /// The addresses come from the language file: the French site and guide for French,
+        /// the English ones for English (a new language can point to its own guide).
+        /// Below the buttons: the possible message (browser impossible to open…).
+        /// </summary>
+        private void BuildAboutTab()
+        {
+            StackPanel texts = new StackPanel();
+            texts.Children.Add(Text("Prunel", 36, White, true));
+            texts.Children.Add(Text(Texts.Format("settings.about.version", ShortVersion(App.Version)), 30, White, false));
+            TextBlock explanation = Text(Texts.Get("settings.about.help"), 23, Soft, false);
+            explanation.TextWrapping = TextWrapping.Wrap;
+            explanation.Width = 1140;
+            explanation.Margin = new Thickness(0, 6, 0, 0);
+            texts.Children.Add(explanation);
+            Place(texts, LeftContent, TopRow + 20);
+
+            string website = Texts.Get("settings.about.websiteUrl");
+            string guide = Texts.Get("settings.about.guideUrl");
+            AddTarget(LeftContent + 60, 380, 560, 120, BigButton("\uE774", Texts.Get("settings.about.website")),
+                         () => RequestLink(website), false, false);
+            AddTarget(LeftContent + 60, 680, 560, 120, BigButton("\uE8A5", Texts.Get("settings.about.guide")),
+                         () => RequestLink(guide), false, false);
+
+            BuildAuthor(LeftContent + 760, 380);
+
+            BuildMessage();
+        }
+
+        /// <summary>
+        /// The author's picture (300 × 300, rounded corners) and, below it, "Créé par Kopolito"
+        /// and the help of Claude.
+        /// The picture is built into Prunel.exe (Resources/Author.jpg, "Resource" in
+        /// Prunel.csproj). It is only a picture: looking at it does nothing.
+        /// </summary>
+        private void BuildAuthor(double left, double top)
+        {
+            StackPanel author = new StackPanel();
+            try
+            {
+                BitmapImage picture = new BitmapImage(new Uri("pack://application:,,,/Resources/Author.jpg"));
+                Border frame = new Border();
+                frame.Width = 300;
+                frame.Height = 300;
+                frame.CornerRadius = new CornerRadius(24);
+                frame.Background = new ImageBrush(picture) { Stretch = Stretch.UniformToFill };
+                author.Children.Add(frame);
+            }
+            catch (Exception ex)
+            {
+                // A missing picture must not prevent the settings from opening.
+                App.Log("Settings: author picture not found: " + ex.Message);
+            }
+            TextBlock caption = Text(Texts.Format("settings.about.author", "Kopolito"), 26, Soft, false);
+            caption.Width = 300;
+            caption.TextAlignment = TextAlignment.Center;
+            caption.Margin = new Thickness(0, 12, 0, 0);
+            author.Children.Add(caption);
+            // The help of Claude (the AI that wrote the code with him), mentioned at the
+            // author's request, out of honesty.
+            TextBlock helpedBy = Text(Texts.Get("settings.about.helpedBy"), 22, Soft, false);
+            helpedBy.Width = 300;
+            helpedBy.TextAlignment = TextAlignment.Center;
+            helpedBy.TextWrapping = TextWrapping.Wrap;
+            helpedBy.Margin = new Thickness(0, 4, 0, 0);
+            author.Children.Add(helpedBy);
+            Place(author, left, top);
+        }
+
+        /// <summary>
+        /// The version without what the build may add after a "+" (the commit identifier):
+        /// "0.5.0+1a2b3c4" → "0.5.0".
+        /// </summary>
+        private static string ShortVersion(string version)
+        {
+            int plus = version.IndexOf('+');
+            return plus > 0 ? version.Substring(0, plus) : version;
+        }
+
+        /// <summary>Asks the mode to open an address in the browser (an input in progress is confirmed first).</summary>
+        private void RequestLink(string url)
+        {
+            ConfirmInput();
+            Action<string> subscribers = LinkRequested;
+            if (subscribers != null)
+            {
+                subscribers(url);
+            }
         }
 
         /// <summary>The tab's possible message (below the big buttons), in blue.</summary>

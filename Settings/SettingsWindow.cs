@@ -208,6 +208,12 @@ namespace Prunel
         /// <summary>"Diagnostic" button of the "Outils" tab.</summary>
         public event Action DiagnosticRequested;
 
+        /// <summary>
+        /// "Site web" or "Guide d'utilisation" button of the "À propos" tab: the address to open
+        /// in the default browser.
+        /// </summary>
+        public event Action<string> LinkRequested;
+
         /// <summary>"Mes mots" button of the "Général" tab.</summary>
         public event Action MyWordsRequested;
 

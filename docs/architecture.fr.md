@@ -160,7 +160,10 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
 - `Modes/SettingsMode` et `SettingsWindow` (étape 7) : bouton « Paramètres » du menu. Une
   fenêtre plein écran, fond noir, avec à gauche quatre catégories dépliantes (02/11/2026) : Regard (Regard,
   Fixation, Délais), Actions (Loupe et glisser, Défilement, Icônes), Affichage (Affichage, Clavier,
-  Jeu) et Système (Général, Profils, Outils). Seule la catégorie ouverte montre ses onglets, en dessous d'elle
+  Jeu) et Système (Général, Profils, Outils, À propos). L'onglet « À propos » (issue #92) montre la
+  version (`App.Version`), l'image de l'auteur (`Resources/Author.jpg`, intégrée à l'exe) et deux
+  boutons dont les adresses viennent du fichier de langue ; `SettingsMode.OpenLink` les ouvre
+  dans le navigateur par défaut et revient au mode mouvement. Seule la catégorie ouverte montre ses onglets, en dessous d'elle
   et en retrait ; regarder une autre catégorie l'ouvre sur son premier onglet (liste dans
   `SettingsCatalog`). Chaque réglage : son nom, une
   explication, puis « − », la valeur, « + » (ou un interrupteur arrondi pour un oui / non : le
