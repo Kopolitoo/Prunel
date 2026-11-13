@@ -93,6 +93,7 @@ namespace Prunel
             {
                 frame.Value.Text = setting.Text(P);
             }
+            RefreshPreview();   // "Colours" tab: the circle preview follows at once
         }
 
         private void ChangeYesNo(Setting setting, bool val)
@@ -214,6 +215,7 @@ namespace Prunel
             {
                 setting.WriteNumber(P, val);   // brought back within its limits by Fix
                 Save(setting);
+                RefreshPreview();
             }
             else
             {

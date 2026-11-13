@@ -275,10 +275,13 @@ Gaze only.
 
 1. Settings, "Interface" category: a "Colours" tab comes right after "Display", with three
    rows: "Circle colour" (Grey), "Circle thickness" (100 %), "Reinforced contrast" (no). With
-   these values the circle looks exactly as before.
+   these values the circle looks exactly as before. Below them, a preview: a dark panel and a
+   light panel, each with a "Movement" circle and a "Fixed gaze" circle with a green ring two
+   thirds full. The preview has the real size of the circle and is not a gaze target.
 2. Look at "+" on "Circle colour": one look = one colour further (White, Yellow, Green, Light
-   blue, Pink, then Grey again); keeping the gaze on "+" does not run through the list. "−"
-   goes back. Clicking the value with the mouse does not open a text box.
+   blue, Dark blue, Purple, Pink, then Grey again); keeping the gaze on "+" does not run through the list. "−"
+   goes back. Clicking the value with the mouse does not open a text box. The preview changes
+   colour at once, and also follows thickness and contrast (steps 4 and 5).
 3. Choose Yellow, go back to movement mode: the circle is yellow; in fixed gaze it is yellow
    too, more visible. In scroll mode it is yellow and paler.
 4. "Circle thickness" 200 %: the lines are twice as thick; 50 %: thinner. It stops at 50 and

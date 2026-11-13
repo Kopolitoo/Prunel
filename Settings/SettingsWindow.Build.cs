@@ -33,6 +33,7 @@ namespace Prunel
             _content.Children.Clear();
             _targets.Clear();
             _frames.Clear();
+            _preview = null;
 
             SettingsTab tab = SettingsCatalog.Tabs[_tab];
 
@@ -75,6 +76,10 @@ namespace Prunel
                 if (tab.Name == DisplayTabName)
                 {
                     BuildScreenInfo(TopRow + tab.Settings.Count * StepRow);
+                }
+                if (tab.Name == SettingsCatalog.ColorsTabName)
+                {
+                    BuildCirclePreview(TopRow + tab.Settings.Count * StepRow);
                 }
                 if (tab.Name == SettingsCatalog.IconsTabName)
                 {
@@ -292,6 +297,131 @@ namespace Prunel
             info.Children.Add(description);
             info.Children.Add(Text(Texts.Get("settings.sizesInPercent"), 23, Soft, false));
             Place(info, LeftContent, top + 30);
+        }
+
+        // ───────────────────────── Preview of the circle ("Colours" tab) ─────────────────────────
+
+        // Two panels: one dark, one light, as the circle is seen on dark and light pages.
+        private const double PreviewWidth = 580;   // 2 × 580 + 40 stops before the right column (1700)
+        private const double PreviewHeight = 380;
+        private const double PreviewGap = 40;
+        private static readonly Brush PreviewDark = Freeze(new SolidColorBrush(Color.FromRgb(0x20, 0x21, 0x24)));
+        private static readonly Brush PreviewLight = Freeze(new SolidColorBrush(Color.FromRgb(0xF2, 0xF2, 0xF2)));
+        private static readonly Brush PreviewDarkText = Freeze(new SolidColorBrush(Color.FromRgb(0x5F, 0x63, 0x68)));
+        private static readonly Brush RingBrush = Freeze(new SolidColorBrush(Color.FromRgb(0x00, 0xC8, 0x53)));
+
+        /// <summary>
+        /// The surface of the preview, or null if the shown tab has none. Redrawn after each
+        /// change (RefreshPreview), without rebuilding the page.
+        /// </summary>
+        private Canvas _preview;
+
+        /// <summary>
+        /// "Colours" tab: a preview of the circle with the current settings (colour, thickness,
+        /// contrast, and also its size), on a dark panel and on a light panel. In each panel:
+        /// the movement circle on the left, the fixed gaze circle with a progress ring on the
+        /// right. It is a picture only, not a gaze target.
+        /// </summary>
+        private void BuildCirclePreview(double top)
+        {
+            _preview = new Canvas();
+            _preview.Width = 2 * PreviewWidth + PreviewGap;
+            _preview.Height = PreviewHeight;
+            _preview.IsHitTestVisible = false;
+            Place(_preview, LeftContent, top + 20);
+            RefreshPreview();
+        }
+
+        /// <summary>Draws the preview again with the current settings (if it is shown).</summary>
+        private void RefreshPreview()
+        {
+            if (_preview == null)
+            {
+                return;
+            }
+            _preview.Children.Clear();
+            AddPreviewPanel(0, PreviewDark, Soft);
+            AddPreviewPanel(PreviewWidth + PreviewGap, PreviewLight, PreviewDarkText);
+        }
+
+        /// <summary>One panel of the preview, at "left" in the preview surface.</summary>
+        private void AddPreviewPanel(double left, Brush background, Brush textColor)
+        {
+            // ClipToBounds: a very large circle (radius up to 23 % of the screen) is cut at the
+            // edge of the panel instead of covering the rest of the page.
+            Canvas panel = new Canvas();
+            panel.Width = PreviewWidth;
+            panel.Height = PreviewHeight;
+            panel.Background = background;
+            panel.ClipToBounds = true;
+            Canvas.SetLeft(panel, left);
+            Canvas.SetTop(panel, 0);
+            _preview.Children.Add(panel);
+
+            AppSettings p = P;
+            // The page is 1080 units high whatever the screen: a length of the real screen is
+            // converted with the page / screen ratio, so the preview has the real size.
+            double radius = p.CircleRadiusPx * PageHeight / ScreenMetrics.HeightPixels;
+            double units = PageHeight / ScreenMetrics.HeightUnits;   // ScreenMetrics.Units → page
+            double centerY = (PreviewHeight - 40) / 2;
+
+            AddPreviewCircle(panel, PreviewWidth / 4, centerY, radius, units, false);
+            AddPreviewCircle(panel, PreviewWidth * 3 / 4, centerY, radius, units, true);
+
+            AddPreviewLabel(panel, Texts.Get("settings.previewMovement"), PreviewWidth / 4, textColor);
+            AddPreviewLabel(panel, Texts.Get("settings.previewFixed"), PreviewWidth * 3 / 4, textColor);
+        }
+
+        /// <summary>One circle of the preview, drawn like OverlayWindow.ShowCircle draws it.</summary>
+        private static void AddPreviewCircle(Canvas panel, double x, double y, double radius,
+                                             double units, bool fixedValue)
+        {
+            AppSettings p = P;
+            CircleStyle style = CircleStyle.For(p, fixedValue, 1.0);
+
+            Ellipse under = new Ellipse();
+            under.Stroke = style.UnderBrush;
+            under.StrokeThickness = ScreenMetrics.Units(style.UnderThickness) * units;
+            under.Opacity = style.UnderOpacity;
+            PlacePreviewEllipse(panel, under, x, y, radius + ScreenMetrics.Units(style.UnderOffset) * units);
+
+            Ellipse circle = new Ellipse();
+            circle.Stroke = style.TopBrush;
+            circle.StrokeThickness = ScreenMetrics.Units(style.TopThickness) * units;
+            circle.Opacity = style.TopOpacity;
+            PlacePreviewEllipse(panel, circle, x, y, radius);
+
+            if (fixedValue)
+            {
+                // The progress ring, two thirds of the way, as during a direct click.
+                Path ring = new Path();
+                ring.Stroke = RingBrush;
+                ring.StrokeThickness = ScreenMetrics.Units(CircleStyle.RingThickness(p)) * units;
+                ring.StrokeStartLineCap = PenLineCap.Round;
+                ring.StrokeEndLineCap = PenLineCap.Round;
+                ring.Data = OverlayWindow.ArcShape(new Point(x, y), radius, 0.66);
+                panel.Children.Add(ring);
+            }
+        }
+
+        private static void PlacePreviewEllipse(Canvas panel, Ellipse ellipse, double x, double y, double radius)
+        {
+            ellipse.Width = 2 * radius;
+            ellipse.Height = 2 * radius;
+            Canvas.SetLeft(ellipse, x - radius);
+            Canvas.SetTop(ellipse, y - radius);
+            panel.Children.Add(ellipse);
+        }
+
+        /// <summary>A small text centred under a circle of the preview, at the bottom of the panel.</summary>
+        private static void AddPreviewLabel(Canvas panel, string text, double x, Brush color)
+        {
+            TextBlock label = Text(text, 22, color, false);
+            label.Width = PreviewWidth / 2;
+            label.TextAlignment = TextAlignment.Center;
+            Canvas.SetLeft(label, x - PreviewWidth / 4);
+            Canvas.SetTop(label, PreviewHeight - 36);
+            panel.Children.Add(label);
         }
 
         /// <summary>Général tab: reminder of where the settings are saved.</summary>

@@ -297,10 +297,14 @@ Uniquement au regard.
 1. Paramètres, catégorie « Interface » : un onglet « Couleurs » vient juste après
    « Affichage », avec trois lignes : « Couleur du cercle » (Gris), « Épaisseur du cercle »
    (100 %), « Contraste renforcé » (non). Avec ces valeurs, le cercle est exactement comme avant.
+   Dessous, un aperçu : un panneau sombre et un panneau clair, chacun avec un cercle
+   « Mouvement » et un cercle « Regard fixe » avec un anneau vert aux deux tiers. L'aperçu a la
+   vraie taille du cercle et n'est pas une cible du regard.
 2. Regarder « + » sur « Couleur du cercle » : un regard = une couleur de plus (Blanc, Jaune,
-   Vert, Bleu clair, Rose, puis Gris à nouveau) ; garder le regard sur « + » ne fait pas défiler
+   Vert, Bleu clair, Bleu foncé, Violet, Rose, puis Gris à nouveau) ; garder le regard sur « + » ne fait pas défiler
    la liste. « − » revient en arrière. Cliquer sur la valeur à la souris n'ouvre pas de zone de
-   saisie.
+   saisie. L'aperçu change de couleur tout de suite, et suit aussi l'épaisseur et le contraste
+   (étapes 4 et 5).
 3. Choisir Jaune, revenir au mode mouvement : le cercle est jaune ; en regard fixe il est jaune
    aussi, plus visible. En mode défilement il est jaune et plus pâle.
 4. « Épaisseur du cercle » 200 % : les traits sont deux fois plus épais ; 50 % : plus fins. La
