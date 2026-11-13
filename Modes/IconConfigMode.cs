@@ -265,7 +265,7 @@ namespace Prunel
             _gazeCircleBackground.Opacity = 0.6;
             _gazeCircleBackground.Visibility = Visibility.Collapsed;
             _gazeCircle = new Ellipse();
-            _gazeCircle.Stroke = Brushes.LimeGreen;
+            _gazeCircle.Stroke = Palette.GazeGreen;   // softer with [NightMode]
             _gazeCircle.StrokeThickness = ScreenMetrics.Units(2);
             _gazeCircle.Visibility = Visibility.Collapsed;
             screen.Children.Add(_gazeCircleBackground);
@@ -293,7 +293,7 @@ namespace Prunel
             StackPanel texts = new StackPanel();
             texts.VerticalAlignment = VerticalAlignment.Center;
             texts.Margin = new Thickness(sideWpf * 0.06);
-            texts.Children.Add(Text(Texts.Get("iconConfig.title"), titleFont, Brushes.White, true));
+            texts.Children.Add(Text(Texts.Get("iconConfig.title"), titleFont, Palette.Text, true));
             TextBlock plus = Text(Texts.Get("iconConfig.plusHelp"), textFont, Soft, false);
             plus.Margin = new Thickness(0, textFont, 0, 0);
             texts.Children.Add(plus);
@@ -341,7 +341,7 @@ namespace Prunel
             frame.Height = layer.LengthToWpf(h);
             frame.CornerRadius = new CornerRadius(layer.LengthToWpf(size * 0.3));
             frame.Background = ListBackground;
-            frame.BorderBrush = Brushes.White;
+            frame.BorderBrush = Palette.Text;
             frame.BorderThickness = new Thickness(ScreenMetrics.Units(2));
             Canvas.SetLeft(frame, corner.X);
             Canvas.SetTop(frame, corner.Y);
@@ -351,7 +351,7 @@ namespace Prunel
             // The texts of the list also follow the Windows text size.
             double titleFont = size * 0.3 * ScreenMetrics.WindowsText;
             AddCenteredText(layer, screen, Texts.Get("iconConfig.chooseAction"), placed.CenterX, top + size * 0.35,
-                               l, titleFont, Brushes.White, true);
+                               l, titleFont, Palette.Text, true);
 
             // ── "Cancel", at the bottom of the rectangle, with its name underneath.
             //    E711 = cross (cancel).
@@ -404,7 +404,7 @@ namespace Prunel
                 AddButton(layer, screen, ActionCatalog.CreateButton(action), () => PlaceAction(action),
                               x, y, size, true);
                 AddCenteredText(layer, screen, ActionCatalog.ShortName(action), x, y + size / 2 + nameFont * 0.4,
-                                   stepX - space, nameFont, Brushes.White, false);
+                                   stepX - space, nameFont, Palette.Text, false);
             }
         }
 

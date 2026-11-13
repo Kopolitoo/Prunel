@@ -192,6 +192,8 @@
   "setting.circleThickness.help": "100 % = trait habituel, 200 % = deux fois plus épais",
   "setting.highContrast.name": "Contraste renforcé",
   "setting.highContrast.help": "Cercle opaque bordé de noir, anneau plus épais",
+  "setting.nightMode.name": "Mode nuit",
+  "setting.nightMode.help": "Couleurs plus douces pour le soir (moins de blanc et de vert vif)",
   "circleColor.gray": "Gris",
   "circleColor.white": "Blanc",
   "circleColor.yellow": "Jaune",

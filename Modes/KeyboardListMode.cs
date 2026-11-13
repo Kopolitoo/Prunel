@@ -292,7 +292,7 @@ namespace Prunel
             frame.Height = layer.LengthToWpf(h);
             frame.CornerRadius = new CornerRadius(layer.LengthToWpf(size * 0.3));
             frame.Background = ListBackground;
-            frame.BorderBrush = Brushes.White;
+            frame.BorderBrush = Palette.Text;
             frame.BorderThickness = new Thickness(ScreenMetrics.Units(2));
             Canvas.SetLeft(frame, corner.X);
             Canvas.SetTop(frame, corner.Y);
@@ -316,7 +316,7 @@ namespace Prunel
                 title += Texts.Format("list.pageOf", _page + 1, pages);
             }
             double yTitle = top + size * 0.35;
-            AddCenteredText(layer, screen, title, centerX, yTitle, l, titleFont, Brushes.White, true);
+            AddCenteredText(layer, screen, title, centerX, yTitle, l, titleFont, Palette.Text, true);
             string explanation = _message ?? (_kind == ListKind.Language
                 ? Texts.Get("list.layouts.help")
                 : _kind == ListKind.Profiles
@@ -425,7 +425,7 @@ namespace Prunel
                     }
                     AddButton(layer, screen, button, action, x, y, size);
                     AddCenteredText(layer, screen, name, x, y + size / 2 + nameFont * 0.4,
-                                       stepX - space, nameFont, Brushes.White, false);
+                                       stepX - space, nameFont, Palette.Text, false);
                 }
             }
 
@@ -436,7 +436,7 @@ namespace Prunel
             _gazeCircleBackground.Opacity = 0.6;
             _gazeCircleBackground.Visibility = Visibility.Collapsed;
             _gazeCircle = new Ellipse();
-            _gazeCircle.Stroke = Brushes.LimeGreen;
+            _gazeCircle.Stroke = Palette.GazeGreen;   // softer with [NightMode]
             _gazeCircle.StrokeThickness = ScreenMetrics.Units(2);
             _gazeCircle.Visibility = Visibility.Collapsed;
             screen.Children.Add(_gazeCircleBackground);

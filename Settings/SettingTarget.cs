@@ -21,12 +21,19 @@ namespace Prunel
     /// </summary>
     internal sealed class SettingTarget : IGazeTarget
     {
-        public static readonly Brush Accent = Freeze(new SolidColorBrush(Color.FromRgb(0x6F, 0xB4, 0xFF)));
+        // Bright colours: softer with [NightMode] (see Palette).
+        public static Brush Accent
+        {
+            get { return Palette.Accent; }
+        }
         private static readonly Brush NormalBackground = Freeze(new SolidColorBrush(Color.FromRgb(0x2A, 0x2F, 0x36)));
         private static readonly Brush HoverBackground = Freeze(new SolidColorBrush(Color.FromRgb(0x45, 0x4B, 0x54)));
         private static readonly Brush ChosenBackground = Freeze(new SolidColorBrush(Color.FromRgb(0x12, 0x26, 0x3D)));
         private static readonly Brush Border = Freeze(new SolidColorBrush(Color.FromRgb(0x4A, 0x52, 0x5C)));
-        private static readonly Brush Green = Freeze(new SolidColorBrush(Color.FromRgb(0x00, 0xC8, 0x53)));
+        private static Brush Green
+        {
+            get { return Palette.Green; }
+        }
 
         private const double BarHeight = 10;
 

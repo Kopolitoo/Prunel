@@ -537,7 +537,7 @@ namespace Prunel
             _arcBackground.StrokeEndLineCap = PenLineCap.Round;
             _arcBackground.Visibility = Visibility.Collapsed;
             _arc = new Path();
-            _arc.Stroke = new SolidColorBrush(Color.FromRgb(0x00, 0xC8, 0x53));   // the green of the rings
+            _arc.Stroke = Palette.Green;   // the green of the rings (softer with [NightMode])
             _arc.StrokeThickness = ScreenMetrics.Units(6);
             _arc.Opacity = Opacity;
             _arc.StrokeStartLineCap = PenLineCap.Round;

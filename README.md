@@ -25,8 +25,9 @@ replaces the old GazeBar.
 
 Prunel is a young project (version 0.x), used every day by its author. Each version is on the
 [Releases](https://github.com/Kopolitoo/Prunel/releases) page as a Windows installer
-(`Prunel-x.y.z-setup.exe`). Already there: sound feedback, automatic pause. Planned next:
-colour themes, a first-run assistant, text-to-speech.
+(`Prunel-x.y.z-setup.exe`). Already there: sound feedback, automatic pause, colour themes
+(circle colour, reinforced contrast, night mode). Planned next: a first-run assistant,
+text-to-speech.
 
 ## Requirements
 

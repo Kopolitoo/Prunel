@@ -46,20 +46,33 @@ namespace Prunel
         private static readonly Brush LightBackground = Freeze(Color.FromArgb(0xFF, 0x3A, 0x3B, 0x3E));
         // Hover background: only a little lighter than the key.
         private static readonly Brush HoverBackground = Freeze(Color.FromArgb(0xFF, 0x46, 0x48, 0x4D));
-        private static readonly Brush FlashBackground = Freeze(Color.FromArgb(0xFF, 0x00, 0xC8, 0x53));
-        private static readonly Brush White = Freeze(Colors.White);
+        // Bright colours: softer with [NightMode] (see Palette).
+        private static Brush FlashBackground
+        {
+            get { return Palette.Green; }
+        }
+        private static Brush White
+        {
+            get { return Palette.Text; }
+        }
         private static readonly Brush Gray = Freeze(Color.FromArgb(0xFF, 0x90, 0x90, 0x90));
-        private static readonly Brush Green = Freeze(Color.FromArgb(0xFF, 0x00, 0xC8, 0x53));
+        private static Brush Green
+        {
+            get { return Palette.Green; }
+        }
         // Text color of the "+ myword" cell (unknown word to add), to tell it apart
         // from an ordinary suggestion (amber).
-        private static readonly Brush Amber = Freeze(Color.FromArgb(0xFF, 0xFF, 0xC8, 0x57));
+        private static Brush Amber
+        {
+            get { return Palette.Amber; }
+        }
 
         private readonly Border _background;
         private readonly TextBlock _text;
         private readonly Brush _normalBackground;
 
         // The hover outline, light blue. Not frozen: its opacity changes during the fade.
-        private readonly SolidColorBrush _outline = new SolidColorBrush(Color.FromRgb(0x7F, 0xB8, 0xF0));
+        private readonly SolidColorBrush _outline = new SolidColorBrush(Palette.Outline);
 
         // True for an active modifier: its green border comes before the hover outline.
         private bool _lit;

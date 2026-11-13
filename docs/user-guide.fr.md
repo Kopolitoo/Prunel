@@ -153,7 +153,11 @@ sont enregistrés.
   opaque et bordé de noir, et l'anneau de progression est plus épais ; utile sur un fond chargé ou
   quand les yeux sont fatigués. Sous les réglages, un **aperçu** montre le cercle tel qu'il sera,
   sur un fond sombre et sur un fond clair : le cercle du mouvement à gauche, le cercle du regard
-  fixe avec son anneau de progression à droite.
+  fixe avec son anneau de progression à droite. **Mode nuit** : des couleurs plus douces sur les
+  écrans de Prunel (clavier, barre de menu, choix d'action, loupe, paramètres, icône d'options) :
+  gris clair au lieu du blanc, verts et bleus plus sombres, pour moins éblouir le soir. La page
+  des paramètres change tout de suite ; les autres écrans à leur prochaine ouverture. La couleur
+  du cercle reste celle que vous avez choisie.
 - Onglet **Sons** : deux options oui / non, toutes deux désactivées au départ. **Son des
   touches** : un petit « tic » à chaque touche du clavier du regard. **Son des boutons** : un petit
   son pour tous les autres boutons (menu, choix d'action, icône d'options, paramètres). Le son

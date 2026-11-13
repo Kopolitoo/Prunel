@@ -88,8 +88,10 @@ namespace Prunel
         ///  19: step color-themes — CircleColor ("gray"), CircleThickness (100 %) and
         ///      HighContrast (no). Nothing to fix: missing from an older file, they keep their
         ///      default value, which is the circle as it was.
+        ///  20: step color-themes, part 2 — NightMode (no). Nothing to fix: missing from an
+        ///      older file, it keeps its default value.
         /// </summary>
-        public const int CurrentVersion = 19;
+        public const int CurrentVersion = 20;
 
         /// <summary>Format number of the file, so it can evolve one day without breaking everything.</summary>
         [DataMember(Order = 0)]
@@ -240,6 +242,14 @@ namespace Prunel
         /// </summary>
         [DataMember(Order = 36)]
         public bool HighContrast { get; set; }
+
+        /// <summary>
+        /// Night mode (yes / no): softer colours on Prunel's own screens (light grey instead
+        /// of white, darker greens and blues), so they dazzle less in the evening. See
+        /// Ui/Palette.cs. No by default.
+        /// </summary>
+        [DataMember(Order = 37)]
+        public bool NightMode { get; set; }
 
         // ───────────────────────── Delays ─────────────────────────
 

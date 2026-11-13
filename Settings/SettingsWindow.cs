@@ -69,6 +69,8 @@ namespace Prunel
         private const double LeftContent = 460;
         private const double TopRow = 92;
         private const double StepRow = 184;           // from one setting row to the next
+        // "Colours" tab: rows a bit closer, to leave room for the circle preview below them.
+        private const double CompactStepRow = 164;
         private const double RowHeight = 160;
         private const double LabelWidth = 520;
         private const double Gap = 18;
@@ -82,7 +84,11 @@ namespace Prunel
         private const double SwitchWidth = 150;   // the track (the "pill")
         private const double SwitchHeight = 76;
         private const double SwitchButton = 60;     // the sliding knob
-        private static readonly Brush ActiveTrack = Freeze(new SolidColorBrush(Color.FromRgb(0x0D, 0x6E, 0xFD)));   // Bootstrap blue
+        // Bootstrap blue; softer with [NightMode] (see Palette).
+        private static Brush ActiveTrack
+        {
+            get { return Palette.Switch; }
+        }
         private const double RightLeft = 1700;      // right column (Défaut, Retour)
         private const double RightSide = 160;
 
@@ -97,7 +103,11 @@ namespace Prunel
         private const double GazeDotDiameter = 50;
 
         // ── Colours.
-        private static readonly Brush White = Freeze(new SolidColorBrush(Color.FromRgb(0xEE, 0xF1, 0xF4)));
+        // Softer with [NightMode] (see Palette).
+        private static Brush White
+        {
+            get { return Palette.SettingsText; }
+        }
         private static readonly Brush Soft = Freeze(new SolidColorBrush(Color.FromRgb(0x9A, 0xA3, 0xAD)));
         private static readonly Brush Border = Freeze(new SolidColorBrush(Color.FromRgb(0x4A, 0x52, 0x5C)));
         private static readonly Brush ValueBackground = Freeze(new SolidColorBrush(Color.FromRgb(0x1A, 0x1D, 0x22)));

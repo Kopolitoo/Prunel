@@ -307,6 +307,7 @@ namespace Prunel
         {
             // Thicker with [HighContrast], to see the progress better.
             Ring.StrokeThickness = ScreenMetrics.Units(CircleStyle.RingThickness(AppSettings.Current));
+            Ring.Stroke = Palette.Green;   // softer with [NightMode]
             DrawArc(Ring, xPixels, yPixels, radiusPixels, progress);
         }
 
@@ -333,6 +334,11 @@ namespace Prunel
             Point center = PointFromScreen(new Point(xPixels, yPixels));
             double side = PixelsToWpf(sizePixels);
 
+            // Bright colours of the icon: softer with [NightMode] (see Palette).
+            OptionsIcon.BorderBrush = Palette.Text;
+            OptionsIconSymbol.Foreground = Palette.Text;
+            OptionsIconFlash.Background = Palette.Green;
+
             OptionsIcon.Width = side;
             OptionsIcon.Height = side;
             OptionsIcon.BorderThickness = new Thickness(ScreenMetrics.Units(2));
@@ -354,6 +360,7 @@ namespace Prunel
                 // The label follows the Windows text size (see ScreenMetrics.Font) and
                 // the interface language.
                 OptionsLabelText.Text = Texts.Get("overlay.options");
+                OptionsLabelText.Foreground = Palette.Text;
                 OptionsLabelText.FontSize = ScreenMetrics.Font(20);
                 OptionsLabel.CornerRadius = new CornerRadius(ScreenMetrics.Units(6));
                 OptionsLabel.Padding = new Thickness(ScreenMetrics.Units(8), ScreenMetrics.Units(2), ScreenMetrics.Units(8), ScreenMetrics.Units(2));

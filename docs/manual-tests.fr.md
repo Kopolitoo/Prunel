@@ -315,6 +315,22 @@ Uniquement au regard.
 6. « Défaut » : les trois lignes reviennent à Gris, 100 %, non. Redémarrer Prunel : les choix
    sont gardés. Un ancien fichier de réglages (version 18) s'ouvre avec le cercle habituel.
 
+## 25. Mode nuit (étape color-themes)
+
+1. Paramètres, onglet « Couleurs » : une quatrième ligne « Mode nuit » (non). Les quatre lignes
+   et l'aperçu tiennent sur la page sans se chevaucher.
+2. L'activer : tout de suite, les textes des paramètres passent en gris clair au lieu du blanc,
+   les interrupteurs en bleu plus sombre, les barres de progression en vert plus sombre. La
+   couleur du cercle ne change pas.
+3. Revenir au mode mouvement : l'icône d'options (regard fixe) est grise avec un flash vert plus
+   sombre ; l'anneau de progression du clic direct est vert plus sombre.
+4. Ouvrir la barre de menu, le choix d'action, la loupe, le clavier (avec la zone de saisie) et
+   la liste des claviers : symboles et textes en gris clair, flashs et anneaux en vert plus
+   sombre, le cercle du regard des modes plein écran en vert plus sombre, la case « + monmot » en
+   ambre plus sombre.
+5. Le désactiver : tout revient aux couleurs de jour (à la prochaine ouverture de chaque écran).
+   Redémarrer Prunel : le choix est gardé. « Défaut » de l'onglet le désactive.
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,

@@ -26,8 +26,9 @@ installateur remplace l'ancien GazeBar.
 
 Prunel est un projet jeune (version 0.x), utilisé tous les jours par son auteur. Chaque version
 est sur la page [Releases](https://github.com/Kopolitoo/Prunel/releases) sous forme
-d'installateur Windows (`Prunel-x.y.z-setup.exe`). Déjà là : retour sonore, pause automatique.
-Prévu ensuite : thèmes de couleur, assistant de premier lancement, synthèse vocale.
+d'installateur Windows (`Prunel-x.y.z-setup.exe`). Déjà là : retour sonore, pause automatique,
+thèmes de couleur (couleur du cercle, contraste renforcé, mode nuit). Prévu ensuite : assistant
+de premier lancement, synthèse vocale.
 
 ## Prérequis
 
