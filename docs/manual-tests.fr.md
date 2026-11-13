@@ -278,6 +278,20 @@ Uniquement au regard.
 5. « Configurer les icônes » (paramètres, onglet Icônes) et les listes du clavier : ils arrivent en fondu ;
    changer de page dans une liste ne refait pas de fondu.
 
+## 23. Onglet « À propos » (issue #92)
+
+1. Paramètres, catégorie « Système » : le dernier onglet est « À propos ». Il montre « Prunel »,
+   « Version 0.5.0 » (le numéro de la version installée, sans le « + » et les lettres qui
+   peuvent suivre), les deux boutons « Site web » et « Guide d'utilisation », et à droite
+   l'image de l'auteur avec « Créé par Kopolito » dessous. Il n'y a pas de bouton « Défaut ».
+   Regarder l'image ne fait rien.
+2. Regarder « Site web » : le navigateur par défaut ouvre le site de Prunel (la page en
+   français quand l'interface est en français, en anglais sinon) et Prunel revient au mode
+   mouvement.
+3. Rouvrir les paramètres, onglet « À propos », « Guide d'utilisation » : le navigateur ouvre
+   le guide d'utilisation sur GitHub, dans la langue de l'interface.
+4. Changer de langue (onglet Général) et revenir : les textes et les adresses suivent la langue.
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,

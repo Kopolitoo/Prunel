@@ -312,12 +312,15 @@ namespace Prunel
     /// icon configuration screen of the action choice (IconConfigMode). Its "Default" button
     /// restores the original icon layout.
     ///
-    /// The "Tools" tab (last) has no setting either: two big buttons, "Calibration" and
+    /// The "Tools" tab (before "About") has no setting either: two big buttons, "Calibration" and
     /// "Diagnostic". It has no "Default" button (there is
     /// nothing to restore).
     ///
     /// The "Profiles" tab (before "Tools") has no setting nor "Default": two big
     /// buttons to save the current settings and load a profile.
+    ///
+    /// The "About" tab (after "Tools", last) has no setting nor "Default": the version
+    /// number and two buttons that open the website and the user guide in the browser.
     /// </summary>
     internal static class SettingsCatalog
     {
@@ -349,6 +352,12 @@ namespace Prunel
         public const string ToolsTabName = "tab.tools";
 
         /// <summary>
+        /// The name of the "About" tab (version, website, user guide), recognized by
+        /// SettingsWindow (issue #92).
+        /// </summary>
+        public const string AboutTabName = "tab.about";
+
+        /// <summary>
         /// The name of the "Profiles" tab, recognized by SettingsWindow, which puts two
         /// big buttons there: "Save the current settings" and "Load a profile".
         /// </summary>
@@ -372,7 +381,7 @@ namespace Prunel
             new SettingsCategory("category.gaze", "\uE890", "tab.gaze", "tab.fixation", "tab.delays", "tab.pause"),
             new SettingsCategory("category.actions", "\uE7C9", "tab.magnifierDrag", "tab.scroll", IconsTabName),
             new SettingsCategory("category.display", "\uE7F4", "tab.display", "tab.keyboard", "tab.sound", "tab.game"),
-            new SettingsCategory("category.system", "\uE770", GeneralTabName, ProfilesTabName, ToolsTabName)
+            new SettingsCategory("category.system", "\uE770", GeneralTabName, ProfilesTabName, ToolsTabName, AboutTabName)
         };
 
         /// <summary>
@@ -541,7 +550,11 @@ namespace Prunel
 
             // E90F = wrench ("Tools"): no setting, two big buttons "Calibration" and
             // "Diagnostic" (see SettingsWindow.BuildToolsTab).
-            new SettingsTab(ToolsTabName, "\uE90F")
+            new SettingsTab(ToolsTabName, "\uE90F"),
+
+            // E946 = "i" in a circle ("About"): no setting, the version and two medium
+            // buttons "Website" and "User guide" (see SettingsWindow.BuildAboutTab).
+            new SettingsTab(AboutTabName, "\uE946")
         };
     }
 }

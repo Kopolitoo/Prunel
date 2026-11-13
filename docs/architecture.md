@@ -154,7 +154,10 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
 - `Modes/SettingsMode` and `SettingsWindow` (step 7): "Settings" button of the menu. A
   full-screen window, black background, with four collapsible categories on the left: Gaze
   (Gaze, Fixation, Delays), Actions (Magnifier, drag, Scroll, Icons), Display (Display,
-  Keyboard, Game) and System (General, Profiles, Tools). Only the open category shows its tabs,
+  Keyboard, Game) and System (General, Profiles, Tools, About). The "About" tab (issue #92) shows the version
+  (`App.Version`), the author's picture (`Resources/Author.jpg`, built into the exe) and two
+  buttons whose addresses come from the language file; `SettingsMode.OpenLink` opens them in
+  the default browser and goes back to movement mode. Only the open category shows its tabs,
   below it and indented; looking at another category opens it on its first tab (list in
   `SettingsCatalog`). Each setting: its name, an explanation, then "−", the value, "+" (or a
   rounded switch for a yes / no: looking at it toggles it). Keeping the gaze on "−" or "+"

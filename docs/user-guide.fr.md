@@ -152,6 +152,9 @@ sont enregistrés.
 - Onglet **Outils** : **Calibration** (lance la calibration de l'eyetracker) et **Diagnostic**
   (montre le regard et le curseur en direct, et la stabilité du regard en haut, au milieu et en
   bas de l'écran ; rien n'est enregistré).
+- Onglet **À propos** : la version installée, et deux boutons qui ouvrent le **site web** de
+  Prunel et ce **guide d'utilisation** dans le navigateur (Prunel revient alors au mode
+  mouvement).
 
 ## Pour l'aidant
 

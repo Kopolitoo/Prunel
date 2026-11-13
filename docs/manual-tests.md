@@ -259,6 +259,18 @@ Gaze only.
 5. "Configure the icons" (settings, Icons tab) and the keyboard lists: they fade in; changing page in a
    list does not fade again.
 
+## 23. "About" tab (issue #92)
+
+1. Settings, "System" category: the last tab is "About". It shows "Prunel", "Version 0.5.0"
+   (the number of the installed version, without "+" and letters after it), the two buttons
+   "Website" and "User guide", and on the right the author's picture with "Created by
+   Kopolito" below it. There is no "Default" button. Looking at the picture does nothing.
+2. Look at "Website": the default browser opens the Prunel site (the English page when the
+   interface is in English, the French page in French) and Prunel is back in movement mode.
+3. Open the settings again, "About" tab, "User guide": the browser opens the user guide on
+   GitHub, in the interface language.
+4. Switch the language (General tab) and come back: texts and addresses follow the language.
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,

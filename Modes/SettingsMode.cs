@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Windows;
 
 namespace Prunel
@@ -101,6 +102,7 @@ namespace Prunel
             window.IconConfigRequested += OpenIconConfig;
             window.CalibrationRequested += LaunchCalibration;
             window.DiagnosticRequested += OpenDiagnostic;
+            window.LinkRequested += OpenLink;
             window.MyWordsRequested += OpenMyWords;
             window.ProfileListRequested += OpenProfileList;
             window.ProfileLoadRequested += LoadProfile;
@@ -220,6 +222,7 @@ namespace Prunel
                 window.IconConfigRequested -= OpenIconConfig;
                 window.CalibrationRequested -= LaunchCalibration;
                 window.DiagnosticRequested -= OpenDiagnostic;
+                window.LinkRequested -= OpenLink;
                 window.MyWordsRequested -= OpenMyWords;
                 window.ProfileListRequested -= OpenProfileList;
                 window.ProfileLoadRequested -= LoadProfile;
@@ -396,6 +399,32 @@ namespace Prunel
             App.LogDetail("Settings: diagnostic");
             Manager.ChangeMode(new MovementMode());
             ((App)Application.Current).OpenDiagnostic();
+        }
+
+        /// <summary>
+        /// "Website" or "User guide" button of the "About" tab: opens the address in the default
+        /// browser, then goes back to movement mode (the settings window, always on top, would
+        /// hide the browser). If the browser cannot be opened, we stay here with a message.
+        /// </summary>
+        private void OpenLink(string url)
+        {
+            if (_window == null)
+            {
+                return;
+            }
+            App.LogDetail("Settings: open " + url);
+            try
+            {
+                // UseShellExecute: Windows opens the address with the default browser.
+                Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+            }
+            catch (Exception ex)
+            {
+                App.Log("Settings: cannot open " + url + ": " + ex.Message);
+                _window.ShowMessage(Texts.Get("settings.about.linkFailed"));
+                return;
+            }
+            Manager.ChangeMode(new MovementMode());
         }
 
         /// <summary>"Back" button: back to movement mode.</summary>

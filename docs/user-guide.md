@@ -142,6 +142,8 @@ repeat) or a yes / no switch. Changes apply at once and are saved.
 - **Tools** tab: **Calibration** (starts the eyetracker calibration) and **Diagnostic** (shows
   the gaze and the cursor live, and how steady the gaze is at the top, middle and bottom of the
   screen; nothing is saved).
+- **About** tab: the installed version, and two buttons that open the Prunel **website** and
+  this **user guide** in the browser (Prunel then goes back to movement mode).
 
 ## For the caregiver
 

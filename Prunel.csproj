@@ -79,6 +79,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- The author's picture of the "About" tab of the settings (issue #92), built INTO
+         Prunel.exe (a WPF "Resource"): nothing to copy next to it. -->
+    <None Remove="Resources\Author.jpg" />
+    <Resource Include="Resources\Author.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <!-- The gaze, through the eyetracker engine (same source as Mill Mouse).
          The eyetracker (Tobii) DLLs are proprietary code, we do NOT ship them with
          Prunel. The package is only used to COMPILE:
