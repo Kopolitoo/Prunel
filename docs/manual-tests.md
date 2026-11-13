@@ -271,6 +271,26 @@ Gaze only.
    GitHub, in the interface language.
 4. Switch the language (General tab) and come back: texts and addresses follow the language.
 
+## 24. Circle colours (step color-themes)
+
+1. Settings, "Interface" category: a "Colours" tab comes right after "Display", with three
+   rows: "Circle colour" (Grey), "Circle thickness" (100 %), "Reinforced contrast" (no). With
+   these values the circle looks exactly as before. Below them, a preview: a dark panel and a
+   light panel, each with a "Movement" circle and a "Fixed gaze" circle with a green ring two
+   thirds full. The preview has the real size of the circle and is not a gaze target.
+2. Look at "+" on "Circle colour": one look = one colour further (White, Yellow, Green, Light
+   blue, Dark blue, Purple, Pink, then Grey again); keeping the gaze on "+" does not run through the list. "−"
+   goes back. Clicking the value with the mouse does not open a text box. The preview changes
+   colour at once, and also follows thickness and contrast (steps 4 and 5).
+3. Choose Yellow, go back to movement mode: the circle is yellow; in fixed gaze it is yellow
+   too, more visible. In scroll mode it is yellow and paler.
+4. "Circle thickness" 200 %: the lines are twice as thick; 50 %: thinner. It stops at 50 and
+   400 %.
+5. "Reinforced contrast" yes: the circle is opaque with a black edge on both sides, on a white
+   page as on a dark one; the progress ring of a direct click is thicker.
+6. "Default": the three rows go back to Grey, 100 %, no. Restart Prunel: the choices are kept.
+   An older settings file (version 18) opens with the usual circle.
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,

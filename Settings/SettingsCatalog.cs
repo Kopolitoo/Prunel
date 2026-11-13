@@ -16,6 +16,9 @@ namespace Prunel
     ///     Variant: a choice between two words, for example "direct" or "relative"
     ///     for GameMouse. There, a switch would not say what each side means: the two
     ///     buttons are kept, one per word (see TwoChoices).
+    ///   - a CHOICE among a few words (CircleColor...): "−" button, word, "+" button. It is
+    ///     stored as a number (the word's place in the list) and "−" / "+" go round the list
+    ///     (see Choice).
     ///
     /// Read and Write are "functions stored in a variable" (delegates). For example
     ///     p => p.Smoothing                 reads the smoothing of an AppSettings object p;
@@ -75,6 +78,18 @@ namespace Prunel
         /// <summary>Number of digits after the point, deduced from the step (0.05 → 2 digits).</summary>
         public int Decimals { get; private set; }
 
+        /// <summary>
+        /// The language keys of the words of a choice (see Choice), in order; null for the
+        /// other settings.
+        /// </summary>
+        private string[] _choiceKeys;
+
+        /// <summary>True for a choice among a few words (created by Choice).</summary>
+        public bool IsChoice
+        {
+            get { return _choiceKeys != null; }
+        }
+
         /// <summary>True for a yes / no setting (or a choice between two words).</summary>
         public bool YesNo { get; private set; }
 
@@ -118,6 +133,19 @@ namespace Prunel
             r.Decimals = CountDecimals(step);
             r._readNumber = read;
             r._writeNumber = write;
+            return r;
+        }
+
+        /// <summary>
+        /// Creates a choice among a few words. The value is the place of the word in
+        /// choiceKeys (0 = the first); the words are keys of the language files. "−" and "+"
+        /// go round the list: after the last word comes the first again.
+        /// </summary>
+        public static Setting Choice(string key, string[] choiceKeys,
+                                     Func<AppSettings, int> read, Action<AppSettings, int> write)
+        {
+            Setting r = Number(key, "", 1, p => read(p), (p, v) => write(p, (int)v));
+            r._choiceKeys = choiceKeys;
             return r;
         }
 
@@ -182,6 +210,14 @@ namespace Prunel
         /// <summary>"−" (direction = -1) or "+" (direction = +1): one step more or less.</summary>
         public void Change(AppSettings p, int direction)
         {
+            if (IsChoice)
+            {
+                // Round the list: (last + 1) → first, (first − 1) → last.
+                int count = _choiceKeys.Length;
+                int index = (ChoiceIndex(p) + direction + count) % count;
+                WriteNumber(p, index);
+                return;
+            }
             WriteNumber(p, ReadNumber(p) + direction * Step);
         }
 
@@ -205,7 +241,18 @@ namespace Prunel
             {
                 return (ReadYesNo(p) ? RightWord : WrongWord).ToLowerInvariant();
             }
+            if (IsChoice)
+            {
+                return Texts.Get(_choiceKeys[ChoiceIndex(p)]);
+            }
             return NumberText(ReadNumber(p)) + Unit;
+        }
+
+        /// <summary>The place of the current word of a choice, always within the list.</summary>
+        private int ChoiceIndex(AppSettings p)
+        {
+            int index = (int)Math.Round(ReadNumber(p));
+            return Math.Max(0, Math.Min(_choiceKeys.Length - 1, index));
         }
 
         /// <summary>The number alone, with a point and the right number of decimals (for input).</summary>
@@ -357,6 +404,9 @@ namespace Prunel
         /// </summary>
         public const string AboutTabName = "tab.about";
 
+        /// <summary>Name of the "Couleurs" tab (step color-themes).</summary>
+        public const string ColorsTabName = "tab.colors";
+
         /// <summary>
         /// The name of the "Profiles" tab, recognized by SettingsWindow, which puts two
         /// big buttons there: "Save the current settings" and "Load a profile".
@@ -380,7 +430,7 @@ namespace Prunel
         {
             new SettingsCategory("category.gaze", "\uE890", "tab.gaze", "tab.fixation", "tab.delays", "tab.pause"),
             new SettingsCategory("category.actions", "\uE7C9", "tab.magnifierDrag", "tab.scroll", IconsTabName),
-            new SettingsCategory("category.display", "\uE7F4", "tab.display", "tab.keyboard", "tab.sound", "tab.game"),
+            new SettingsCategory("category.display", "\uE7F4", "tab.display", ColorsTabName, "tab.keyboard", "tab.sound", "tab.game"),
             new SettingsCategory("category.system", "\uE770", GeneralTabName, ProfilesTabName, ToolsTabName, AboutTabName)
         };
 
@@ -474,6 +524,15 @@ namespace Prunel
                                p => p.InterfaceSize, (p, v) => p.InterfaceSize = v),
                 Setting.YesOrNo("setting.showLabels",
                                  p => p.ShowLabels, (p, v) => p.ShowLabels = v)),
+
+            // E790 = colour palette ("Colours"): step color-themes, the look of the gaze circle.
+            new SettingsTab(ColorsTabName, "\uE790",
+                Setting.Choice("setting.circleColor", CircleColors.TextKeys,
+                               p => p.CircleColorIndex, (p, v) => p.CircleColorIndex = v),
+                Setting.Number("setting.circleThickness", " %", 25,
+                               p => p.CircleThickness, (p, v) => p.CircleThickness = v),
+                Setting.YesOrNo("setting.highContrast",
+                                 p => p.HighContrast, (p, v) => p.HighContrast = v)),
 
             // E71E = magnifier ("Magnifier, drag")
             new SettingsTab("tab.magnifierDrag", "",

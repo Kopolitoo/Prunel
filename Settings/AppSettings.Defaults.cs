@@ -47,6 +47,10 @@ namespace Prunel
             InterfaceSize = 100;
             ShowLabels = true;
 
+            CircleColor = CircleColors.DefaultName;
+            CircleThickness = 100;
+            HighContrast = false;
+
             ActivationDelay = 0.6;
             OptionsIconDelay = 0.3;
             MenuDelay = 0.5;
@@ -124,6 +128,9 @@ namespace Prunel
             CircleRadius = Clamp(CircleRadius, 1, 23);
             IconSize = Clamp(IconSize, 2, 19);
             InterfaceSize = Clamp(InterfaceSize, 75, 150);
+            // An unknown colour word (typo…) becomes the default colour again.
+            CircleColor = CircleColors.NameAt(CircleColors.IndexOf((CircleColor ?? "").Trim()));
+            CircleThickness = Clamp(CircleThickness, 50, 400);
 
             ActivationDelay = Clamp(ActivationDelay, 0.1, 10);
             OptionsIconDelay = Clamp(OptionsIconDelay, 0.1, 10);
@@ -309,7 +316,8 @@ namespace Prunel
 
             // Version 17 (AutoPause, AutoPauseDelay): nothing to fix, the settings keep their
             // default value (yes, 10 s). Version 18 (DoubleClickGap): nothing to fix either,
-            // it gets its default value (200 ms).
+            // it gets its default value (200 ms). Version 19 (CircleColor, CircleThickness,
+            // HighContrast): nothing to fix, the defaults draw the circle as before.
 
             FileVersion = CurrentVersion;
             return true;

@@ -47,7 +47,7 @@ The three biggest classes are "partial" classes: one class written in several fi
 | `Actions` | what the action choice offers: `ActionCatalog`, `ActionChoiceLayout`, `Modifiers`, `DragGesture` |
 | `Typing` | the gaze keyboard and word prediction: `GazeKeyboard`, `KeyboardKey`, `KeyboardLayout`, `WordPredictor` |
 | `Settings` | the settings file, profiles and settings window: `AppSettings`, `SettingsCatalog`, `SettingsProfiles`, `SettingsWindow`, `SettingTarget` |
-| `Ui` | windows and gaze buttons: `OverlayWindow`, `DiagnosticWindow`, `CursorSampler`, `GazeButton`, `ButtonAimer`, `IGazeTarget`, `Texts` |
+| `Ui` | windows and gaze buttons: `OverlayWindow`, `DiagnosticWindow`, `CursorSampler`, `GazeButton`, `ButtonAimer`, `IGazeTarget`, `Texts`, `CircleColors` |
 | `Platform` | calls to Windows: `NativeMethods`, `MouseInjector`, `KeyboardInjector`, `KeyboardHook`, `MouseClickHook`, `WheelScroller`, `CursorWaker`, `ScreenCapture`, `ScreenMetrics`, `WindowsStartup`, `UiAccess`, `SoundFeedback` |
 | `Languages`, `Keyboards`, `Dictionaries` | data files copied next to `Prunel.exe` (texts, keyboard layouts, prediction dictionaries) |
 | `Resources` | the program icon |
@@ -77,7 +77,8 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
 
 - `OverlayWindow`: the "overlay", a transparent window that covers the whole screen, always on
   top, that clicks go through and that never takes the focus. It draws the circle, the progress
-  ring and the options icon.
+  ring and the options icon. The circle's colour, thickness and reinforced contrast come from the
+  settings ("Colours" tab); `CircleColors` holds the list of colours and their brushes.
 - `Modes/ModeManager`: knows the current mode and switches from one mode to another; about 60
   times per second, it gives the gaze position (`GazeState`) to the current mode.
 - `Modes/Mode`: base shared by all modes (`Enter`, `Update`, `Quit`).
