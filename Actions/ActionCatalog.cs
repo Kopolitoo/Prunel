@@ -262,7 +262,8 @@ namespace Prunel
                 case ChoiceAction.Paste:
                     return new GazeButton("", null, Texts.Get("action.paste.label"));
                 case ChoiceAction.Keyboard:
-                    // Empty badge: the same button opens the keyboard, or closes it if it is open.
+                    // Empty badge: the button clicks on the aimed field, then opens the keyboard (or
+                    // keeps it open, issue #133).
                     return new GazeButton("\uE765", null, Texts.Get("action.keyboard.label"));
                 default:
                     return new GazeButton("", null, Texts.Get("action.back.label"));

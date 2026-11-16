@@ -260,8 +260,8 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   pas de Prunel (vrai clavier, Dragon : flèches, Suppr, texte dicté…), sauf les touches de
   modification seules (`OtherKeyPressed`).
 - Clavier au regard (étape 12, `GazeKeyboard`, `KeyboardKey`, `KeyboardLayout`) : bouton
-  « Clavier » du menu, ou action « Clavier » du choix d'action (ouvre / ferme le clavier ; avant de l'ouvrir, un clic
-  gauche sur P donne le focus au champ visé et y place le curseur de texte ; pas
+  « Clavier » du menu, ou action « Clavier » du choix d'action (un clic gauche sur P donne le focus au champ visé et y place
+  le curseur de texte, puis le clavier s'ouvre, ou reste ouvert s'il l'était déjà : issue #133 ; pas
   placée par défaut : on la met à la place d'une autre dans l'écran de configuration des icônes). Un clavier sur la moitié basse de l'écran (`KeyboardHeight`), par-dessus
   tout, sans réserver de place ni prendre le focus. Ses cinq pages (lettres AZERTY, accents,
   123.!, symboles et navigation, F1 à F12) viennent du fichier `Keyboards/fr-azerty.json`, relu à

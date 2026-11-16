@@ -105,7 +105,8 @@ page.
 
 You can also put "Keyboard" on the crown of the action choice (icon configuration). Fix your
 gaze on the field where you want to write, then choose "Keyboard": Prunel first clicks there,
-so the field gets the focus and the text cursor goes where you looked.
+so the field gets the focus and the text cursor goes where you looked. If the keyboard is
+already open, it stays open: this is how you move to another field.
 
 - **Word prediction**: the three boxes at the top suggest words. Look at one to write it with a
   space. An unknown word appears with an amber "+": look at it to add it to your personal

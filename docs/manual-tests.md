@@ -108,7 +108,9 @@ time), "Size" goes to 75 % then 50 %, "Pause" hides it until resuming. In the ic
 place "Keyboard" on the crown: in the action choice, this button opens the keyboard. In Notepad with several lines of text,
 fix your gaze in the middle of a line (Notepad not active, or another window in front), choose
 "Keyboard": the text cursor goes to that place and typed keys are written there. With the
-keyboard open, the same button closes it, without a click.
+keyboard open, fix your gaze on another place of the text and choose "Keyboard" again: the
+keyboard stays open, the text cursor goes to the new place and typed keys are written there
+(issue #133).
 
 ## 11. Word prediction
 

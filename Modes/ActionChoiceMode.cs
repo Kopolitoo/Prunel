@@ -263,16 +263,9 @@ namespace Prunel
                 return;
             }
 
-            if (action == ChoiceAction.Keyboard && Manager.Keyboard.IsOpen)
-            {
-                // The gaze keyboard is already open (hidden during this choice): it closes,
-                // without a click.
-                Manager.Keyboard.Close();
-                Manager.ChangeMode(new MovementMode());
-                return;
-            }
-            // A closed keyboard opens in the execution step, after a left click on P (see
-            // Execute).
+            // "Keyboard" always goes to the execution step: a left click on P, then the
+            // keyboard opens, or stays open if it already is (issue #133; see Execute). It is
+            // closed with its Close button, its menu bar or the menu.
 
             if (action == ChoiceAction.Magnifier)
             {
@@ -328,9 +321,15 @@ namespace Prunel
                     // insertion point goes there. Then the keyboard opens; it appears when
                     // back in movement mode (GazeKeyboard.OnModeChange). Layout file missing
                     // or incorrect: nothing opens, the error is written to the log.
+                    // Keyboard already open (issue #133): it stays open, on the same page;
+                    // the click alone is enough, and the keyboard forgets its current word
+                    // because of it (mouse click hook, issue #96).
                     MouseInjector.Click(MouseSide.Left);
-                    string message;
-                    Manager.Keyboard.Open(out message);
+                    if (!Manager.Keyboard.IsOpen)
+                    {
+                        string message;
+                        Manager.Keyboard.Open(out message);
+                    }
                     break;
             }
 
