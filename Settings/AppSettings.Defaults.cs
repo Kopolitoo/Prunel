@@ -87,6 +87,7 @@ namespace Prunel
             AutoCapitalize = true;
             KeyboardHeight = 50;
             KeyboardSize = 100;
+            KeyboardSizeChoice = CustomSizeText;
             KeyboardAtTop = false;
             KeyboardLayout = Prunel.KeyboardLayout.DefaultName;
             InputBox = false;
@@ -160,8 +161,12 @@ namespace Prunel
 
             KeyDelay = Clamp(KeyDelay, 0.1, 5);
             KeyboardHeight = Clamp(KeyboardHeight, 25, 75);
-            // Only 50, 75 or 100: another value goes to the nearest (60 → 50, 90 → 100).
-            KeyboardSize = Math.Round(Clamp(KeyboardSize, 50, 100) / 25) * 25;
+            // From 30 to 100 %, by 5 % steps: another value goes to the nearest (62 → 60).
+            KeyboardSize = Math.Round(Clamp(KeyboardSize, MinKeyboardSize, 100) / 5) * 5;
+            // An unknown word (typo, capitals…) becomes "custom" again.
+            string sizeChoice = (KeyboardSizeChoice ?? "").Trim().ToLowerInvariant();
+            KeyboardSizeChoice = sizeChoice == SmallSizeText || sizeChoice == LargeSizeText
+                ? sizeChoice : CustomSizeText;
             // Only 0, 25, 50 or 75: another value goes to the nearest (40 → 50, 90 → 75).
             KeyboardTransparency = Math.Round(Clamp(KeyboardTransparency, 0, 75) / 25) * 25;
             LengthPenalty = Clamp(LengthPenalty, 1, 2);
@@ -324,6 +329,8 @@ namespace Prunel
             // (NightMode): nothing to fix, it keeps its default value (no). Version 21
             // (LengthPenalty): nothing to fix, it gets its default value (1.3, softer than the
             // old fixed 1.6, issue #122).
+            // Version 22 (KeyboardSizeChoice): nothing to fix, it keeps its default value
+            // ("custom"), and the old KeyboardSize (50, 75 or 100 %) is still a valid custom size.
 
             FileVersion = CurrentVersion;
             return true;

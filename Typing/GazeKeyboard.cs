@@ -26,8 +26,8 @@ namespace Prunel
     /// It is drawn on the overlay (KeyboardSurface), at the bottom of the screen, full
     /// width, above everything and WITHOUT reserving room: other windows keep their size.
     /// The keyboard menu bar also offers: moving it to the
-    /// top of the screen (position remembered, [KeyboardAtTop]), and shrinking it to 75 % or
-    /// 50 % ([KeyboardSize], centred), and making its backgrounds see-through
+    /// top of the screen (position remembered, [KeyboardAtTop]), and choosing its size
+    /// (Custom, Small or Large: [EffectiveKeyboardSize], centred), and making its backgrounds see-through
     /// ([KeyboardTransparency]: 0, 25, 50 or 75 %, labels stay opaque). When this bar is open, the keyboard moves up above it
     /// (SetBottomReserve). The overlay never takes focus: the application being typed in
     /// keeps its text cursor, and the simulated keys do reach it.
@@ -420,15 +420,27 @@ namespace Prunel
         }
 
         /// <summary>
-        /// "Taille" button of the keyboard bar: 100 % → 75 % → 50 % → 100 %… (the same
-        /// setting as "Taille du clavier" in the Clavier settings tab). Saved.
+        /// "Taille" button of the keyboard bar (issue #107): Custom → Small → Large → Custom…
+        /// Custom is "Taille du clavier" of the Clavier settings tab; Small and Large are fixed
+        /// sizes (see AppSettings.SmallKeyboardSize). The choice is saved.
         /// </summary>
         public void ChangeSize()
         {
             AppSettings p = AppSettings.Current;
-            p.KeyboardSize = p.KeyboardSize > 75 ? 75 : p.KeyboardSize > 50 ? 50 : 100;
+            if (p.KeyboardSizeChoice == AppSettings.CustomSizeText)
+            {
+                p.KeyboardSizeChoice = AppSettings.SmallSizeText;
+            }
+            else if (p.KeyboardSizeChoice == AppSettings.SmallSizeText)
+            {
+                p.KeyboardSizeChoice = AppSettings.LargeSizeText;
+            }
+            else
+            {
+                p.KeyboardSizeChoice = AppSettings.CustomSizeText;
+            }
             p.Save();
-            App.LogDetail("Keyboard: size " + p.KeyboardSize + " %");
+            App.LogDetail("Keyboard: size " + p.KeyboardSizeChoice + " (" + p.EffectiveKeyboardSize + " %)");
             if (_visible)
             {
                 Build();

@@ -586,9 +586,14 @@ namespace Prunel
                                  p => p.AutoCapitalize, (p, v) => p.AutoCapitalize = v),
                 Setting.Number("setting.keyboardHeight", " %", 5,
                                p => p.KeyboardHeight, (p, v) => p.KeyboardHeight = v),
-                // 50, 75 or 100 % (Fix rounds to the quarter); also in the keyboard bar.
-                Setting.Number("setting.keyboardSize", " %", 25,
-                               p => p.KeyboardSize, (p, v) => p.KeyboardSize = v)),
+                // Custom size, 30 to 100 % by 5 % steps (issue #107). Changing it brings the
+                // "Taille" button of the keyboard bar back to "custom", so it is seen at once.
+                Setting.Number("setting.keyboardSize", " %", 5,
+                               p => p.KeyboardSize, (p, v) =>
+                               {
+                                   p.KeyboardSize = v;
+                                   p.KeyboardSizeChoice = AppSettings.CustomSizeText;
+                               })),
 
             // E82F = light bulb ("Prediction"): the word prediction of the gaze keyboard
             // (see WordPredictor). A tab of its own: "Keyboard" already has 5 rows, the maximum.

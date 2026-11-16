@@ -39,9 +39,9 @@ namespace Prunel
             double width = ScreenMetrics.WidthPixels;
             double height = ScreenMetrics.HeightPixels;
 
-            // Size: at 75 % or 50 %, width AND height shrink together, so keys
+            // Size: below 100 %, width AND height shrink together, so keys
             // keep their shape; the keyboard is centred horizontally.
-            double sizePercent = p.KeyboardSize / 100.0;
+            double sizePercent = p.EffectiveKeyboardSize / 100.0;
             double keyboardWidth = width * sizePercent;
             double keysHeight = height * p.KeyboardHeight / 100.0 * sizePercent;
 
@@ -75,9 +75,10 @@ namespace Prunel
             Canvas surface = _layer.KeyboardSurface;
 
             // ── The background: an almost black rectangle, as on the user's screenshots,
-            //    more or less see-through ([KeyboardTransparency]).
+            //    more or less see-through ([KeyboardTransparency]). The colour itself is fully
+            //    opaque, so at 0 % nothing behind the keyboard shows through.
             Border background = new Border();
-            SolidColorBrush backgroundBrush = new SolidColorBrush(Color.FromArgb(0xF5, 0x12, 0x12, 0x12));
+            SolidColorBrush backgroundBrush = new SolidColorBrush(Color.FromArgb(0xFF, 0x12, 0x12, 0x12));
             backgroundBrush.Opacity = backgroundOpacity;
             background.Background = backgroundBrush;
             background.Width = _layer.LengthToWpf(keyboardWidth);

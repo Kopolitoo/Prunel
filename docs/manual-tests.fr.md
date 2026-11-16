@@ -114,7 +114,9 @@ la page « À,È,Ê »). On regarde au-dessus du clavier : le cercle revient et 
 On tape un moment sur les touches en haut à droite : le bouton Fermer, bien séparé du clavier,
 ne se déclenche jamais par erreur (de même sous le clavier quand il est en haut).
 On regarde sous l'écran : la barre du clavier s'ouvre et le clavier remonte au-dessus d'elle ;
-« Haut / bas » le met en haut (il s'y rouvre la fois suivante), « Taille » passe à 75 % puis 50 %,
+« Haut / bas » le met en haut (il s'y rouvre la fois suivante), « Taille » affiche « Perso », puis « Petit » (60 %), « Grand » (100 %) et à nouveau « Perso » (retenu
+à la réouverture) ; dans les Paramètres, « Taille du clavier » avance de 5 % (30 à 100 %) : on règle
+80 %, la barre du clavier affiche « Perso » et le clavier s'ouvre à 80 %,
 « Pause » le cache jusqu'à la reprise. Dans la configuration des icônes, on place « Clavier » sur la couronne : dans le choix
 d'action, ce bouton ouvre le clavier. Dans le Bloc-notes avec plusieurs lignes de texte, on fixe
 le milieu d'une ligne (Bloc-notes pas actif, ou une autre fenêtre devant), on choisit « Clavier » :

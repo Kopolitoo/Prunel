@@ -118,7 +118,8 @@ clavier est déjà ouvert, il reste ouvert : c'est ainsi que l'on passe à un au
   comme « mp3 », peut l'être). Les mots courts passent devant, sauf si un mot plus long est beaucoup
   plus courant ou souvent utilisé (à quel point : réglage « Mots courts d'abord », voir plus bas). Prunel apprend aussi quel mot suit souvent un autre.
 - **Barre du clavier** (regarder sous l'écran quand le clavier est ouvert) : monter ou descendre
-  le clavier, changer sa taille, rendre son fond transparent (« Transparence » : 0, 25, 50 ou
+  le clavier, changer sa taille (« Perso », « Petit », « Grand » ; la taille Perso se règle dans
+  les Paramètres, onglet « Clavier », par pas de 5 %), rendre son fond transparent (« Transparence » : 0, 25, 50 ou
   75 %, les lettres restent nettes), le mettre en pause, afficher la « Zone de saisie » (un aperçu de
   ce qui est écrit), choisir la « Disposition du clavier » (AZERTY, QWERTY…).
 - **Mes mots** (Paramètres, onglet « Général ») : les mots ajoutés ; en regarder un le retire.
