@@ -91,6 +91,7 @@ namespace Prunel
             KeyboardLayout = Prunel.KeyboardLayout.DefaultName;
             InputBox = false;
             KeyboardTransparency = 0;
+            LengthPenalty = 1.3;
             Language = Texts.FallbackLanguage;
 
             DefaultIcons();
@@ -163,6 +164,7 @@ namespace Prunel
             KeyboardSize = Math.Round(Clamp(KeyboardSize, 50, 100) / 25) * 25;
             // Only 0, 25, 50 or 75: another value goes to the nearest (40 → 50, 90 → 75).
             KeyboardTransparency = Math.Round(Clamp(KeyboardTransparency, 0, 75) / 25) * 25;
+            LengthPenalty = Clamp(LengthPenalty, 1, 2);
             // An empty file name or one containing a path ("..\", "C:\"…) becomes the default
             // layout again: only files of the Keyboards folder are read.
             if (string.IsNullOrWhiteSpace(KeyboardLayout) ||
@@ -319,7 +321,9 @@ namespace Prunel
             // default value (yes, 10 s). Version 18 (DoubleClickGap): nothing to fix either,
             // it gets its default value (200 ms). Version 19 (CircleColor, CircleThickness,
             // HighContrast): nothing to fix, the defaults draw the circle as before. Version 20
-            // (NightMode): nothing to fix, it keeps its default value (no).
+            // (NightMode): nothing to fix, it keeps its default value (no). Version 21
+            // (LengthPenalty): nothing to fix, it gets its default value (1.3, softer than the
+            // old fixed 1.6, issue #122).
 
             FileVersion = CurrentVersion;
             return true;

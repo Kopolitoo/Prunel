@@ -430,7 +430,7 @@ namespace Prunel
         {
             new SettingsCategory("category.gaze", "\uE890", "tab.gaze", "tab.fixation", "tab.delays", "tab.pause"),
             new SettingsCategory("category.actions", "\uE7C9", "tab.magnifierDrag", "tab.scroll", IconsTabName),
-            new SettingsCategory("category.display", "\uE7F4", "tab.display", ColorsTabName, "tab.keyboard", "tab.sound", "tab.game"),
+            new SettingsCategory("category.display", "\uE7F4", "tab.display", ColorsTabName, "tab.keyboard", "tab.prediction", "tab.sound", "tab.game"),
             new SettingsCategory("category.system", "\uE770", GeneralTabName, ProfilesTabName, ToolsTabName, AboutTabName)
         };
 
@@ -589,6 +589,13 @@ namespace Prunel
                 // 50, 75 or 100 % (Fix rounds to the quarter); also in the keyboard bar.
                 Setting.Number("setting.keyboardSize", " %", 25,
                                p => p.KeyboardSize, (p, v) => p.KeyboardSize = v)),
+
+            // E82F = light bulb ("Prediction"): the word prediction of the gaze keyboard
+            // (see WordPredictor). A tab of its own: "Keyboard" already has 5 rows, the maximum.
+            new SettingsTab("tab.prediction", "\uE82F",
+                // Issue #122: short words first, 1.0 (no preference) to 2.0.
+                Setting.Number("setting.lengthPenalty", "", 0.1,
+                               p => p.LengthPenalty, (p, v) => p.LengthPenalty = v)),
 
             // E767 = speaker ("Sound"): the optional sound feedback (see SoundFeedback).
             new SettingsTab("tab.sound", "\uE767",
