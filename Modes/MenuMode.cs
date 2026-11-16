@@ -471,8 +471,11 @@ namespace Prunel
                 {
                     Add(buttons, actions, new GazeButton("\uE70E", null, Texts.Get("menu.keyboardTop")), MenuAction.KeyboardPosition);
                 }
+                // Size (issue #107): the button shows the choice (Custom, Small, Large), its
+                // label the size in %.
                 Add(buttons, actions,
-                        GazeButton.Text(p.KeyboardSize.ToString("F0") + " %", Texts.Get("menu.keyboardSize")),
+                        GazeButton.Text(Texts.Get("menu.keyboardSize." + p.KeyboardSizeChoice),
+                                        Texts.Format("menu.keyboardSize", p.EffectiveKeyboardSize.ToString("F0"))),
                         MenuAction.KeyboardSize);
                 Add(buttons, actions,
                         GazeButton.Text(p.KeyboardTransparency.ToString("F0") + " %", Texts.Get("menu.keyboardTransparency")),

@@ -111,7 +111,8 @@ so the field gets the focus and the text cursor goes where you looked.
   space. An unknown word appears with an amber "+": look at it to add it to your personal
   dictionary. Numbers are never added (a word with letters and digits, such as "mp3", can be). Short words come first, unless a longer word is much more common or used often. Prunel also learns which word usually comes next.
 - **Keyboard bar** (look below the screen while the keyboard is open): move the keyboard up or
-  down, change its size, make its background see-through ("Transparency": 0, 25, 50 or 75 %, the
+  down, change its size ("Custom", "Small", "Large"; the Custom size is set in Settings,
+  "Keyboard" tab, by 5 % steps), make its background see-through ("Transparency": 0, 25, 50 or 75 %, the
   letters stay clear), pause it, show the "Input box" (a preview of what you typed), choose
   the "Keyboard layout" (QWERTY, AZERTY…).
 - **My words** (Settings, "General" tab): the words you added; look at one to remove it.

@@ -90,8 +90,11 @@ namespace Prunel
         ///      default value, which is the circle as it was.
         ///  20: step color-themes, part 2 — NightMode (no). Nothing to fix: missing from an
         ///      older file, it keeps its default value.
+        ///  21: issue #107 — KeyboardSizeChoice ("custom"), and KeyboardSize moves by 5 %
+        ///      steps (30 to 100 %). Nothing to fix: missing from an older file, the choice is
+        ///      "custom", and the old 50, 75 or 100 % stays a valid custom size.
         /// </summary>
-        public const int CurrentVersion = 20;
+        public const int CurrentVersion = 21;
 
         /// <summary>Format number of the file, so it can evolve one day without breaking everything.</summary>
         [DataMember(Order = 0)]
@@ -467,13 +470,58 @@ namespace Prunel
         public double KeyboardHeight { get; set; }
 
         /// <summary>
-        /// Size of the gaze keyboard, in %: 100, 75 or 50. Width
+        /// CUSTOM size of the gaze keyboard, in %: 30 to 100, by 5 % steps (issue #107). Width
         /// AND height shrink together: at 50 %, the keyboard is half the screen width and half
         /// of [KeyboardHeight], centred.
-        /// Also set with the "Taille" button of the keyboard menu bar.
+        /// Used when [KeyboardSizeChoice] is "custom" (the default). In code, use
+        /// [EffectiveKeyboardSize], which takes the choice of the keyboard bar into account.
         /// </summary>
         [DataMember(Order = 114)]
         public double KeyboardSize { get; set; }
+
+        /// <summary>Smallest custom keyboard size, in %.</summary>
+        public const double MinKeyboardSize = 30;
+
+        /// <summary>Keyboard size of the "Small" choice of the keyboard bar, in %.</summary>
+        public const double SmallKeyboardSize = 50;
+
+        /// <summary>Keyboard size of the "Large" choice of the keyboard bar, in %.</summary>
+        public const double LargeKeyboardSize = 100;
+
+        /// <summary>Words of [KeyboardSizeChoice] (as stored in the file).</summary>
+        public const string CustomSizeText = "custom";
+        public const string SmallSizeText = "small";
+        public const string LargeSizeText = "large";
+
+        /// <summary>
+        /// Size chosen with the "Taille" button of the keyboard menu bar (issue #107):
+        /// "custom" ([KeyboardSize], the value of the settings; the default), "small"
+        /// ([SmallKeyboardSize]) or "large" ([LargeKeyboardSize]). Remembered: the keyboard
+        /// reopens at this size. Changing "Taille du clavier" in the settings goes back to
+        /// "custom", so the new value is seen at once.
+        /// </summary>
+        [DataMember(Order = 119)]
+        public string KeyboardSizeChoice { get; set; }
+
+        /// <summary>
+        /// Size of the keyboard actually drawn, in %: [SmallKeyboardSize], [LargeKeyboardSize]
+        /// or [KeyboardSize], depending on [KeyboardSizeChoice]. Not saved.
+        /// </summary>
+        public double EffectiveKeyboardSize
+        {
+            get
+            {
+                if (KeyboardSizeChoice == SmallSizeText)
+                {
+                    return SmallKeyboardSize;
+                }
+                if (KeyboardSizeChoice == LargeSizeText)
+                {
+                    return LargeKeyboardSize;
+                }
+                return KeyboardSize;
+            }
+        }
 
         /// <summary>
         /// True: the keyboard is at the top of the screen; false: at the bottom. Changed by

@@ -104,7 +104,9 @@ keyboard: the circle comes back and fixed gaze works. Type for a while on the to
 right keys: the Close button, clearly apart from the keyboard, is never triggered by mistake
 (same below the keyboard when it is at the top). Look below the screen: the keyboard bar
 opens and the keyboard slides up above it; "Up / down" puts it at the top (it reopens there next
-time), "Size" goes to 75 % then 50 %, "Pause" hides it until resuming. In the icon configuration,
+time), "Size" shows "Custom", then "Small" (50 %), "Large" (100 %) and "Custom" again (remembered when
+the keyboard reopens); in Settings, "Keyboard size" moves by 5 % (30 to 100 %): set 80 %, the
+keyboard bar shows "Custom" and the keyboard opens at 80 %, "Pause" hides it until resuming. In the icon configuration,
 place "Keyboard" on the crown: in the action choice, this button opens the keyboard. In Notepad with several lines of text,
 fix your gaze in the middle of a line (Notepad not active, or another window in front), choose
 "Keyboard": the text cursor goes to that place and typed keys are written there. With the

@@ -39,9 +39,9 @@ namespace Prunel
             double width = ScreenMetrics.WidthPixels;
             double height = ScreenMetrics.HeightPixels;
 
-            // Size: at 75 % or 50 %, width AND height shrink together, so keys
+            // Size: below 100 %, width AND height shrink together, so keys
             // keep their shape; the keyboard is centred horizontally.
-            double sizePercent = p.KeyboardSize / 100.0;
+            double sizePercent = p.EffectiveKeyboardSize / 100.0;
             double keyboardWidth = width * sizePercent;
             double keysHeight = height * p.KeyboardHeight / 100.0 * sizePercent;
 
