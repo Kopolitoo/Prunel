@@ -92,6 +92,7 @@ namespace Prunel
             KeyboardLayout = Prunel.KeyboardLayout.DefaultName;
             InputBox = false;
             KeyboardTransparency = 0;
+            LengthPenalty = 1.3;
             Language = Texts.FallbackLanguage;
 
             DefaultIcons();
@@ -168,6 +169,7 @@ namespace Prunel
                 ? sizeChoice : CustomSizeText;
             // Only 0, 25, 50 or 75: another value goes to the nearest (40 → 50, 90 → 75).
             KeyboardTransparency = Math.Round(Clamp(KeyboardTransparency, 0, 75) / 25) * 25;
+            LengthPenalty = Clamp(LengthPenalty, 1, 2);
             // An empty file name or one containing a path ("..\", "C:\"…) becomes the default
             // layout again: only files of the Keyboards folder are read.
             if (string.IsNullOrWhiteSpace(KeyboardLayout) ||
@@ -325,8 +327,10 @@ namespace Prunel
             // it gets its default value (200 ms). Version 19 (CircleColor, CircleThickness,
             // HighContrast): nothing to fix, the defaults draw the circle as before. Version 20
             // (NightMode): nothing to fix, it keeps its default value (no). Version 21
-            // (KeyboardSizeChoice): nothing to fix, it keeps its default value ("custom"), and
-            // the old KeyboardSize (50, 75 or 100 %) is still a valid custom size.
+            // (LengthPenalty): nothing to fix, it gets its default value (1.3, softer than the
+            // old fixed 1.6, issue #122).
+            // Version 22 (KeyboardSizeChoice): nothing to fix, it keeps its default value
+            // ("custom"), and the old KeyboardSize (50, 75 or 100 %) is still a valid custom size.
 
             FileVersion = CurrentVersion;
             return true;

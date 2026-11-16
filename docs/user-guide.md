@@ -109,7 +109,8 @@ so the field gets the focus and the text cursor goes where you looked.
 
 - **Word prediction**: the three boxes at the top suggest words. Look at one to write it with a
   space. An unknown word appears with an amber "+": look at it to add it to your personal
-  dictionary. Numbers are never added (a word with letters and digits, such as "mp3", can be). Short words come first, unless a longer word is much more common or used often. Prunel also learns which word usually comes next.
+  dictionary. Numbers are never added (a word with letters and digits, such as "mp3", can be). Short words come first, unless a longer word is much more common or used often (how much:
+  setting "Short words first", see below). Prunel also learns which word usually comes next.
 - **Keyboard bar** (look below the screen while the keyboard is open): move the keyboard up or
   down, change its size ("Custom", "Small", "Large"; the Custom size is set in Settings,
   "Keyboard" tab, by 5 % steps), make its background see-through ("Transparency": 0, 25, 50 or 75 %, the
@@ -148,6 +149,10 @@ repeat) or a yes / no switch. Changes apply at once and are saved.
   magnifier, settings, options icon): light grey instead of white, darker greens and blues, so
   they dazzle less in the evening. The settings page changes at once; the other screens at their
   next opening. The colour of the gaze circle stays the one you chose.
+- **Prediction** tab: **Short words first** (1.3 at first, from 1.0 to 2.0). The larger the
+  number, the more short words come before long ones in the three boxes of the gaze keyboard;
+  1.0 = no preference, only how common the word is and how often you use it count. If useful
+  long words come too late, lower it; if long rare words get in the way, raise it.
 - **Sound** tab: two yes / no options, both off at first. **Key sound**: a short "tick" for each
   key of the gaze keyboard. **Button sound**: a short sound for every other button (menu, action
   choice, options icon, settings). The sound plays at the Windows volume.

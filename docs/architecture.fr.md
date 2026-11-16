@@ -280,7 +280,7 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   Taille (alterne Perso → Petit 50 % → Grand 100 %, retenu dans `KeyboardSizeChoice` ;
   Perso est `KeyboardSize`, réglé dans les paramètres de 30 à 100 % par pas de 5 % ; largeur et
   hauteur ensemble, clavier centré ; `EffectiveKeyboardSize` donne la taille dessinée ;
-  `settings.json` version 21, issue #107), Transparence (0, 25, 50 ou 75 % des fonds : clavier, touches et zone de
+  `settings.json` version 22, issue #107), Transparence (0, 25, 50 ou 75 % des fonds : clavier, touches et zone de
   saisie ; les lettres, le survol et l'éclair vert restent opaques : `KeyboardTransparency`,
   `settings.json` version 15, issue #55), Pause (le bouton Fermer de cette barre a été retiré à l'étape 14 : il
   doublait celui au-dessus du clavier). Quand elle s'ouvre, le clavier en bas remonte au-dessus
@@ -295,8 +295,9 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   ni des majuscules (« ete » propose « été »). Si ce qui est tapé est déjà un mot connu, il est
   en 1re case : le regarder écrit juste l'espace après lui. En regarder une écrit le mot entier suivi d'une
   espace (pas d'espace après « l' », « qu' »…) ; le mot garde la majuscule de départ. Classement :
-  fréquence dans Lexique + 20 par utilisation, divisé par 1,6 pour chaque lettre qui reste à taper
-  (les mots courts d'abord, issue #71). Un mot inconnu de 2 caractères ou plus s'affiche dans
+  fréquence dans Lexique + 20 par utilisation, divisé par `LengthPenalty` pour chaque lettre qui
+  reste à taper (les mots courts d'abord, issue #71 ; réglage « Mots courts d'abord », onglet
+  « Prédiction », 1,3 par défaut, de 1,0 à 2,0, `settings.json` version 21, issue #122). Un mot inconnu de 2 caractères ou plus s'affiche dans
   la 1re case avec un « + » (en ambre) : la regarder l'ajoute au dictionnaire personnel. Un nombre
   (seulement des chiffres et des tirets, comme « 2026 ») n'a jamais de « + » ; un mot mêlant
   lettres et chiffres (« mp3 ») en a un (issue #61). Fichiers :

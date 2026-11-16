@@ -267,7 +267,7 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   position remembered: `KeyboardAtTop`), Size (cycles Custom → Small 50 % → Large 100 %, remembered in
   `KeyboardSizeChoice`; Custom is `KeyboardSize`, set in the settings from 30 to 100 % by 5 %
   steps; width and height together, keyboard centred; `EffectiveKeyboardSize` gives the size
-  drawn; `settings.json` version 21, issue #107), Transparency (0, 25, 50 or 75 % of
+  drawn; `settings.json` version 22, issue #107), Transparency (0, 25, 50 or 75 % of
   the backgrounds: keyboard, keys and input box; labels, hover and green flash stay opaque:
   `KeyboardTransparency`, `settings.json` version 15, issue #55), Pause. When it opens, the keyboard at
   the bottom slides up above it (and back down). Closing: button on the right above the keyboard
@@ -281,8 +281,9 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   what is typed is already a known word, it is in the 1st box: looking at it just writes the
   space after it. Looking at a box writes the whole word followed by a space (no space after the
   French elided forms "l'", "qu'"…); the word keeps the starting capital. Ranking: frequency in
-  the dictionary + 20 per use, divided by 1.6 for each letter still to type (short words first,
-  issue #71). An unknown word of 2 characters or more shows in the 1st box with a
+  the dictionary + 20 per use, divided by `LengthPenalty` for each letter still to type (short
+  words first, issue #71; setting "Short words first", "Prediction" tab, 1.3 by default, 1.0 to
+  2.0, `settings.json` version 21, issue #122). An unknown word of 2 characters or more shows in the 1st box with a
   "+" (amber): looking at it adds it to the personal dictionary. A number (digits and hyphens
   only, such as "2026") never gets a "+"; a word mixing letters and digits ("mp3") does (issue #61). Files: `Dictionaries/<language>.txt`
   (copied next to Prunel.exe, read in the background at startup) and

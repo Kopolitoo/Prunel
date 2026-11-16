@@ -90,11 +90,13 @@ namespace Prunel
         ///      default value, which is the circle as it was.
         ///  20: step color-themes, part 2 — NightMode (no). Nothing to fix: missing from an
         ///      older file, it keeps its default value.
-        ///  21: issue #107 — KeyboardSizeChoice ("custom"), and KeyboardSize moves by 5 %
+        ///  21: issue #122 — LengthPenalty (1.3). Nothing to fix: missing from an older file,
+        ///      it gets its default value (the old fixed value 1.6 was found too strong).
+        ///  22: issue #107 — KeyboardSizeChoice ("custom"), and KeyboardSize moves by 5 %
         ///      steps (30 to 100 %). Nothing to fix: missing from an older file, the choice is
         ///      "custom", and the old 50, 75 or 100 % stays a valid custom size.
         /// </summary>
-        public const int CurrentVersion = 21;
+        public const int CurrentVersion = 22;
 
         /// <summary>Format number of the file, so it can evolve one day without breaking everything.</summary>
         [DataMember(Order = 0)]
@@ -500,7 +502,7 @@ namespace Prunel
         /// reopens at this size. Changing "Taille du clavier" in the settings goes back to
         /// "custom", so the new value is seen at once.
         /// </summary>
-        [DataMember(Order = 119)]
+        [DataMember(Order = 120)]
         public string KeyboardSizeChoice { get; set; }
 
         /// <summary>
@@ -557,6 +559,16 @@ namespace Prunel
         /// </summary>
         [DataMember(Order = 118)]
         public double KeyboardTransparency { get; set; }
+
+        /// <summary>
+        /// Word prediction, short words first (issue #71, setting since issue #122): a word's
+        /// score is divided by this number for each letter still to type. 1 = no preference
+        /// for short words; the larger, the more short words pass before long ones. With 1.3,
+        /// a word 3 letters longer needs about 2.2 times the score of the shorter one to come
+        /// before it (about 4 times with 1.6, the old fixed value). "Prediction" settings tab.
+        /// </summary>
+        [DataMember(Order = 119)]
+        public double LengthPenalty { get; set; }
 
         // ───────────────────────── Language ─────────────────────────
 

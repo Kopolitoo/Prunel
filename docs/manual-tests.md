@@ -122,6 +122,11 @@ appears; type "mp3x": "+ mp3x" appears. Write "je suis" twice (typing
 "suis" in full then a space): after "je" and a space, the 1st box suggests "suis". After closing
 Prunel, `%APPDATA%\Prunel\personal-dictionary.json` contains the word.
 
+Short words first (issue #122): in the settings, "Interface" category, "Prediction" tab, "Short
+words first" shows 1.3 (also after updating from an older version). Set it to 2.0, type "pr":
+only short words; set it to 1.0, type "pr": the most common words, long ones included
+("prendre"…). "−" stops at 1.0, "+" at 2.0. "Default" brings back 1.3.
+
 ## 12. Keyboard options
 
 Keyboard open, look below the screen: the keyboard bar also shows "Input box" and

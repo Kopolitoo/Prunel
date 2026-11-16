@@ -115,7 +115,7 @@ endroit, le champ prend le focus et le curseur de texte se place là où l'on re
   avec une espace. Un mot inconnu apparaît avec un « + » orangé : le regarder l'ajoute au
   dictionnaire personnel. Les nombres ne sont jamais ajoutés (un mot mêlant lettres et chiffres,
   comme « mp3 », peut l'être). Les mots courts passent devant, sauf si un mot plus long est beaucoup
-  plus courant ou souvent utilisé. Prunel apprend aussi quel mot suit souvent un autre.
+  plus courant ou souvent utilisé (à quel point : réglage « Mots courts d'abord », voir plus bas). Prunel apprend aussi quel mot suit souvent un autre.
 - **Barre du clavier** (regarder sous l'écran quand le clavier est ouvert) : monter ou descendre
   le clavier, changer sa taille (« Perso », « Petit », « Grand » ; la taille Perso se règle dans
   les Paramètres, onglet « Clavier », par pas de 5 %), rendre son fond transparent (« Transparence » : 0, 25, 50 ou
@@ -159,6 +159,10 @@ sont enregistrés.
   gris clair au lieu du blanc, verts et bleus plus sombres, pour moins éblouir le soir. La page
   des paramètres change tout de suite ; les autres écrans à leur prochaine ouverture. La couleur
   du cercle reste celle que vous avez choisie.
+- Onglet **Prédiction** : **Mots courts d'abord** (1,3 au départ, de 1,0 à 2,0). Plus le nombre
+  est grand, plus les mots courts passent devant les longs dans les trois cases du clavier du
+  regard ; 1,0 = aucune préférence, seuls comptent la fréquence du mot et votre usage. Si des mots
+  longs utiles arrivent trop tard, baissez-le ; si des mots longs rares gênent, montez-le.
 - Onglet **Sons** : deux options oui / non, toutes deux désactivées au départ. **Son des
   touches** : un petit « tic » à chaque touche du clavier du regard. **Son des boutons** : un petit
   son pour tous les autres boutons (menu, choix d'action, icône d'options, paramètres). Le son
