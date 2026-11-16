@@ -264,7 +264,7 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   Ctrl, Alt, Win (for the next key); automatic capital after ".", "?", "!" (`AutoCapitalize`).
   "⌫ ABC" deletes the current word (or Ctrl + Backspace). Keyboard menu bar (gaze below the
   screen, which then replaces the usual bar): Up / down (keyboard at the top of the screen,
-  position remembered: `KeyboardAtTop`), Size (cycles Custom → Small 50 % → Large 100 %, remembered in
+  position remembered: `KeyboardAtTop`), Size (cycles Custom → Small 60 % → Large 100 %, remembered in
   `KeyboardSizeChoice`; Custom is `KeyboardSize`, set in the settings from 30 to 100 % by 5 %
   steps; width and height together, keyboard centred; `EffectiveKeyboardSize` gives the size
   drawn; `settings.json` version 22, issue #107), Transparency (0, 25, 50 or 75 % of

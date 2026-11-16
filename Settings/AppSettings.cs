@@ -485,7 +485,7 @@ namespace Prunel
         public const double MinKeyboardSize = 30;
 
         /// <summary>Keyboard size of the "Small" choice of the keyboard bar, in %.</summary>
-        public const double SmallKeyboardSize = 50;
+        public const double SmallKeyboardSize = 60;
 
         /// <summary>Keyboard size of the "Large" choice of the keyboard bar, in %.</summary>
         public const double LargeKeyboardSize = 100;

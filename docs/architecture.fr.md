@@ -277,7 +277,7 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   « . », « ? », « ! » (`AutoCapitalize`). « ⌫ ABC » efface le mot en cours (ou Ctrl + Retour
   arrière). Barre de menu du clavier (regard sous l'écran, qui remplace alors la barre
   classique) : Haut / bas (clavier en haut de l'écran, position retenue : `KeyboardAtTop`),
-  Taille (alterne Perso → Petit 50 % → Grand 100 %, retenu dans `KeyboardSizeChoice` ;
+  Taille (alterne Perso → Petit 60 % → Grand 100 %, retenu dans `KeyboardSizeChoice` ;
   Perso est `KeyboardSize`, réglé dans les paramètres de 30 à 100 % par pas de 5 % ; largeur et
   hauteur ensemble, clavier centré ; `EffectiveKeyboardSize` donne la taille dessinée ;
   `settings.json` version 22, issue #107), Transparence (0, 25, 50 ou 75 % des fonds : clavier, touches et zone de
