@@ -132,8 +132,8 @@ namespace Prunel
             List<int> openTabs = SettingsCatalog.TabsOf(openCategory);
 
             // Number of rows in the column: all categories + the tabs of the open category.
-            // Rows share the page height, without exceeding the maximum height (140): with 9
-            // rows (category "Interface" open, 5 tabs), each one is about 107 high.
+            // Rows share the page height, without exceeding the maximum height (140): with 10
+            // rows (category "Interface" open, 6 tabs), each one is 80 high (+ 20 of gap).
             int rowCount = SettingsCatalog.Categories.Count + openTabs.Count;
             double step = Math.Min(TabMaxHeight + TabGap,
                                   (BottomTabs - TopTabs + TabGap) / Math.Max(1, rowCount));

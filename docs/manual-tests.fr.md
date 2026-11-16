@@ -130,6 +130,12 @@ s'écrivent. « ete » propose « été ». « pr » propose des mots courts («
 proposé. On tape « 2026 » : aucune case « + » n'apparaît ; on tape « mp3x » : « + mp3x » apparaît. On écrit deux fois « je suis » (en tapant « suis » en entier puis une espace) : après
 « je » et une espace, la 1re case propose « suis ». Après avoir fermé Prunel, `%APPDATA%\Prunel\personal-dictionary.json` contient le mot.
 
+Mots courts d'abord (issue #122) : dans les paramètres, catégorie « Interface », onglet
+« Prédiction », « Mots courts d'abord » vaut 1.3 (aussi après une mise à jour depuis une
+ancienne version). On le met à 2.0 et on tape « pr » : seulement des mots courts ; on le met à
+1.0 et on tape « pr » : les mots les plus courants, longs compris (« prendre »…). « − » s'arrête
+à 1.0, « + » à 2.0. « Défaut » remet 1.3.
+
 ## 12. Options du clavier
 
 Clavier ouvert, on regarde sous l'écran : la barre du clavier montre aussi
