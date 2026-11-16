@@ -247,8 +247,8 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   `KeyboardHook` reports every key that does not come from Prunel (real keyboard, Dragon:
   arrows, Delete, dictated text…), except the modifier keys alone (`OtherKeyPressed`).
 - Gaze keyboard (step 12, `GazeKeyboard`, `KeyboardKey`, `KeyboardLayout`): "Keyboard" button of
-  the menu, or "Keyboard" action of the action choice (opens / closes the keyboard; before opening it, a left
-  click on P gives the focus to the aimed field and places the text cursor there; not placed by
+  the menu, or "Keyboard" action of the action choice (a left click on P gives the focus to the aimed field and places the text cursor
+  there, then the keyboard opens, or stays open if it already is: issue #133; not placed by
   default: put it in place of another one in the icon configuration screen). A keyboard on the
   lower half of the screen (`KeyboardHeight`), above everything, without reserving space or
   taking the focus. Its five pages (letters, accents, 123.!, symbols and navigation, F1 to F12)

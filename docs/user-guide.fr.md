@@ -109,7 +109,8 @@ revient à la page d'avant.
 
 On peut aussi placer « Clavier » sur la couronne du choix d'action (configuration des icônes).
 On fixe le champ où l'on veut écrire, puis on choisit « Clavier » : Prunel clique d'abord à cet
-endroit, le champ prend le focus et le curseur de texte se place là où l'on regardait.
+endroit, le champ prend le focus et le curseur de texte se place là où l'on regardait. Si le
+clavier est déjà ouvert, il reste ouvert : c'est ainsi que l'on passe à un autre champ.
 
 - **Prédiction de mots** : les trois cases du haut proposent des mots. En regarder une l'écrit
   avec une espace. Un mot inconnu apparaît avec un « + » orangé : le regarder l'ajoute au

@@ -55,7 +55,7 @@
   "action.copy.label": "Copy (Ctrl + C)",
   "action.cut.label": "Cut (Ctrl + X)",
   "action.paste.label": "Paste here (click, then Ctrl + V)",
-  "action.keyboard.label": "Keyboard (open / close)",
+  "action.keyboard.label": "Keyboard (click on the field)",
   "action.back.label": "Back",
   "drag.cancel": "Cancel the drag and drop",
   "scroll.quit": "Stop scrolling",

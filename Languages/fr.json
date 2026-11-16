@@ -55,7 +55,7 @@
   "action.copy.label": "Copier (Ctrl + C)",
   "action.cut.label": "Couper (Ctrl + X)",
   "action.paste.label": "Coller ici (clic, puis Ctrl + V)",
-  "action.keyboard.label": "Clavier (ouvrir / fermer)",
+  "action.keyboard.label": "Clavier (clic sur le champ)",
   "action.back.label": "Retour",
   "drag.cancel": "Annuler le glisser-déposer",
   "scroll.quit": "Quitter le défilement",

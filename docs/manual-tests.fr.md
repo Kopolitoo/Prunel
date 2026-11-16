@@ -118,8 +118,9 @@ On regarde sous l'écran : la barre du clavier s'ouvre et le clavier remonte au-
 « Pause » le cache jusqu'à la reprise. Dans la configuration des icônes, on place « Clavier » sur la couronne : dans le choix
 d'action, ce bouton ouvre le clavier. Dans le Bloc-notes avec plusieurs lignes de texte, on fixe
 le milieu d'une ligne (Bloc-notes pas actif, ou une autre fenêtre devant), on choisit « Clavier » :
-le curseur de texte va à cet endroit et les touches tapées s'y écrivent. Clavier ouvert, le même
-bouton le ferme, sans clic.
+le curseur de texte va à cet endroit et les touches tapées s'y écrivent. Clavier ouvert, on fixe un
+autre endroit du texte et on choisit de nouveau « Clavier » : le clavier reste ouvert, le curseur
+de texte va au nouvel endroit et les touches tapées s'y écrivent (issue #133).
 
 ## 11. Prédiction de mots
 
