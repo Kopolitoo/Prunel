@@ -95,8 +95,8 @@ namespace Prunel
         ///  22: issue #107 — KeyboardSizeChoice ("custom"), and KeyboardSize moves by 5 %
         ///      steps (30 to 100 %). Nothing to fix: missing from an older file, the choice is
         ///      "custom", and the old 50, 75 or 100 % stays a valid custom size.
-        ///  23: issue #123 — FixedCircleRadius. Missing from an older file, it takes the value
-        ///      of CircleRadius (at least 4 %), which the fixed gaze circle used until then.
+        ///  23: issue #123 — CaptureRadius. Missing from an older file, it takes the value
+        ///      of CircleRadius (at least 4 %), which sized the photo until then.
         /// </summary>
         public const int CurrentVersion = 23;
 
@@ -167,14 +167,14 @@ namespace Prunel
         public double CircleRadius { get; set; }
 
         /// <summary>
-        /// Radius of the fixed gaze circle, in % of the screen height (issue #123), separate
-        /// from [CircleRadius]: a small movement circle (3 %) tires the eyes less, but a fixed
-        /// circle that small is hard to use. Also gives the side of the photo of the
-        /// magnifier and of the action choice (2 × this radius). At least
-        /// [MinFixedCircleRadius] (4 %). In code: FixedCircleRadiusPx.
+        /// Radius of the CAPTURE, in % of the screen height (issue #123): the photo of the
+        /// magnifier and of the action choice is a square of side 2 × this radius, centred on
+        /// the fixated point. Separate from [CircleRadius]: a small circle (3 %) tires the eyes
+        /// less, but a photo that small is hard to use. At least [MinCaptureRadius] (4 %), so
+        /// the action choice icons do not overlap. In code: CaptureRadiusPx.
         /// </summary>
         [DataMember(Order = 39)]
-        public double FixedCircleRadius { get; set; }
+        public double CaptureRadius { get; set; }
 
         /// <summary>
         /// Side of the gaze-activated icons, in % of the screen height.
@@ -221,15 +221,15 @@ namespace Prunel
         }
 
         /// <summary>
-        /// Smallest [FixedCircleRadius], in % of the screen height (issue #123): below it, the
+        /// Smallest [CaptureRadius], in % of the screen height (issue #123): below it, the
         /// photo of the action choice is so small that the crown icons overlap.
         /// </summary>
-        public const double MinFixedCircleRadius = 4;
+        public const double MinCaptureRadius = 4;
 
-        /// <summary>[FixedCircleRadius] in pixels of the current screen, multiplied by [InterfaceSize].</summary>
-        public double FixedCircleRadiusPx
+        /// <summary>[CaptureRadius] in pixels of the current screen, multiplied by [InterfaceSize].</summary>
+        public double CaptureRadiusPx
         {
-            get { return ScreenMetrics.InterfacePercent(FixedCircleRadius); }
+            get { return ScreenMetrics.InterfacePercent(CaptureRadius); }
         }
 
         /// <summary>[IconSize] in pixels of the current screen, multiplied by [InterfaceSize].</summary>

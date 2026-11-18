@@ -340,20 +340,18 @@ Uniquement au regard.
 5. Le désactiver : tout revient aux couleurs de jour (à la prochaine ouverture de chaque écran).
    Redémarrer Prunel : le choix est gardé. « Défaut » de l'onglet le désactive.
 
-## 26. Rayon du cercle fixe séparé (issue #123)
+## 26. Rayon de la capture séparé (issue #123)
 
-1. Paramètres, onglet « Affichage » : une deuxième ligne « Rayon du cercle fixe » (même valeur
+1. Paramètres, onglet « Affichage » : une deuxième ligne « Rayon de la capture » (même valeur
    que « Rayon du cercle », 8.8 % sur une nouvelle installation). Les cinq lignes tiennent sur la
    page.
-2. « Rayon du cercle » 3 %, « Rayon du cercle fixe » 6 %. Revenir au mode mouvement : le cercle
-   qui suit le regard est petit.
-3. Fixer un point : le cercle du regard fixe est plus grand (6 %), l'icône d'options est à côté,
-   et regarder dedans (clic direct activé) remplit l'anneau.
-4. Choix d'action et loupe : la photo correspond au cercle de 6 % ; les icônes de la couronne
+2. « Rayon du cercle » 3 %, « Rayon de la capture » 6 %. Revenir au mode mouvement : le cercle
+   qui suit le regard est petit. Fixer un point : le cercle du regard fixe a la même petite
+   taille.
+3. Choix d'action et loupe : la photo a la taille d'un cercle de 6 % ; les icônes de la couronne
    ne chevauchent pas la photo.
-5. « Rayon du cercle fixe » : « − » s'arrête à 4 %. Onglet « Couleurs » : dans l'aperçu, le
-   cercle du mouvement est petit et celui du regard fixe plus grand.
-6. Un ancien fichier de réglages (version 22) s'ouvre avec « Rayon du cercle fixe » = son
+4. « Rayon de la capture » : « − » s'arrête à 4 %.
+5. Un ancien fichier de réglages (version 22) s'ouvre avec « Rayon de la capture » = son
    « Rayon du cercle » (au moins 4 %) : rien ne change. « Défaut » de l'onglet remet les deux à
    8.8 %.
 

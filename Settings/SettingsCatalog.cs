@@ -518,9 +518,9 @@ namespace Prunel
             new SettingsTab("tab.display", "",
                 Setting.Number("setting.circleRadius", " %", 0.2,
                                p => p.CircleRadius, (p, v) => p.CircleRadius = v),
-                // Issue #123: fixed gaze circle, magnifier and action choice photo.
-                Setting.Number("setting.fixedCircleRadius", " %", 0.2,
-                               p => p.FixedCircleRadius, (p, v) => p.FixedCircleRadius = v),
+                // Issue #123: size of the photo of the magnifier and of the action choice.
+                Setting.Number("setting.captureRadius", " %", 0.2,
+                               p => p.CaptureRadius, (p, v) => p.CaptureRadius = v),
                 Setting.Number("setting.iconSize", " %", 0.2,
                                p => p.IconSize, (p, v) => p.IconSize = v),
                 Setting.Number("setting.interfaceSize", " %", 25,

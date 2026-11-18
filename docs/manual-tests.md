@@ -314,20 +314,17 @@ Gaze only.
 5. Turn it off: everything is back to the day colours (at the next opening of each screen).
    Restart Prunel: the choice is kept. "Default" of the tab turns it off.
 
-## 26. Separate fixed circle radius (issue #123)
+## 26. Separate capture radius (issue #123)
 
-1. Settings, "Display" tab: a second row "Fixed circle radius" (same value as "Circle radius",
+1. Settings, "Display" tab: a second row "Capture radius" (same value as "Circle radius",
    8.8 % on a new installation). The five rows fit on the page.
-2. "Circle radius" 3 %, "Fixed circle radius" 6 %. Back to movement mode: the circle that
-   follows the gaze is small.
-3. Stare at a point: the fixed gaze circle is larger (6 %), the options icon sits next to it,
-   and looking inside it (direct click on) fills the ring.
-4. Action choice and magnifier: the photo matches the 6 % circle; the crown icons do not
+2. "Circle radius" 3 %, "Capture radius" 6 %. Back to movement mode: the circle that follows the
+   gaze is small. Stare at a point: the fixed gaze circle has the same small size.
+3. Action choice and magnifier: the photo is the size of a 6 % circle; the crown icons do not
    overlap the photo.
-5. "Fixed circle radius": "−" stops at 4 %. "Colours" tab: in the preview, the movement circle
-   is small and the fixed gaze circle larger.
-6. An older settings file (version 22) opens with "Fixed circle radius" = its "Circle radius"
-   (at least 4 %): nothing changes. "Default" of the tab puts both back to 8.8 %.
+4. "Capture radius": "−" stops at 4 %.
+5. An older settings file (version 22) opens with "Capture radius" = its "Circle radius" (at
+   least 4 %): nothing changes. "Default" of the tab puts both back to 8.8 %.
 
 ## Full installation (Setup.exe, UI access)
 

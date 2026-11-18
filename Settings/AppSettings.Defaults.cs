@@ -43,7 +43,7 @@ namespace Prunel
             DirectClickDelay = 1.5;
 
             CircleRadius = 8.8;
-            FixedCircleRadius = 8.8;
+            CaptureRadius = 8.8;
             IconSize = 5.6;
             InterfaceSize = 100;
             ShowLabels = true;
@@ -130,7 +130,7 @@ namespace Prunel
             DirectClickDelay = Clamp(DirectClickDelay, 0.1, 10);
 
             CircleRadius = Clamp(CircleRadius, 1, 23);
-            FixedCircleRadius = Clamp(FixedCircleRadius, MinFixedCircleRadius, 23);
+            CaptureRadius = Clamp(CaptureRadius, MinCaptureRadius, 23);
             IconSize = Clamp(IconSize, 2, 19);
             InterfaceSize = Clamp(InterfaceSize, 75, 150);
             // An unknown colour word (typo…) becomes the default colour again.
@@ -336,11 +336,11 @@ namespace Prunel
 
             if (FileVersion < 23)
             {
-                // FixedCircleRadius is missing from the file: the fixed gaze circle used
-                // CircleRadius until now, so it starts with the same value (Fix() then keeps it
-                // at least 4 %).
-                FixedCircleRadius = CircleRadius;
-                App.Log("Settings: updated to version 23 (fixed circle radius)");
+                // CaptureRadius is missing from the file: the photo of the magnifier and of the
+                // action choice used CircleRadius until now, so it starts with the same value
+                // (Fix() then keeps it at least 4 %).
+                CaptureRadius = CircleRadius;
+                App.Log("Settings: updated to version 23 (capture radius)");
             }
 
             FileVersion = CurrentVersion;
