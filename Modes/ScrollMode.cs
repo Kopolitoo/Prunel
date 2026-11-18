@@ -97,15 +97,16 @@ namespace Prunel
     internal sealed class ScrollMode : Mode
     {
         /// <summary>
-        /// Smallest wheel send, in Windows units (120 = one whole notch): 4 units = 1/30 of a
-        /// notch. As soon as the reserve reaches this amount, EVERYTHING it contains is sent (in
-        /// whole units), on every frame if needed. (Quarter notches, 30, make visible jumps at
-        /// low speed; 8 units still left a few frames without movement at low speed, issue #125:
-        /// with 4, a send happens on more frames, so the movement is more regular.)
+        /// Smallest wheel send, in Windows units (120 = one whole notch): 1 unit = 1/120 of a
+        /// notch, the smallest amount Windows can carry. As soon as the reserve reaches this
+        /// amount, EVERYTHING it contains is sent (in whole units), on every frame if needed.
+        /// (Quarter notches, 30, make visible jumps at low speed; 8, then 4 units still left
+        /// small jerks, issue #125: with 1, a send happens on almost every frame, so the
+        /// movement is as regular as possible.)
         /// If a program scrolls much too fast (some old programs count each send as a whole
         /// notch), go back to 120 here.
         /// </summary>
-        private const int MinStep = 4;
+        private const int MinStep = 1;
 
         /// <summary>
         /// Time constant of the speed smoothing, in milliseconds: in 300 ms, the speed covers
