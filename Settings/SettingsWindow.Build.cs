@@ -64,7 +64,9 @@ namespace Prunel
             }
             else
             {
-                double step = tab.Name == SettingsCatalog.ColorsTabName ? CompactStepRow : StepRow;
+                double step = tab.Name == SettingsCatalog.ColorsTabName ? CompactStepRow
+                            : tab.Name == DisplayTabName ? DisplayStepRow
+                            : StepRow;
                 for (int i = 0; i < tab.Settings.Count; i++)
                 {
                     BuildRow(tab.Settings[i], TopRow + i * step);
@@ -76,7 +78,7 @@ namespace Prunel
                 }
                 if (tab.Name == DisplayTabName)
                 {
-                    BuildScreenInfo(TopRow + tab.Settings.Count * StepRow);
+                    BuildScreenInfo(TopRow + tab.Settings.Count * step);
                 }
                 if (tab.Name == SettingsCatalog.ColorsTabName)
                 {

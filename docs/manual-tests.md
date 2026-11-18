@@ -317,7 +317,8 @@ Gaze only.
 ## 26. Separate capture radius (issue #123)
 
 1. Settings, "Display" tab: a second row "Capture radius" (same value as "Circle radius",
-   8.8 % on a new installation). The five rows fit on the page.
+   8.8 % on a new installation). The five rows are a bit closer together, and the
+   "Screen detected" text below them is fully visible above the bottom of the page.
 2. "Circle radius" 3 %, "Capture radius" 6 %. Back to movement mode: the circle that follows the
    gaze is small. Stare at a point: the fixed gaze circle has the same small size.
 3. Action choice and magnifier: the photo is the size of a 6 % circle; the crown icons do not

@@ -343,8 +343,9 @@ Uniquement au regard.
 ## 26. Rayon de la capture séparé (issue #123)
 
 1. Paramètres, onglet « Affichage » : une deuxième ligne « Rayon de la capture » (même valeur
-   que « Rayon du cercle », 8.8 % sur une nouvelle installation). Les cinq lignes tiennent sur la
-   page.
+   que « Rayon du cercle », 8.8 % sur une nouvelle installation). Les cinq lignes sont un peu plus
+   serrées, et le texte « Écran détecté » en dessous est entièrement visible au-dessus du bas de
+   la page.
 2. « Rayon du cercle » 3 %, « Rayon de la capture » 6 %. Revenir au mode mouvement : le cercle
    qui suit le regard est petit. Fixer un point : le cercle du regard fixe a la même petite
    taille.
