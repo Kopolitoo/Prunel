@@ -71,6 +71,10 @@ namespace Prunel
         private const double StepRow = 184;           // from one setting row to the next
         // "Colours" tab: rows a bit closer, to leave room for the circle preview below them.
         private const double CompactStepRow = 164;
+        // "Display" tab: 5 rows since issue #123, then the detected screen below them. With
+        // 184, that text went past the bottom of the page. 150 still leaves 30 between the
+        // 120 high buttons of two rows.
+        private const double DisplayStepRow = 150;
         private const double RowHeight = 160;
         private const double LabelWidth = 520;
         private const double Gap = 18;

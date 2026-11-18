@@ -18,7 +18,7 @@ namespace Prunel
     ///
     ///  1. CAPTURE. The circle and the icon of the overlay are hidden, we wait [WaitMs] for
     ///     Windows to finish erasing them, then we take a picture of the square enclosing the
-    ///     circle (side 2 × [CircleRadius], i.e. 200 × 200 px). Without this wait, the photo
+    ///     circle (side 2 × [CaptureRadius], i.e. 200 × 200 px). Without this wait, the photo
     ///     would contain the circle.
     ///
     ///  2. CHOICE. A black screen covers the whole screen. In the center: the photo enlarged
@@ -379,7 +379,7 @@ namespace Prunel
             // ── The photo: the square enclosing the circle, centered on P. Near an edge of the
             //    screen, the square is shifted to stay fully on the screen (P is then no longer
             //    in the center of the photo, nor is the cross).
-            int side = (int)Math.Round(2 * p.CircleRadiusPx);
+            int side = (int)Math.Round(2 * p.CaptureRadiusPx);   // [CaptureRadius] (issue #123)
             side = Math.Min(side, (int)Math.Min(width, height));
             int ox = (int)Clamp(Math.Round(_px - side / 2.0), 0, width - side);
             int oy = (int)Clamp(Math.Round(_py - side / 2.0), 0, height - side);

@@ -340,6 +340,22 @@ Uniquement au regard.
 5. Le désactiver : tout revient aux couleurs de jour (à la prochaine ouverture de chaque écran).
    Redémarrer Prunel : le choix est gardé. « Défaut » de l'onglet le désactive.
 
+## 26. Rayon de la capture séparé (issue #123)
+
+1. Paramètres, onglet « Affichage » : une deuxième ligne « Rayon de la capture » (même valeur
+   que « Rayon du cercle », 8.8 % sur une nouvelle installation). Les cinq lignes sont un peu plus
+   serrées, et le texte « Écran détecté » en dessous est entièrement visible au-dessus du bas de
+   la page.
+2. « Rayon du cercle » 3 %, « Rayon de la capture » 6 %. Revenir au mode mouvement : le cercle
+   qui suit le regard est petit. Fixer un point : le cercle du regard fixe a la même petite
+   taille.
+3. Choix d'action et loupe : la photo a la taille d'un cercle de 6 % ; les icônes de la couronne
+   ne chevauchent pas la photo.
+4. « Rayon de la capture » : « − » s'arrête à 4 %.
+5. Un ancien fichier de réglages (version 22) s'ouvre avec « Rayon de la capture » = son
+   « Rayon du cercle » (au moins 4 %) : rien ne change. « Défaut » de l'onglet remet les deux à
+   8.8 %.
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,

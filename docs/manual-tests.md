@@ -314,6 +314,19 @@ Gaze only.
 5. Turn it off: everything is back to the day colours (at the next opening of each screen).
    Restart Prunel: the choice is kept. "Default" of the tab turns it off.
 
+## 26. Separate capture radius (issue #123)
+
+1. Settings, "Display" tab: a second row "Capture radius" (same value as "Circle radius",
+   8.8 % on a new installation). The five rows are a bit closer together, and the
+   "Screen detected" text below them is fully visible above the bottom of the page.
+2. "Circle radius" 3 %, "Capture radius" 6 %. Back to movement mode: the circle that follows the
+   gaze is small. Stare at a point: the fixed gaze circle has the same small size.
+3. Action choice and magnifier: the photo is the size of a 6 % circle; the crown icons do not
+   overlap the photo.
+4. "Capture radius": "−" stops at 4 %.
+5. An older settings file (version 22) opens with "Capture radius" = its "Circle radius" (at
+   least 4 %): nothing changes. "Default" of the tab puts both back to 8.8 %.
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,

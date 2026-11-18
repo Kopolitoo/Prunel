@@ -29,7 +29,7 @@ namespace Prunel
     ///
     ///  1. CAPTURE. Everything Prunel draws is hidden, we wait [WaitMs] for Windows to erase
     ///     it, then we take a picture of the square enclosing the circle around the aimed
-    ///     point P (side 2 × [CircleRadius], i.e. 200 × 200 px).
+    ///     point P (side 2 × [CaptureRadius], i.e. 200 × 200 px).
     ///
     ///  2. AIMING. A black screen covers the whole screen. In the center: the photo enlarged
     ///     ×[MagnifierZoom] (800 × 800 px). A small 50 px diameter circle follows the gaze. On
@@ -322,7 +322,7 @@ namespace Prunel
             //    screen, converted with ScreenMetrics.Px): on a small screen, or with
             //    a large zoom, a smaller square is therefore photographed.
             //    Example: 1080 px high screen, zoom 4 → at most (1080 − 40) ÷ 4 = 260 px.
-            int side = (int)Math.Round(2 * p.CircleRadiusPx);
+            int side = (int)Math.Round(2 * p.CaptureRadiusPx);   // [CaptureRadius] (issue #123)
             int maxSide = (int)Math.Floor((Math.Min(width, height) - ScreenMetrics.Px(40)) / _zoom);
             side = Math.Max(10, Math.Min(side, maxSide));
             //    Near an edge of the screen, the square is shifted to stay fully on the screen

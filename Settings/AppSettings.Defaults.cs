@@ -43,6 +43,7 @@ namespace Prunel
             DirectClickDelay = 1.5;
 
             CircleRadius = 8.8;
+            CaptureRadius = 8.8;
             IconSize = 5.6;
             InterfaceSize = 100;
             ShowLabels = true;
@@ -129,6 +130,7 @@ namespace Prunel
             DirectClickDelay = Clamp(DirectClickDelay, 0.1, 10);
 
             CircleRadius = Clamp(CircleRadius, 1, 23);
+            CaptureRadius = Clamp(CaptureRadius, MinCaptureRadius, 23);
             IconSize = Clamp(IconSize, 2, 19);
             InterfaceSize = Clamp(InterfaceSize, 75, 150);
             // An unknown colour word (typo…) becomes the default colour again.
@@ -331,6 +333,15 @@ namespace Prunel
             // old fixed 1.6, issue #122).
             // Version 22 (KeyboardSizeChoice): nothing to fix, it keeps its default value
             // ("custom"), and the old KeyboardSize (50, 75 or 100 %) is still a valid custom size.
+
+            if (FileVersion < 23)
+            {
+                // CaptureRadius is missing from the file: the photo of the magnifier and of the
+                // action choice used CircleRadius until now, so it starts with the same value
+                // (Fix() then keeps it at least 4 %).
+                CaptureRadius = CircleRadius;
+                App.Log("Settings: updated to version 23 (capture radius)");
+            }
 
             FileVersion = CurrentVersion;
             return true;

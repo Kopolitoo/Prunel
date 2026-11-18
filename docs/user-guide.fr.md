@@ -147,6 +147,11 @@ sont enregistrés.
   cette langue.
 - **Profils** (onglet « Profils ») : enregistrer les réglages actuels sous un nom, et les
   recharger plus tard au regard (par exemple un profil « Matin » et un profil « Soir »).
+- Onglet **Affichage** : **Rayon du cercle** règle la taille du cercle qui suit le regard en
+  mode mouvement et en regard fixe. Un petit cercle (3 % par exemple) attire moins le regard et
+  fatigue moins les yeux. **Rayon de la capture** règle, à part, la taille de la photo de la
+  loupe et du choix d'action (4 % minimum, pour que les icônes du choix d'action ne se
+  chevauchent pas).
 - Onglet **Couleurs** (catégorie « Interface ») : l'aspect du cercle qui suit le regard.
   **Couleur du cercle** : gris (le cercle habituel), blanc, jaune, vert, bleu clair, bleu foncé,
   violet ou rose ;
