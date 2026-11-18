@@ -24,6 +24,11 @@ namespace Prunel
     /// corners, the measures overflowing a little prevented fixed gaze.
     /// Gaze lost (no measure): the circle and the cursor stay where they are.
     ///
+    /// [ShowMovementCircle] off (issue #123): the circle is not drawn, so the eyes are not
+    /// drawn to it all day. It is still computed (smoothing, cursor with [MouseTracking]),
+    /// and the fixation works as before: the fixed gaze circle then appears on the fixated
+    /// point.
+    ///
     /// It is one of the only modes from which the menu can open (with pause).
     ///
     /// Gaze keyboard (see GazeKeyboard): when it is shown and the gaze is ON it, this
@@ -180,9 +185,10 @@ namespace Prunel
             // 5. Drawing the circle (as soon as there is a position).
             //    It is hidden above the keyboard, including when the gaze is below
             //    the screen: the circle, clamped to the bottom edge, would then be on the keyboard.
+            //    Hidden too when [ShowMovementCircle] is off (issue #123).
             if (_placed)
             {
-                if (onKeyboard || keyboard.Contains(_smoothed.X, _smoothed.Y))
+                if (!p.ShowMovementCircle || onKeyboard || keyboard.Contains(_smoothed.X, _smoothed.Y))
                 {
                     Manager.Layer.HideCircle();
                 }

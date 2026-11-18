@@ -190,6 +190,8 @@
   "setting.interfaceSize.help": "75 small, 100 normal, 125 large, 150 very large",
   "setting.showLabels.name": "Labels",
   "setting.showLabels.help": "Action name when an icon is hovered",
+  "setting.showMovementCircle.name": "Movement circle",
+  "setting.showMovementCircle.help": "Circle that follows the gaze in movement mode",
   "setting.circleColor.name": "Circle colour",
   "setting.circleColor.help": "The colour of the circle that follows the gaze",
   "setting.circleThickness.name": "Circle thickness",

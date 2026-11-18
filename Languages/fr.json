@@ -190,6 +190,8 @@
   "setting.interfaceSize.help": "75 petite, 100 normale, 125 grande, 150 très grande",
   "setting.showLabels.name": "Libellés",
   "setting.showLabels.help": "Nom de l'action au survol d'une icône",
+  "setting.showMovementCircle.name": "Cercle du mouvement",
+  "setting.showMovementCircle.help": "Cercle qui suit le regard en mode mouvement",
   "setting.circleColor.name": "Couleur du cercle",
   "setting.circleColor.help": "La couleur du cercle qui suit le regard",
   "setting.circleThickness.name": "Épaisseur du cercle",

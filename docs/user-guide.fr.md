@@ -147,6 +147,11 @@ sont enregistrés.
   cette langue.
 - **Profils** (onglet « Profils ») : enregistrer les réglages actuels sous un nom, et les
   recharger plus tard au regard (par exemple un profil « Matin » et un profil « Soir »).
+- Onglet **Affichage** : **Cercle du mouvement** (oui au départ). À désactiver si voir le cercle
+  bouger toute la journée fatigue les yeux : en mode mouvement, le cercle n'est plus dessiné,
+  mais tout le reste marche comme avant (la fixation, le cercle du regard fixe et son icône
+  d'options, le curseur qui suit avec « Suivi souris »). Les autres écrans (menu, défilement,
+  loupe…) ne changent pas.
 - Onglet **Couleurs** (catégorie « Interface ») : l'aspect du cercle qui suit le regard.
   **Couleur du cercle** : gris (le cercle habituel), blanc, jaune, vert, bleu clair, bleu foncé,
   violet ou rose ;

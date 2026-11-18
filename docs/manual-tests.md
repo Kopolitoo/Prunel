@@ -314,6 +314,18 @@ Gaze only.
 5. Turn it off: everything is back to the day colours (at the next opening of each screen).
    Restart Prunel: the choice is kept. "Default" of the tab turns it off.
 
+## 26. Hide the movement circle (issue #123)
+
+1. Settings, "Display" tab: a fifth row "Movement circle" (yes). The five rows fit on the page.
+2. Turn it off, go back to movement mode: no circle follows the gaze.
+3. Stare at a point: the fixed gaze circle and the options icon appear there as usual; the
+   action choice and the magnifier work. Look elsewhere: the circle disappears again.
+4. With "Mouse tracking" on: the cursor still follows the gaze, without the circle.
+5. Menu bar (gaze below the screen), scroll mode, gaze keyboard: unchanged.
+6. Turn it back on: the circle follows the gaze again. Restart Prunel: the choice is kept.
+   "Default" of the tab turns it back on. An older settings file (version 22) opens with the
+   circle shown.
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,

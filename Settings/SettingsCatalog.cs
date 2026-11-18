@@ -523,7 +523,10 @@ namespace Prunel
                 Setting.Number("setting.interfaceSize", " %", 25,
                                p => p.InterfaceSize, (p, v) => p.InterfaceSize = v),
                 Setting.YesOrNo("setting.showLabels",
-                                 p => p.ShowLabels, (p, v) => p.ShowLabels = v)),
+                                 p => p.ShowLabels, (p, v) => p.ShowLabels = v),
+                // Issue #123: hide the circle in movement mode (eye fatigue).
+                Setting.YesOrNo("setting.showMovementCircle",
+                                 p => p.ShowMovementCircle, (p, v) => p.ShowMovementCircle = v)),
 
             // E790 = colour palette ("Colours"): step color-themes, the look of the gaze circle.
             new SettingsTab(ColorsTabName, "\uE790",

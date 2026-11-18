@@ -340,6 +340,20 @@ Uniquement au regard.
 5. Le désactiver : tout revient aux couleurs de jour (à la prochaine ouverture de chaque écran).
    Redémarrer Prunel : le choix est gardé. « Défaut » de l'onglet le désactive.
 
+## 26. Masquer le cercle du mouvement (issue #123)
+
+1. Paramètres, onglet « Affichage » : une cinquième ligne « Cercle du mouvement » (oui). Les cinq
+   lignes tiennent sur la page.
+2. La désactiver, revenir au mode mouvement : aucun cercle ne suit le regard.
+3. Fixer un point : le cercle du regard fixe et l'icône d'options y apparaissent comme
+   d'habitude ; le choix d'action et la loupe marchent. Regarder ailleurs : le cercle disparaît
+   de nouveau.
+4. Avec « Suivi souris » activé : le curseur suit toujours le regard, sans le cercle.
+5. Barre de menu (regard sous l'écran), mode défilement, clavier du regard : inchangés.
+6. La réactiver : le cercle suit de nouveau le regard. Redémarrer Prunel : le choix est gardé.
+   « Défaut » de l'onglet la réactive. Un ancien fichier de réglages (version 22) s'ouvre avec le
+   cercle affiché.
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,
