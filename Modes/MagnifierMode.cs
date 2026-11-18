@@ -322,7 +322,7 @@ namespace Prunel
             //    screen, converted with ScreenMetrics.Px): on a small screen, or with
             //    a large zoom, a smaller square is therefore photographed.
             //    Example: 1080 px high screen, zoom 4 → at most (1080 − 40) ÷ 4 = 260 px.
-            int side = (int)Math.Round(2 * p.FixedCircleRadiusPx);   // at least 2 × 5 % (issue #123)
+            int side = (int)Math.Round(2 * p.FixedCircleRadiusPx);   // [FixedCircleRadius] (issue #123)
             int maxSide = (int)Math.Floor((Math.Min(width, height) - ScreenMetrics.Px(40)) / _zoom);
             side = Math.Max(10, Math.Min(side, maxSide));
             //    Near an edge of the screen, the square is shifted to stay fully on the screen

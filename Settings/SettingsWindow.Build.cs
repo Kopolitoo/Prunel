@@ -371,7 +371,7 @@ namespace Prunel
             double centerY = (PreviewHeight - 40) / 2;
 
             AddPreviewCircle(panel, PreviewWidth / 4, centerY, radius, units, false);
-            // The fixed gaze circle is at least 5 % (issue #123).
+            // The fixed gaze circle has its own radius, [FixedCircleRadius] (issue #123).
             double fixedRadius = p.FixedCircleRadiusPx * PageHeight / ScreenMetrics.HeightPixels;
             AddPreviewCircle(panel, PreviewWidth * 3 / 4, centerY, fixedRadius, units, true);
 

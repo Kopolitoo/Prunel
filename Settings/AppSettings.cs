@@ -95,8 +95,10 @@ namespace Prunel
         ///  22: issue #107 — KeyboardSizeChoice ("custom"), and KeyboardSize moves by 5 %
         ///      steps (30 to 100 %). Nothing to fix: missing from an older file, the choice is
         ///      "custom", and the old 50, 75 or 100 % stays a valid custom size.
+        ///  23: issue #123 — FixedCircleRadius. Missing from an older file, it takes the value
+        ///      of CircleRadius (at least 4 %), which the fixed gaze circle used until then.
         /// </summary>
-        public const int CurrentVersion = 22;
+        public const int CurrentVersion = 23;
 
         /// <summary>Format number of the file, so it can evolve one day without breaking everything.</summary>
         [DataMember(Order = 0)]
@@ -165,6 +167,16 @@ namespace Prunel
         public double CircleRadius { get; set; }
 
         /// <summary>
+        /// Radius of the fixed gaze circle, in % of the screen height (issue #123), separate
+        /// from [CircleRadius]: a small movement circle (3 %) tires the eyes less, but a fixed
+        /// circle that small is hard to use. Also gives the side of the photo of the
+        /// magnifier and of the action choice (2 × this radius). At least
+        /// [MinFixedCircleRadius] (4 %). In code: FixedCircleRadiusPx.
+        /// </summary>
+        [DataMember(Order = 39)]
+        public double FixedCircleRadius { get; set; }
+
+        /// <summary>
         /// Side of the gaze-activated icons, in % of the screen height.
         /// 5.6 % = 121 px in 4K, 60 px in 1080p. In code: IconSizePx.
         /// </summary>
@@ -209,21 +221,15 @@ namespace Prunel
         }
 
         /// <summary>
-        /// Smallest radius, in % of the screen height, of the fixed gaze circle and of the
-        /// photo of the magnifier and of the action choice (issue #123). A small movement
-        /// circle (3 %) is less tiring for the eyes, but a fixed circle and a photo that small
-        /// are hard to use.
+        /// Smallest [FixedCircleRadius], in % of the screen height (issue #123): below it, the
+        /// photo of the action choice is so small that the crown icons overlap.
         /// </summary>
-        public const double MinFixedCircleRadius = 5;
+        public const double MinFixedCircleRadius = 4;
 
-        /// <summary>
-        /// Radius of the fixed gaze circle, in pixels of the current screen, multiplied by
-        /// [InterfaceSize]: [CircleRadius], but at least [MinFixedCircleRadius]. Also gives the
-        /// side of the photo of the magnifier and of the action choice (2 × this radius).
-        /// </summary>
+        /// <summary>[FixedCircleRadius] in pixels of the current screen, multiplied by [InterfaceSize].</summary>
         public double FixedCircleRadiusPx
         {
-            get { return ScreenMetrics.InterfacePercent(Math.Max(CircleRadius, MinFixedCircleRadius)); }
+            get { return ScreenMetrics.InterfacePercent(FixedCircleRadius); }
         }
 
         /// <summary>[IconSize] in pixels of the current screen, multiplied by [InterfaceSize].</summary>

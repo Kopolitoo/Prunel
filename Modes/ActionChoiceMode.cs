@@ -379,7 +379,7 @@ namespace Prunel
             // ── The photo: the square enclosing the circle, centered on P. Near an edge of the
             //    screen, the square is shifted to stay fully on the screen (P is then no longer
             //    in the center of the photo, nor is the cross).
-            int side = (int)Math.Round(2 * p.FixedCircleRadiusPx);   // at least 2 × 5 % (issue #123)
+            int side = (int)Math.Round(2 * p.FixedCircleRadiusPx);   // [FixedCircleRadius] (issue #123)
             side = Math.Min(side, (int)Math.Min(width, height));
             int ox = (int)Clamp(Math.Round(_px - side / 2.0), 0, width - side);
             int oy = (int)Clamp(Math.Round(_py - side / 2.0), 0, height - side);
