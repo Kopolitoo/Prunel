@@ -34,7 +34,8 @@ namespace Prunel
     ///     center (no diagonal);
     ///   - SPEED: 0 at the edge of the dead zone, then it increases with the distance, up to
     ///     [MaxScrollSpeed] notches per second at [MaxSpeedRadii] × [CircleRadius] beyond the
-    ///     edge (three radii). This speed-up distance is always
+    ///     edge (six radii, issue #125: three made the speed hard to control). This speed-up
+    ///     distance is always
     ///     counted in WHOLE radii of [CircleRadius]: shrinking the dead zone only brought the
     ///     start of scrolling closer, without making the speed-up more abrupt.
     ///     Further away, it no longer increases;
@@ -96,21 +97,26 @@ namespace Prunel
     internal sealed class ScrollMode : Mode
     {
         /// <summary>
-        /// Smallest wheel send, in Windows units (120 = one whole notch): 8 units = 1/15 of a
-        /// notch. As soon as the reserve reaches this amount, EVERYTHING it contains is sent (in
-        /// whole units), on every frame if needed. (Quarter notches, 30, make visible jumps at
-        /// low speed.)
+        /// Smallest wheel send, in Windows units (120 = one whole notch): 1 unit = 1/120 of a
+        /// notch, the smallest amount Windows can carry. As soon as the reserve reaches this
+        /// amount, EVERYTHING it contains is sent (in whole units), on every frame if needed.
+        /// (Quarter notches, 30, make visible jumps at low speed; 8, then 4 units still left
+        /// small jerks, issue #125: with 1, a send happens on almost every frame, so the
+        /// movement is as regular as possible.)
         /// If a program scrolls much too fast (some old programs count each send as a whole
         /// notch), go back to 120 here.
         /// </summary>
-        private const int MinStep = 8;
+        private const int MinStep = 1;
 
         /// <summary>
-        /// Time constant of the speed smoothing, in milliseconds: in 150 ms, the speed covers
+        /// Time constant of the speed smoothing, in milliseconds: in 300 ms, the speed covers
         /// about two thirds of the way to the wanted speed (same principle as Smoother.cs, single
         /// stage). Larger = softer but slower starts and stops; smaller = livelier.
+        /// First 150; doubled for issue #125 ("scrolling is still a bit jerky"): the small
+        /// jitter of the eye changes the speed less. Stops stay immediate when the gaze is lost
+        /// or on the back button (see Update).
         /// </summary>
-        private const double SpeedTimeConstantMs = 150;
+        private const double SpeedTimeConstantMs = 300;
 
         /// <summary>
         /// Longest wait, in milliseconds after entering the mode, before scrolling may start
@@ -150,10 +156,10 @@ namespace Prunel
 
         /// <summary>
         /// Distance, counted in circle radii from the edge, where the speed reaches
-        /// [MaxScrollSpeed]. First 1, tripled at the user's request for a more
-        /// gradual speed-up.
+        /// [MaxScrollSpeed]. First 1, then 3 at the user's request for a more
+        /// gradual speed-up, then 6 (issue #125: the speed was still hard to control).
         /// </summary>
-        private const double MaxSpeedRadii = 3;
+        private const double MaxSpeedRadii = 6;
 
         /// <summary>
         /// How far, in 4K screen pixels beyond the screen edges, the gaze still counts for
@@ -349,7 +355,7 @@ namespace Prunel
 
             // 6. The wanted speed and, outside the dead zone, the direction (one axis only: the
             //    one with the largest gap).
-            //    Speed: from 0 at the edge of the dead zone to [MaxScrollSpeed] three whole
+            //    Speed: from 0 at the edge of the dead zone to [MaxScrollSpeed] [MaxSpeedRadii] whole
             //    [CircleRadius] further, along a curve, and lowered during the first moments of
             //    each start (see the class comment).
             //    In the dead zone, the previous direction is kept: the speed goes smoothly back

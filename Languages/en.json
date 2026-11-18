@@ -219,7 +219,7 @@
   "setting.dragDuration.name": "Drag duration",
   "setting.dragDuration.help": "Cursor travel, button held down",
   "setting.maxScrollSpeed.name": "Maximum speed",
-  "setting.maxScrollSpeed.help": "Reached three circle radii beyond the edge",
+  "setting.maxScrollSpeed.help": "Reached six circle radii beyond the edge",
   "setting.scrollInactiveWindows.name": "Scroll inactive windows",
   "setting.scrollInactiveWindows.help": "Windows setting: the wheel goes to the window under the cursor",
   "setting.relativeMouse.name": "Game mouse",
