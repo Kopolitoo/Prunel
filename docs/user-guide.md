@@ -63,6 +63,15 @@ follows your gaze. Stare at the destination, refine it in the magnifier, and the
 "Android" adds a pause before moving (for touch-style apps). The "back" button on the right
 edge cancels.
 
+## Hold a mouse button
+
+For games that move the character while a mouse button is held (for example Back to Bed, right
+button). Add "Hold left" or "Hold right" to the crown in the icon configuration screen (they are
+not there by default). Stare at the starting point and choose it: the button is pressed there,
+then the cursor follows your gaze, button still held (same smoothing and anti-jitter as game
+mode). To let go, look at the "Release" button (square) on the right edge of the screen. The
+button is also released with Escape, or when the gaze is lost for more than one second.
+
 ## Scroll
 
 Choose "Scroll" in the action choice. The circle stays in place. Look above, below, left or

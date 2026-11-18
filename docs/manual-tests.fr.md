@@ -356,6 +356,23 @@ Uniquement au regard.
    « Rayon du cercle » (au moins 4 %) : rien ne change. « Défaut » de l'onglet remet les deux à
    8.8 %.
 
+## 27. Garder un bouton de la souris enfoncé (issue #126)
+
+1. Configuration des icônes : la liste de la couronne montre « Gauche maintenu » et « Droit
+   maintenu » (cadenas, pastilles G et D). Placer « Droit maintenu » sur un emplacement.
+2. Dans Paint, fixer la toile, choisir « Droit maintenu » : le choix d'action se ferme, un bouton
+   carré « Relâcher le bouton » apparaît au bord droit. Bouger le regard : un trait se dessine
+   (couleur du bouton droit) là où va le curseur. Petit tremblement du regard au repos : le curseur
+   ne bouge pas.
+3. Regarder « Relâcher le bouton » : le trait s'arrête, retour au mode mouvement (le cercle revient).
+4. Pareil avec « Gauche maintenu », puis appuyer sur Échap (ou dire « Échap » à Dragon) pendant le
+   dessin : le bouton est relâché, retour au mode mouvement.
+5. Pendant le dessin, fermer les yeux environ 2 s : le bouton est relâché. Un clignement normal
+   ne le relâche pas.
+6. Avec Ctrl allumé dans le choix d'action, « Gauche maintenu » : Ctrl est enfoncé aussi, et
+   relâché avec le bouton.
+7. Dans Back to Bed : « Droit maintenu » déplace le personnage vers le regard.
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,

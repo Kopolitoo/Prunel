@@ -327,6 +327,21 @@ Gaze only.
 5. An older settings file (version 22) opens with "Capture radius" = its "Circle radius" (at
    least 4 %): nothing changes. "Default" of the tab puts both back to 8.8 %.
 
+## 27. Hold a mouse button (issue #126)
+
+1. Icon configuration: the list of the crown shows "Hold left" and "Hold right" (padlock, badges
+   L and R). Place "Hold right" on a slot.
+2. In Paint, stare at the canvas, choose "Hold right": the action choice closes, a square
+   "Release the button" button appears on the right edge. Move the gaze: a line is drawn (right
+   button colour) where the cursor goes. Small gaze jitter at rest: the cursor does not move.
+3. Look at "Release the button": the line stops, back to movement mode (circle back).
+4. Same with "Hold left", then press Escape (or say "Escape" to Dragon) while drawing: the
+   button is released, back to movement mode.
+5. While drawing, close the eyes about 2 s: the button is released. A normal blink does not
+   release it.
+6. With Ctrl lit in the action choice, "Hold left": Ctrl is held too, and released with the button.
+7. In Back to Bed: "Hold right" moves the character towards the gaze.
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,

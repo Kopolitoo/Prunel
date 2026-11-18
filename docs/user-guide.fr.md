@@ -67,6 +67,16 @@ pointillée suit le regard. On fixe la destination, on l'affine dans la loupe, e
 déplacé. « Android » ajoute une pause avant le déplacement (pour les applications tactiles). Le
 bouton retour au bord droit annule.
 
+## Garder un bouton de la souris enfoncé
+
+Pour les jeux qui déplacent le personnage tant qu'un bouton de la souris est enfoncé (par exemple
+Back to Bed, bouton droit). On ajoute « Gauche maintenu » ou « Droit maintenu » sur la couronne
+dans la configuration des icônes (ils n'y sont pas par défaut). On fixe le point de départ et on
+le choisit : le bouton est enfoncé à cet endroit, puis le curseur suit le regard, bouton toujours
+enfoncé (même lissage et même anti-tremblement qu'en mode jeu). Pour lâcher, on regarde le bouton
+« Relâcher le bouton » (carré) au bord droit de l'écran. Le bouton est aussi relâché avec Échap,
+ou quand le regard est perdu plus d'une seconde.
+
 ## Défilement
 
 On choisit « Défilement » dans le choix d'action. Le cercle reste en place. On regarde au-dessus,

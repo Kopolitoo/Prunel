@@ -255,6 +255,15 @@ namespace Prunel
                 return;
             }
 
+            if (action == ChoiceAction.HoldLeft || action == ChoiceAction.HoldRight)
+            {
+                // The button is pressed on P, then stays pressed while the cursor follows the
+                // gaze (issue #126). The black screen will be hidden by Quit, just before.
+                MouseSide button = action == ChoiceAction.HoldRight ? MouseSide.Right : MouseSide.Left;
+                Manager.ChangeMode(new HoldButtonMode(button, _px, _py));
+                return;
+            }
+
             if (action == ChoiceAction.Scroll)
             {
                 // Scrolling happens around P, on the real screen (the black screen will be
