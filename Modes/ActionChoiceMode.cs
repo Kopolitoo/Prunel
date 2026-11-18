@@ -18,7 +18,7 @@ namespace Prunel
     ///
     ///  1. CAPTURE. The circle and the icon of the overlay are hidden, we wait [WaitMs] for
     ///     Windows to finish erasing them, then we take a picture of the square enclosing the
-    ///     circle (side 2 × [CircleRadius], i.e. 200 × 200 px). Without this wait, the photo
+    ///     circle (side 2 × [CaptureRadius], i.e. 200 × 200 px). Without this wait, the photo
     ///     would contain the circle.
     ///
     ///  2. CHOICE. A black screen covers the whole screen. In the center: the photo enlarged

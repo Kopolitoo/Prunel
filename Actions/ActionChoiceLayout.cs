@@ -44,7 +44,7 @@ namespace Prunel
 
         /// <summary>
         /// Computes the layout for a screen of this size, buttons of this side ([IconSize]) and
-        /// a photo of this side BEFORE enlargement (2 × [CircleRadius]).
+        /// a photo of this side BEFORE enlargement (2 × [CaptureRadius]).
         /// </summary>
         public ActionChoiceLayout(double width, double height, double size, double photoSide)
         {
