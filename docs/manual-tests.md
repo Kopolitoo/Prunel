@@ -314,17 +314,16 @@ Gaze only.
 5. Turn it off: everything is back to the day colours (at the next opening of each screen).
    Restart Prunel: the choice is kept. "Default" of the tab turns it off.
 
-## 26. Hide the movement circle (issue #123)
+## 26. Small movement circle, fixed circle at least 5 % (issue #123)
 
-1. Settings, "Display" tab: a fifth row "Movement circle" (yes). The five rows fit on the page.
-2. Turn it off, go back to movement mode: no circle follows the gaze.
-3. Stare at a point: the fixed gaze circle and the options icon appear there as usual; the
-   action choice and the magnifier work. Look elsewhere: the circle disappears again.
-4. With "Mouse tracking" on: the cursor still follows the gaze, without the circle.
-5. Menu bar (gaze below the screen), scroll mode, gaze keyboard: unchanged.
-6. Turn it back on: the circle follows the gaze again. Restart Prunel: the choice is kept.
-   "Default" of the tab turns it back on. An older settings file (version 22) opens with the
-   circle shown.
+1. Settings, "Display" tab: "Circle radius" 3 %. Back to movement mode: the circle that follows
+   the gaze is small.
+2. Stare at a point: the fixed gaze circle is larger (5 %), the options icon sits next to it,
+   and looking inside it (direct click on) fills the ring.
+3. Action choice: the photo is as large as with a 5 % circle. Same for the magnifier.
+4. "Colours" tab: in the preview, the movement circle is small and the fixed gaze circle larger.
+5. "Circle radius" 8.8 % (default) or more: everything is as before, the fixed circle has the
+   same size as the movement circle.
 
 ## Full installation (Setup.exe, UI access)
 

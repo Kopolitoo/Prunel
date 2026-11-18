@@ -46,7 +46,6 @@ namespace Prunel
             IconSize = 5.6;
             InterfaceSize = 100;
             ShowLabels = true;
-            ShowMovementCircle = true;
 
             CircleColor = CircleColors.DefaultName;
             CircleThickness = 100;
@@ -332,7 +331,6 @@ namespace Prunel
             // old fixed 1.6, issue #122).
             // Version 22 (KeyboardSizeChoice): nothing to fix, it keeps its default value
             // ("custom"), and the old KeyboardSize (50, 75 or 100 %) is still a valid custom size.
-            // Version 23 (ShowMovementCircle): nothing to fix, it keeps its default value (yes).
 
             FileVersion = CurrentVersion;
             return true;

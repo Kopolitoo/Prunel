@@ -97,7 +97,7 @@ namespace Prunel
                 _smoothed.Place(_px, _py);
             }
 
-            PlaceIcon(p.CircleRadiusPx, p.IconSizePx);
+            PlaceIcon(p.FixedCircleRadiusPx, p.IconSizePx);
 
             // The gaze is fixated: the cursor joins it now.
             PlaceCursor();
@@ -192,10 +192,10 @@ namespace Prunel
             // Drawing.
             // The circle slides smoothly towards P (see Smoother.cs; a few ticks are enough).
             _smoothed.Follow(_px, _py, gaze.NowMs);
-            Manager.Layer.ShowCircle(_smoothed.X, _smoothed.Y, p.CircleRadiusPx, true);
+            Manager.Layer.ShowCircle(_smoothed.X, _smoothed.Y, p.FixedCircleRadiusPx, true);
             if (clickProgress > 0)
             {
-                Manager.Layer.ShowRing(_smoothed.X, _smoothed.Y, p.CircleRadiusPx, clickProgress);
+                Manager.Layer.ShowRing(_smoothed.X, _smoothed.Y, p.FixedCircleRadiusPx, clickProgress);
             }
             else
             {
@@ -296,7 +296,7 @@ namespace Prunel
 
             double dx = x - _px;
             double dy = y - _py;
-            if (Math.Sqrt(dx * dx + dy * dy) <= p.CircleRadiusPx)
+            if (Math.Sqrt(dx * dx + dy * dy) <= p.FixedCircleRadiusPx)
             {
                 return Zone.Circle;
             }

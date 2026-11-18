@@ -340,19 +340,17 @@ Uniquement au regard.
 5. Le désactiver : tout revient aux couleurs de jour (à la prochaine ouverture de chaque écran).
    Redémarrer Prunel : le choix est gardé. « Défaut » de l'onglet le désactive.
 
-## 26. Masquer le cercle du mouvement (issue #123)
+## 26. Petit cercle du mouvement, cercle fixe d'au moins 5 % (issue #123)
 
-1. Paramètres, onglet « Affichage » : une cinquième ligne « Cercle du mouvement » (oui). Les cinq
-   lignes tiennent sur la page.
-2. La désactiver, revenir au mode mouvement : aucun cercle ne suit le regard.
-3. Fixer un point : le cercle du regard fixe et l'icône d'options y apparaissent comme
-   d'habitude ; le choix d'action et la loupe marchent. Regarder ailleurs : le cercle disparaît
-   de nouveau.
-4. Avec « Suivi souris » activé : le curseur suit toujours le regard, sans le cercle.
-5. Barre de menu (regard sous l'écran), mode défilement, clavier du regard : inchangés.
-6. La réactiver : le cercle suit de nouveau le regard. Redémarrer Prunel : le choix est gardé.
-   « Défaut » de l'onglet la réactive. Un ancien fichier de réglages (version 22) s'ouvre avec le
-   cercle affiché.
+1. Paramètres, onglet « Affichage » : « Rayon du cercle » 3 %. Revenir au mode mouvement : le
+   cercle qui suit le regard est petit.
+2. Fixer un point : le cercle du regard fixe est plus grand (5 %), l'icône d'options est à côté,
+   et regarder dedans (clic direct activé) remplit l'anneau.
+3. Choix d'action : la photo est aussi grande qu'avec un cercle de 5 %. Pareil pour la loupe.
+4. Onglet « Couleurs » : dans l'aperçu, le cercle du mouvement est petit et celui du regard fixe
+   plus grand.
+5. « Rayon du cercle » 8,8 % (défaut) ou plus : tout est comme avant, le cercle fixe a la même
+   taille que celui du mouvement.
 
 ## Installation complète (Setup.exe, accès à l'interface)
 

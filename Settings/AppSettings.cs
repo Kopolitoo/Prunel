@@ -95,10 +95,8 @@ namespace Prunel
         ///  22: issue #107 — KeyboardSizeChoice ("custom"), and KeyboardSize moves by 5 %
         ///      steps (30 to 100 %). Nothing to fix: missing from an older file, the choice is
         ///      "custom", and the old 50, 75 or 100 % stays a valid custom size.
-        ///  23: issue #123 — ShowMovementCircle (yes). Nothing to fix: missing from an older
-        ///      file, it keeps its default value, so the circle stays shown as before.
         /// </summary>
-        public const int CurrentVersion = 23;
+        public const int CurrentVersion = 22;
 
         /// <summary>Format number of the file, so it can evolve one day without breaking everything.</summary>
         [DataMember(Order = 0)]
@@ -210,6 +208,24 @@ namespace Prunel
             get { return ScreenMetrics.InterfacePercent(CircleRadius); }
         }
 
+        /// <summary>
+        /// Smallest radius, in % of the screen height, of the fixed gaze circle and of the
+        /// photo of the magnifier and of the action choice (issue #123). A small movement
+        /// circle (3 %) is less tiring for the eyes, but a fixed circle and a photo that small
+        /// are hard to use.
+        /// </summary>
+        public const double MinFixedCircleRadius = 5;
+
+        /// <summary>
+        /// Radius of the fixed gaze circle, in pixels of the current screen, multiplied by
+        /// [InterfaceSize]: [CircleRadius], but at least [MinFixedCircleRadius]. Also gives the
+        /// side of the photo of the magnifier and of the action choice (2 × this radius).
+        /// </summary>
+        public double FixedCircleRadiusPx
+        {
+            get { return ScreenMetrics.InterfacePercent(Math.Max(CircleRadius, MinFixedCircleRadius)); }
+        }
+
         /// <summary>[IconSize] in pixels of the current screen, multiplied by [InterfaceSize].</summary>
         public double IconSizePx
         {
@@ -219,16 +235,6 @@ namespace Prunel
         /// <summary>Show an action's label when its icon is hovered (learning mode).</summary>
         [DataMember(Order = 32)]
         public bool ShowLabels { get; set; }
-
-        /// <summary>
-        /// Show the gaze circle in movement mode (yes / no, issue #123). Off: the circle is not
-        /// drawn in movement mode, so the eyes are not drawn to a moving circle all day; all
-        /// the rest works as before (smoothing, fixation, cursor following with
-        /// [MouseTracking]). The other modes (fixed gaze, menu, scroll...) still draw it.
-        /// Yes by default.
-        /// </summary>
-        [DataMember(Order = 38)]
-        public bool ShowMovementCircle { get; set; }
 
         // ───────────────────────── Colours (step color-themes) ─────────────────────────
 

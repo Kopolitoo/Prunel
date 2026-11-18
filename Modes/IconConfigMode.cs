@@ -207,8 +207,9 @@ namespace Prunel
             double height = Manager.ScreenHeight;
             double size = p.IconSizePx;
 
-            // The photo of the action choice has the same side: 2 × [CircleRadius], at most the screen.
-            double photoSide = Math.Min(Math.Round(2 * p.CircleRadiusPx), Math.Min(width, height));
+            // The photo of the action choice has the same side: 2 × the fixed circle radius
+            // ([CircleRadius], at least 5 %), at most the screen.
+            double photoSide = Math.Min(Math.Round(2 * p.FixedCircleRadiusPx), Math.Min(width, height));
             ActionChoiceLayout placed = new ActionChoiceLayout(width, height, size, photoSide);
 
             layer.PrepareChoiceScreen();

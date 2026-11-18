@@ -139,10 +139,10 @@ repeat) or a yes / no switch. Changes apply at once and are saved.
   language.
 - **Profiles** ("Profiles" tab): save the current settings under a name, and load them later
   with your eyes (for example a "Morning" and an "Evening" profile).
-- **Display** tab: **Movement circle** (yes at first). Turn it off if seeing the circle move
-  all day tires your eyes: in movement mode the circle is no longer drawn, but everything else
-  works as before (the fixation, the fixed gaze circle and its options icon, the cursor that
-  follows with "Mouse tracking"). The other screens (menu, scroll, magnifier...) are unchanged.
+- **Display** tab: **Circle radius** sets the size of the circle that follows your gaze. A
+  small circle (3 % for example) draws the eyes less and tires them less. The fixed gaze circle
+  and the photo of the magnifier and of the action choice never go below 5 %, so they stay easy
+  to use.
 - **Colours** tab ("Interface" category): the look of the gaze circle. **Circle colour**: grey
   (the usual circle), white, yellow, green, light blue, dark blue, purple or pink; "−" and "+" go
   from one colour to the next. **Circle thickness**: 100 % is the usual line, 200 % twice as thick (50 to 400 %).
