@@ -347,8 +347,6 @@ namespace Prunel
             frame.Background = ListBackground;
             frame.BorderBrush = Palette.Text;
             frame.BorderThickness = new Thickness(ScreenMetrics.Units(2));
-            // Round, like the photo of the action choice (RoundPhoto.cs).
-            frame.CornerRadius = new CornerRadius(sideWpf / 2);
             Canvas.SetLeft(frame, corner.X);
             Canvas.SetTop(frame, corner.Y);
             screen.Children.Add(frame);
