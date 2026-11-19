@@ -33,7 +33,8 @@ défilement, écriture…). Ce guide explique comment s'en servir. Pour l'instal
 
 ## Choix d'action
 
-Un écran noir montre la zone fixée, agrandie deux fois, avec une croix sur le point exact.
+Un écran noir montre la zone fixée, agrandie deux fois, dans un rond, avec une croix sur le
+point exact en son centre. Près d'un bord de l'écran, le rond est coupé droit par ce bord.
 Il apparaît et disparaît en fondu (un cinquième de seconde), pour que l'écran ne flashe pas.
 Autour, des icônes : clic gauche, double clic, clic droit, loupe, glisser-déposer (bouton
 gauche, bouton droit, android), défilement. On regarde une icône jusqu'à ce que son anneau soit
@@ -54,7 +55,8 @@ icônes ».
 
 ## Loupe
 
-Pour les petites cibles (une case à cocher, un petit lien). La zone est agrandie quatre fois ;
+Pour les petites cibles (une case à cocher, un petit lien). La zone est agrandie quatre fois,
+dans un rond (coupé droit près d'un bord de l'écran) ;
 on fixe le point exact sur l'image, et le choix d'action s'ouvre sur ce point. « Loupe avant
 l'action » (onglet « Loupe, glisser ») ouvre la loupe à chaque fois, avant le choix d'action.
 « Délai de la loupe » (même onglet) règle le temps de fixation sur l'image, séparément du délai

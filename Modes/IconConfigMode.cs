@@ -280,7 +280,7 @@ namespace Prunel
         }
 
         /// <summary>
-        /// Instead of the photo: a gray square of the same size, with the screen title and a
+        /// Instead of the photo: a gray disc of the same size, with the screen title and a
         /// reminder of the role of the badges.
         /// </summary>
         private static void BuildPreview(OverlayWindow layer, Canvas screen, ActionChoiceLayout placed)
@@ -293,7 +293,8 @@ namespace Prunel
 
             StackPanel texts = new StackPanel();
             texts.VerticalAlignment = VerticalAlignment.Center;
-            texts.Margin = new Thickness(sideWpf * 0.06);
+            // A wider margin: the text must fit inside the disc, not in the corners of a square.
+            texts.Margin = new Thickness(sideWpf * 0.16);
             texts.Children.Add(Text(Texts.Get("iconConfig.title"), titleFont, Palette.Text, true));
             TextBlock plus = Text(Texts.Get("iconConfig.plusHelp"), textFont, Soft, false);
             plus.Margin = new Thickness(0, textFont, 0, 0);
@@ -306,6 +307,8 @@ namespace Prunel
             frame.Background = PreviewBackground;
             frame.BorderBrush = Brushes.Gray;
             frame.BorderThickness = new Thickness(ScreenMetrics.Units(2));
+            // Round, like the photo of the action choice (RoundPhoto.cs).
+            frame.CornerRadius = new CornerRadius(sideWpf / 2);
             frame.Child = texts;
             Canvas.SetLeft(frame, corner.X);
             Canvas.SetTop(frame, corner.Y);
@@ -344,6 +347,8 @@ namespace Prunel
             frame.Background = ListBackground;
             frame.BorderBrush = Palette.Text;
             frame.BorderThickness = new Thickness(ScreenMetrics.Units(2));
+            // Round, like the photo of the action choice (RoundPhoto.cs).
+            frame.CornerRadius = new CornerRadius(sideWpf / 2);
             Canvas.SetLeft(frame, corner.X);
             Canvas.SetTop(frame, corner.Y);
             screen.Children.Add(frame);

@@ -356,6 +356,18 @@ Uniquement au regard.
    « Rayon du cercle » (au moins 4 %) : rien ne change. « Défaut » de l'onglet remet les deux à
    8.8 %.
 
+## 27. Photo ronde (issue #143)
+
+1. Au milieu de l'écran : ouvrir le choix d'action. La photo est un rond avec un fin anneau gris,
+   la croix est en son centre ; les icônes de la couronne ne la recouvrent pas.
+2. Loupe depuis là : l'image est ronde aussi. Fixer la cible dedans ouvre le choix d'action sur
+   le bon point ; fixer les coins noirs autour du rond ne fait rien.
+3. Près du bord gauche de l'écran (une icône du bureau), puis dans le coin en bas à droite
+   (l'horloge de la barre des tâches) : le rond est coupé droit du côté du bord de l'écran, la
+   croix est toujours au centre, et la loupe atteint toujours la cible.
+4. Paramètres, onglet « Icônes », « Configurer les icônes » : l'aperçu gris est rond, son texte
+   tient dedans.
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,
