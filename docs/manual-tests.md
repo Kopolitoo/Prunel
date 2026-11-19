@@ -327,6 +327,17 @@ Gaze only.
 5. An older settings file (version 22) opens with "Capture radius" = its "Circle radius" (at
    least 4 %): nothing changes. "Default" of the tab puts both back to 8.8 %.
 
+## 27. Round photo (issue #143)
+
+1. Middle of the screen: open the action choice. The photo is a circle with a thin grey ring,
+   the cross is in its center; the crown icons do not overlap it.
+2. Magnifier from there: the picture is a circle too. Staring at the target in it opens the
+   action choice on the right point; staring at the black corners around the circle does nothing.
+3. Near the left edge of the screen (a desktop icon), then in the bottom-right corner (clock of
+   the taskbar): the circle is cut flat on the side of the screen edge, the cross is still in
+   the center, and the magnifier still reaches the target.
+4. Settings, "Icons" tab, "Configure the icons": the grey preview is round, its text fits inside.
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,

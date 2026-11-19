@@ -96,6 +96,9 @@ namespace Prunel
         private double _left;
         private double _top;
         private double _zoom;
+        // Where P is shown (the center of the round photo, i.e. the center of the screen).
+        private double _centerX;
+        private double _centerY;
 
         // The "back" button (the only button of this mode) and what decides whether it is activated.
         private readonly List<GazeButton> _buttons = new List<GazeButton>();
@@ -289,12 +292,11 @@ namespace Prunel
             }
         }
 
-        /// <summary>True if this point (screen pixels) is on the enlarged photo.</summary>
+        /// <summary>True if this point (screen pixels) is on the enlarged photo (its visible disc).</summary>
         private bool OnPhoto(double x, double y)
         {
-            double enlargedSide = _side * _zoom;
-            return x >= _left && x <= _left + enlargedSide &&
-                   y >= _top && y <= _top + enlargedSide;
+            // The photo is round (RoundPhoto.cs): a point in a hidden corner does not count.
+            return RoundPhoto.Contains(x, y, _centerX, _centerY, new Point(_left, _top), _side * _zoom);
         }
 
         // ───────────────────────── 1. The photo and the black screen ─────────────────────────
@@ -326,7 +328,8 @@ namespace Prunel
             int maxSide = (int)Math.Floor((Math.Min(width, height) - ScreenMetrics.Px(40)) / _zoom);
             side = Math.Max(10, Math.Min(side, maxSide));
             //    Near an edge of the screen, the square is shifted to stay fully on the screen
-            //    (P is then no longer in the center of the photo).
+            //    (P is then no longer in the center of the square; the round photo stays
+            //    centered on P, see RoundPhoto.cs).
             _ox = (int)Clamp(Math.Round(_px - side / 2.0), 0, width - side);
             _oy = (int)Clamp(Math.Round(_py - side / 2.0), 0, height - side);
             _side = side;
@@ -340,37 +343,16 @@ namespace Prunel
             layer.PrepareChoiceScreen();
             Canvas screen = layer.ChoiceScreen;
 
-            // ── The enlarged photo, in the center of the screen.
+            // ── The enlarged photo, round, with P in the center of the screen (RoundPhoto.cs).
+            //    Near an edge of the screen, the disc is cut flat by that edge.
             double cxScreen = width / 2;
             double cyScreen = height / 2;
-            double enlargedSide = side * _zoom;
-            _left = cxScreen - enlargedSide / 2;
-            _top = cyScreen - enlargedSide / 2;
-
-            Image image = new Image();
-            image.Source = photo;
-            image.Stretch = Stretch.Fill;
-            // "Nearest neighbour": each pixel becomes a sharp 4 × 4 square, instead of being
-            // softened (blurred). This way one sees exactly where each real pixel falls.
-            RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.NearestNeighbor);
-            Point corner = layer.ToWpf(_left, _top);
-            image.Width = layer.LengthToWpf(enlargedSide);
-            image.Height = image.Width;
-            Canvas.SetLeft(image, corner.X);
-            Canvas.SetTop(image, corner.Y);
-            screen.Children.Add(image);
-
-            // A thin gray frame around the photo.
-            Rectangle frame = new Rectangle();
-            frame.Stroke = Brushes.Gray;
-            // Thickness in units of the reference screen, converted (see ScreenMetrics.cs).
-            double stroke = ScreenMetrics.Units(2);
-            frame.StrokeThickness = stroke;
-            frame.Width = image.Width + 2 * stroke;
-            frame.Height = image.Height + 2 * stroke;
-            Canvas.SetLeft(frame, corner.X - stroke);
-            Canvas.SetTop(frame, corner.Y - stroke);
-            screen.Children.Add(frame);
+            _centerX = cxScreen;
+            _centerY = cyScreen;
+            Point imageCorner = RoundPhoto.Add(layer, screen, photo, side, _zoom,
+                                               _px - _ox, _py - _oy, cxScreen, cyScreen);
+            _left = imageCorner.X;
+            _top = imageCorner.Y;
 
             // ── The "back" icon, on the right,
             //    at the same height as in the action choice (middle of the screen).

@@ -104,7 +104,9 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   the gaze has left it (no bursts of clicks).
 - `Modes/ActionChoiceMode` (step 3): the area around the cursor (a square of 2 × `CircleRadius`)
   is captured (`ScreenCapture`), then shown enlarged ×2 in the middle of a black screen, with a
-  cross in place of the cursor. Around it, a crown of eight slots, two per side of the picture:
+  cross in place of the cursor. The photo is round (`Ui/RoundPhoto`, issue #143): the capture
+  stays a square, only a disc centered on the cursor is shown, with P in the center of the screen;
+  near an edge of the screen the square is shifted, and the disc is cut flat by that edge. Around it, a crown of eight slots, two per side of the picture:
   double click and left click (top), right click and left drag and drop (right), right drag and
   drop and magnifier (bottom), android drag and drop and scrolling (left, step 8). On the left
   edge of the screen, the three modifiers Ctrl, Shift, Alt (step 6), 60 px from the edge and
@@ -116,7 +118,8 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   issue #59) between its two clicks, kept 50 ms shorter than the Windows double-click time.
 - `Modes/MagnifierMode` (step 5): refines the cursor position. The same area is captured, then
   shown enlarged ×`MagnifierZoom` (×4, i.e. 800 × 800 px) in the middle of a black screen; a
-  small 50 px circle follows the gaze. When the gaze fixes on the picture (same detection as in
+  small 50 px circle follows the gaze. The picture is round, like in the action choice
+  (`RoundPhoto`), and only a fixation on the visible disc counts. When the gaze fixes on the picture (same detection as in
   movement mode), the point is brought back to real coordinates (offset divided by 4), the cursor
   is placed there and the action choice opens on that point. A 30 px gaze error is then only 7
   to 8 real pixels. The "back" icon (right) returns, doing nothing, to the mode it came from: the
@@ -200,7 +203,7 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   and played with `System.Media.SoundPlayer` (in .NET Framework, no extra library).
 - `Modes/IconConfigMode` (step 10): "Icons" tab of the settings, "Configure the icons" button.
   Same layout as the action choice (`ActionChoiceLayout`, shared by both modes), with a grey
-  frame in place of the picture. The fourteen slots (eight of the crown, three modifiers on the
+  disc in place of the picture. The fourteen slots (eight of the crown, three modifiers on the
   left, Copy / Cut / Paste at the top) carry a badge: a red "−" on an assigned icon (looking at
   it removes the action), a green "+" on an empty slot (looking at it opens a list, in a
   rounded rectangle three quarters of the screen wide, with all the actions of the same group and
