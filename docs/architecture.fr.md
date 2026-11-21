@@ -111,7 +111,9 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   endroit n'est pas reconnue tant que le regard n'en est pas sorti (pas de clics en rafale).
 - `Modes/ActionChoiceMode` (étape 3) : la zone autour du curseur (carré de 2 × `CircleRadius`) est
   photographiée (`ScreenCapture`), puis affichée agrandie ×2 au centre d'un écran noir, avec une
-  croix à la place du curseur. Autour, une couronne de huit emplacements, deux par côté de la
+  croix à la place du curseur. La photo est ronde (`Ui/RoundPhoto`, issue #143) : la capture
+  reste un carré, seul un disque centré sur le curseur est montré, avec P au centre de l'écran ;
+  près d'un bord de l'écran le carré est décalé et le disque est coupé droit par ce bord. Autour, une couronne de huit emplacements, deux par côté de la
   photo : double clic et clic gauche (en haut), clic droit et glisser-déposer gauche (à droite),
   glisser-déposer droit et loupe (en bas), glisser-déposer android et défilement (à gauche, étape 8). Sur le bord gauche de l'écran, les trois modificateurs
   Ctrl, Maj, Alt (étape 6), à 60 px du bord et 60 px les uns des autres.
@@ -123,7 +125,8 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   entre ses deux clics, toujours 50 ms de moins que le délai de double clic de Windows.
 - `Modes/MagnifierMode` (étape 5) : affine la position du curseur. La même zone est photographiée,
   puis affichée agrandie ×`MagnifierZoom` (×4, soit 800 × 800 px) au centre d'un écran noir ; un
-  petit cercle de 50 px suit le regard. Quand le regard se fixe sur la photo (même détection
+  petit cercle de 50 px suit le regard. La photo est ronde, comme dans le choix d'action
+  (`RoundPhoto`), et seule une fixation sur le disque visible compte. Quand le regard se fixe sur la photo (même détection
   qu'en mode mouvement), le point est ramené en coordonnées réelles (écart divisé par 4), le
   curseur y est placé et le choix d'action s'ouvre sur ce point. Une erreur de 30 px du regard
   ne vaut plus que 7 à 8 px réels. L'icône « retour » (à droite) revient sans rien faire au mode
@@ -193,7 +196,7 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   fixé sur le curseur. Regard dans le cercle : rien ne défile (zone morte). Regard au-dessus, en
   dessous, à droite ou à gauche : la fenêtre sous le curseur défile dans ce sens (molette Windows,
   un seul sens à la fois), d'autant plus vite que le regard est loin du cercle, jusqu'à
-  `MaxScrollSpeed` (5 crans/s par défaut depuis le 02/11/2026) trois `CircleRadius` au-delà du bord. Démarrage doux (issue #52) : la
+  `MaxScrollSpeed` (5 crans/s par défaut depuis le 02/11/2026) six `CircleRadius` au-delà du bord (trois avant l'issue #125). Démarrage doux (issue #52) : la
   vitesse suit une courbe avec la distance (au carré : lente près du cercle) et chaque départ
   commence à 20 % de cette vitesse, puis atteint 100 % en 1,5 s. Un petit arc vert sur le
   cercle montre la direction. Rien ne défile pendant les 0,4 premières secondes, sauf si le regard
@@ -214,7 +217,7 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   plus).
 - `Modes/IconConfigMode` (étape 10) : onglet « Icônes » des paramètres, bouton « Configurer les
   icônes ». Même mise en page que le choix d'action (`ActionChoiceLayout`, partagée par les
-  deux modes), avec un cadre gris à la place de la photo. Les quatorze emplacements (huit de la
+  deux modes), avec un disque gris à la place de la photo. Les quatorze emplacements (huit de la
   couronne, trois modificateurs à gauche, Copier / Couper / Coller en haut) portent une pastille :
   « − » rouge sur une icône assignée (la regarder retire l'action), « + » verte sur un emplacement
   vide (la regarder ouvre une liste, dans un rectangle aux bords arrondis des trois quarts de

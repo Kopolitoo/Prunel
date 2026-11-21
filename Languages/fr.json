@@ -224,7 +224,7 @@
   "setting.dragDuration.name": "Durée du glisser",
   "setting.dragDuration.help": "Trajet du curseur, bouton enfoncé",
   "setting.maxScrollSpeed.name": "Vitesse maximale",
-  "setting.maxScrollSpeed.help": "Atteinte trois rayons de cercle au-delà du bord",
+  "setting.maxScrollSpeed.help": "Atteinte six rayons de cercle au-delà du bord",
   "setting.scrollInactiveWindows.name": "Défiler les fenêtres inactives",
   "setting.scrollInactiveWindows.help": "Réglage Windows : la molette va à la fenêtre sous le curseur",
   "setting.relativeMouse.name": "Souris du jeu",

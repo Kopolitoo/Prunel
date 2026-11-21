@@ -30,7 +30,8 @@ type…). This guide explains how to use it. To install it, see the [README](../
 
 ## Action choice
 
-A black screen shows the area you stared at, enlarged twice, with a cross on the exact point.
+A black screen shows the area you stared at, enlarged twice, in a circle, with a cross on the
+exact point in its center. Near an edge of the screen, the circle is cut flat by that edge.
 It fades in and out gently (a fifth of a second), so the screen does not flash.
 Around it, icons: left click, double click, right click, magnifier, drag and drop (left button,
 right button, android), scroll. Look at an icon until its ring is full to use it. On the left
@@ -50,7 +51,8 @@ The icons can be moved or removed: Settings, "Icons" tab, "Configure the icons".
 
 ## Magnifier
 
-For small targets (a check box, a small link). The area is shown enlarged four times; stare at
+For small targets (a check box, a small link). The area is shown enlarged four times, in a
+circle (cut flat near an edge of the screen); stare at
 the exact point on the picture, and the action choice opens on that point. "Magnifier before
 action" ("Magnifier, drag" tab) opens the magnifier every time, before the action choice.
 "Magnifier delay" (same tab) sets how long to stare at the picture, separately from the fixation

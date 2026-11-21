@@ -387,7 +387,7 @@ namespace Prunel
 
             // ── The photo: the square enclosing the circle, centered on P. Near an edge of the
             //    screen, the square is shifted to stay fully on the screen (P is then no longer
-            //    in the center of the photo, nor is the cross).
+            //    in the center of the square; the round photo stays centered on P).
             int side = (int)Math.Round(2 * p.CaptureRadiusPx);   // [CaptureRadius] (issue #123)
             side = Math.Min(side, (int)Math.Min(width, height));
             int ox = (int)Clamp(Math.Round(_px - side / 2.0), 0, width - side);
@@ -406,38 +406,13 @@ namespace Prunel
             ActionChoiceLayout placed = new ActionChoiceLayout(width, height, size, side);
             double zoom = ActionChoiceLayout.Zoom;
 
-            // ── The enlarged photo, in the center of the screen.
-            double enlargedSide = placed.EnlargedPhotoSide;
-            double left = placed.CenterX - enlargedSide / 2;
-            double top = placed.CenterY - enlargedSide / 2;
+            // ── The enlarged photo, round, with P (and the cross) in the center of the screen
+            //    (RoundPhoto.cs). Near an edge of the screen, the disc is cut flat by that edge.
+            RoundPhoto.Add(layer, screen, photo, side, zoom, _px - ox, _py - oy,
+                           placed.CenterX, placed.CenterY);
 
-            Image image = new Image();
-            image.Source = photo;
-            image.Stretch = Stretch.Fill;
-            // "Nearest neighbour": each pixel becomes a sharp 2 × 2 square, instead of being
-            // softened (blurred). The enlarged text thus stays readable.
-            RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.NearestNeighbor);
-            Point corner = layer.ToWpf(left, top);
-            image.Width = layer.LengthToWpf(enlargedSide);
-            image.Height = image.Width;
-            Canvas.SetLeft(image, corner.X);
-            Canvas.SetTop(image, corner.Y);
-            screen.Children.Add(image);
-
-            // A thin gray frame around the photo.
-            Rectangle frame = new Rectangle();
-            frame.Stroke = Brushes.Gray;
-            // Thickness in units of the reference screen, converted (see ScreenMetrics.cs).
-            double stroke = ScreenMetrics.Units(2);
-            frame.StrokeThickness = stroke;
-            frame.Width = image.Width + 2 * stroke;
-            frame.Height = image.Height + 2 * stroke;
-            Canvas.SetLeft(frame, corner.X - stroke);
-            Canvas.SetTop(frame, corner.Y - stroke);
-            screen.Children.Add(frame);
-
-            // ── The cross, in place of the cursor in the enlarged photo.
-            DrawCross(layer, screen, left + (_px - ox) * zoom, top + (_py - oy) * zoom);
+            // ── The cross, in place of the cursor in the enlarged photo: always in its center.
+            DrawCross(layer, screen, placed.CenterX, placed.CenterY);
 
             // ── The three groups of slots (crown, utility buttons at the top, modifiers on the
             //    left), with the layout chosen in the settings.
