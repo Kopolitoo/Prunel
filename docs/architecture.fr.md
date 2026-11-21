@@ -147,8 +147,8 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   annule sans rien enfoncer. `Actions/DragGesture` décrit le glisser en cours (départ, bouton, pause).
 - Bouton maintenu (issue #126, `Modes/HoldButtonMode`) : actions de couronne `HoldLeft` /
   `HoldRight` (pas placées par défaut). Le bouton est enfoncé sur P, puis le curseur suit le
-  regard comme la souris directe du jeu (`GameSmoothing`, `CursorDeadZone`) jusqu'au bouton
-  « Relâcher » du bord droit, Échap, ou un regard perdu 1 s ; `Quit` relâche toujours le bouton
+  regard comme la souris directe du jeu (`GameSmoothing`, `CursorDeadZone`) jusqu'à un bref regard (0,05 s) sur
+  le bouton « Relâcher » du bord droit (deux fois la taille des icônes), Échap, ou un regard perdu 1 s ; `Quit` relâche toujours le bouton
   et les modificateurs.
 - `GazeButton` : un bouton activable au regard (symbole de la police Windows, pastille,
   anneau, libellé au survol), dessiné sur le calque. Il peut être vide (« + » grisé),

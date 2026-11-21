@@ -364,7 +364,8 @@ Uniquement au regard.
    carré « Relâcher le bouton » apparaît au bord droit. Bouger le regard : un trait se dessine
    (couleur du bouton droit) là où va le curseur. Petit tremblement du regard au repos : le curseur
    ne bouge pas.
-3. Regarder « Relâcher le bouton » : le trait s'arrête, retour au mode mouvement (le cercle revient).
+3. Le bouton est deux fois plus gros que les autres icônes. Un bref regard sur « Relâcher le
+   bouton » (pas d'anneau à attendre) : le trait s'arrête, retour au mode mouvement (le cercle revient).
 4. Pareil avec « Gauche maintenu », puis appuyer sur Échap (ou dire « Échap » à Dragon) pendant le
    dessin : le bouton est relâché, retour au mode mouvement.
 5. Pendant le dessin, fermer les yeux environ 2 s : le bouton est relâché. Un clignement normal

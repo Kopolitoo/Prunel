@@ -69,7 +69,7 @@ For games that move the character while a mouse button is held (for example Back
 button). Add "Hold left" or "Hold right" to the crown in the icon configuration screen (they are
 not there by default). Stare at the starting point and choose it: the button is pressed there,
 then the cursor follows your gaze, button still held (same smoothing and anti-jitter as game
-mode). To let go, look at the "Release" button (square) on the right edge of the screen. The
+mode). To let go, glance at the large "Release" button (square) on the right edge of the screen: a short look is enough. The
 button is also released with Escape, or when the gaze is lost for more than one second.
 
 ## Scroll

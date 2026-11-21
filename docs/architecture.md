@@ -141,8 +141,8 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   button, pause).
 - Hold a button (issue #126, `Modes/HoldButtonMode`): crown actions `HoldLeft` / `HoldRight`
   (not placed by default). The button is pressed on P, then the cursor follows the gaze like the
-  direct game mouse (`GameSmoothing`, `CursorDeadZone`) until the "Release" button on the right
-  edge, Escape, or a gaze lost for 1 s; `Quit` always releases the button and the modifiers.
+  direct game mouse (`GameSmoothing`, `CursorDeadZone`) until a short glance (0.05 s) at the
+  "Release" button on the right edge (twice the icon size), Escape, or a gaze lost for 1 s; `Quit` always releases the button and the modifiers.
 - `GazeButton`: a button activated by gaze (symbol of the Windows font, badge, ring, label on
   hover), drawn on the overlay. It can be empty (greyed "+"), unavailable (its symbol, greyed) or
   lit (green border, for a switch).

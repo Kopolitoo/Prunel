@@ -334,7 +334,8 @@ Gaze only.
 2. In Paint, stare at the canvas, choose "Hold right": the action choice closes, a square
    "Release the button" button appears on the right edge. Move the gaze: a line is drawn (right
    button colour) where the cursor goes. Small gaze jitter at rest: the cursor does not move.
-3. Look at "Release the button": the line stops, back to movement mode (circle back).
+3. The button is twice the size of the other icons. A short glance at "Release the button" (no
+   ring to wait for): the line stops, back to movement mode (circle back).
 4. Same with "Hold left", then press Escape (or say "Escape" to Dragon) while drawing: the
    button is released, back to movement mode.
 5. While drawing, close the eyes about 2 s: the button is released. A normal blink does not

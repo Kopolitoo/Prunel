@@ -25,7 +25,8 @@ namespace Prunel
     ///  4. RELEASE.  The button and the modifiers are released, then back to movement mode.
     ///
     /// Ways out, so that the button never stays stuck:
-    ///   - looking at the "Release" button for [ActivationDelay];
+    ///   - a short glance at the "Release" button (twice the icon size, almost immediate:
+    ///     [ReleaseDelaySeconds], not [ActivationDelay]);
     ///   - the caregiver's Escape key (or "Escape" said to Dragon): App.OnEscape releases all
     ///     the buttons and keys and returns to movement mode;
     ///   - the gaze LOST (no measure) for more than [LostReleaseMs] (a blink is shorter);
@@ -52,6 +53,16 @@ namespace Prunel
         /// stay held when nobody is in front of the eyetracker any more. Starting value, to adjust after testing.
         /// </summary>
         private const double LostReleaseMs = 1000;
+
+        /// <summary>
+        /// Activation delay of the "Release" button, in seconds: almost immediate (user
+        /// request after testing: a short glance must be enough to stop). Not 0: the aimer
+        /// divides by the delay. With the confirmation of the aimed button, about 0.1 s in all.
+        /// </summary>
+        private const double ReleaseDelaySeconds = 0.05;
+
+        /// <summary>Size of the "Release" button: twice the usual icon size (user request after testing).</summary>
+        private const double ReleaseSizeFactor = 2;
 
         private readonly MouseSide _button;
 
@@ -157,7 +168,7 @@ namespace Prunel
             AppSettings p = AppSettings.Current;
 
             // The "Release" button.
-            int active = _aimer.Update(gaze, p.ActivationDelay, p.ShowLabels);
+            int active = _aimer.Update(gaze, ReleaseDelaySeconds, p.ShowLabels);
             if (active >= 0)
             {
                 App.LogDetail("Hold button: Release button looked at");
@@ -262,7 +273,7 @@ namespace Prunel
             }
             layer.PrepareDragSurface();
             Canvas surface = layer.DragSurface;
-            double size = AppSettings.Current.IconSizePx;
+            double size = AppSettings.Current.IconSizePx * ReleaseSizeFactor;
 
             double xRelease = Manager.ScreenWidth - size / 2 - ScreenMetrics.Px(10);
             double yRelease = Manager.ScreenHeight / 2;
