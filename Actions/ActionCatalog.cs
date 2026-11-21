@@ -36,7 +36,16 @@ namespace Prunel
         /// Opens (or closes) the gaze keyboard. Added at
         /// the end: the names already written in settings.json do not change.
         /// </summary>
-        Keyboard
+        Keyboard,
+
+        /// <summary>
+        /// Holds the left button pressed while the cursor follows the gaze (issue #126, see
+        /// HoldButtonMode). Added at the end, like Keyboard.
+        /// </summary>
+        HoldLeft,
+
+        /// <summary>Same with the right button (issue #126: games such as Back to Bed).</summary>
+        HoldRight
     }
 
     /// <summary>
@@ -94,7 +103,10 @@ namespace Prunel
                         ChoiceAction.Scroll,
                         // Offered in the list of the configuration
                         // screen, but not placed by default (the eight slots are taken).
-                        ChoiceAction.Keyboard
+                        ChoiceAction.Keyboard,
+                        // Not placed by default either (issue #126).
+                        ChoiceAction.HoldLeft,
+                        ChoiceAction.HoldRight
                     };
                 case IconGroup.Modifiers:
                     return new[] { ChoiceAction.Ctrl, ChoiceAction.Shift, ChoiceAction.Alt };
@@ -214,6 +226,8 @@ namespace Prunel
                 case ChoiceAction.Cut: return Texts.Get("action.cut.short");
                 case ChoiceAction.Paste: return Texts.Get("action.paste.short");
                 case ChoiceAction.Keyboard: return Texts.Get("action.keyboard.short");
+                case ChoiceAction.HoldLeft: return Texts.Get("action.holdLeft.short");
+                case ChoiceAction.HoldRight: return Texts.Get("action.holdRight.short");
                 default: return Texts.Get("action.back.short");
             }
         }
@@ -224,7 +238,7 @@ namespace Prunel
         ///   E962 = mouse, E71E = magnifier, E7C2 = move (four arrows), E72B = "back" arrow,
         ///   EC8F = scroll (up and down arrows; symbol to check on screen),
         ///   E8C8 = copy, E8C6 = scissors (cut), E77F = clipboard (paste),
-        ///   E765 = keyboard.
+        ///   E765 = keyboard, E72E = padlock (hold a button, issue #126).
         /// The three clicks share the mouse symbol, the three drag and drops the four arrows;
         /// the badge tells them apart (G = left, D = right, A = android).
         /// The modifiers simply show their name ("Ctrl", "Maj", "Alt").
@@ -265,6 +279,11 @@ namespace Prunel
                     // Empty badge: the button clicks on the aimed field, then opens the keyboard (or
                     // keeps it open, issue #133).
                     return new GazeButton("\uE765", null, Texts.Get("action.keyboard.label"));
+                case ChoiceAction.HoldLeft:
+                    // E72E = padlock (the button stays "locked" down; symbol to check on screen).
+                    return new GazeButton("\uE72E", Texts.Get("action.badge.left"), Texts.Get("action.holdLeft.label"));
+                case ChoiceAction.HoldRight:
+                    return new GazeButton("\uE72E", Texts.Get("action.badge.right"), Texts.Get("action.holdRight.label"));
                 default:
                     return new GazeButton("", null, Texts.Get("action.back.label"));
             }
