@@ -95,6 +95,12 @@ le mode jeu. Boutons :
 - **Paramètres** : voir plus bas.
 - **Jeu** : mode jeu (voir plus bas).
 - **Clavier** : le clavier du regard.
+- **Appeler** (sonnette) : sonne pour appeler quelqu'un. Avec la **sonnette de l'ordinateur**
+  (activée au départ), un « ding-dong » fort sonne sur cet ordinateur pendant quelques secondes
+  (par ses haut-parleurs, ou une enceinte Bluetooth si Windows y joue ses sons). Le menu reste
+  ouvert et affiche « Appel envoyé ». Un deuxième appel dans les 5 secondes est ignoré (« Appel
+  déjà envoyé »). La sonnette n'est pas dans la barre de la pause : choisir d'abord
+  « Reprendre », puis rouvrir le menu. Paramètres, catégorie « Actions », onglet « Sonnette ».
 - **Pause** / **Reprendre** : plus rien ne suit le regard, jusqu'à ce qu'on rouvre le menu et
   qu'on choisisse « Reprendre ».
 
@@ -133,7 +139,8 @@ clavier est déjà ouvert, il reste ouvert : c'est ainsi que l'on passe à un au
   le clavier, changer sa taille (« Perso », « Petit », « Grand » ; la taille Perso se règle dans
   les Paramètres, onglet « Clavier », par pas de 5 %), rendre son fond transparent (« Transparence » : 0, 25, 50 ou
   75 %, les lettres restent nettes), le mettre en pause, afficher la « Zone de saisie » (un aperçu de
-  ce qui est écrit), choisir la « Disposition du clavier » (AZERTY, QWERTY…).
+  ce qui est écrit), choisir la « Disposition du clavier » (AZERTY, QWERTY…), appeler (sonnette, comme dans la
+  barre classique).
 - **Mes mots** (Paramètres, onglet « Général ») : les mots ajoutés ; en regarder un le retire.
 - On ferme le clavier par le bouton au-dessus de lui, par la barre du clavier, ou avec Échap.
 
@@ -181,6 +188,12 @@ sont enregistrés.
   est grand, plus les mots courts passent devant les longs dans les trois cases du clavier du
   regard ; 1,0 = aucune préférence, seuls comptent la fréquence du mot et votre usage. Si des mots
   longs utiles arrivent trop tard, baissez-le ; si des mots longs rares gênent, montez-le.
+- Onglet **Sonnette** (catégorie « Actions ») : **Sonnette de l'ordinateur** (oui au départ) :
+  le bouton « Appeler » du menu sonne sur cet ordinateur. **Durée de la sonnerie** (6 s au
+  départ, de 2 à 30 s) et **Volume de la sonnette** (80 % au départ, de 10 à 100 % ; le volume de
+  Windows s'applique en plus). Pendant que la sonnette sonne, les petits sons des touches et des
+  boutons se taisent, pour ne pas la couper. D'autres sonnettes (enceinte Alexa…) viendront plus
+  tard.
 - Onglet **Sons** : deux options oui / non, toutes deux désactivées au départ. **Son des
   touches** : un petit « tic » à chaque touche du clavier du regard. **Son des boutons** : un petit
   son pour tous les autres boutons (menu, choix d'action, icône d'options, paramètres). Le son

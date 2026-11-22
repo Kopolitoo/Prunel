@@ -21,6 +21,8 @@ namespace Prunel
     ///                  becomes "Quit game" and returns to movement mode;
     ///   Keyboard       opens Prunel's gaze keyboard (see GazeKeyboard), then closes
     ///                  the menu. If it is already open (hidden by game mode), closes it;
+    ///   Call           rings the call bell (step call-bell, see BellRinger). The menu stays
+    ///                  open, with "Call sent" (or the problem) above the bar;
     ///   Pause          switches to pause mode;
     ///   Mouse tracking switch: green border when the option is on. The menu stays open; the
     ///                  gaze must leave the button before it can be used again;
@@ -35,7 +37,8 @@ namespace Prunel
     /// From PAUSE mode: the bar first shows ONLY the "Resume"
     /// button (play). This way, during the pause, a downward gaze cannot trigger anything else.
     /// When activated, it ends the pause and returns directly to movement mode. For the other
-    /// buttons, one then opens the menu again.
+    /// buttons (the "Call" bell too), one then opens the menu again: the user chose not to
+    /// show the bell during the pause (2026-11-22).
     ///
     /// The gaze circle keeps its normal size ([CircleRadius], as in movement mode).
     /// It is hidden while the gaze is in the bar zone. From PAUSE mode it is never shown:
@@ -51,6 +54,7 @@ namespace Prunel
     ///                 button shows the current value; issue #55);
     ///   Input box     switch (green border): the band of the last typed words;
     ///   Language      opens the list of the layouts of the Keyboards folder;
+    ///   Call          rings the call bell, as in the classic bar;
     ///   Pause         switches to pause mode (the keyboard is hidden, and comes back on resume).
     /// No "Close" button: it duplicated the one placed above the keyboard (removed at the
     /// user's).
@@ -79,6 +83,7 @@ namespace Prunel
             InputBox,
             Language,
             Pause,
+            Bell,
             Resume,
             MouseTracking,
             Quit,
@@ -374,6 +379,10 @@ namespace Prunel
                     Manager.ChangeMode(new PauseMode());
                     break;
 
+                case MenuAction.Bell:
+                    RingBell();
+                    break;
+
                 case MenuAction.Resume:
                     // End of the pause: straight back to movement mode, without showing the
                     // other buttons.
@@ -404,6 +413,36 @@ namespace Prunel
                     _confirmation = false;
                     _message = null;
                     Build();
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Rings the call bell (all the bells that are on, see BellRinger). The menu stays
+        /// open: the result is shown above the bar ("Call sent", or the problem). A bell that
+        /// goes through the network answers later: if the menu has been closed meanwhile,
+        /// nothing is shown.
+        /// </summary>
+        private async void RingBell()
+        {
+            BellResult result = await BellRinger.RingAllAsync();
+            if (Manager.CurrentMode != this)
+            {
+                return;
+            }
+            switch (result)
+            {
+                case BellResult.Sent:
+                    ShowMessage(Texts.Get("bell.sent"));
+                    break;
+                case BellResult.Failed:
+                    ShowMessage(Texts.Get("bell.failed"));
+                    break;
+                case BellResult.NoBell:
+                    ShowMessage(Texts.Get("bell.noBell"));
+                    break;
+                case BellResult.TooSoon:
+                    ShowMessage(Texts.Get("bell.tooSoon"));
                     break;
             }
         }
@@ -485,6 +524,8 @@ namespace Prunel
                 zone.SetLit(p.InputBox);
                 Add(buttons, actions, zone, MenuAction.InputBox);
                 Add(buttons, actions, new GazeButton("\uE774", null, Texts.Get("menu.keyboardLayout")), MenuAction.Language);
+                // E7ED = ringer: the call bell (step call-bell).
+                Add(buttons, actions, new GazeButton("\uE7ED", null, Texts.Get("menu.bell")), MenuAction.Bell);
                 Add(buttons, actions, new GazeButton("\uE769", null, Texts.Get("menu.pause")), MenuAction.Pause);
             }
             else if (_confirmation)
@@ -513,6 +554,8 @@ namespace Prunel
                     Add(buttons, actions, new GazeButton("\uE7FC", null, Texts.Get("menu.game")), MenuAction.Game);
                 }
                 Add(buttons, actions, new GazeButton("", null, Texts.Get("menu.keyboard")), MenuAction.Keyboard);
+                // E7ED = ringer: the call bell (step call-bell), in the middle of the bar.
+                Add(buttons, actions, new GazeButton("\uE7ED", null, Texts.Get("menu.bell")), MenuAction.Bell);
                 // (From the pause, only "Resume" is shown: so here, we are never in pause.)
                 Add(buttons, actions, new GazeButton("", null, Texts.Get("menu.pause")), MenuAction.Pause);
                 GazeButton tracking = new GazeButton("", null, Texts.Get("menu.mouseTracking"));

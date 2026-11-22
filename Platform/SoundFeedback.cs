@@ -34,7 +34,7 @@ namespace Prunel
     internal static class SoundFeedback
     {
         // 22050 samples per second, 16 bits, mono: enough for such short sounds.
-        private const int SampleRate = 22050;
+        public const int SampleRate = 22050;
 
         // Volume of the sounds, from 0 to 1: rather low, so as not to tire with fast typing.
         private const double Volume = 0.24;
@@ -54,7 +54,9 @@ namespace Prunel
         {
             AppSettings p = AppSettings.Current;
             bool wanted = (kind == SoundKind.Key && p.KeySound) || (kind == SoundKind.Button && p.ButtonSound);
-            if (!wanted || _failed)
+            // While the call bell rings, no short sound: it would cut the bell (Windows plays
+            // only one of these sounds at a time).
+            if (!wanted || _failed || ComputerBell.IsRinging)
             {
                 return;
             }
@@ -108,6 +110,17 @@ namespace Prunel
                     samples[n * perNote + i] = (short)(value * short.MaxValue);
                 }
             }
+
+            return ToWav(samples);
+        }
+
+        /// <summary>
+        /// Turns samples ([SampleRate] per second, 16 bits, mono) into a WAV file in memory.
+        /// Also used by the computer bell (see ComputerBell).
+        /// </summary>
+        public static byte[] ToWav(short[] samples)
+        {
+            int count = samples.Length;
 
             // The WAV format: a 44-byte header ("RIFF", "fmt ", "data"), then the samples.
             MemoryStream stream = new MemoryStream();

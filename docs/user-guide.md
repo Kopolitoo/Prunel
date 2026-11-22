@@ -90,6 +90,12 @@ game mode. Buttons:
 - **Settings**: see below.
 - **Game**: game mode (see below).
 - **Keyboard**: the gaze keyboard.
+- **Call** (bell): rings to call someone. With the **computer bell** (on at first), a loud
+  "ding-dong" rings on this computer for a few seconds (through its speakers, or a Bluetooth
+  speaker if Windows plays its sounds there). The menu stays open and shows "Call sent". A
+  second call within 5 seconds is ignored ("Call already sent"). The bell is not in the pause
+  bar: first choose "Resume", then open the menu again. Settings, "Actions" category, "Bell"
+  tab.
 - **Pause** / **Resume**: nothing follows your gaze any more, until you open the menu again
   and choose "Resume".
 
@@ -126,7 +132,7 @@ already open, it stays open: this is how you move to another field.
 - **Keyboard bar** (look below the screen while the keyboard is open): move the keyboard up or
   down, change its size ("Custom", "Small", "Large"; the Custom size is set in Settings,
   "Keyboard" tab, by 5 % steps), make its background see-through ("Transparency": 0, 25, 50 or 75 %, the
-  letters stay clear), pause it, show the "Input box" (a preview of what you typed), choose
+  letters stay clear), call (bell, as in the classic bar), pause it, show the "Input box" (a preview of what you typed), choose
   the "Keyboard layout" (QWERTY, AZERTY…).
 - **My words** (Settings, "General" tab): the words you added; look at one to remove it.
 - Close the keyboard with the button above it, from the keyboard bar, or with Escape.
@@ -172,6 +178,11 @@ repeat) or a yes / no switch. Changes apply at once and are saved.
 - **Sound** tab: two yes / no options, both off at first. **Key sound**: a short "tick" for each
   key of the gaze keyboard. **Button sound**: a short sound for every other button (menu, action
   choice, options icon, settings). The sound plays at the Windows volume.
+- **Bell** tab ("Actions" category): **Computer bell** (yes at first): the menu's "Call" button
+  rings on this computer. **Bell duration** (6 s at first, 2 to 30 s) and **Bell volume** (80 %
+  at first, 10 to 100 %; the Windows volume still applies). While the bell rings, the short
+  key and button sounds keep quiet, so they do not cut it. Other bells (an Alexa speaker…) will
+  come later.
 - **Tools** tab: **Calibration** (starts the eyetracker calibration) and **Diagnostic** (shows
   the gaze and the cursor live, and how steady the gaze is at the top, middle and bottom of the
   screen; nothing is saved).

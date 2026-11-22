@@ -354,6 +354,22 @@ Gaze only.
 6. With Ctrl lit in the action choice, "Hold left": Ctrl is held too, and released with the button.
 7. In Back to Bed: "Hold right" moves the character towards the gaze.
 
+## 29. Call bell on the computer (step call-bell)
+
+1. Open the menu from movement mode: a "Call" button (bell) is in the middle of the bar. Look at
+   it: a "ding-dong" rings on the computer for about 6 s, "Call sent" shows above the bar, the
+   menu stays open.
+2. Look at "Call" again within 5 s: nothing rings, "Call already sent". After 5 s it rings again.
+3. Settings, "Actions" category, "Bell" tab: change the duration (2 s, then 15 s) and the volume
+   (30 %, then 100 %): the next call follows them. "Default": yes, 6 s, 80 %.
+4. Turn "Computer bell" off, then "Call": nothing rings, "No bell is on (settings, Bell tab)".
+5. With "Button sound" on (Sound tab): during the ringing, looking at other menu buttons does not
+   cut the bell.
+6. Open the gaze keyboard, then its bar (look below the screen): a "Call" button is there too,
+   and rings.
+7. From the pause: the bar only shows "Resume" (no bell). From game mode: "Call" is there.
+8. With a Bluetooth speaker as the Windows output: the bell rings in the speaker.
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,

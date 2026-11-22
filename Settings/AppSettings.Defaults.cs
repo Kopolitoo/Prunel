@@ -83,6 +83,10 @@ namespace Prunel
             KeySound = false;
             ButtonSound = false;
 
+            ComputerBell = true;
+            BellDuration = 6;
+            BellVolume = 80;
+
             KeyDelay = 0.6;
             KeyRepeat = true;
             AutoCapitalize = true;
@@ -172,6 +176,8 @@ namespace Prunel
             // Only 0, 25, 50 or 75: another value goes to the nearest (40 → 50, 90 → 75).
             KeyboardTransparency = Math.Round(Clamp(KeyboardTransparency, 0, 75) / 25) * 25;
             LengthPenalty = Clamp(LengthPenalty, 1, 2);
+            BellDuration = Clamp(BellDuration, 2, 30);
+            BellVolume = Clamp(BellVolume, 10, 100);
             // An empty file name or one containing a path ("..\", "C:\"…) becomes the default
             // layout again: only files of the Keyboards folder are read.
             if (string.IsNullOrWhiteSpace(KeyboardLayout) ||
@@ -342,6 +348,9 @@ namespace Prunel
                 CaptureRadius = CircleRadius;
                 App.Log("Settings: updated to version 23 (capture radius)");
             }
+
+            // Version 24 (ComputerBell, BellDuration, BellVolume): nothing to fix, the settings
+            // keep their default value (yes, 6 s, 80 %).
 
             FileVersion = CurrentVersion;
             return true;
