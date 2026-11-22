@@ -79,6 +79,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- System.Security: part of .NET Framework (not an extra library), it is not referenced
+         by default. Needed for ProtectedData, which encrypts the Voice Monkey token of the
+         Alexa bell (see Bell/SecretStore.cs). HttpClient (System.Net.Http) is referenced by
+         default. -->
+    <Reference Include="System.Security" />
+  </ItemGroup>
+  <ItemGroup>
     <!-- The author's picture of the "About" tab of the settings (issue #92), built INTO
          Prunel.exe (a WPF "Resource"): nothing to copy next to it. -->
     <None Remove="Resources\Author.jpg" />

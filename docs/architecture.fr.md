@@ -51,7 +51,7 @@ l'explication de la classe.
 | `Typing` | le clavier au regard et la prédiction de mots : `GazeKeyboard`, `KeyboardKey`, `KeyboardLayout`, `WordPredictor` |
 | `Settings` | le fichier des réglages, les profils et la fenêtre des paramètres : `AppSettings`, `SettingsCatalog`, `SettingsProfiles`, `SettingsWindow`, `SettingTarget` |
 | `Ui` | fenêtres et boutons au regard : `OverlayWindow`, `DiagnosticWindow`, `CursorSampler`, `GazeButton`, `ButtonAimer`, `IGazeTarget`, `Texts`, `CircleColors`, `Palette` |
-| `Bell` | la sonnette d'appel : `IBell`, `BellRinger`, `ComputerBell` |
+| `Bell` | la sonnette d'appel : `IBell`, `BellRinger`, `ComputerBell`, `VoiceMonkeyBell`, `SecretStore` |
 | `Platform` | appels à Windows : `NativeMethods`, `MouseInjector`, `KeyboardInjector`, `KeyboardHook`, `MouseClickHook`, `WheelScroller`, `CursorWaker`, `ScreenCapture`, `ScreenMetrics`, `WindowsStartup`, `UiAccess`, `SoundFeedback` |
 | `Languages`, `Keyboards`, `Dictionaries` | fichiers de données copiés à côté de `Prunel.exe` (textes, dispositions de clavier, dictionnaires de prédiction) |
 | `Resources` | l'icône du programme |
@@ -225,6 +225,16 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   construit par `SoundFeedback.ToWav`) et joué avec `SoundPlayer` ; réglages `ComputerBell`,
   `BellDuration`, `BellVolume` (onglet « Sonnette », version 24 des paramètres). Pendant qu'elle
   sonne, `SoundFeedback` se tait (Windows ne joue qu'un son `SoundPlayer` à la fois).
+  `VoiceMonkeyBell` (partie 2) : `POST https://api-v3.voicemonkey.io/trigger` avec
+  `Authorization: Bearer <jeton>` et `{"device": "<id>"}`, par un `HttpClient` partagé
+  (`System.Net.Http`, délai de 10 s) ; succès = 2xx et `"success": true` ; les codes HTTP 401 /
+  404 / 429 donnent un message (`LastErrorKey`). Réglages `AlexaBell`, `VoiceMonkeyDevice`,
+  `VoiceMonkeyTokenProtected` (version 25), onglet « Alexa » (`SettingsWindow.BuildAlexaTab` :
+  coller le jeton, coller l'appareil depuis le presse-papiers, Tester). `SecretStore` chiffre le
+  jeton avec DPAPI (`ProtectedData`, `CurrentUser`, référence du framework `System.Security`) ;
+  les profils gardent le jeton et l'appareil actuels. Si toutes les sonnettes activées échouent
+  et que la sonnette de l'ordinateur est désactivée, `BellRinger` fait sonner l'ordinateur à la
+  place (`BellResult.Fallback`).
 - `Modes/IconConfigMode` (étape 10) : onglet « Icônes » des paramètres, bouton « Configurer les
   icônes ». Même mise en page que le choix d'action (`ActionChoiceLayout`, partagée par les
   deux modes), avec un disque gris à la place de la photo. Les quatorze emplacements (huit de la
@@ -382,7 +392,7 @@ Ancien nom : Prunel s'appelait GazeBar jusqu'à la version 0.2.0. `FormerName.Mi
 nouveau dossier n'existe pas encore (une copie si le déplacement est refusé). `WindowsStartup`
 retire l'ancienne valeur `GazeBar` de la clé Run, et l'installateur (même `AppId`) passe à
 `Program Files\Prunel` et supprime `Program Files\GazeBar`.
-`FileVersion` (24 actuellement) indique quelle version a écrit le fichier : un fichier plus
+`FileVersion` (25 actuellement) indique quelle version a écrit le fichier : un fichier plus
 ancien est converti au démarrage (voir la liste des versions en haut de `AppSettings.cs`). La
 fenêtre des paramètres liste ses onglets et ses réglages dans `SettingsCatalog.cs`.
 

@@ -84,6 +84,10 @@ namespace Prunel
                 {
                     BuildCirclePreview(TopRow + tab.Settings.Count * step);
                 }
+                if (tab.Name == SettingsCatalog.AlexaTabName)
+                {
+                    BuildAlexaTab(TopRow + tab.Settings.Count * StepRow);
+                }
                 if (tab.Name == SettingsCatalog.IconsTabName)
                 {
                     BuildIconsTab();
@@ -471,6 +475,40 @@ namespace Prunel
         }
 
         /// <summary>
+        /// "Alexa" tab (call bell, part 2), below its yes / no row: what is filled in (token
+        /// saved or not, device id), three small buttons "Paste the token", "Paste the device"
+        /// and "Test", a short help, then the message of the last button.
+        /// The token and the device are copied (Ctrl+C) from the Voice Monkey console in the
+        /// browser, then pasted here with the gaze: no long typing. E77F = paste, E7F5 = speakers,
+        /// E7ED = ringer.
+        /// </summary>
+        private void BuildAlexaTab(double top)
+        {
+            bool hasToken = !string.IsNullOrEmpty(P.VoiceMonkeyTokenProtected);
+            string device = string.IsNullOrEmpty(P.VoiceMonkeyDevice) ? Texts.Get("settings.alexa.none") : P.VoiceMonkeyDevice;
+            StackPanel state = new StackPanel();
+            state.Children.Add(Text(Texts.Format("settings.alexa.token",
+                                                 Texts.Get(hasToken ? "settings.alexa.tokenSaved" : "settings.alexa.none")),
+                                    28, White, false));
+            state.Children.Add(Text(Texts.Format("settings.alexa.device", device), 28, White, false));
+            Place(state, LeftContent, top + 10);
+
+            AddTarget(LeftContent, 500, 370, 120, SmallButton("\uE77F", Texts.Get("settings.alexa.pasteToken")),
+                         PasteVoiceMonkeyToken, false, false);
+            AddTarget(LeftContent + 385, 500, 370, 120, SmallButton("\uE7F5", Texts.Get("settings.alexa.pasteDevice")),
+                         PasteVoiceMonkeyDevice, false, false);
+            AddTarget(LeftContent + 770, 500, 370, 120, SmallButton("\uE7ED", Texts.Get("settings.alexa.test")),
+                         TestAlexaBell, false, false);
+
+            TextBlock help = Text(Texts.Get("settings.alexa.help"), 23, Soft, false);
+            help.TextWrapping = TextWrapping.Wrap;
+            help.Width = 1140;
+            Place(help, LeftContent, 660);
+
+            BuildMessage();
+        }
+
+        /// <summary>
         /// "Icônes" tab: an explanation, then a big button that opens the action
         /// choice icon configuration screen. E71D = grid of squares.
         /// </summary>
@@ -651,6 +689,27 @@ namespace Prunel
             icon.Margin = new Thickness(0, 0, 30, 0);
             button.Children.Add(icon);
             TextBlock text = Text(word, 42, White, true);
+            text.VerticalAlignment = VerticalAlignment.Center;
+            button.Children.Add(text);
+            return button;
+        }
+
+        /// <summary>
+        /// Like BigButton, with a smaller symbol and word: for three buttons side by side
+        /// ("Alexa" tab).
+        /// </summary>
+        private static UIElement SmallButton(string symbol, string word)
+        {
+            StackPanel button = new StackPanel();
+            button.Orientation = Orientation.Horizontal;
+            button.HorizontalAlignment = HorizontalAlignment.Center;
+            button.VerticalAlignment = VerticalAlignment.Center;
+            TextBlock icon = Text(symbol, 44, White, false);
+            icon.FontFamily = new FontFamily(IconFont);
+            icon.VerticalAlignment = VerticalAlignment.Center;
+            icon.Margin = new Thickness(0, 0, 18, 0);
+            button.Children.Add(icon);
+            TextBlock text = Text(word, 30, White, true);
             text.VerticalAlignment = VerticalAlignment.Center;
             button.Children.Add(text);
             return button;

@@ -192,8 +192,26 @@ sont enregistrés.
   le bouton « Appeler » du menu sonne sur cet ordinateur. **Durée de la sonnerie** (6 s au
   départ, de 2 à 30 s) et **Volume de la sonnette** (80 % au départ, de 10 à 100 % ; le volume de
   Windows s'applique en plus). Pendant que la sonnette sonne, les petits sons des touches et des
-  boutons se taisent, pour ne pas la couper. D'autres sonnettes (enceinte Alexa…) viendront plus
-  tard.
+  boutons se taisent, pour ne pas la couper.
+- Onglet **Alexa** (catégorie « Actions ») : la **sonnette Alexa** (désactivée au départ).
+  Activée, « Appeler » sonne aussi sur une enceinte Amazon Echo, par le service gratuit
+  [Voice Monkey](https://voicemonkey.io) (une skill Alexa ; sa formule gratuite permet environ
+  200 appels par mois). Installation à faire une seule fois, par exemple par un aidant :
+  1. Dans l'application Alexa, activer la skill **Voice Monkey** et la relier à son compte Amazon.
+  2. Sur [app.voicemonkey.io](https://app.voicemonkey.io), créer un **déclencheur de routine**
+     (« routine trigger », par exemple « Sonnette Prunel »).
+  3. Dans l'application Alexa, créer une **routine** : quand cet appareil Voice Monkey est
+     activé, régler le volume, jouer un son de sonnette, dire une phrase, sur l'Echo choisi (on
+     peut ajouter une notification sur un téléphone).
+  4. Sur app.voicemonkey.io, créer un **jeton** (« token »). Le copier (Ctrl+C), puis dans
+     Prunel regarder **Coller le jeton**. Copier l'identifiant du déclencheur, puis regarder
+     **Coller l'appareil**.
+  5. Regarder **Tester** : l'Echo doit sonner. Ensuite, activer la sonnette Alexa.
+  Le jeton est enregistré chiffré pour votre compte Windows (jamais en clair, jamais dans le
+  journal) et reste sur cet ordinateur : un profil ne l'emporte pas. Prunel n'envoie que
+  « active cet appareil » : aucune donnée du regard, aucun texte tapé. Il faut Internet ; si la
+  sonnette Alexa échoue et que la sonnette de l'ordinateur est désactivée, l'ordinateur sonne à
+  la place. En attendant la réponse, le menu affiche « Appel en cours… ».
 - Onglet **Sons** : deux options oui / non, toutes deux désactivées au départ. **Son des
   touches** : un petit « tic » à chaque touche du clavier du regard. **Son des boutons** : un petit
   son pour tous les autres boutons (menu, choix d'action, icône d'options, paramètres). Le son

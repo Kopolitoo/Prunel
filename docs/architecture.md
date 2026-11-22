@@ -48,7 +48,7 @@ The three biggest classes are "partial" classes: one class written in several fi
 | `Typing` | the gaze keyboard and word prediction: `GazeKeyboard`, `KeyboardKey`, `KeyboardLayout`, `WordPredictor` |
 | `Settings` | the settings file, profiles and settings window: `AppSettings`, `SettingsCatalog`, `SettingsProfiles`, `SettingsWindow`, `SettingTarget` |
 | `Ui` | windows and gaze buttons: `OverlayWindow`, `DiagnosticWindow`, `CursorSampler`, `GazeButton`, `ButtonAimer`, `IGazeTarget`, `Texts`, `CircleColors`, `Palette` |
-| `Bell` | the call bell: `IBell`, `BellRinger`, `ComputerBell` |
+| `Bell` | the call bell: `IBell`, `BellRinger`, `ComputerBell`, `VoiceMonkeyBell`, `SecretStore` |
 | `Platform` | calls to Windows: `NativeMethods`, `MouseInjector`, `KeyboardInjector`, `KeyboardHook`, `MouseClickHook`, `WheelScroller`, `CursorWaker`, `ScreenCapture`, `ScreenMetrics`, `WindowsStartup`, `UiAccess`, `SoundFeedback` |
 | `Languages`, `Keyboards`, `Dictionaries` | data files copied next to `Prunel.exe` (texts, keyboard layouts, prediction dictionaries) |
 | `Resources` | the program icon |
@@ -214,6 +214,15 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   memory (WAV built by `SoundFeedback.ToWav`) and played with `SoundPlayer`; settings
   `ComputerBell`, `BellDuration`, `BellVolume` ("Bell" tab, settings version 24). While it rings,
   `SoundFeedback` keeps quiet (Windows plays one `SoundPlayer` sound at a time).
+  `VoiceMonkeyBell` (part 2): `POST https://api-v3.voicemonkey.io/trigger` with
+  `Authorization: Bearer <token>` and `{"device": "<id>"}`, through one shared `HttpClient`
+  (`System.Net.Http`, 10 s timeout); success = 2xx and `"success": true`; HTTP 401 / 404 / 429
+  give a message (`LastErrorKey`). Settings `AlexaBell`, `VoiceMonkeyDevice`,
+  `VoiceMonkeyTokenProtected` (version 25), "Alexa" tab (`SettingsWindow.BuildAlexaTab`: paste
+  token, paste device from the clipboard, Test). `SecretStore` encrypts the token with DPAPI
+  (`ProtectedData`, `CurrentUser`, framework reference `System.Security`); profiles keep the
+  current token and device. If every bell that is on fails and the computer bell is off,
+  `BellRinger` rings the computer bell instead (`BellResult.Fallback`).
 - `Modes/IconConfigMode` (step 10): "Icons" tab of the settings, "Configure the icons" button.
   Same layout as the action choice (`ActionChoiceLayout`, shared by both modes), with a grey
   disc in place of the picture. The fourteen slots (eight of the crown, three modifiers on the
@@ -364,7 +373,7 @@ Former name: Prunel was called GazeBar up to version 0.2.0. `FormerName.Migrate`
 folder does not exist yet (a copy if the move is refused). `WindowsStartup` removes the old
 `GazeBar` value of the Run key, and the installer (same `AppId`) moves to
 `Program Files\Prunel` and deletes `Program Files\GazeBar`.
-`FileVersion` (currently 24) says which version wrote the file: an older file is converted at
+`FileVersion` (currently 25) says which version wrote the file: an older file is converted at
 startup (see the list of versions at the top of `AppSettings.cs`). The settings window lists its
 tabs and settings in `SettingsCatalog.cs`.
 
