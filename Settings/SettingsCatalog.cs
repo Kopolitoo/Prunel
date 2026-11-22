@@ -429,7 +429,7 @@ namespace Prunel
         public static readonly List<SettingsCategory> Categories = new List<SettingsCategory>
         {
             new SettingsCategory("category.gaze", "\uE890", "tab.gaze", "tab.fixation", "tab.delays", "tab.pause"),
-            new SettingsCategory("category.actions", "\uE7C9", "tab.magnifierDrag", "tab.scroll", IconsTabName),
+            new SettingsCategory("category.actions", "\uE7C9", "tab.magnifierDrag", "tab.scroll", IconsTabName, "tab.bell"),
             new SettingsCategory("category.display", "\uE7F4", "tab.display", ColorsTabName, "tab.keyboard", "tab.prediction", "tab.sound", "tab.game"),
             new SettingsCategory("category.system", "\uE770", GeneralTabName, ProfilesTabName, ToolsTabName, AboutTabName)
         };
@@ -611,6 +611,15 @@ namespace Prunel
                                  p => p.KeySound, (p, v) => p.KeySound = v),
                 Setting.YesOrNo("setting.buttonSound",
                                  p => p.ButtonSound, (p, v) => p.ButtonSound = v)),
+
+            // E7ED = ringer ("Bell"): the call bell of the menu (see BellRinger, ComputerBell).
+            new SettingsTab("tab.bell", "\uE7ED",
+                Setting.YesOrNo("setting.computerBell",
+                                 p => p.ComputerBell, (p, v) => p.ComputerBell = v),
+                Setting.Number("setting.bellDuration", " s", 1,
+                               p => p.BellDuration, (p, v) => p.BellDuration = v),
+                Setting.Number("setting.bellVolume", " %", 10,
+                               p => p.BellVolume, (p, v) => p.BellVolume = v)),
 
             // E713 = gear ("General")
             new SettingsTab(GeneralTabName, "",

@@ -386,6 +386,25 @@ Uniquement au regard.
    relâché avec le bouton.
 7. Dans Back to Bed : « Droit maintenu » déplace le personnage vers le regard.
 
+## 29. Sonnette d'appel sur l'ordinateur (étape call-bell)
+
+1. Ouvrir le menu depuis le mode mouvement : un bouton « Appeler » (sonnette) est au milieu de la
+   barre. Le regarder : un « ding-dong » sonne sur l'ordinateur pendant environ 6 s, « Appel
+   envoyé » s'affiche au-dessus de la barre, le menu reste ouvert.
+2. Regarder de nouveau « Appeler » dans les 5 s : rien ne sonne, « Appel déjà envoyé ». Après
+   5 s, ça sonne de nouveau.
+3. Paramètres, catégorie « Actions », onglet « Sonnette » : changer la durée (2 s, puis 15 s) et
+   le volume (30 %, puis 100 %) : l'appel suivant les suit. « Défaut » : oui, 6 s, 80 %.
+4. Désactiver « Sonnette de l'ordinateur », puis « Appeler » : rien ne sonne, « Aucune sonnette
+   activée (paramètres, onglet Sonnette) ».
+5. Avec « Son des boutons » activé (onglet Sons) : pendant la sonnerie, regarder d'autres boutons
+   du menu ne coupe pas la sonnette.
+6. Ouvrir le clavier du regard, puis sa barre (regarder sous l'écran) : un bouton « Appeler » y
+   est aussi, et sonne.
+7. Depuis la pause : la barre ne montre que « Reprendre » (pas de sonnette). Depuis le mode jeu :
+   « Appeler » est là.
+8. Avec une enceinte Bluetooth comme sortie de Windows : la sonnette sonne dans l'enceinte.
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,

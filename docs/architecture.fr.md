@@ -51,6 +51,7 @@ l'explication de la classe.
 | `Typing` | le clavier au regard et la prédiction de mots : `GazeKeyboard`, `KeyboardKey`, `KeyboardLayout`, `WordPredictor` |
 | `Settings` | le fichier des réglages, les profils et la fenêtre des paramètres : `AppSettings`, `SettingsCatalog`, `SettingsProfiles`, `SettingsWindow`, `SettingTarget` |
 | `Ui` | fenêtres et boutons au regard : `OverlayWindow`, `DiagnosticWindow`, `CursorSampler`, `GazeButton`, `ButtonAimer`, `IGazeTarget`, `Texts`, `CircleColors`, `Palette` |
+| `Bell` | la sonnette d'appel : `IBell`, `BellRinger`, `ComputerBell` |
 | `Platform` | appels à Windows : `NativeMethods`, `MouseInjector`, `KeyboardInjector`, `KeyboardHook`, `MouseClickHook`, `WheelScroller`, `CursorWaker`, `ScreenCapture`, `ScreenMetrics`, `WindowsStartup`, `UiAccess`, `SoundFeedback` |
 | `Languages`, `Keyboards`, `Dictionaries` | fichiers de données copiés à côté de `Prunel.exe` (textes, dispositions de clavier, dictionnaires de prédiction) |
 | `Resources` | l'icône du programme |
@@ -215,6 +216,15 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   « Sons », `KeySound` et `ButtonSound` (non par défaut). Les deux sons sont de petits WAV calculés
   en mémoire et joués avec `System.Media.SoundPlayer` (dans .NET Framework, sans bibliothèque en
   plus).
+- `Bell/` (étape call-bell) : la sonnette d'appel du menu (bouton « Appeler », `MenuMode`, dans
+  la barre classique et la barre du clavier, pas dans la barre de la pause : choix de
+  l'utilisateur). `IBell` est un type de sonnette (`Name`, `IsOn`, `RingAsync`, qui renvoie un
+  `Task<bool>` pour qu'une future sonnette réseau réponde sans bloquer le regard).
+  `BellRinger.RingAllAsync` fait sonner toutes les sonnettes activées, chacune de son côté, et
+  ignore un nouvel appel pendant 5 s. `ComputerBell` : un « ding-dong » calculé en mémoire (WAV
+  construit par `SoundFeedback.ToWav`) et joué avec `SoundPlayer` ; réglages `ComputerBell`,
+  `BellDuration`, `BellVolume` (onglet « Sonnette », version 24 des paramètres). Pendant qu'elle
+  sonne, `SoundFeedback` se tait (Windows ne joue qu'un son `SoundPlayer` à la fois).
 - `Modes/IconConfigMode` (étape 10) : onglet « Icônes » des paramètres, bouton « Configurer les
   icônes ». Même mise en page que le choix d'action (`ActionChoiceLayout`, partagée par les
   deux modes), avec un disque gris à la place de la photo. Les quatorze emplacements (huit de la
@@ -372,7 +382,7 @@ Ancien nom : Prunel s'appelait GazeBar jusqu'à la version 0.2.0. `FormerName.Mi
 nouveau dossier n'existe pas encore (une copie si le déplacement est refusé). `WindowsStartup`
 retire l'ancienne valeur `GazeBar` de la clé Run, et l'installateur (même `AppId`) passe à
 `Program Files\Prunel` et supprime `Program Files\GazeBar`.
-`FileVersion` (16 actuellement) indique quelle version a écrit le fichier : un fichier plus
+`FileVersion` (24 actuellement) indique quelle version a écrit le fichier : un fichier plus
 ancien est converti au démarrage (voir la liste des versions en haut de `AppSettings.cs`). La
 fenêtre des paramètres liste ses onglets et ses réglages dans `SettingsCatalog.cs`.
 

@@ -48,6 +48,7 @@ The three biggest classes are "partial" classes: one class written in several fi
 | `Typing` | the gaze keyboard and word prediction: `GazeKeyboard`, `KeyboardKey`, `KeyboardLayout`, `WordPredictor` |
 | `Settings` | the settings file, profiles and settings window: `AppSettings`, `SettingsCatalog`, `SettingsProfiles`, `SettingsWindow`, `SettingTarget` |
 | `Ui` | windows and gaze buttons: `OverlayWindow`, `DiagnosticWindow`, `CursorSampler`, `GazeButton`, `ButtonAimer`, `IGazeTarget`, `Texts`, `CircleColors`, `Palette` |
+| `Bell` | the call bell: `IBell`, `BellRinger`, `ComputerBell` |
 | `Platform` | calls to Windows: `NativeMethods`, `MouseInjector`, `KeyboardInjector`, `KeyboardHook`, `MouseClickHook`, `WheelScroller`, `CursorWaker`, `ScreenCapture`, `ScreenMetrics`, `WindowsStartup`, `UiAccess`, `SoundFeedback` |
 | `Languages`, `Keyboards`, `Dictionaries` | data files copied next to `Prunel.exe` (texts, keyboard layouts, prediction dictionaries) |
 | `Resources` | the program icon |
@@ -205,6 +206,14 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   the gaze keyboard), `FixedGazeMode` for the options icon. Two settings in the "Sound" tab,
   `KeySound` and `ButtonSound` (no by default). The two sounds are small WAVs computed in memory
   and played with `System.Media.SoundPlayer` (in .NET Framework, no extra library).
+- `Bell/` (step call-bell): the call bell of the menu ("Call" button, `MenuMode`, in the
+  classic bar and the keyboard bar, not in the pause bar: user's choice). `IBell` is one kind of
+  bell (`Name`, `IsOn`, `RingAsync`, which returns a `Task<bool>` so that a later network bell
+  answers without blocking the gaze). `BellRinger.RingAllAsync` rings all the bells that are on,
+  each on its own side, and ignores a new call for 5 s. `ComputerBell`: a "ding-dong" computed in
+  memory (WAV built by `SoundFeedback.ToWav`) and played with `SoundPlayer`; settings
+  `ComputerBell`, `BellDuration`, `BellVolume` ("Bell" tab, settings version 24). While it rings,
+  `SoundFeedback` keeps quiet (Windows plays one `SoundPlayer` sound at a time).
 - `Modes/IconConfigMode` (step 10): "Icons" tab of the settings, "Configure the icons" button.
   Same layout as the action choice (`ActionChoiceLayout`, shared by both modes), with a grey
   disc in place of the picture. The fourteen slots (eight of the crown, three modifiers on the
@@ -355,7 +364,7 @@ Former name: Prunel was called GazeBar up to version 0.2.0. `FormerName.Migrate`
 folder does not exist yet (a copy if the move is refused). `WindowsStartup` removes the old
 `GazeBar` value of the Run key, and the installer (same `AppId`) moves to
 `Program Files\Prunel` and deletes `Program Files\GazeBar`.
-`FileVersion` (currently 16) says which version wrote the file: an older file is converted at
+`FileVersion` (currently 24) says which version wrote the file: an older file is converted at
 startup (see the list of versions at the top of `AppSettings.cs`). The settings window lists its
 tabs and settings in `SettingsCatalog.cs`.
 

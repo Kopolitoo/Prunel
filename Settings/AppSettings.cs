@@ -97,8 +97,10 @@ namespace Prunel
         ///      "custom", and the old 50, 75 or 100 % stays a valid custom size.
         ///  23: issue #123 — CaptureRadius. Missing from an older file, it takes the value
         ///      of CircleRadius (at least 4 %), which sized the photo until then.
+        ///  24: step call-bell — ComputerBell (yes), BellDuration (6 s) and BellVolume (80 %).
+        ///      Nothing to fix: missing from an older file, they keep their default value.
         /// </summary>
-        public const int CurrentVersion = 23;
+        public const int CurrentVersion = 24;
 
         /// <summary>Format number of the file, so it can evolve one day without breaking everything.</summary>
         [DataMember(Order = 0)]
@@ -630,5 +632,25 @@ namespace Prunel
         /// </summary>
         [DataMember(Order = 141)]
         public bool ButtonSound { get; set; }
+
+        // ───────────────────────── Call bell ─────────────────────────
+
+        /// <summary>
+        /// The computer bell (yes / no): the "Call" button of the menu rings a loud "ding-dong"
+        /// on this computer. Yes by default. See ComputerBell and BellRinger.
+        /// </summary>
+        [DataMember(Order = 150)]
+        public bool ComputerBell { get; set; }
+
+        /// <summary>How long the computer bell rings, in seconds (2 to 30). See ComputerBell.</summary>
+        [DataMember(Order = 151)]
+        public double BellDuration { get; set; }
+
+        /// <summary>
+        /// Volume of the computer bell, in % (10 to 100) of its loudest sound. The Windows
+        /// volume still applies on top of it. See ComputerBell.
+        /// </summary>
+        [DataMember(Order = 152)]
+        public double BellVolume { get; set; }
     }
 }
