@@ -227,7 +227,7 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   sonne, `SoundFeedback` se tait (Windows ne joue qu'un son `SoundPlayer` à la fois).
   `VoiceMonkeyBell` (partie 2) : `POST https://api-v3.voicemonkey.io/trigger` avec
   `Authorization: Bearer <jeton>` et `{"device": "<id>"}`, par un `HttpClient` partagé
-  (`System.Net.Http`, délai de 10 s) ; succès = 2xx et `"success": true` ; les codes HTTP 401 /
+  (référence du framework `System.Net.Http`, délai de 10 s) ; succès = 2xx et `"success": true` ; les codes HTTP 401 /
   404 / 429 donnent un message (`LastErrorKey`). Réglages `AlexaBell`, `VoiceMonkeyDevice`,
   `VoiceMonkeyTokenProtected` (version 25), onglet « Alexa » (`SettingsWindow.BuildAlexaTab` :
   coller le jeton, coller l'appareil depuis le presse-papiers, Tester). `SecretStore` chiffre le

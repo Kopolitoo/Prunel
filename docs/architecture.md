@@ -216,7 +216,7 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   `SoundFeedback` keeps quiet (Windows plays one `SoundPlayer` sound at a time).
   `VoiceMonkeyBell` (part 2): `POST https://api-v3.voicemonkey.io/trigger` with
   `Authorization: Bearer <token>` and `{"device": "<id>"}`, through one shared `HttpClient`
-  (`System.Net.Http`, 10 s timeout); success = 2xx and `"success": true`; HTTP 401 / 404 / 429
+  (framework reference `System.Net.Http`, 10 s timeout); success = 2xx and `"success": true`; HTTP 401 / 404 / 429
   give a message (`LastErrorKey`). Settings `AlexaBell`, `VoiceMonkeyDevice`,
   `VoiceMonkeyTokenProtected` (version 25), "Alexa" tab (`SettingsWindow.BuildAlexaTab`: paste
   token, paste device from the clipboard, Test). `SecretStore` encrypts the token with DPAPI

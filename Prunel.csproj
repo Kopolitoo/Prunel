@@ -79,10 +79,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- System.Security: part of .NET Framework (not an extra library), it is not referenced
-         by default. Needed for ProtectedData, which encrypts the Voice Monkey token of the
-         Alexa bell (see Bell/SecretStore.cs). HttpClient (System.Net.Http) is referenced by
-         default. -->
+    <!-- Two parts of .NET Framework (not extra libraries), not referenced by default, for the
+         Alexa bell (see Bell/VoiceMonkeyBell.cs):
+         - System.Net.Http: HttpClient, which sends the request to Voice Monkey;
+         - System.Security: ProtectedData, which encrypts the Voice Monkey token
+           (see Bell/SecretStore.cs). -->
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Security" />
   </ItemGroup>
   <ItemGroup>
