@@ -75,6 +75,7 @@ namespace Prunel
             GameSensitivity = 1.0;
             GameMouse = DirectMouseText;
             GameRelative = TrackingRelativeText;
+            GameCursorDeadZone = 0.4;
 
             MouseTracking = false;
             StartWithWindows = false;
@@ -162,6 +163,7 @@ namespace Prunel
 
             GameSmoothing = Clamp(GameSmoothing, 0.01, 1);
             GameSensitivity = Clamp(GameSensitivity, 0.1, 10);
+            GameCursorDeadZone = Clamp(GameCursorDeadZone, 0, 5);
 
             // An unknown word (typo, capitals…) becomes the default value again.
             string mouse = (GameMouse ?? "").Trim().ToLowerInvariant();
@@ -360,6 +362,14 @@ namespace Prunel
             // keep their default value (yes, 6 s, 80 %). Version 25 (AlexaBell,
             // VoiceMonkeyDevice, VoiceMonkeyTokenProtected): nothing to fix either (no Alexa bell).
             // Version 26 (BellWindowsVolume): nothing to fix, it keeps its default value (80 %).
+
+            if (FileVersion < 27)
+            {
+                // GameCursorDeadZone is missing from the file: game mode used CursorDeadZone
+                // until now, so it starts with the same value (issue #124).
+                GameCursorDeadZone = CursorDeadZone;
+                App.Log("Settings: updated to version 27 (game anti-jitter)");
+            }
 
             FileVersion = CurrentVersion;
             return true;

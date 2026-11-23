@@ -575,6 +575,9 @@ namespace Prunel
                                   p => p.GamepadRelative, (p, v) => p.GamepadRelative = v),
                 Setting.Number("setting.gameSmoothing", "", 0.01,
                                p => p.GameSmoothing, (p, v) => p.GameSmoothing = v),
+                // Own anti-jitter of game mode (issue #124), by 0.05 % steps to aim finely.
+                Setting.Number("setting.gameCursorDeadZone", " %", 0.05,
+                               p => p.GameCursorDeadZone, (p, v) => p.GameCursorDeadZone = v),
                 Setting.Number("setting.gameSensitivity", " ×", 0.1,
                                p => p.GameSensitivity, (p, v) => p.GameSensitivity = v)),
 

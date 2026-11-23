@@ -149,7 +149,9 @@ clavier est déjà ouvert, il reste ouvert : c'est ainsi que l'on passe à un au
 Menu, « Jeu ». Rien n'est dessiné ; le curseur suit directement le regard (prévu pour des jeux
 comme Mindball Play). Les clics se font avec un contacteur externe ou la reconnaissance vocale.
 On ouvre le menu et on choisit « Quitter le jeu » pour revenir. L'onglet « Jeu » des paramètres
-contient les options du jeu.
+contient les options du jeu, dont son propre « Lissage du jeu » et son propre « Anti-tremblement
+du jeu » : ils ne changent que le mode jeu (et « Gauche / Droit maintenu »), pas le mode
+mouvement. L'anti-tremblement du jeu avance par pas de 0,05 %, pour viser finement.
 
 ## Paramètres
 

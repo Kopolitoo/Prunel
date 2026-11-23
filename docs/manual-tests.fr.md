@@ -446,6 +446,22 @@ jeton).
    ni touche restés enfoncés) ; le journal dit « Settings: Prunel exit requested ».
 6. En anglais : le bouton s'appelle « Quit Prunel ».
 
+## 32. Anti-tremblement du jeu (issue #124)
+
+1. Avant d'installer : noter la valeur « Anti-tremblement » (Paramètres, onglet « Regard »).
+   Installer la nouvelle version : l'onglet « Jeu » montre « Anti-tremblement du jeu » (sous
+   « Lissage du jeu ») avec la MÊME valeur ; le journal dit « Settings: updated to version 27
+   (game anti-jitter) ». Rien n'a changé en mode jeu ni en mode mouvement.
+2. Mettre « Anti-tremblement du jeu » à 0 (pas de 0,05 %) : en mode jeu, le curseur suit même
+   les tout petits mouvements du regard ; de retour en mode mouvement, le curseur se comporte
+   comme avant (la valeur de l'onglet « Regard » n'a pas changé).
+3. Mettre « Anti-tremblement du jeu » à 2 % : en mode jeu, le curseur reste immobile pour les
+   petits mouvements du regard. « Droit maintenu » (s'il est placé sur la couronne) se
+   comporte de la même façon.
+4. Changer « Anti-tremblement » de l'onglet « Regard » : la valeur du jeu ne change pas.
+5. « Défaut » dans l'onglet « Jeu » : « Anti-tremblement du jeu » revient à 0.40 %.
+6. En anglais : « Game anti-jitter ».
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,

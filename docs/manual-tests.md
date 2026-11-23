@@ -407,6 +407,21 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
    left pressed); the log says "Settings: Prunel exit requested".
 6. In French: the button is called « Quitter Prunel ».
 
+## 32. Game anti-jitter (issue #124)
+
+1. Before installing: note the "Anti-jitter" value (Settings, "Gaze" tab). Install the new
+   version: the "Game" tab shows "Game anti-jitter" (below "Game smoothing") with the SAME
+   value; the log says "Settings: updated to version 27 (game anti-jitter)". Nothing changed
+   in game mode or movement mode.
+2. Set "Game anti-jitter" to 0 (steps of 0.05 %): in game mode, the cursor follows even tiny
+   gaze moves; back in movement mode, the cursor behaves as before (the "Gaze" tab value did not
+   change).
+3. Set "Game anti-jitter" to 2 %: in game mode, the cursor stays still for small gaze moves.
+   "Hold right" (if placed on the crown) behaves the same way.
+4. Change "Anti-jitter" of the "Gaze" tab: the game value does not change.
+5. "Default" in the "Game" tab: "Game anti-jitter" goes back to 0.40 %.
+6. In French: « Anti-tremblement du jeu ».
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,

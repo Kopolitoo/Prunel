@@ -104,8 +104,10 @@ namespace Prunel
         ///      keep their default value (no Alexa bell).
         ///  26: step call-bell (user request) — BellWindowsVolume (80 %). Nothing to fix:
         ///      missing from an older file, it keeps its default value.
+        ///  27: issue #124 — GameCursorDeadZone. Missing from an older file, it takes the value
+        ///      of CursorDeadZone, which game mode used until then: nothing changes for the user.
         /// </summary>
-        public const int CurrentVersion = 26;
+        public const int CurrentVersion = 27;
 
         /// <summary>Format number of the file, so it can evolve one day without breaking everything.</summary>
         [DataMember(Order = 0)]
@@ -421,6 +423,22 @@ namespace Prunel
         /// </summary>
         [DataMember(Order = 83)]
         public string GameRelative { get; set; }
+
+        /// <summary>
+        /// Cursor anti-jitter of game mode (issue #124), same meaning as [CursorDeadZone] (in %
+        /// of the screen height), but set separately: a game often needs another value, and
+        /// changing it no longer changes movement mode. Used by the direct mouse of game mode
+        /// and by the "hold right button" mode, which moves like it.
+        /// In code, use GameCursorDeadZonePx.
+        /// </summary>
+        [DataMember(Order = 84)]
+        public double GameCursorDeadZone { get; set; }
+
+        /// <summary>[GameCursorDeadZone] in pixels of the current screen. Not saved in the file.</summary>
+        public double GameCursorDeadZonePx
+        {
+            get { return ScreenMetrics.Percent(GameCursorDeadZone); }
+        }
 
         // The possible values of GameMouse and GameRelative, written only once.
         public const string DirectMouseText = "direct";

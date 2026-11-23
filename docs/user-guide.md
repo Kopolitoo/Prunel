@@ -141,7 +141,10 @@ already open, it stays open: this is how you move to another field.
 
 Menu, "Game". Nothing is drawn; the mouse cursor follows your gaze directly (made for games like
 Mindball Play). Clicks are made with an external switch or voice recognition. Open the menu and
-choose "Quit the game" to go back. The "Game" tab of the settings has the game options.
+choose "Quit the game" to go back. The "Game" tab of the settings has the game options,
+including its own "Game smoothing" and "Game anti-jitter": they change only game mode (and
+"Hold left / right"), not movement mode. The game anti-jitter moves by 0.05 % steps, to aim
+finely.
 
 ## Settings
 

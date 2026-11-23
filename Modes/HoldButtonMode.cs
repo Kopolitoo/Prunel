@@ -17,7 +17,7 @@ namespace Prunel
     ///  2. PRESS.    The active modifiers (Ctrl, Shift, Alt) are pressed, the cursor is placed
     ///               on the aimed point P, then the button is pressed.
     ///  3. HOLD.     The button stays pressed. The cursor follows the gaze exactly as in game
-    ///               mode with the direct mouse (same [GameSmoothing], same [CursorDeadZone]
+    ///               mode with the direct mouse (same [GameSmoothing], same [GameCursorDeadZone]
     ///               anti-jitter): at rest it does not move for a tiny gaze jitter, beyond
     ///               that it follows continuously. Gaze off screen: the cursor stays where it is.
     ///               A "Release" button is shown on the right edge of the screen, vertically
@@ -228,7 +228,7 @@ namespace Prunel
         }
 
         /// <summary>
-        /// The cursor follows the smoothed gaze, with the [CursorDeadZone] anti-jitter (same
+        /// The cursor follows the smoothed gaze, with the [GameCursorDeadZone] anti-jitter (same
         /// logic as GameMode.DirectMouse). PointTo sends a real mouse movement (SendInput):
         /// with the button held, the application sees a drag.
         /// </summary>
@@ -243,7 +243,7 @@ namespace Prunel
             double gapX = cursor.X - _smoothed.X;
             double gapY = cursor.Y - _smoothed.Y;
             double distance = Math.Sqrt(gapX * gapX + gapY * gapY);
-            if (!_cursorOnTheWay && distance >= AppSettings.Current.CursorDeadZonePx)
+            if (!_cursorOnTheWay && distance >= AppSettings.Current.GameCursorDeadZonePx)
             {
                 _cursorOnTheWay = true;
             }

@@ -240,6 +240,8 @@
   "setting.gamepadRelative.right": "Manette",
   "setting.gameSmoothing.name": "Lissage du jeu",
   "setting.gameSmoothing.help": "Plus petit = plus calme, plus grand = plus réactif",
+  "setting.gameCursorDeadZone.name": "Anti-tremblement du jeu",
+  "setting.gameCursorDeadZone.help": "En mode jeu, le curseur ne bouge pas en dessous",
   "setting.gameSensitivity.name": "Sensibilité",
   "setting.gameSensitivity.help": "Souris relative : multiplie les déplacements",
   "setting.keyDelay.name": "Délai de frappe",

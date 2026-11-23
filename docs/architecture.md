@@ -145,7 +145,7 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   button, pause).
 - Hold a button (issue #126, `Modes/HoldButtonMode`): crown actions `HoldLeft` / `HoldRight`
   (not placed by default). The button is pressed on P, then the cursor follows the gaze like the
-  direct game mouse (`GameSmoothing`, `CursorDeadZone`) until a short glance (0.05 s) at the
+  direct game mouse (`GameSmoothing`, `GameCursorDeadZone`) until a short glance (0.05 s) at the
   "Release" button on the right edge (twice the icon size), Escape, or a gaze lost for 1 s; `Quit` always releases the button and the modifiers.
 - `GazeButton`: a button activated by gaze (symbol of the Windows font, badge, ring, label on
   hover), drawn on the overlay. It can be empty (greyed "+"), unavailable (its symbol, greyed) or
@@ -240,7 +240,8 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
 - `Modes/GameMode` (step 9): "Game" button of the menu. Nothing is drawn; the user clicks
   with an external switch or voice recognition. `GameMouse` "direct" (default, for Mindball
   Play): the cursor follows the gaze like movement mode with mouse tracking, with its own
-  `GameSmoothing`. `GameMouse` "relative" (untested): mouse movements for games that read raw
+  `GameSmoothing` and its own anti-jitter `GameCursorDeadZone` (issue #124; settings v27 copies
+  `CursorDeadZone` into it). `GameMouse` "relative" (untested): mouse movements for games that read raw
   input, either "tracking" or "gamepad" (`GameRelative`, `GameSensitivity`). The menu opens
   from this mode ("Quit the game").
 - `Modes/PauseMode` (step 4): nothing follows the gaze any more; only the menu can still open

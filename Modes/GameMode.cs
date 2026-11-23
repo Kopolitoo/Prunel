@@ -18,10 +18,10 @@ namespace Prunel
     ///   with mouse tracking, but without a circle (user request: with
     ///   [GameSmoothing] = 0.7 then 0.3, the cursor stuttered too much). So: the same double
     ///   smoothing as movement mode, but with its own [GameSmoothing] setting (0.16 by
-    ///   default, like [Smoothing]: the user wants two separate settings), and the
-    ///   [CursorDeadZone] anti-jitter:
+    ///   default, like [Smoothing]: the user wants two separate settings), and its own
+    ///   [GameCursorDeadZone] anti-jitter (issue #124, separate from [CursorDeadZone]):
     ///   at rest, the cursor does not move as long as the smoothed gaze is less than
-    ///   [CursorDeadZone] pixels away; beyond that, it follows continuously until it has
+    ///   [GameCursorDeadZone] pixels away; beyond that, it follows continuously until it has
     ///   caught up. Gaze lost or off screen: the cursor stays where it is.
     ///
     ///   "relative" (for other games): many games ignore the cursor position and only read
@@ -163,7 +163,7 @@ namespace Prunel
         /// Direct mouse: the cursor follows the smoothed gaze, like the mouse tracking of
         /// movement mode (MovementMode.MoveCursor):
         ///  - at rest, the cursor does not move as long as the smoothed gaze is less than
-        ///    [CursorDeadZone] pixels away (the small gaze jitter is ignored);
+        ///    [GameCursorDeadZone] pixels away (the small gaze jitter is ignored);
         ///  - beyond that, it gets "on the way" and follows on each frame, continuously, until
         ///    it has caught up (less than one pixel), then goes back to rest.
         /// The real cursor position is read: if the game moved it, this is taken into account.
@@ -179,7 +179,7 @@ namespace Prunel
             double gapX = cursor.X - _smoothed.X;
             double gapY = cursor.Y - _smoothed.Y;
             double distance = Math.Sqrt(gapX * gapX + gapY * gapY);
-            if (!_cursorOnTheWay && distance >= AppSettings.Current.CursorDeadZonePx)
+            if (!_cursorOnTheWay && distance >= AppSettings.Current.GameCursorDeadZonePx)
             {
                 _cursorOnTheWay = true;
             }

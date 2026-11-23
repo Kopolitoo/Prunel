@@ -151,7 +151,7 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   annule sans rien enfoncer. `Actions/DragGesture` décrit le glisser en cours (départ, bouton, pause).
 - Bouton maintenu (issue #126, `Modes/HoldButtonMode`) : actions de couronne `HoldLeft` /
   `HoldRight` (pas placées par défaut). Le bouton est enfoncé sur P, puis le curseur suit le
-  regard comme la souris directe du jeu (`GameSmoothing`, `CursorDeadZone`) jusqu'à un bref regard (0,05 s) sur
+  regard comme la souris directe du jeu (`GameSmoothing`, `GameCursorDeadZone`) jusqu'à un bref regard (0,05 s) sur
   le bouton « Relâcher » du bord droit (deux fois la taille des icônes), Échap, ou un regard perdu 1 s ; `Quit` relâche toujours le bouton
   et les modificateurs.
 - `GazeButton` : un bouton activable au regard (symbole de la police Windows, pastille,
@@ -254,7 +254,8 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
 - `Modes/GameMode` (étape 9) : bouton « Jeu » du menu. Rien n'est dessiné ; l'utilisateur clique
   avec un contacteur externe ou la reconnaissance vocale. `GameMouse` « direct » (par défaut,
   pour Mindball Play) : le curseur suit le regard comme en mode mouvement avec suivi souris, avec
-  son propre lissage `GameSmoothing`. `GameMouse` « relative » (non testé) : déplacements de la
+  son propre lissage `GameSmoothing` et son propre anti-tremblement `GameCursorDeadZone`
+  (issue #124 ; les paramètres v27 y recopient `CursorDeadZone`). `GameMouse` « relative » (non testé) : déplacements de la
   souris pour les jeux qui lisent l'entrée brute, en mode « tracking » ou « gamepad »
   (`GameRelative`, `GameSensitivity`). Le menu s'ouvre depuis ce mode (« Quitter le jeu »).
 - `Modes/PauseMode` (étape 4) : plus rien ne suit le regard ; seul le menu peut encore s'ouvrir
