@@ -228,6 +228,9 @@ namespace Prunel
         /// </summary>
         public event Action<string> LinkRequested;
 
+        /// <summary>"Oui" to the question "Quitter Prunel ?" of the "Quitter" tab.</summary>
+        public event Action QuitRequested;
+
         /// <summary>"Mes mots" button of the "Général" tab.</summary>
         public event Action MyWordsRequested;
 

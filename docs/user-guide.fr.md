@@ -225,6 +225,9 @@ sont enregistrés.
 - Onglet **À propos** : la version installée, et deux boutons qui ouvrent le **site web** de
   Prunel et ce **guide d'utilisation** dans le navigateur (Prunel revient alors au mode
   mouvement).
+- Onglet **Quitter** : le bouton **Quitter Prunel**, puis la question « Quitter Prunel ? »
+  (Oui / Non). Quitter reste ainsi toujours possible depuis les paramètres, même si le menu
+  ne montre plus son bouton « Quitter ».
 
 ## Pour l'aidant
 

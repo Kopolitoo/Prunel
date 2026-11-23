@@ -103,6 +103,7 @@ namespace Prunel
             window.CalibrationRequested += LaunchCalibration;
             window.DiagnosticRequested += OpenDiagnostic;
             window.LinkRequested += OpenLink;
+            window.QuitRequested += QuitPrunel;
             window.MyWordsRequested += OpenMyWords;
             window.ProfileListRequested += OpenProfileList;
             window.ProfileLoadRequested += LoadProfile;
@@ -223,6 +224,7 @@ namespace Prunel
                 window.CalibrationRequested -= LaunchCalibration;
                 window.DiagnosticRequested -= OpenDiagnostic;
                 window.LinkRequested -= OpenLink;
+                window.QuitRequested -= QuitPrunel;
                 window.MyWordsRequested -= OpenMyWords;
                 window.ProfileListRequested -= OpenProfileList;
                 window.ProfileLoadRequested -= LoadProfile;
@@ -425,6 +427,16 @@ namespace Prunel
                 return;
             }
             Manager.ChangeMode(new MovementMode());
+        }
+
+        /// <summary>
+        /// "Oui" to "Quitter Prunel ?" in the "Quitter" tab: closes Prunel, like the "Quit"
+        /// button of the menu (App.OnExit releases the mouse buttons and keys).
+        /// </summary>
+        private void QuitPrunel()
+        {
+            App.Log("Settings: Prunel exit requested");
+            Application.Current.Shutdown();
         }
 
         /// <summary>"Back" button: back to movement mode.</summary>

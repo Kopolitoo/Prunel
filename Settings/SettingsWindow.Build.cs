@@ -104,11 +104,15 @@ namespace Prunel
                 {
                     BuildAboutTab();
                 }
+                if (tab.Name == SettingsCatalog.QuitTabName)
+                {
+                    BuildQuitTab();
+                }
             }
 
             // ── The right column: "Défaut" at the top, "Retour" in the middle of the edge.
             //    E72C = circular arrows (restore), E72B = back arrow.
-            //    No "Défaut" for a tab with nothing to restore ("Outils", "Profils", "À propos"): a button
+            //    No "Défaut" for a tab with nothing to restore ("Outils", "Profils", "À propos", "Quitter"): a button
             //    that does nothing would be confusing.
             bool hasDefaults = tab.Settings.Count > 0 || tab.Name == SettingsCatalog.IconsTabName;
             if (hasDefaults)
@@ -604,6 +608,30 @@ namespace Prunel
         }
 
         /// <summary>
+        /// "Quitter" tab: one medium button "Quitter Prunel" at the bottom of the page (same size
+        /// and place as the lower button of the "Outils" tab). Looking at it does not quit: it
+        /// opens the question "Quitter Prunel ? Oui / Non" (see BuildConfirmation), whose
+        /// buttons are higher up, so that keeping the gaze on the button never confirms.
+        ///   E7E8 = power button.
+        /// This tab keeps quitting reachable even when the main menu no longer shows its
+        /// "Quitter" button (issue #147: customizable menu).
+        /// </summary>
+        private void BuildQuitTab()
+        {
+            StackPanel texts = new StackPanel();
+            texts.Children.Add(Text(Texts.Get("menu.quit"), 36, White, true));
+            TextBlock explanation = Text(Texts.Get("settings.quit.help"), 23, Soft, false);
+            explanation.TextWrapping = TextWrapping.Wrap;
+            explanation.Width = 1140;
+            explanation.Margin = new Thickness(0, 6, 0, 0);
+            texts.Children.Add(explanation);
+            Place(texts, LeftContent, TopRow + 20);
+
+            AddTarget(LeftContent + 290, 660, 560, 120, BigButton("\uE7E8", Texts.Get("menu.quit")),
+                         RequestQuit, false, false);
+        }
+
+        /// <summary>
         /// The author's picture (300 × 300, rounded corners) and, below it, "Créé par Kopolito"
         /// and the help of Claude.
         /// The picture is built into Prunel.exe (Resources/Author.jpg, "Resource" in
@@ -745,6 +773,19 @@ namespace Prunel
         /// </summary>
         private void BuildConfirmation(SettingsTab tab)
         {
+            if (tab.Name == SettingsCatalog.QuitTabName)
+            {
+                // "Quitter Prunel ?": same place and same buttons as the "Défaut" question.
+                TextBlock quitQuestion = Text(Texts.Get("menu.quitQuestion"), 40, White, true);
+                quitQuestion.TextWrapping = TextWrapping.Wrap;
+                quitQuestion.Width = 1140;
+                Place(quitQuestion, LeftContent, 300);
+
+                AddTarget(640, 480, 300, SideButton, Word(Texts.Get("common.yes"), 42), () => Notify(QuitRequested), false, false);
+                AddTarget(1040, 480, 300, SideButton, Word(Texts.Get("common.no"), 42), CancelDefaults, false, false);
+                return;
+            }
+
             string questionText = tab.Name == SettingsCatalog.IconsTabName
                 ? Texts.Get("settings.icons.defaultsQuestion")
                 : Texts.Format("settings.defaultsQuestion", tab.Label);

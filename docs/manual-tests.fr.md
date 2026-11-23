@@ -289,7 +289,7 @@ Uniquement au regard.
 
 ## 23. Onglet « À propos » (issue #92)
 
-1. Paramètres, catégorie « Système » : le dernier onglet est « À propos ». Il montre « Prunel »,
+1. Paramètres, catégorie « Système » : l'onglet « À propos » vient après « Outils ». Il montre « Prunel »,
    « Version 0.5.0 » (le numéro de la version installée, sans le « + » et les lettres qui
    peuvent suivre), les deux boutons « Site web » et « Guide d'utilisation », et à droite
    l'image de l'auteur avec « Créé par Kopolito » et « avec l'aide de Claude, une IA d'Anthropic » dessous. Il n'y a pas de bouton « Défaut ».
@@ -431,6 +431,18 @@ jeton).
    10 s au plus, « La sonnette a échoué : l'ordinateur a sonné à la place », et l'ordinateur
    sonne. Avec la sonnette de l'ordinateur ACTIVÉE : « Appel envoyé, mais une sonnette a échoué ».
 8. Enregistrer un profil, changer le jeton, charger le profil : le jeton actuel reste.
+
+## 31. Onglet « Quitter » des paramètres
+
+1. Paramètres, catégorie « Système » : le dernier onglet, sous « À propos », est « Quitter »
+   (symbole du bouton marche/arrêt). Il montre une explication et, en bas, le bouton
+   « Quitter Prunel ». Il n'y a pas de bouton « Défaut ».
+2. Regarder « Quitter Prunel » : la question « Quitter Prunel ? » apparaît avec « Oui » et
+   « Non » plus haut. Garder le regard là où était le bouton ne répond pas à la question.
+3. Regarder « Non » : l'onglet « Quitter » revient, Prunel continue.
+4. Recommencer et regarder « Oui » : Prunel se ferme (plus de cercle, aucun bouton de la souris
+   ni touche restés enfoncés) ; le journal dit « Settings: Prunel exit requested ».
+5. En anglais (onglet Général) : l'onglet s'appelle « Quit », le bouton « Quit Prunel ».
 
 ## Installation complète (Setup.exe, accès à l'interface)
 

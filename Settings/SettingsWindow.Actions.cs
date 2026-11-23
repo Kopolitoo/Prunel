@@ -189,6 +189,16 @@ namespace Prunel
             Build();
         }
 
+        /// <summary>
+        /// "Quitter Prunel" button of the "Quitter" tab: shows the question (the same flag as
+        /// the "Défaut" question; BuildConfirmation recognizes the tab).
+        /// </summary>
+        private void RequestQuit()
+        {
+            _confirmation = true;
+            Build();
+        }
+
         private void CancelDefaults()
         {
             _confirmation = false;
