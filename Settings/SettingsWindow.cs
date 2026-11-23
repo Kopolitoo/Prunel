@@ -132,6 +132,9 @@ namespace Prunel
         private int _tab;
         private bool _confirmation;
 
+        // True during the question "Quitter Prunel ?" ("Général" tab).
+        private bool _quitConfirmation;
+
         // A message shown in the "Outils" tab (for example "Calibration impossible…") or
         // "Profils" ("Profil chargé…"), or null. Cleared when the tab changes.
         private string _message;
@@ -227,6 +230,9 @@ namespace Prunel
         /// in the default browser.
         /// </summary>
         public event Action<string> LinkRequested;
+
+        /// <summary>"Oui" to the question "Quitter Prunel ?" of the "Général" tab.</summary>
+        public event Action QuitRequested;
 
         /// <summary>"Mes mots" button of the "Général" tab.</summary>
         public event Action MyWordsRequested;

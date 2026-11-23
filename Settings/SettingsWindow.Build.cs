@@ -54,6 +54,10 @@ namespace Prunel
             {
                 BuildNamingPage();
             }
+            else if (_quitConfirmation)
+            {
+                BuildQuitConfirmation();
+            }
             else if (_confirmation)
             {
                 BuildConfirmation(tab);
@@ -75,6 +79,7 @@ namespace Prunel
                 {
                     BuildFileInfo(TopRow + tab.Settings.Count * StepRow);
                     BuildMyWordsButton();
+                    BuildQuitButton();
                 }
                 if (tab.Name == DisplayTabName)
                 {
@@ -471,7 +476,22 @@ namespace Prunel
                 : Text(_message, 30, SettingTarget.Accent, true);
             explanation.TextWrapping = TextWrapping.Wrap;
             explanation.Width = 1140;
-            Place(explanation, LeftContent, 840);
+            Place(explanation, LeftContent, 830);
+        }
+
+        /// <summary>
+        /// "Général" tab, at the very bottom of the page: a medium "Quitter Prunel" button
+        /// (E7E8 = power button), against the right edge of the screen, in the bottom-right
+        /// corner (nothing else there: "Défaut" is at the top, "Retour" in the middle). Quitting stays
+        /// reachable here even when the main menu no longer shows its "Quitter" button
+        /// (issue #147: customizable menu). Looking at it does not quit: it opens the question
+        /// "Quitter Prunel ? Oui / Non" (see BuildQuitConfirmation), whose buttons are much
+        /// higher up, so that keeping the gaze on the button never confirms.
+        /// </summary>
+        private void BuildQuitButton()
+        {
+            AddTarget(PageWidth - 460 - 20, 920, 460, 110, BigButton("\uE7E8", Texts.Get("menu.quit")),
+                         RequestQuit, false, false);
         }
 
         /// <summary>
@@ -755,6 +775,22 @@ namespace Prunel
 
             AddTarget(640, 480, 300, SideButton, Word(Texts.Get("common.yes"), 42), () => RestoreDefaults(tab), false, false);
             AddTarget(1040, 480, 300, SideButton, Word(Texts.Get("common.no"), 42), CancelDefaults, false, false);
+        }
+
+        /// <summary>
+        /// The question "Quitter Prunel ?" of the "Général" tab, at the same place and with the
+        /// same "Oui" / "Non" buttons as the "Défaut" question: far above the "Quitter Prunel"
+        /// button (bottom of the page).
+        /// </summary>
+        private void BuildQuitConfirmation()
+        {
+            TextBlock question = Text(Texts.Get("menu.quitQuestion"), 40, White, true);
+            question.TextWrapping = TextWrapping.Wrap;
+            question.Width = 1140;
+            Place(question, LeftContent, 300);
+
+            AddTarget(640, 480, 300, SideButton, Word(Texts.Get("common.yes"), 42), () => Notify(QuitRequested), false, false);
+            AddTarget(1040, 480, 300, SideButton, Word(Texts.Get("common.no"), 42), CancelQuit, false, false);
         }
     }
 }

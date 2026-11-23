@@ -393,6 +393,20 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
    "Call sent, but one bell failed".
 8. Save a profile, change the token, load the profile: the current token stays.
 
+## 31. Quit from the "General" settings tab
+
+1. Settings, "System" category, "General" tab: in the bottom-right corner of the
+   screen, the "Quit Prunel" button (power symbol). Nothing overlaps (the
+   explanation above stays readable).
+2. Look at "Quit Prunel": the question "Quit Prunel?" appears with "Yes" and "No" much higher
+   up. Keeping the gaze where the button was does not answer the question.
+3. Look at "No": the "General" tab comes back, Prunel keeps running.
+4. Do it again, then look at "Default" during the question: the "Restore the default values…"
+   question replaces it. Look at "No".
+5. Do it again and look at "Yes": Prunel closes (no circle any more, no mouse button or key
+   left pressed); the log says "Settings: Prunel exit requested".
+6. In French: the button is called « Quitter Prunel ».
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,

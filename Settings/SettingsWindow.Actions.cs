@@ -152,6 +152,7 @@ namespace Prunel
             }
             _tab = num;
             _confirmation = false;
+            _quitConfirmation = false;
             _profileToConfirm = null;
             _message = null;
             App.LogDetail("Settings: tab " + SettingsCatalog.Tabs[num].Name);
@@ -185,7 +186,22 @@ namespace Prunel
 
         private void RequestDefaults()
         {
+            _quitConfirmation = false;   // the "Défaut" question replaces "Quitter Prunel ?"
             _confirmation = true;
+            Build();
+        }
+
+        /// <summary>"Quitter Prunel" button of the "Général" tab: shows the question.</summary>
+        private void RequestQuit()
+        {
+            _quitConfirmation = true;
+            Build();
+        }
+
+        /// <summary>"Non" to "Quitter Prunel ?": back to the "Général" tab.</summary>
+        private void CancelQuit()
+        {
+            _quitConfirmation = false;
             Build();
         }
 
