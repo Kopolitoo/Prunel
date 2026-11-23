@@ -166,7 +166,7 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
 - `Modes/SettingsMode` and `SettingsWindow` (step 7): "Settings" button of the menu. A
   full-screen window, black background, with four collapsible categories on the left: Gaze
   (Gaze, Fixation, Delays), Actions (Magnifier, drag, Scroll, Icons), Display (Display,
-  Keyboard, Game) and System (General, Profiles, Tools, About). The General tab has, at the very bottom, a "Quit Prunel" button then the question "Quit Prunel?" (`BuildQuitConfirmation`); "Yes" calls `SettingsMode.QuitPrunel`, which closes Prunel like the menu. The "About" tab (issue #92) shows the version
+  Keyboard, Game) and System (General, Profiles, Tools, About). The General tab has, in the bottom-right corner, a "Quit Prunel" button then the question "Quit Prunel?" (`BuildQuitConfirmation`); "Yes" calls `SettingsMode.QuitPrunel`, which closes Prunel like the menu. The "About" tab (issue #92) shows the version
   (`App.Version`), the author's picture (`Resources/Author.jpg`, built into the exe) and two
   buttons whose addresses come from the language file; `SettingsMode.OpenLink` opens them in
   the default browser and goes back to movement mode. Only the open category shows its tabs,

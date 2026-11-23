@@ -434,8 +434,8 @@ jeton).
 
 ## 31. Quitter depuis l'onglet « Général » des paramètres
 
-1. Paramètres, catégorie « Système », onglet « Général » : tout en bas de la page, sous
-   « Mes mots » et la langue, le bouton « Quitter Prunel » (symbole marche/arrêt). Rien ne se
+1. Paramètres, catégorie « Système », onglet « Général » : tout en bas à droite de l'écran,
+   le bouton « Quitter Prunel » (symbole marche/arrêt). Rien ne se
    chevauche (l'explication au-dessus reste lisible).
 2. Regarder « Quitter Prunel » : la question « Quitter Prunel ? » apparaît avec « Oui » et
    « Non » bien plus haut. Garder le regard là où était le bouton ne répond pas à la question.

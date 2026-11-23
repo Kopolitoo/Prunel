@@ -202,7 +202,7 @@ repeat) or a yes / no switch. Changes apply at once and are saved.
   device": no gaze data, no typed text. It needs internet; if the Alexa bell fails and the
   computer bell is off, the computer rings instead. Until the answer comes, the menu shows
   "Calling…".
-- **General** tab, at the very bottom: the **Quit Prunel** button, then the question "Quit
+- **General** tab, bottom-right corner: the **Quit Prunel** button, then the question "Quit
   Prunel?" (Yes / No). Quitting thus always stays possible from the settings, even if the menu
   no longer shows its "Quit" button.
 - **Tools** tab: **Calibration** (starts the eyetracker calibration) and **Diagnostic** (shows

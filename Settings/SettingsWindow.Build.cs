@@ -481,7 +481,8 @@ namespace Prunel
 
         /// <summary>
         /// "Général" tab, at the very bottom of the page: a medium "Quitter Prunel" button
-        /// (E7E8 = power button), centred below "Mes mots" and the language. Quitting stays
+        /// (E7E8 = power button), against the right edge of the screen, in the bottom-right
+        /// corner (nothing else there: "Défaut" is at the top, "Retour" in the middle). Quitting stays
         /// reachable here even when the main menu no longer shows its "Quitter" button
         /// (issue #147: customizable menu). Looking at it does not quit: it opens the question
         /// "Quitter Prunel ? Oui / Non" (see BuildQuitConfirmation), whose buttons are much
@@ -489,7 +490,7 @@ namespace Prunel
         /// </summary>
         private void BuildQuitButton()
         {
-            AddTarget(LeftContent + 360, 920, 460, 110, BigButton("\uE7E8", Texts.Get("menu.quit")),
+            AddTarget(PageWidth - 460 - 20, 920, 460, 110, BigButton("\uE7E8", Texts.Get("menu.quit")),
                          RequestQuit, false, false);
         }
 

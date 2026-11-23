@@ -395,8 +395,8 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
 
 ## 31. Quit from the "General" settings tab
 
-1. Settings, "System" category, "General" tab: at the very bottom of the page, below "My
-   words" and the language, the "Quit Prunel" button (power symbol). Nothing overlaps (the
+1. Settings, "System" category, "General" tab: in the bottom-right corner of the
+   screen, the "Quit Prunel" button (power symbol). Nothing overlaps (the
    explanation above stays readable).
 2. Look at "Quit Prunel": the question "Quit Prunel?" appears with "Yes" and "No" much higher
    up. Keeping the gaze where the button was does not answer the question.

@@ -219,7 +219,7 @@ sont enregistrés.
   touches** : un petit « tic » à chaque touche du clavier du regard. **Son des boutons** : un petit
   son pour tous les autres boutons (menu, choix d'action, icône d'options, paramètres). Le son
   suit le volume de Windows.
-- Onglet **Général**, tout en bas : le bouton **Quitter Prunel**, puis la question « Quitter
+- Onglet **Général**, en bas à droite : le bouton **Quitter Prunel**, puis la question « Quitter
   Prunel ? » (Oui / Non). Quitter reste ainsi toujours possible depuis les paramètres, même si
   le menu ne montre plus son bouton « Quitter ».
 - Onglet **Outils** : **Calibration** (lance la calibration de l'eyetracker) et **Diagnostic**
