@@ -63,6 +63,82 @@ namespace Prunel
             Build();
         }
 
+        /// <summary>
+        /// "Alexa" tab: pastes the Voice Monkey token from the clipboard. It is saved encrypted
+        /// (see SecretStore) and never shown nor logged.
+        /// </summary>
+        private void PasteVoiceMonkeyToken()
+        {
+            string text = ClipboardText();
+            if (text.Length == 0 || text.IndexOfAny(new[] { ' ', '\r', '\n', '\t' }) >= 0)
+            {
+                _message = Texts.Get("settings.alexa.clipboardWrong");
+                Build();
+                return;
+            }
+            VoiceMonkeyBell.SaveToken(P, text);
+            P.Save();
+            App.Log("Settings: Voice Monkey token saved");
+            _message = Texts.Get("settings.alexa.tokenPasted");
+            Build();
+        }
+
+        /// <summary>"Alexa" tab: pastes the id of the Voice Monkey routine trigger from the clipboard.</summary>
+        private void PasteVoiceMonkeyDevice()
+        {
+            string text = ClipboardText();
+            if (text.Length == 0 || text.Length > 100 || text.IndexOfAny(new[] { ' ', '\r', '\n', '\t' }) >= 0)
+            {
+                _message = Texts.Get("settings.alexa.clipboardWrong");
+                Build();
+                return;
+            }
+            P.VoiceMonkeyDevice = text;
+            P.Save();
+            App.Log("Settings: Voice Monkey device = " + text);
+            _message = Texts.Get("settings.alexa.devicePasted");
+            Build();
+        }
+
+        /// <summary>
+        /// "Alexa" tab: presses the routine trigger once, even if the Alexa bell is off, and
+        /// shows the result. The answer may take a few seconds: "Test in progress" first.
+        /// </summary>
+        private async void TestAlexaBell()
+        {
+            if (!VoiceMonkeyBell.IsReady(P))
+            {
+                _message = Texts.Get("bell.alexa.error.notReady");
+                Build();
+                return;
+            }
+            _message = Texts.Get("settings.alexa.testing");
+            Build();
+            int tab = _tab;
+            bool ok = await VoiceMonkeyBell.TriggerAsync(P);
+            App.Log("Settings: Alexa bell test " + (ok ? "OK" : "failed"));
+            if (_tab != tab || !IsVisible)
+            {
+                return;
+            }
+            _message = ok ? Texts.Get("settings.alexa.testOk") : Texts.Get(VoiceMonkeyBell.LastErrorKey ?? "bell.alexa.error.other");
+            Build();
+        }
+
+        /// <summary>The text of the clipboard, trimmed ("" if none or unreadable).</summary>
+        private static string ClipboardText()
+        {
+            try
+            {
+                return Clipboard.ContainsText() ? Clipboard.GetText().Trim() : "";
+            }
+            catch (Exception e)
+            {
+                App.Log("Settings: cannot read the clipboard (" + e.GetType().Name + ")");
+                return "";
+            }
+        }
+
         private void ChooseTab(int num)
         {
             if (_naming)

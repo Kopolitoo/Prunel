@@ -99,8 +99,11 @@ namespace Prunel
         ///      of CircleRadius (at least 4 %), which sized the photo until then.
         ///  24: step call-bell — ComputerBell (yes), BellDuration (6 s) and BellVolume (80 %).
         ///      Nothing to fix: missing from an older file, they keep their default value.
+        ///  25: step call-bell, part 2 — AlexaBell (no), VoiceMonkeyDevice ("") and
+        ///      VoiceMonkeyTokenProtected (""). Nothing to fix: missing from an older file, they
+        ///      keep their default value (no Alexa bell).
         /// </summary>
-        public const int CurrentVersion = 24;
+        public const int CurrentVersion = 25;
 
         /// <summary>Format number of the file, so it can evolve one day without breaking everything.</summary>
         [DataMember(Order = 0)]
@@ -652,5 +655,29 @@ namespace Prunel
         /// </summary>
         [DataMember(Order = 152)]
         public double BellVolume { get; set; }
+
+        /// <summary>
+        /// The Alexa bell (yes / no): the "Call" button also presses a Voice Monkey routine
+        /// trigger, which starts an Alexa routine (doorbell sound on an Echo...). No by default.
+        /// It only rings once a token and a device are filled in. See VoiceMonkeyBell.
+        /// </summary>
+        [DataMember(Order = 153)]
+        public bool AlexaBell { get; set; }
+
+        /// <summary>
+        /// The id of the Voice Monkey routine trigger to press (for example "prunel-bell"),
+        /// pasted in the "Alexa" settings tab. "" = none. Belongs to the computer: loading a
+        /// profile does not change it.
+        /// </summary>
+        [DataMember(Order = 154)]
+        public string VoiceMonkeyDevice { get; set; }
+
+        /// <summary>
+        /// The Voice Monkey API token, ENCRYPTED for the current Windows account (see
+        /// SecretStore): never in clear in the file, never in the log. "" = none. Belongs to
+        /// the computer: loading a profile does not change it.
+        /// </summary>
+        [DataMember(Order = 155)]
+        public string VoiceMonkeyTokenProtected { get; set; }
     }
 }

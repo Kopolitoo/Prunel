@@ -7,8 +7,14 @@ namespace Prunel
     /// <summary>The result of a call (see BellRinger.RingAllAsync).</summary>
     internal enum BellResult
     {
-        /// <summary>At least one bell rang.</summary>
+        /// <summary>All the bells that are on rang.</summary>
         Sent,
+
+        /// <summary>Some bells rang, at least one failed.</summary>
+        PartlyFailed,
+
+        /// <summary>All the bells that are on failed: the computer bell rang instead.</summary>
+        Fallback,
 
         /// <summary>All the bells that are on failed.</summary>
         Failed,
@@ -23,7 +29,9 @@ namespace Prunel
     /// <summary>
     /// The CALL BELL (step call-bell): the "Call" button of the menu bar asks this class to
     /// ring. It rings ALL the bells that are on in the settings ("Bell" tab), each one on its
-    /// own side: if one fails, the others ring all the same.
+    /// own side: if one fails, the others ring all the same. If ALL of them fail (no internet
+    /// for the Alexa bell...) and the computer bell is off, the computer bell rings instead:
+    /// someone may still hear it.
     ///
     /// After a call, a new call is ignored for [CooldownSeconds]: looking at the button again
     /// by mistake does not ring twice (useful later for the bells that go through the
@@ -40,8 +48,12 @@ namespace Prunel
         /// <summary>All the kinds of bells, in order.</summary>
         private static readonly List<IBell> Bells = new List<IBell>
         {
-            new ComputerBell()
+            new ComputerBell(),
+            new VoiceMonkeyBell()
         };
+
+        // The computer bell, also used as the fallback.
+        private static readonly IBell Computer = Bells[0];
 
         // Time of the last call that left (DateTime.MinValue = none yet).
         private static DateTime _lastCall = DateTime.MinValue;
@@ -74,7 +86,23 @@ namespace Prunel
                 calls.Add(RingOne(bell, p));
             }
             bool[] results = await Task.WhenAll(calls);
-            return Array.IndexOf(results, true) >= 0 ? BellResult.Sent : BellResult.Failed;
+            bool oneRang = Array.IndexOf(results, true) >= 0;
+            bool oneFailed = Array.IndexOf(results, false) >= 0;
+            if (oneRang)
+            {
+                return oneFailed ? BellResult.PartlyFailed : BellResult.Sent;
+            }
+
+            // Everything failed: the computer bell, if it was not among them, rings instead.
+            if (!on.Contains(Computer))
+            {
+                App.Log("Bell: every bell failed, the computer bell rings instead");
+                if (await RingOne(Computer, p))
+                {
+                    return BellResult.Fallback;
+                }
+            }
+            return BellResult.Failed;
         }
 
         /// <summary>Rings one bell and logs the result. Never throws.</summary>

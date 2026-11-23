@@ -370,6 +370,25 @@ Gaze only.
 7. From the pause: the bar only shows "Resume" (no bell). From game mode: "Call" is there.
 8. With a Bluetooth speaker as the Windows output: the bell rings in the speaker.
 
+## 30. Call bell on an Alexa speaker (step call-bell, part 2)
+
+Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa routine, token).
+
+1. Settings, "Actions" category, "Alexa" tab: "Token: none", "Device: none". "Test": message
+   "paste the token and the device first".
+2. Copy a wrong text with a space, "Paste token": "The clipboard holds no token…".
+3. Copy the token, "Paste token": "Token: saved (encrypted)". Open `settings.json`: the token is
+   not readable in clear. `prunel.log` does not contain it.
+4. Copy the routine trigger id, "Paste device": the id is shown. "Test": "Test in progress…",
+   then the Echo rings and "Voice Monkey started the routine". Note how many seconds it takes.
+5. Turn "Alexa bell" on. Menu, "Call": "Calling…", then "Call sent"; the computer and the Echo
+   ring.
+6. Paste a wrong token, "Test": "the token is refused". Paste the right one again.
+7. Unplug the internet (or Wi-Fi off), "Call" with the computer bell OFF: after up to 10 s, "The
+   bell failed: the computer rang instead", and the computer rings. With the computer bell ON:
+   "Call sent, but one bell failed".
+8. Save a profile, change the token, load the profile: the current token stays.
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,

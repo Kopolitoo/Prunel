@@ -27,8 +27,8 @@ installateur remplace l'ancien GazeBar.
 Prunel est un projet jeune (version 0.x), utilisé tous les jours par son auteur. Chaque version
 est sur la page [Releases](https://github.com/Kopolitoo/Prunel/releases) sous forme
 d'installateur Windows (`Prunel-x.y.z-setup.exe`). Déjà là : retour sonore, pause automatique,
-thèmes de couleur (couleur du cercle, contraste renforcé, mode nuit), sonnette d'appel sur
-l'ordinateur. Prévu ensuite : sonnette sur une enceinte Alexa, assistant
+thèmes de couleur (couleur du cercle, contraste renforcé, mode nuit), sonnette d'appel (sur
+l'ordinateur, ou sur une enceinte Alexa par Voice Monkey). Prévu ensuite : assistant
 de premier lancement, synthèse vocale.
 
 ## Prérequis

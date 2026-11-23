@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -425,7 +426,13 @@ namespace Prunel
         /// </summary>
         private async void RingBell()
         {
-            BellResult result = await BellRinger.RingAllAsync();
+            Task<BellResult> call = BellRinger.RingAllAsync();
+            if (!call.IsCompleted)
+            {
+                // A bell that goes through the network (Alexa): it may take a few seconds.
+                ShowMessage(Texts.Get("bell.calling"));
+            }
+            BellResult result = await call;
             if (Manager.CurrentMode != this)
             {
                 return;
@@ -434,6 +441,12 @@ namespace Prunel
             {
                 case BellResult.Sent:
                     ShowMessage(Texts.Get("bell.sent"));
+                    break;
+                case BellResult.PartlyFailed:
+                    ShowMessage(Texts.Get("bell.partlyFailed"));
+                    break;
+                case BellResult.Fallback:
+                    ShowMessage(Texts.Get("bell.fallback"));
                     break;
                 case BellResult.Failed:
                     ShowMessage(Texts.Get("bell.failed"));

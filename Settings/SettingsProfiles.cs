@@ -263,11 +263,15 @@ namespace Prunel
                 return false;
             }
 
-            // 3. The computer settings (start with Windows, detailed log) do not change, nor the
+            // 3. The computer settings (start with Windows, detailed log, Alexa token) do not change, nor the
             //    interface language (switching language by loading a profile would be a surprise).
             newItems.StartWithWindows = currentValues.StartWithWindows;
             newItems.DetailedLog = currentValues.DetailedLog;
             newItems.Language = currentValues.Language;
+            //    The Alexa bell token and device belong to this computer too: the token is
+            //    encrypted for this Windows account (see SecretStore), a profile cannot carry it.
+            newItems.VoiceMonkeyDevice = currentValues.VoiceMonkeyDevice;
+            newItems.VoiceMonkeyTokenProtected = currentValues.VoiceMonkeyTokenProtected;
 
             // 4. Apply and save.
             AppSettings.Replace(newItems);

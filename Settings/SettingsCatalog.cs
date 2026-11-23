@@ -407,6 +407,9 @@ namespace Prunel
         /// <summary>Name of the "Couleurs" tab (step color-themes).</summary>
         public const string ColorsTabName = "tab.colors";
 
+        /// <summary>The "Alexa" tab (call bell on an Alexa speaker): one setting and three buttons.</summary>
+        public const string AlexaTabName = "tab.alexa";
+
         /// <summary>
         /// The name of the "Profiles" tab, recognized by SettingsWindow, which puts two
         /// big buttons there: "Save the current settings" and "Load a profile".
@@ -429,7 +432,7 @@ namespace Prunel
         public static readonly List<SettingsCategory> Categories = new List<SettingsCategory>
         {
             new SettingsCategory("category.gaze", "\uE890", "tab.gaze", "tab.fixation", "tab.delays", "tab.pause"),
-            new SettingsCategory("category.actions", "\uE7C9", "tab.magnifierDrag", "tab.scroll", IconsTabName, "tab.bell"),
+            new SettingsCategory("category.actions", "\uE7C9", "tab.magnifierDrag", "tab.scroll", IconsTabName, "tab.bell", AlexaTabName),
             new SettingsCategory("category.display", "\uE7F4", "tab.display", ColorsTabName, "tab.keyboard", "tab.prediction", "tab.sound", "tab.game"),
             new SettingsCategory("category.system", "\uE770", GeneralTabName, ProfilesTabName, ToolsTabName, AboutTabName)
         };
@@ -620,6 +623,13 @@ namespace Prunel
                                p => p.BellDuration, (p, v) => p.BellDuration = v),
                 Setting.Number("setting.bellVolume", " %", 10,
                                p => p.BellVolume, (p, v) => p.BellVolume = v)),
+
+            // E7F5 = speakers ("Alexa"): the Alexa bell (see VoiceMonkeyBell). One yes / no,
+            // then the buttons to paste the token and the device, and "Test" (see
+            // SettingsWindow.BuildAlexaTab).
+            new SettingsTab(AlexaTabName, "\uE7F5",
+                Setting.YesOrNo("setting.alexaBell",
+                                 p => p.AlexaBell, (p, v) => p.AlexaBell = v)),
 
             // E713 = gear ("General")
             new SettingsTab(GeneralTabName, "",

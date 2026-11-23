@@ -26,8 +26,8 @@ replaces the old GazeBar.
 Prunel is a young project (version 0.x), used every day by its author. Each version is on the
 [Releases](https://github.com/Kopolitoo/Prunel/releases) page as a Windows installer
 (`Prunel-x.y.z-setup.exe`). Already there: sound feedback, automatic pause, colour themes
-(circle colour, reinforced contrast, night mode), a call bell on the computer. Planned next: a
-call bell on an Alexa speaker, a first-run assistant, text-to-speech.
+(circle colour, reinforced contrast, night mode), a call bell (on the computer, or on an Alexa
+speaker through Voice Monkey). Planned next: a first-run assistant, text-to-speech.
 
 ## Requirements
 

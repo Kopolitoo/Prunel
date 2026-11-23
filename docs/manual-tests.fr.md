@@ -405,6 +405,28 @@ Uniquement au regard.
    « Appeler » est là.
 8. Avec une enceinte Bluetooth comme sortie de Windows : la sonnette sonne dans l'enceinte.
 
+## 30. Sonnette d'appel sur une enceinte Alexa (étape call-bell, partie 2)
+
+Il faut l'installation de Voice Monkey du guide (skill, déclencheur de routine, routine Alexa,
+jeton).
+
+1. Paramètres, catégorie « Actions », onglet « Alexa » : « Jeton : aucun », « Appareil :
+   aucun ». « Tester » : message « collez d'abord le jeton et l'appareil ».
+2. Copier un mauvais texte avec une espace, « Coller le jeton » : « Le presse-papiers ne
+   contient pas de jeton… ».
+3. Copier le jeton, « Coller le jeton » : « Jeton : enregistré (chiffré) ». Ouvrir
+   `settings.json` : le jeton n'est pas lisible en clair. `prunel.log` ne le contient pas.
+4. Copier l'identifiant du déclencheur, « Coller l'appareil » : l'identifiant s'affiche.
+   « Tester » : « Test en cours… », puis l'Echo sonne et « Voice Monkey a lancé la routine ».
+   Noter le nombre de secondes.
+5. Activer « Sonnette Alexa ». Menu, « Appeler » : « Appel en cours… », puis « Appel envoyé » ;
+   l'ordinateur et l'Echo sonnent.
+6. Coller un faux jeton, « Tester » : « le jeton est refusé ». Recoller le bon.
+7. Couper Internet (ou le Wi-Fi), « Appeler » avec la sonnette de l'ordinateur DÉSACTIVÉE : après
+   10 s au plus, « La sonnette a échoué : l'ordinateur a sonné à la place », et l'ordinateur
+   sonne. Avec la sonnette de l'ordinateur ACTIVÉE : « Appel envoyé, mais une sonnette a échoué ».
+8. Enregistrer un profil, changer le jeton, charger le profil : le jeton actuel reste.
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,

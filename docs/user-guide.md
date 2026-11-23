@@ -181,8 +181,25 @@ repeat) or a yes / no switch. Changes apply at once and are saved.
 - **Bell** tab ("Actions" category): **Computer bell** (yes at first): the menu's "Call" button
   rings on this computer. **Bell duration** (6 s at first, 2 to 30 s) and **Bell volume** (80 %
   at first, 10 to 100 %; the Windows volume still applies). While the bell rings, the short
-  key and button sounds keep quiet, so they do not cut it. Other bells (an Alexa speaker…) will
-  come later.
+  key and button sounds keep quiet, so they do not cut it.
+- **Alexa** tab ("Actions" category): the **Alexa bell** (off at first). When it is on, "Call"
+  also rings an Amazon Echo speaker, through the free [Voice Monkey](https://voicemonkey.io)
+  service (an Alexa skill; its free plan allows about 200 calls a month). One-time setup, which
+  a caregiver can do:
+  1. In the Alexa app, enable the **Voice Monkey** skill and link it to your Amazon account.
+  2. On [app.voicemonkey.io](https://app.voicemonkey.io), create a **routine trigger** (for
+     example "Prunel bell").
+  3. In the Alexa app, create a **routine**: when this Voice Monkey device is pressed, set the
+     volume, play a doorbell sound, say a sentence, on the Echo you want (a notification to a
+     phone can be added).
+  4. On app.voicemonkey.io, create a **token**. Copy it (Ctrl+C), then in Prunel look at
+     **Paste token**. Copy the id of the routine trigger, then look at **Paste device**.
+  5. Look at **Test**: the Echo should ring. Then turn the Alexa bell on.
+  The token is saved encrypted for your Windows account (never in clear, never in the log) and
+  stays on this computer: a profile does not carry it. Prunel sends nothing but "press this
+  device": no gaze data, no typed text. It needs internet; if the Alexa bell fails and the
+  computer bell is off, the computer rings instead. Until the answer comes, the menu shows
+  "Calling…".
 - **Tools** tab: **Calibration** (starts the eyetracker calibration) and **Diagnostic** (shows
   the gaze and the cursor live, and how steady the gaze is at the top, middle and bottom of the
   screen; nothing is saved).
