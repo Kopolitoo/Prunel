@@ -404,6 +404,11 @@ Uniquement au regard.
 7. Depuis la pause : la barre ne montre que « Reprendre » (pas de sonnette). Depuis le mode jeu :
    « Appeler » est là.
 8. Avec une enceinte Bluetooth comme sortie de Windows : la sonnette sonne dans l'enceinte.
+9. Volume de Windows à 20 %, puis « Appeler » : le volume monte à 80 % pendant la sonnerie, puis
+   revient à 20 %. Pareil avec le son coupé : réactivé pendant la sonnerie, recoupé après. Volume
+   de Windows à 90 % : inchangé. « Volume de Windows pendant la sonnerie » à 0 : le volume n'est
+   jamais touché.
+10. Quitter Prunel pendant la sonnerie : le volume de Windows revient.
 
 ## 30. Sonnette d'appel sur une enceinte Alexa (étape call-bell, partie 2)
 

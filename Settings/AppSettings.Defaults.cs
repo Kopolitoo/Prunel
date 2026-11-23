@@ -87,6 +87,7 @@ namespace Prunel
             BellDuration = 6;
             BellVolume = 80;
             AlexaBell = false;
+            BellWindowsVolume = 80;
             VoiceMonkeyDevice = "";
             VoiceMonkeyTokenProtected = "";
 
@@ -181,6 +182,7 @@ namespace Prunel
             LengthPenalty = Clamp(LengthPenalty, 1, 2);
             BellDuration = Clamp(BellDuration, 2, 30);
             BellVolume = Clamp(BellVolume, 10, 100);
+            BellWindowsVolume = Clamp(BellWindowsVolume, 0, 100);
             VoiceMonkeyDevice = (VoiceMonkeyDevice ?? "").Trim();
             VoiceMonkeyTokenProtected = VoiceMonkeyTokenProtected ?? "";
             // An empty file name or one containing a path ("..\", "C:\"…) becomes the default
@@ -357,6 +359,7 @@ namespace Prunel
             // Version 24 (ComputerBell, BellDuration, BellVolume): nothing to fix, the settings
             // keep their default value (yes, 6 s, 80 %). Version 25 (AlexaBell,
             // VoiceMonkeyDevice, VoiceMonkeyTokenProtected): nothing to fix either (no Alexa bell).
+            // Version 26 (BellWindowsVolume): nothing to fix, it keeps its default value (80 %).
 
             FileVersion = CurrentVersion;
             return true;

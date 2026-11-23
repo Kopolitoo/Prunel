@@ -369,6 +369,10 @@ Gaze only.
    and rings.
 7. From the pause: the bar only shows "Resume" (no bell). From game mode: "Call" is there.
 8. With a Bluetooth speaker as the Windows output: the bell rings in the speaker.
+9. Windows volume at 20 %, then "Call": the volume goes up to 80 % during the ringing, then back
+   to 20 %. Same with the sound muted: unmuted while ringing, muted again after. Windows volume
+   at 90 %: unchanged. "Windows volume while ringing" at 0: the volume is never touched.
+10. Quit Prunel during the ringing: the Windows volume comes back.
 
 ## 30. Call bell on an Alexa speaker (step call-bell, part 2)
 
