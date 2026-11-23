@@ -430,7 +430,7 @@ namespace Prunel
         }
 
         /// <summary>
-        /// "Oui" to "Quitter Prunel ?" in the "Quitter" tab: closes Prunel, like the "Quit"
+        /// "Oui" to "Quitter Prunel ?" in the "Général" tab: closes Prunel, like the "Quit"
         /// button of the menu (App.OnExit releases the mouse buttons and keys).
         /// </summary>
         private void QuitPrunel()

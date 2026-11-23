@@ -366,11 +366,8 @@ namespace Prunel
     /// The "Profiles" tab (before "Tools") has no setting nor "Default": two big
     /// buttons to save the current settings and load a profile.
     ///
-    /// The "About" tab (after "Tools") has no setting nor "Default": the version
+    /// The "About" tab (after "Tools", last) has no setting nor "Default": the version
     /// number and two buttons that open the website and the user guide in the browser.
-    ///
-    /// The "Quit" tab (after "About", last) has no setting nor "Default": a "Quit Prunel"
-    /// button, then the question "Quit Prunel? Yes / No".
     /// </summary>
     internal static class SettingsCatalog
     {
@@ -407,13 +404,6 @@ namespace Prunel
         /// </summary>
         public const string AboutTabName = "tab.about";
 
-        /// <summary>
-        /// The name of the "Quit" tab (last of the "System" category), recognized by
-        /// SettingsWindow: a "Quit Prunel" button, then a "Yes / No" confirmation. Quitting
-        /// stays reachable here even if the main menu no longer shows its "Quit" button.
-        /// </summary>
-        public const string QuitTabName = "tab.quit";
-
         /// <summary>Name of the "Couleurs" tab (step color-themes).</summary>
         public const string ColorsTabName = "tab.colors";
 
@@ -444,7 +434,7 @@ namespace Prunel
             new SettingsCategory("category.gaze", "\uE890", "tab.gaze", "tab.fixation", "tab.delays", "tab.pause"),
             new SettingsCategory("category.actions", "\uE7C9", "tab.magnifierDrag", "tab.scroll", IconsTabName, "tab.bell", AlexaTabName),
             new SettingsCategory("category.display", "\uE7F4", "tab.display", ColorsTabName, "tab.keyboard", "tab.prediction", "tab.sound", "tab.game"),
-            new SettingsCategory("category.system", "\uE770", GeneralTabName, ProfilesTabName, ToolsTabName, AboutTabName, QuitTabName)
+            new SettingsCategory("category.system", "\uE770", GeneralTabName, ProfilesTabName, ToolsTabName, AboutTabName)
         };
 
         /// <summary>
@@ -663,11 +653,7 @@ namespace Prunel
 
             // E946 = "i" in a circle ("About"): no setting, the version and two medium
             // buttons "Website" and "User guide" (see SettingsWindow.BuildAboutTab).
-            new SettingsTab(AboutTabName, "\uE946"),
-
-            // E7E8 = power button ("Quit"): no setting, one medium button "Quit Prunel" at the
-            // bottom of the page, then the confirmation (see SettingsWindow.BuildQuitTab).
-            new SettingsTab(QuitTabName, "\uE7E8")
+            new SettingsTab(AboutTabName, "\uE946")
         };
     }
 }

@@ -54,6 +54,10 @@ namespace Prunel
             {
                 BuildNamingPage();
             }
+            else if (_quitConfirmation)
+            {
+                BuildQuitConfirmation();
+            }
             else if (_confirmation)
             {
                 BuildConfirmation(tab);
@@ -75,6 +79,7 @@ namespace Prunel
                 {
                     BuildFileInfo(TopRow + tab.Settings.Count * StepRow);
                     BuildMyWordsButton();
+                    BuildQuitButton();
                 }
                 if (tab.Name == DisplayTabName)
                 {
@@ -104,15 +109,11 @@ namespace Prunel
                 {
                     BuildAboutTab();
                 }
-                if (tab.Name == SettingsCatalog.QuitTabName)
-                {
-                    BuildQuitTab();
-                }
             }
 
             // ── The right column: "Défaut" at the top, "Retour" in the middle of the edge.
             //    E72C = circular arrows (restore), E72B = back arrow.
-            //    No "Défaut" for a tab with nothing to restore ("Outils", "Profils", "À propos", "Quitter"): a button
+            //    No "Défaut" for a tab with nothing to restore ("Outils", "Profils", "À propos"): a button
             //    that does nothing would be confusing.
             bool hasDefaults = tab.Settings.Count > 0 || tab.Name == SettingsCatalog.IconsTabName;
             if (hasDefaults)
@@ -475,7 +476,21 @@ namespace Prunel
                 : Text(_message, 30, SettingTarget.Accent, true);
             explanation.TextWrapping = TextWrapping.Wrap;
             explanation.Width = 1140;
-            Place(explanation, LeftContent, 840);
+            Place(explanation, LeftContent, 830);
+        }
+
+        /// <summary>
+        /// "Général" tab, at the very bottom of the page: a medium "Quitter Prunel" button
+        /// (E7E8 = power button), centred below "Mes mots" and the language. Quitting stays
+        /// reachable here even when the main menu no longer shows its "Quitter" button
+        /// (issue #147: customizable menu). Looking at it does not quit: it opens the question
+        /// "Quitter Prunel ? Oui / Non" (see BuildQuitConfirmation), whose buttons are much
+        /// higher up, so that keeping the gaze on the button never confirms.
+        /// </summary>
+        private void BuildQuitButton()
+        {
+            AddTarget(LeftContent + 360, 920, 460, 110, BigButton("\uE7E8", Texts.Get("menu.quit")),
+                         RequestQuit, false, false);
         }
 
         /// <summary>
@@ -605,30 +620,6 @@ namespace Prunel
             BuildAuthor(LeftContent + 760, 380);
 
             BuildMessage();
-        }
-
-        /// <summary>
-        /// "Quitter" tab: one medium button "Quitter Prunel" at the bottom of the page (same size
-        /// and place as the lower button of the "Outils" tab). Looking at it does not quit: it
-        /// opens the question "Quitter Prunel ? Oui / Non" (see BuildConfirmation), whose
-        /// buttons are higher up, so that keeping the gaze on the button never confirms.
-        ///   E7E8 = power button.
-        /// This tab keeps quitting reachable even when the main menu no longer shows its
-        /// "Quitter" button (issue #147: customizable menu).
-        /// </summary>
-        private void BuildQuitTab()
-        {
-            StackPanel texts = new StackPanel();
-            texts.Children.Add(Text(Texts.Get("menu.quit"), 36, White, true));
-            TextBlock explanation = Text(Texts.Get("settings.quit.help"), 23, Soft, false);
-            explanation.TextWrapping = TextWrapping.Wrap;
-            explanation.Width = 1140;
-            explanation.Margin = new Thickness(0, 6, 0, 0);
-            texts.Children.Add(explanation);
-            Place(texts, LeftContent, TopRow + 20);
-
-            AddTarget(LeftContent + 290, 660, 560, 120, BigButton("\uE7E8", Texts.Get("menu.quit")),
-                         RequestQuit, false, false);
         }
 
         /// <summary>
@@ -773,19 +764,6 @@ namespace Prunel
         /// </summary>
         private void BuildConfirmation(SettingsTab tab)
         {
-            if (tab.Name == SettingsCatalog.QuitTabName)
-            {
-                // "Quitter Prunel ?": same place and same buttons as the "Défaut" question.
-                TextBlock quitQuestion = Text(Texts.Get("menu.quitQuestion"), 40, White, true);
-                quitQuestion.TextWrapping = TextWrapping.Wrap;
-                quitQuestion.Width = 1140;
-                Place(quitQuestion, LeftContent, 300);
-
-                AddTarget(640, 480, 300, SideButton, Word(Texts.Get("common.yes"), 42), () => Notify(QuitRequested), false, false);
-                AddTarget(1040, 480, 300, SideButton, Word(Texts.Get("common.no"), 42), CancelDefaults, false, false);
-                return;
-            }
-
             string questionText = tab.Name == SettingsCatalog.IconsTabName
                 ? Texts.Get("settings.icons.defaultsQuestion")
                 : Texts.Format("settings.defaultsQuestion", tab.Label);
@@ -796,6 +774,22 @@ namespace Prunel
 
             AddTarget(640, 480, 300, SideButton, Word(Texts.Get("common.yes"), 42), () => RestoreDefaults(tab), false, false);
             AddTarget(1040, 480, 300, SideButton, Word(Texts.Get("common.no"), 42), CancelDefaults, false, false);
+        }
+
+        /// <summary>
+        /// The question "Quitter Prunel ?" of the "Général" tab, at the same place and with the
+        /// same "Oui" / "Non" buttons as the "Défaut" question: far above the "Quitter Prunel"
+        /// button (bottom of the page).
+        /// </summary>
+        private void BuildQuitConfirmation()
+        {
+            TextBlock question = Text(Texts.Get("menu.quitQuestion"), 40, White, true);
+            question.TextWrapping = TextWrapping.Wrap;
+            question.Width = 1140;
+            Place(question, LeftContent, 300);
+
+            AddTarget(640, 480, 300, SideButton, Word(Texts.Get("common.yes"), 42), () => Notify(QuitRequested), false, false);
+            AddTarget(1040, 480, 300, SideButton, Word(Texts.Get("common.no"), 42), CancelQuit, false, false);
         }
     }
 }

@@ -270,7 +270,7 @@ Gaze only.
 
 ## 23. "About" tab (issue #92)
 
-1. Settings, "System" category: the "About" tab comes after "Tools". It shows "Prunel", "Version 0.5.0"
+1. Settings, "System" category: the last tab is "About". It shows "Prunel", "Version 0.5.0"
    (the number of the installed version, without "+" and letters after it), the two buttons
    "Website" and "User guide", and on the right the author's picture with "Created by
    Kopolito" and "with the help of Claude, an AI by Anthropic" below it. There is no "Default" button. Looking at the picture does nothing.
@@ -393,17 +393,19 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
    "Call sent, but one bell failed".
 8. Save a profile, change the token, load the profile: the current token stays.
 
-## 31. "Quit" settings tab
+## 31. Quit from the "General" settings tab
 
-1. Settings, "System" category: the last tab, below "About", is "Quit" (power button symbol).
-   It shows an explanation and, at the bottom, the "Quit Prunel" button. There is no
-   "Default" button.
-2. Look at "Quit Prunel": the question "Quit Prunel?" appears with "Yes" and "No" higher up.
-   Keeping the gaze where the button was does not answer the question.
-3. Look at "No": the "Quit" tab comes back, Prunel keeps running.
-4. Do it again and look at "Yes": Prunel closes (no circle any more, no mouse button or key
+1. Settings, "System" category, "General" tab: at the very bottom of the page, below "My
+   words" and the language, the "Quit Prunel" button (power symbol). Nothing overlaps (the
+   explanation above stays readable).
+2. Look at "Quit Prunel": the question "Quit Prunel?" appears with "Yes" and "No" much higher
+   up. Keeping the gaze where the button was does not answer the question.
+3. Look at "No": the "General" tab comes back, Prunel keeps running.
+4. Do it again, then look at "Default" during the question: the "Restore the default values…"
+   question replaces it. Look at "No".
+5. Do it again and look at "Yes": Prunel closes (no circle any more, no mouse button or key
    left pressed); the log says "Settings: Prunel exit requested".
-5. In English (General tab): the tab is called "Quit", the button "Quit Prunel".
+6. In French: the button is called « Quitter Prunel ».
 
 ## Full installation (Setup.exe, UI access)
 
