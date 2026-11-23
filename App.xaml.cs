@@ -243,6 +243,8 @@ namespace Prunel
 
             MouseInjector.ReleaseAll();
             KeyboardInjector.ReleaseAll();
+            // The call bell may be ringing: the Windows volume it raised comes back.
+            ComputerBell.RestoreVolume();
             if (_keyboard != null)
             {
                 _keyboard.Dispose();

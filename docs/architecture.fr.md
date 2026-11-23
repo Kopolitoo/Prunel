@@ -52,7 +52,7 @@ l'explication de la classe.
 | `Settings` | le fichier des réglages, les profils et la fenêtre des paramètres : `AppSettings`, `SettingsCatalog`, `SettingsProfiles`, `SettingsWindow`, `SettingTarget` |
 | `Ui` | fenêtres et boutons au regard : `OverlayWindow`, `DiagnosticWindow`, `CursorSampler`, `GazeButton`, `ButtonAimer`, `IGazeTarget`, `Texts`, `CircleColors`, `Palette` |
 | `Bell` | la sonnette d'appel : `IBell`, `BellRinger`, `ComputerBell`, `VoiceMonkeyBell`, `SecretStore` |
-| `Platform` | appels à Windows : `NativeMethods`, `MouseInjector`, `KeyboardInjector`, `KeyboardHook`, `MouseClickHook`, `WheelScroller`, `CursorWaker`, `ScreenCapture`, `ScreenMetrics`, `WindowsStartup`, `UiAccess`, `SoundFeedback` |
+| `Platform` | appels à Windows : `NativeMethods`, `MouseInjector`, `KeyboardInjector`, `KeyboardHook`, `MouseClickHook`, `WheelScroller`, `CursorWaker`, `ScreenCapture`, `ScreenMetrics`, `WindowsStartup`, `UiAccess`, `SoundFeedback`, `WindowsVolume` |
 | `Languages`, `Keyboards`, `Dictionaries` | fichiers de données copiés à côté de `Prunel.exe` (textes, dispositions de clavier, dictionnaires de prédiction) |
 | `Resources` | l'icône du programme |
 | `Install` | l'installateur de l'installation complète (accès à l'interface) : `Prunel.iss` (Inno Setup) et `setup-certificate.ps1` |
@@ -225,6 +225,10 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   construit par `SoundFeedback.ToWav`) et joué avec `SoundPlayer` ; réglages `ComputerBell`,
   `BellDuration`, `BellVolume` (onglet « Sonnette », version 24 des paramètres). Pendant qu'elle
   sonne, `SoundFeedback` se tait (Windows ne joue qu'un son `SoundPlayer` à la fois).
+  `BellWindowsVolume` (80 %, 0 = désactivé, version 26) : `ComputerBell` monte le volume de
+  Windows à ce niveau et réactive le son pendant la sonnerie, puis remet le volume d'origine
+  (`Platform/WindowsVolume` : `IAudioEndpointVolume` de Core Audio par interop COM, sans
+  bibliothèque ; aussi à la fermeture, `App.OnExit`).
   `VoiceMonkeyBell` (partie 2) : `POST https://api-v3.voicemonkey.io/trigger` avec
   `Authorization: Bearer <jeton>` et `{"device": "<id>"}`, par un `HttpClient` partagé
   (référence du framework `System.Net.Http`, délai de 10 s) ; succès = 2xx et `"success": true` ; les codes HTTP 401 /
@@ -392,7 +396,7 @@ Ancien nom : Prunel s'appelait GazeBar jusqu'à la version 0.2.0. `FormerName.Mi
 nouveau dossier n'existe pas encore (une copie si le déplacement est refusé). `WindowsStartup`
 retire l'ancienne valeur `GazeBar` de la clé Run, et l'installateur (même `AppId`) passe à
 `Program Files\Prunel` et supprime `Program Files\GazeBar`.
-`FileVersion` (25 actuellement) indique quelle version a écrit le fichier : un fichier plus
+`FileVersion` (26 actuellement) indique quelle version a écrit le fichier : un fichier plus
 ancien est converti au démarrage (voir la liste des versions en haut de `AppSettings.cs`). La
 fenêtre des paramètres liste ses onglets et ses réglages dans `SettingsCatalog.cs`.
 

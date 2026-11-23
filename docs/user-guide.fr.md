@@ -191,7 +191,10 @@ sont enregistrés.
 - Onglet **Sonnette** (catégorie « Actions ») : **Sonnette de l'ordinateur** (oui au départ) :
   le bouton « Appeler » du menu sonne sur cet ordinateur. **Durée de la sonnerie** (6 s au
   départ, de 2 à 30 s) et **Volume de la sonnette** (80 % au départ, de 10 à 100 % ; le volume de
-  Windows s'applique en plus). Pendant que la sonnette sonne, les petits sons des touches et des
+  Windows s'applique en plus). **Volume de Windows pendant la sonnerie** (80 % au départ) :
+  pendant la sonnerie, le volume de Windows est monté à ce niveau s'il est plus bas (et le son
+  est réactivé s'il était coupé), puis remis comme avant ; 0 = le volume de Windows n'est pas
+  touché. Pendant que la sonnette sonne, les petits sons des touches et des
   boutons se taisent, pour ne pas la couper.
 - Onglet **Alexa** (catégorie « Actions ») : la **sonnette Alexa** (désactivée au départ).
   Activée, « Appeler » sonne aussi sur une enceinte Amazon Echo, par le service gratuit

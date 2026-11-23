@@ -15,6 +15,12 @@ namespace Prunel
     /// Framework 4.8, no extra library). It is computed again only when [BellDuration] or
     /// [BellVolume] changed.
     ///
+    /// WINDOWS VOLUME ([BellWindowsVolume], 80 % by default, 0 = not touched): while the bell
+    /// rings, the Windows volume is raised to this level (if it is lower) and the sound is
+    /// unmuted; when the bell stops, the original volume and mute come back (see WindowsVolume).
+    /// A volume already higher is left as it is. If Prunel closes while the bell rings, the
+    /// volume is put back too (App.OnExit calls RestoreVolume).
+    ///
     /// Windows plays only one SoundPlayer sound at a time: while the bell rings, the short
     /// sounds of the keys and buttons are skipped, so that they do not cut it (see IsRinging).
     /// </summary>
@@ -32,6 +38,11 @@ namespace Prunel
 
         // Until when the bell rings (UTC; MinValue = it does not ring).
         private static DateTime _ringsUntil = DateTime.MinValue;
+
+        // The Windows volume and mute before the bell raised them (only while _volumeRaised).
+        private static bool _volumeRaised;
+        private static float _originalLevel;
+        private static bool _originalMuted;
 
         /// <summary>True while the bell rings: the sound feedback then keeps quiet.</summary>
         public static bool IsRinging
@@ -59,9 +70,15 @@ namespace Prunel
                     _madeDuration = settings.BellDuration;
                     _madeVolume = settings.BellVolume;
                 }
+                RaiseVolume(settings.BellWindowsVolume);
                 // Play() returns at once: the sound plays in the background.
                 _player.Play();
-                _ringsUntil = DateTime.UtcNow.AddSeconds(Cycles(settings.BellDuration) * CycleSeconds);
+                double seconds = Cycles(settings.BellDuration) * CycleSeconds;
+                _ringsUntil = DateTime.UtcNow.AddSeconds(seconds);
+                if (_volumeRaised)
+                {
+                    RestoreVolumeLater(seconds);
+                }
                 return Task.FromResult(true);
             }
             catch (Exception e)
@@ -70,6 +87,70 @@ namespace Prunel
                 App.Log("Bell (computer): cannot play the sound (" + e.Message + ")");
                 return Task.FromResult(false);
             }
+        }
+
+        /// <summary>
+        /// Raises the Windows volume to percent (if it is lower) and unmutes it, keeping the
+        /// original values to put them back. 0 = nothing changes. If the bell rings again while
+        /// the volume is already raised, the original values stay the first ones.
+        /// </summary>
+        private static void RaiseVolume(double percent)
+        {
+            if (percent <= 0)
+            {
+                return;
+            }
+            float target = (float)(percent / 100.0);
+            float level;
+            bool muted;
+            if (!_volumeRaised)
+            {
+                if (!WindowsVolume.TryGet(out level, out muted))
+                {
+                    return;
+                }
+                if (level >= target && !muted)
+                {
+                    return;   // loud enough already: nothing to change, nothing to put back
+                }
+                _originalLevel = level;
+                _originalMuted = muted;
+            }
+            else
+            {
+                level = _originalLevel;
+            }
+            if (WindowsVolume.TrySet(Math.Max(level, target), false))
+            {
+                _volumeRaised = true;
+                App.LogDetail("Bell (computer): Windows volume raised");
+            }
+        }
+
+        /// <summary>
+        /// Puts the volume back once the bell has stopped. If the bell rang again meanwhile,
+        /// the later call does it.
+        /// </summary>
+        private static async void RestoreVolumeLater(double seconds)
+        {
+            // A small margin: the end of the sound is still playing.
+            await Task.Delay(TimeSpan.FromSeconds(seconds + 0.3));
+            if (DateTime.UtcNow >= _ringsUntil)
+            {
+                RestoreVolume();
+            }
+        }
+
+        /// <summary>Puts the Windows volume and mute back as they were before the bell, if it raised them.</summary>
+        public static void RestoreVolume()
+        {
+            if (!_volumeRaised)
+            {
+                return;
+            }
+            _volumeRaised = false;
+            WindowsVolume.TrySet(_originalLevel, _originalMuted);
+            App.LogDetail("Bell (computer): Windows volume put back");
         }
 
         private static double CycleSeconds

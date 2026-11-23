@@ -102,8 +102,10 @@ namespace Prunel
         ///  25: step call-bell, part 2 — AlexaBell (no), VoiceMonkeyDevice ("") and
         ///      VoiceMonkeyTokenProtected (""). Nothing to fix: missing from an older file, they
         ///      keep their default value (no Alexa bell).
+        ///  26: step call-bell (user request) — BellWindowsVolume (80 %). Nothing to fix:
+        ///      missing from an older file, it keeps its default value.
         /// </summary>
-        public const int CurrentVersion = 25;
+        public const int CurrentVersion = 26;
 
         /// <summary>Format number of the file, so it can evolve one day without breaking everything.</summary>
         [DataMember(Order = 0)]
@@ -679,5 +681,13 @@ namespace Prunel
         /// </summary>
         [DataMember(Order = 155)]
         public string VoiceMonkeyTokenProtected { get; set; }
+
+        /// <summary>
+        /// While the computer bell rings, the Windows volume is raised to this level, in %
+        /// (0 to 100), if it is lower, and unmuted; then it comes back. 0 = the Windows volume
+        /// is not touched. 80 % by default. See ComputerBell.
+        /// </summary>
+        [DataMember(Order = 156)]
+        public double BellWindowsVolume { get; set; }
     }
 }

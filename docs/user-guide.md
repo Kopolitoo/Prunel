@@ -180,7 +180,9 @@ repeat) or a yes / no switch. Changes apply at once and are saved.
   choice, options icon, settings). The sound plays at the Windows volume.
 - **Bell** tab ("Actions" category): **Computer bell** (yes at first): the menu's "Call" button
   rings on this computer. **Bell duration** (6 s at first, 2 to 30 s) and **Bell volume** (80 %
-  at first, 10 to 100 %; the Windows volume still applies). While the bell rings, the short
+  at first, 10 to 100 %; the Windows volume still applies). **Windows volume while ringing**
+  (80 % at first): while the bell rings, the Windows volume is raised to this level if it is
+  lower (and unmuted), then put back as it was; 0 = the Windows volume is not touched. While the bell rings, the short
   key and button sounds keep quiet, so they do not cut it.
 - **Alexa** tab ("Actions" category): the **Alexa bell** (off at first). When it is on, "Call"
   also rings an Amazon Echo speaker, through the free [Voice Monkey](https://voicemonkey.io)

@@ -622,7 +622,10 @@ namespace Prunel
                 Setting.Number("setting.bellDuration", " s", 1,
                                p => p.BellDuration, (p, v) => p.BellDuration = v),
                 Setting.Number("setting.bellVolume", " %", 10,
-                               p => p.BellVolume, (p, v) => p.BellVolume = v)),
+                               p => p.BellVolume, (p, v) => p.BellVolume = v),
+                // Windows volume during the ringing, 0 = not touched (user request).
+                Setting.Number("setting.bellWindowsVolume", " %", 10,
+                               p => p.BellWindowsVolume, (p, v) => p.BellWindowsVolume = v)),
 
             // E7F5 = speakers ("Alexa"): the Alexa bell (see VoiceMonkeyBell). One yes / no,
             // then the buttons to paste the token and the device, and "Test" (see
