@@ -476,6 +476,7 @@ namespace Prunel
             BitmapSource photo = _snapshot.Crop(ox, oy, side);
 
             layer.PrepareChoiceScreen();
+            layer.SetChoiceTransparency(p.ChoiceBackgroundTransparency);   // issue #155
             Canvas screen = layer.ChoiceScreen;
 
             // ── The layout (the same as the one of the icon configuration screen).

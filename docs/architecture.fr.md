@@ -151,6 +151,14 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   l'autre ; l'écran noir reste donc affiché et aucune nouvelle photo n'est prise (pas de flash) ;
   la nouvelle photo part de l'endroit où P était montré sur l'écran qu'on quitte, à son zoom.
   Si la nouvelle photo ne tient pas dans la capture, une nouvelle photo est prise comme avant.
+- Transparence du fond de la loupe et du choix d'action (issue #155,
+  `ChoiceBackgroundTransparency`, onglet « Choix d'action », 0 à 100 % par pas de 10 %, 100 par
+  défaut, `settings.json` version 29) : `OverlayWindow.SetChoiceTransparency`, appelée par les
+  deux modes juste après `PrepareChoiceScreen`, donne à l'écran noir un pinceau noir avec cette
+  transparence (l'opacité de `ChoiceScreen` elle-même sert aux fondus : on change donc le
+  pinceau, pas l'opacité). `PrepareChoiceScreen` remet le noir opaque pour les autres écrans
+  (configuration des icônes, listes du clavier). La photo, les boutons et le cercle du regard
+  restent opaques.
 - Modificateurs (étape 6, `Modifiers`, `KeyboardInjector`) : dans le choix d'action, un
   regard sur « Ctrl », « Maj » ou « Alt » l'allume (bord vert), un second l'éteint. Les touches
   allumées sont enfoncées juste avant l'action et relâchées juste après (après le dépôt pour un

@@ -424,6 +424,7 @@ namespace Prunel
             BitmapSource photo = _snapshot.Crop(_ox, _oy, side);
 
             layer.PrepareChoiceScreen();
+            layer.SetChoiceTransparency(p.ChoiceBackgroundTransparency);   // issue #155
             Canvas screen = layer.ChoiceScreen;
 
             // ── The enlarged photo, round, with P in the center of the screen (RoundPhoto.cs).
