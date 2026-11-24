@@ -37,7 +37,7 @@ When it opens, the picture first grows from its real place on the screen to the 
 the icons appear (less than half a second); the icons only work once they are shown. Going
 from the magnifier to the action choice (or back) is a smooth move from one to the other, with
 no flash. To turn
-this animation off: Settings, "Choice screen" tab, "Opening animation". It also applies to the
+this animation off: Settings, "Action choice" tab, "Opening animation". It also applies to the
 magnifier.
 Around it, icons: left click, double click, right click, magnifier, drag and drop (left button,
 right button, android), scroll. Look at an icon until its ring is full to use it. On the left
@@ -53,7 +53,7 @@ The double click makes a short pause between its two clicks (to close two browse
 row, for example). To change it: Settings, "Delays" tab, "Double click pause" (in milliseconds,
 200 by default; 0 = no pause).
 
-The icons can be moved or removed: Settings, "Icons" tab, "Configure the icons".
+The icons can be moved or removed: Settings, "Action choice" tab, "Configure the icons".
 
 ## Magnifier
 

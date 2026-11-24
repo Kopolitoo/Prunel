@@ -548,6 +548,13 @@ namespace Prunel
         private const double OpeningButtonsMs = 150;
 
         /// <summary>
+        /// Frames per second asked for the opening animation (user: "smoother"). WPF animates at
+        /// 60 frames per second by default; a screen refreshing faster (120, 144 Hz) can then
+        /// show more images. On a 60 Hz screen, nothing changes.
+        /// </summary>
+        private const int OpeningFrameRate = 144;
+
+        /// <summary>
         /// Plays the opening animation of the black screen just filled by the magnifier or the
         /// action choice (issue #154), if the [OpeningAnimation] setting is on:
         ///  1. the photo starts where P was seen just before, at the size it had there, then
@@ -581,13 +588,18 @@ namespace Prunel
             transform.Children.Add(scale);
             transform.Children.Add(shift);
             photo.RenderTransform = transform;
+            // The photo is drawn once into an image kept by the graphics card, then only moved
+            // and resized: lighter for each frame. Removed at the end (sharp photo again).
+            photo.CacheMode = new BitmapCache();
 
             Duration grow = new Duration(TimeSpan.FromMilliseconds(OpeningGrowMs));
             // Fast at the start, slow at the end (user request): the photo "lands" gently.
             CubicEase smooth = new CubicEase();
             smooth.EasingMode = EasingMode.EaseOut;
             double startScale = fromZoom / zoom;
-            scale.BeginAnimation(ScaleTransform.ScaleXProperty, Animation(startScale, 1, grow, smooth));
+            DoubleAnimation scaleX = Animation(startScale, 1, grow, smooth);
+            scaleX.Completed += (s, e) => photo.CacheMode = null;
+            scale.BeginAnimation(ScaleTransform.ScaleXProperty, scaleX);
             scale.BeginAnimation(ScaleTransform.ScaleYProperty, Animation(startScale, 1, grow, smooth));
             shift.BeginAnimation(TranslateTransform.XProperty, Animation(real.X - shown.X, 0, grow, smooth));
             shift.BeginAnimation(TranslateTransform.YProperty, Animation(real.Y - shown.Y, 0, grow, smooth));
@@ -625,6 +637,7 @@ namespace Prunel
         {
             DoubleAnimation animation = new DoubleAnimation(from, to, duration);
             animation.EasingFunction = easing;
+            Timeline.SetDesiredFrameRate(animation, OpeningFrameRate);
             return animation;
         }
 

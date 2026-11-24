@@ -355,9 +355,10 @@ namespace Prunel
     ///
     /// To add a setting later: add it to AppSettings.cs (with its default value and its limits
     /// in Fix), then here, in the wanted tab (five at most per tab, so that nothing scrolls).
-    /// The "Icons" tab is special: it has no "− / +" setting, but a big button that opens the
-    /// icon configuration screen of the action choice (IconConfigMode). Its "Default" button
-    /// restores the original icon layout.
+    /// The "Action choice" tab (formerly "Icons", name kept: tab.icons) is special: at the top,
+    /// a big button that opens the icon configuration screen of the action choice
+    /// (IconConfigMode); below it, two settings at most (from SettingsWindow.IconsRowsTop).
+    /// Its "Default" button restores the original icon layout and its settings.
     ///
     /// The "Tools" tab (before "About") has no setting either: two big buttons, "Calibration" and
     /// "Diagnostic". It has no "Default" button (there is
@@ -432,7 +433,7 @@ namespace Prunel
         public static readonly List<SettingsCategory> Categories = new List<SettingsCategory>
         {
             new SettingsCategory("category.gaze", "\uE890", "tab.gaze", "tab.fixation", "tab.delays", "tab.pause"),
-            new SettingsCategory("category.actions", "\uE7C9", "tab.magnifierDrag", "tab.choiceScreen", "tab.scroll", IconsTabName, "tab.bell", AlexaTabName),
+            new SettingsCategory("category.actions", "\uE7C9", "tab.magnifierDrag", "tab.scroll", IconsTabName, "tab.bell", AlexaTabName),
             new SettingsCategory("category.display", "\uE7F4", "tab.display", ColorsTabName, "tab.keyboard", "tab.prediction", "tab.sound", "tab.game"),
             new SettingsCategory("category.system", "\uE770", GeneralTabName, ProfilesTabName, ToolsTabName, AboutTabName)
         };
@@ -556,12 +557,6 @@ namespace Prunel
                 Setting.Number("setting.dragDuration", " s", 0.05,
                                p => p.DragDuration, (p, v) => p.DragDuration = v)),
 
-            // E91B = photo ("Choice screen"): the black screen of the magnifier and of the
-            // action choice (issue #154).
-            new SettingsTab("tab.choiceScreen", "\uE91B",
-                Setting.YesOrNo("setting.openingAnimation",
-                                 p => p.OpeningAnimation, (p, v) => p.OpeningAnimation = v)),
-
             // EC8F = up and down arrows ("Scroll")
             new SettingsTab("tab.scroll", "\uEC8F",
                 Setting.Number("setting.maxScrollSpeed", "unit.notchesPerSecond", 1,
@@ -587,9 +582,12 @@ namespace Prunel
                 Setting.Number("setting.gameSensitivity", " ×", 0.1,
                                p => p.GameSensitivity, (p, v) => p.GameSensitivity = v)),
 
-            // E71D = grid of squares ("Icons"): no setting, a "Configure icons" button
-            // (see SettingsWindow.BuildIconsTab).
-            new SettingsTab(IconsTabName, "\uE71D"),
+            // E71D = grid of squares ("Action choice", formerly "Icons"): a "Configure icons"
+            // button (see SettingsWindow.BuildIconsTab), then the settings of the black screen
+            // of the action choice and of the magnifier (issue #154), below the button.
+            new SettingsTab(IconsTabName, "\uE71D",
+                Setting.YesOrNo("setting.openingAnimation",
+                                 p => p.OpeningAnimation, (p, v) => p.OpeningAnimation = v)),
 
             // E765 = keyboard ("Keyboard")
             new SettingsTab("tab.keyboard", "\uE765",

@@ -71,9 +71,11 @@ namespace Prunel
                 double step = tab.Name == SettingsCatalog.ColorsTabName ? CompactStepRow
                             : tab.Name == DisplayTabName ? DisplayStepRow
                             : StepRow;
+                // "Action choice" tab: its settings go below the "Configure the icons" button.
+                double top = tab.Name == SettingsCatalog.IconsTabName ? IconsRowsTop : TopRow;
                 for (int i = 0; i < tab.Settings.Count; i++)
                 {
-                    BuildRow(tab.Settings[i], TopRow + i * step);
+                    BuildRow(tab.Settings[i], top + i * step);
                 }
                 if (tab.Name == SettingsCatalog.GeneralTabName)
                 {
@@ -557,7 +559,7 @@ namespace Prunel
             word.VerticalAlignment = VerticalAlignment.Center;
             button.Children.Add(word);
 
-            AddTarget(LeftContent + 170, 420, 800, 180, button, RequestIconConfig, false, false);
+            AddTarget(LeftContent + 170, 340, 800, 180, button, RequestIconConfig, false, false);
         }
 
         /// <summary>

@@ -217,7 +217,7 @@ namespace Prunel
             AppSettings defaults = new AppSettings();
             if (tab.Name == SettingsCatalog.IconsTabName)
             {
-                P.DefaultIcons();   // the "Icônes" tab has no setting, but a layout
+                P.DefaultIcons();   // the "Action choice" tab also has a layout
             }
             foreach (Setting setting in tab.Settings)
             {

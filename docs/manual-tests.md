@@ -79,12 +79,12 @@ gaze keyboard open: Escape closes the keyboard only.
 
 ## 8. Icon configuration
 
-Menu, "Settings", "Icons" tab, "Configure the icons". Look at the "−" of the left
+Menu, "Settings", "Action choice" tab, "Configure the icons". Look at the "−" of the left
 click (top left of the crown) then the one of the right click: both slots become empty ("+").
 Look at the first one: the list offers all the actions of the crown; choose "Right click". Do
 the same with the other slot and "Left click": the two actions have swapped places. "Back", then
 in the action choice, the two icons are in their new place. Removing "Cut" leaves a greyed slot
-at the top of the action choice. "Default" in the "Icons" tab puts everything back.
+at the top of the action choice. "Default" in the "Action choice" tab puts everything back.
 
 ## 9. Screen sizes
 
@@ -265,7 +265,7 @@ Gaze only.
    photo of the action choice and of the magnifier never shows the black screen itself.
 4. Scroll and drag and drop from the action choice: the black screen fades out while the mode
    starts; scrolling and dropping work as before.
-5. "Configure the icons" (settings, Icons tab) and the keyboard lists: they fade in; changing page in a
+5. "Configure the icons" (settings, "Action choice" tab) and the keyboard lists: they fade in; changing page in a
    list does not fade again.
 
 ## 23. "About" tab (issue #92)
@@ -336,7 +336,7 @@ Gaze only.
 3. Near the left edge of the screen (a desktop icon), then in the bottom-right corner (clock of
    the taskbar): the circle is cut flat on the side of the screen edge, the cross is still in
    the center, and the magnifier still reaches the target.
-4. Settings, "Icons" tab, "Configure the icons": the grey preview is round, its text fits inside.
+4. Settings, "Action choice" tab, "Configure the icons": the grey preview is round, its text fits inside.
 
 ## 28. Hold a mouse button (issue #126)
 
@@ -427,13 +427,14 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
 
 ## 33. Opening animation of the magnifier and action choice (issue #154)
 
-1. Install the new version. Settings, "Actions" category: a new "Choice screen" tab, with "Opening animation"
-   on.
+1. Install the new version. Settings, "Actions" category: the former "Icons" tab is now called
+   "Action choice": the "Configure the icons" button, and below it "Opening animation" (on).
 2. Fixed gaze → action choice (magnifier before action off): the round picture starts exactly
    on the place you stared at, at its real size, and grows to the center of the screen
    (about a quarter of a second); then the icons, the cross and the gaze circle fade in.
    Looking at an icon during the animation does nothing; once shown, icons work as before.
-   The picture moves fast at first and slows down at the end.
+   The picture moves fast at first and slows down at the end. On a screen faster than 60 Hz,
+   the movement can show more images per second (up to 144).
 3. Same with "Magnifier before action" on: the magnifier picture grows from the stared place,
    then the "back" icon appears; the fixation on the picture only counts once it is in place.
    Then the action choice opens WITHOUT going back to the real screen: the black screen stays,
@@ -444,7 +445,7 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
 4. Near an edge and in a corner of the screen: the picture still starts on the stared place
    (cut flat by the edge) and ends in the center.
 5. Turn "Opening animation" off: the screens open at once, as before (black fade only).
-6. "Default" in the "Choice screen" tab turns it back on. In French: onglet « Écran de choix »,
+6. "Default" in the "Action choice" tab turns it back on (and restores the icon layout). In French: onglet « Choix d'action »,
    « Animation d'ouverture ».
 
 ## Full installation (Setup.exe, UI access)

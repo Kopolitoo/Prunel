@@ -39,7 +39,7 @@ Il apparaît et disparaît en fondu (un cinquième de seconde), pour que l'écra
 À l'ouverture, la photo grandit d'abord depuis sa vraie place à l'écran jusqu'au centre, puis
 les icônes apparaissent (moins d'une demi-seconde) ; les icônes ne marchent qu'une fois
 affichées. Le passage de la loupe au choix d'action (ou l'inverse) se fait en douceur de l'un
-à l'autre, sans flash. Pour couper cette animation : Paramètres, onglet « Écran de choix », « Animation
+à l'autre, sans flash. Pour couper cette animation : Paramètres, onglet « Choix d'action », « Animation
 d'ouverture ». Elle vaut aussi pour la loupe.
 Autour, des icônes : clic gauche, double clic, clic droit, loupe, glisser-déposer (bouton
 gauche, bouton droit, android), défilement. On regarde une icône jusqu'à ce que son anneau soit
@@ -55,7 +55,7 @@ Le double clic fait une courte pause entre ses deux clics (pour fermer deux ongl
 navigateur à la suite, par exemple). Pour la changer : Paramètres, onglet « Délais », « Pause du
 double clic » (en millisecondes, 200 par défaut ; 0 = aucune pause).
 
-Les icônes peuvent être déplacées ou retirées : Paramètres, onglet « Icônes », « Configurer les
+Les icônes peuvent être déplacées ou retirées : Paramètres, onglet « Choix d'action », « Configurer les
 icônes ».
 
 ## Loupe

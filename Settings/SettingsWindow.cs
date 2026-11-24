@@ -75,6 +75,9 @@ namespace Prunel
         // 184, that text went past the bottom of the page. 150 still leaves 30 between the
         // 120 high buttons of two rows.
         private const double DisplayStepRow = 150;
+        // "Action choice" tab: its settings start below the "Configure the icons" button
+        // (340 to 520, see BuildIconsTab). Room for two rows (issue #154, then #155).
+        private const double IconsRowsTop = 590;
         private const double RowHeight = 160;
         private const double LabelWidth = 520;
         private const double Gap = 18;

@@ -129,13 +129,15 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   Its delay is `MagnifierDelay` ("Magnifier, drag" tab, `settings.json` version 16), not
   `FixationDelay`: `FixationDetector` takes the delay to read in its constructor.
 - Opening animation of the magnifier and of the action choice (issue #154, `OpeningAnimation`,
-  "Choice screen" tab, `settings.json` version 28, yes by default):
+  "Action choice" tab, `settings.json` version 28, yes by default):
   `OverlayWindow.AnimateChoiceOpening`. `RoundPhoto.Add` puts the photo and its ring in one
   group; the group starts at scale 1 / zoom, shifted onto the real point P (it covers exactly
   what it shows), and grows to its place in 250 ms (fast at first, slow at the end); then the
   other elements of the black screen (buttons, cross, gaze circle) fade in over 150 ms. The
   modes ignore the gaze (buttons and fixation) until the end of the animation; only the small
-  gaze circle moves. Between the magnifier and the action choice (both ways, and the magnifier's
+  gaze circle moves. The animations ask for 144 frames per second (`Timeline.DesiredFrameRate`,
+  60 by default in WPF) and the photo is cached by the graphics card while it moves
+  (`BitmapCache`, removed at the end). Between the magnifier and the action choice (both ways, and the magnifier's
   "back"), the transition is smooth: `Ui/ScreenSnapshot` keeps a screenshot four times wider
   than the photo, handed from one mode to the other, so the black screen stays and no new photo
   is taken (no flash); the new photo starts where P was shown on the screen just left, at its
@@ -177,7 +179,7 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   closes it and goes back to the previous mode. A small circle shows where the gaze is.
 - `Modes/SettingsMode` and `SettingsWindow` (step 7): "Settings" button of the menu. A
   full-screen window, black background, with four collapsible categories on the left: Gaze
-  (Gaze, Fixation, Delays), Actions (Magnifier, drag, Choice screen, Scroll, Icons), Display (Display,
+  (Gaze, Fixation, Delays), Actions (Magnifier, drag, Scroll, Action choice), Display (Display,
   Keyboard, Game) and System (General, Profiles, Tools, About). The General tab has, in the bottom-right corner, a "Quit Prunel" button then the question "Quit Prunel?" (`BuildQuitConfirmation`); "Yes" calls `SettingsMode.QuitPrunel`, which closes Prunel like the menu. The "About" tab (issue #92) shows the version
   (`App.Version`), the author's picture (`Resources/Author.jpg`, built into the exe) and two
   buttons whose addresses come from the language file; `SettingsMode.OpenLink` opens them in
@@ -238,7 +240,7 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   (`ProtectedData`, `CurrentUser`, framework reference `System.Security`); profiles keep the
   current token and device. If every bell that is on fails and the computer bell is off,
   `BellRinger` rings the computer bell instead (`BellResult.Fallback`).
-- `Modes/IconConfigMode` (step 10): "Icons" tab of the settings, "Configure the icons" button.
+- `Modes/IconConfigMode` (step 10): "Action choice" tab of the settings, "Configure the icons" button.
   Same layout as the action choice (`ActionChoiceLayout`, shared by both modes), with a grey
   disc in place of the picture. The fourteen slots (eight of the crown, three modifiers on the
   left, Copy / Cut / Paste at the top) carry a badge: a red "−" on an assigned icon (looking at
@@ -246,8 +248,8 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   rounded rectangle three quarters of the screen wide, with all the actions of the same group and
   "Cancel"; an action can be placed several times). Each change is saved in `settings.json`
   (lists `CrownIcons`, `ModifierIcons`, `UtilityIcons`, version 6; "" = empty slot); "Default"
-  in the "Icons" tab restores the original layout. In the action choice, an empty slot is greyed
-  and does nothing. "Back" or Escape goes back to the "Icons" tab. List of the actions:
+  in the "Action choice" tab restores the original layout. In the action choice, an empty slot is greyed
+  and does nothing. "Back" or Escape goes back to the "Action choice" tab. List of the actions:
   `ActionCatalog`.
 - `Modes/GameMode` (step 9): "Game" button of the menu. Nothing is drawn; the user clicks
   with an external switch or voice recognition. `GameMouse` "direct" (default, for Mindball

@@ -87,13 +87,13 @@ seulement le clavier.
 
 ## 8. Configuration des icônes
 
-Menu, « Paramètres », onglet « Icônes », « Configurer les icônes ». On
+Menu, « Paramètres », onglet « Choix d'action », « Configurer les icônes ». On
 regarde le « − » du clic gauche (en haut à gauche de la couronne) puis celui du clic droit : les
 deux emplacements deviennent vides (« + »). On regarde le premier : la liste propose toutes les
 actions de la couronne ; on choisit « Clic droit ». On fait de même avec l'autre emplacement et « Clic
 gauche » : les deux actions ont échangé leur place. « Retour », puis dans le choix d'action, les
 deux icônes sont à leur nouvelle place. Retirer « Couper » laisse un emplacement grisé en haut
-du choix d'action. « Défaut » dans l'onglet « Icônes » remet tout comme avant.
+du choix d'action. « Défaut » dans l'onglet « Choix d'action » remet tout comme avant.
 
 ## 9. Tailles d'écran
 
@@ -284,7 +284,7 @@ Uniquement au regard.
    fondu. La photo du choix d'action et de la loupe ne montre jamais l'écran noir lui-même.
 4. Défilement et glisser-déposer depuis le choix d'action : l'écran noir s'efface pendant que
    le mode démarre ; défiler et déposer marchent comme avant.
-5. « Configurer les icônes » (paramètres, onglet Icônes) et les listes du clavier : ils arrivent en fondu ;
+5. « Configurer les icônes » (paramètres, onglet « Choix d'action ») et les listes du clavier : ils arrivent en fondu ;
    changer de page dans une liste ne refait pas de fondu.
 
 ## 23. Onglet « À propos » (issue #92)
@@ -365,7 +365,7 @@ Uniquement au regard.
 3. Près du bord gauche de l'écran (une icône du bureau), puis dans le coin en bas à droite
    (l'horloge de la barre des tâches) : le rond est coupé droit du côté du bord de l'écran, la
    croix est toujours au centre, et la loupe atteint toujours la cible.
-4. Paramètres, onglet « Icônes », « Configurer les icônes » : l'aperçu gris est rond, son texte
+4. Paramètres, onglet « Choix d'action », « Configurer les icônes » : l'aperçu gris est rond, son texte
    tient dedans.
 
 ## 28. Garder un bouton de la souris enfoncé (issue #126)
@@ -467,14 +467,16 @@ jeton).
 
 ## 33. Animation d'ouverture de la loupe et du choix d'action (issue #154)
 
-1. Installer la nouvelle version. Paramètres, catégorie « Actions » : un nouvel onglet « Écran de choix », avec « Animation
-   d'ouverture » activée.
+1. Installer la nouvelle version. Paramètres, catégorie « Actions » : l'ancien onglet « Icônes »
+   s'appelle maintenant « Choix d'action » : le bouton « Configurer les icônes », et dessous
+   « Animation d'ouverture » (activée).
 2. Regard fixe → choix d'action (loupe avant l'action désactivée) : la photo ronde part
    exactement de l'endroit fixé, à sa vraie taille, et grandit jusqu'au centre de l'écran
    (environ un quart de seconde) ; puis les icônes, la croix et le cercle du regard
    apparaissent en fondu. Regarder une icône pendant l'animation ne fait rien ; une fois
    affichées, les icônes marchent comme avant.
-   La photo va vite au début et ralentit à la fin.
+   La photo va vite au début et ralentit à la fin. Sur un écran plus rapide que 60 Hz, le
+   mouvement peut montrer plus d'images par seconde (jusqu'à 144).
 3. Pareil avec « Loupe avant l'action » activée : la photo de la loupe grandit depuis
    l'endroit fixé, puis l'icône « retour » apparaît ; la fixation sur la photo ne compte
    qu'une fois la photo en place. Ensuite le choix d'action s'ouvre SANS repasser par le vrai
@@ -486,7 +488,7 @@ jeton).
    droit par le bord) et finit au centre.
 5. Désactiver « Animation d'ouverture » : les écrans s'ouvrent d'un coup, comme avant (fondu du
    noir seulement).
-6. « Défaut » dans l'onglet « Écran de choix » la réactive. En anglais : "Choice screen" tab,
+6. « Défaut » dans l'onglet « Choix d'action » la réactive (et remet la disposition des icônes). En anglais : "Action choice" tab,
    "Opening animation".
 
 ## Installation complète (Setup.exe, accès à l'interface)
