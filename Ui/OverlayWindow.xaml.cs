@@ -430,6 +430,24 @@ namespace Prunel
             ChoiceScreen.Height = ActualHeight;
             Canvas.SetLeft(ChoiceScreen, 0);
             Canvas.SetTop(ChoiceScreen, 0);
+            ChoiceScreen.Background = Brushes.Black;   // opaque, unless a mode asks otherwise
+        }
+
+        /// <summary>
+        /// Makes the black background of the black screen partly or fully transparent
+        /// (issue #155, [ChoiceBackgroundTransparency] of the magnifier and of the action
+        /// choice): 0 = black, 100 = no background, the real screen shows. Only the background:
+        /// the photo, the buttons and the gaze circle stay opaque. Call it after
+        /// PrepareChoiceScreen, which puts the opaque black back for the other screens
+        /// (icon configuration, keyboard lists).
+        /// </summary>
+        public void SetChoiceTransparency(double percent)
+        {
+            double opacity = 1 - Math.Max(0, Math.Min(100, percent)) / 100;
+            byte alpha = (byte)Math.Round(255 * opacity);
+            SolidColorBrush background = new SolidColorBrush(Color.FromArgb(alpha, 0, 0, 0));
+            background.Freeze();
+            ChoiceScreen.Background = background;
         }
 
         /// <summary>

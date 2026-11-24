@@ -108,8 +108,10 @@ namespace Prunel
         ///      of CursorDeadZone, which game mode used until then: nothing changes for the user.
         ///  28: issue #154 — OpeningAnimation (yes). Nothing to fix: missing from an older file,
         ///      it keeps its default value.
+        ///  29: issue #155 — ChoiceBackgroundTransparency (0 %). Nothing to fix: missing from an
+        ///      older file, it keeps its default value (black background, as before).
         /// </summary>
-        public const int CurrentVersion = 28;
+        public const int CurrentVersion = 29;
 
         /// <summary>Format number of the file, so it can evolve one day without breaking everything.</summary>
         [DataMember(Order = 0)]
@@ -717,5 +719,14 @@ namespace Prunel
         /// </summary>
         [DataMember(Order = 157)]
         public bool OpeningAnimation { get; set; }
+
+        /// <summary>
+        /// Transparency of the black background of the magnifier and of the action choice, in %
+        /// (issue #155): 0 = fully black (as before), 100 = no background at all, the real
+        /// screen shows around the photo. The photo, the buttons and the gaze circle stay
+        /// opaque. 0 by default.
+        /// </summary>
+        [DataMember(Order = 158)]
+        public double ChoiceBackgroundTransparency { get; set; }
     }
 }

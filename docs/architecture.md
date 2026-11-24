@@ -142,6 +142,13 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   than the photo, handed from one mode to the other, so the black screen stays and no new photo
   is taken (no flash); the new photo starts where P was shown on the screen just left, at its
   zoom there. If the new photo does not fit in the snapshot, a new photo is taken as before.
+- Background transparency of the magnifier and of the action choice (issue #155,
+  `ChoiceBackgroundTransparency`, "Action choice" tab, 0 to 100 % by 10 %, 0 by default,
+  `settings.json` version 29): `OverlayWindow.SetChoiceTransparency`, called by the two modes
+  just after `PrepareChoiceScreen`, gives the black screen a black brush with that alpha (the
+  opacity of `ChoiceScreen` itself is used by the fades, so the brush is changed, not the
+  opacity). `PrepareChoiceScreen` puts the opaque black back for the other screens (icon
+  configuration, keyboard lists). Photo, buttons and gaze circle stay opaque.
 - Modifiers (step 6, `Modifiers`, `KeyboardInjector`): in the action choice, looking at "Ctrl",
   "Shift" or "Alt" turns it on (green border), a second look turns it off. The keys that are on
   are pressed just before the action and released just after (after the drop for a drag). They

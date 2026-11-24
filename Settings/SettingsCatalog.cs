@@ -587,7 +587,10 @@ namespace Prunel
             // of the action choice and of the magnifier (issue #154), below the button.
             new SettingsTab(IconsTabName, "\uE71D",
                 Setting.YesOrNo("setting.openingAnimation",
-                                 p => p.OpeningAnimation, (p, v) => p.OpeningAnimation = v)),
+                                 p => p.OpeningAnimation, (p, v) => p.OpeningAnimation = v),
+                // Issue #155: see the real screen around the photo, up to no background at all.
+                Setting.Number("setting.choiceBackgroundTransparency", " %", 10,
+                               p => p.ChoiceBackgroundTransparency, (p, v) => p.ChoiceBackgroundTransparency = v)),
 
             // E765 = keyboard ("Keyboard")
             new SettingsTab("tab.keyboard", "\uE765",

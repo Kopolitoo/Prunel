@@ -224,6 +224,8 @@
   "setting.magnifierDelay.help": "Gaze time on the picture",
   "setting.openingAnimation.name": "Opening animation",
   "setting.openingAnimation.help": "The picture grows, then the buttons appear",
+  "setting.choiceBackgroundTransparency.name": "Background transparency",
+  "setting.choiceBackgroundTransparency.help": "See the screen behind (100 % = no black background)",
   "setting.androidPauseDuration.name": "Android pause",
   "setting.androidPauseDuration.help": "Between the press and the move",
   "setting.dragDuration.name": "Drag duration",
