@@ -64,7 +64,7 @@ namespace Prunel
             MagnifierZoom = 4;
             MagnifierDelay = 0.8;
             OpeningAnimation = true;
-            ChoiceBackgroundTransparency = 0;
+            ChoiceBackgroundTransparency = 100;   // user choice: no black background
 
             AndroidPauseDuration = 1.0;
             DragDuration = 0.5;
@@ -375,8 +375,8 @@ namespace Prunel
             }
 
             // Version 28 (OpeningAnimation): nothing to fix, it keeps its default value (yes).
-            // Version 29 (ChoiceBackgroundTransparency): nothing to fix, it keeps its default
-            // value (0 %: black background, as before).
+            // Version 29 (ChoiceBackgroundTransparency): nothing to fix, it gets its default
+            // value (100 %: no black background, the user's choice).
 
             FileVersion = CurrentVersion;
             return true;

@@ -493,15 +493,16 @@ jeton).
 
 ## 34. Transparence du fond de la loupe et du choix d'action (issue #155)
 
-1. Installer la nouvelle version. Paramètres, onglet « Choix d'action » : « Transparence du
-   fond » (0 %) sous « Animation d'ouverture ». La loupe et le choix d'action sont comme avant.
+1. Installer la nouvelle version (paramètres d'avant la version 29). Paramètres, onglet « Choix
+   d'action » : « Transparence du fond » (100 %) sous « Animation d'ouverture ». La loupe et le
+   choix d'action n'ont plus de fond noir. La mettre à 0 % : entièrement noir, comme avant.
 2. La mettre à 50 % : le vrai écran se voit, assombri, autour de la photo du choix d'action et
    de la loupe. La photo, les icônes et le cercle du regard restent bien visibles.
 3. La mettre à 100 % : plus de fond noir du tout ; seules la photo et les icônes sont dessinées
    par-dessus le vrai écran. Les icônes, la fixation de la loupe et « retour » marchent comme
    avant.
 4. L'écran de configuration des icônes et les listes du clavier restent entièrement noirs.
-5. « Défaut » dans l'onglet « Choix d'action » la remet à 0 %. En anglais : "Background
+5. « Défaut » dans l'onglet « Choix d'action » la remet à 100 %. En anglais : "Background
    transparency".
 
 ## Installation complète (Setup.exe, accès à l'interface)

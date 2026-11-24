@@ -450,14 +450,15 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
 
 ## 34. Background transparency of the magnifier and action choice (issue #155)
 
-1. Install the new version. Settings, "Action choice" tab: "Background transparency" (0 %)
-   below "Opening animation". The magnifier and the action choice look as before.
+1. Install the new version (settings older than version 29). Settings, "Action choice" tab:
+   "Background transparency" (100 %) below "Opening animation". The magnifier and the action
+   choice have no black background. Set it to 0 %: fully black, as before.
 2. Set it to 50 %: the real screen shows, darkened, around the picture of the action choice
    and of the magnifier. The picture, the icons and the gaze circle stay fully visible.
 3. Set it to 100 %: no black background at all; only the picture and the icons are drawn over
    the real screen. Icons, magnifier fixation and "back" work as before.
 4. The icon configuration screen and the keyboard lists stay fully black.
-5. "Default" in the "Action choice" tab puts it back to 0 %. In French: « Transparence du
+5. "Default" in the "Action choice" tab puts it back to 100 %. In French: « Transparence du
    fond ».
 
 ## Full installation (Setup.exe, UI access)

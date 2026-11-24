@@ -39,7 +39,7 @@ from the magnifier to the action choice (or back) is a smooth move from one to t
 no flash. To turn
 this animation off: Settings, "Action choice" tab, "Opening animation". It also applies to the
 magnifier. In the same tab, "Background transparency" lets the real screen show around the
-picture (0 % = black, as by default; 100 % = no black background at all).
+picture (100 % by default = no black background at all; 0 % = fully black).
 Around it, icons: left click, double click, right click, magnifier, drag and drop (left button,
 right button, android), scroll. Look at an icon until its ring is full to use it. On the left
 edge: **Ctrl**, **Shift**, **Alt** (look once to turn on, the border turns green; they are

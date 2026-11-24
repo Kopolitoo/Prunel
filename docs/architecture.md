@@ -143,7 +143,7 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   is taken (no flash); the new photo starts where P was shown on the screen just left, at its
   zoom there. If the new photo does not fit in the snapshot, a new photo is taken as before.
 - Background transparency of the magnifier and of the action choice (issue #155,
-  `ChoiceBackgroundTransparency`, "Action choice" tab, 0 to 100 % by 10 %, 0 by default,
+  `ChoiceBackgroundTransparency`, "Action choice" tab, 0 to 100 % by 10 %, 100 by default,
   `settings.json` version 29): `OverlayWindow.SetChoiceTransparency`, called by the two modes
   just after `PrepareChoiceScreen`, gives the black screen a black brush with that alpha (the
   opacity of `ChoiceScreen` itself is used by the fades, so the brush is changed, not the
