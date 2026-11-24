@@ -136,6 +136,21 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   ou aucun, suffit (issue #91).
   Son délai est `MagnifierDelay` (onglet « Loupe, glisser », `settings.json` version 16), et non
   `FixationDelay` : `FixationDetector` reçoit le délai à lire dans son constructeur.
+- Animation d'ouverture de la loupe et du choix d'action (issue #154, `OpeningAnimation`,
+  onglet « Choix d'action », `settings.json` version 28, oui par défaut) :
+  `OverlayWindow.AnimateChoiceOpening`. `RoundPhoto.Add` met la photo et son anneau dans un
+  seul groupe ; le groupe part à l'échelle 1 / zoom, décalé sur le vrai point P (il recouvre
+  exactement ce qu'il montre), et grandit jusqu'à sa place en 250 ms (rapide au début, lent à
+  la fin) ; puis les autres éléments de l'écran noir (boutons, croix, cercle du regard)
+  apparaissent en fondu en 150 ms. Les modes ignorent le regard (boutons et fixation) jusqu'à la
+  fin de l'animation ; seul le petit cercle du regard bouge. Les animations demandent 144 images
+  par seconde (`Timeline.DesiredFrameRate`, 60 par défaut dans WPF) et la photo est gardée en
+  cache par la carte graphique pendant qu'elle bouge (`BitmapCache`, retiré à la fin). Entre la loupe et le choix d'action
+  (dans les deux sens, et le « retour » de la loupe), la transition est douce :
+  `Ui/ScreenSnapshot` garde une capture quatre fois plus large que la photo, passée d'un mode à
+  l'autre ; l'écran noir reste donc affiché et aucune nouvelle photo n'est prise (pas de flash) ;
+  la nouvelle photo part de l'endroit où P était montré sur l'écran qu'on quitte, à son zoom.
+  Si la nouvelle photo ne tient pas dans la capture, une nouvelle photo est prise comme avant.
 - Modificateurs (étape 6, `Modifiers`, `KeyboardInjector`) : dans le choix d'action, un
   regard sur « Ctrl », « Maj » ou « Alt » l'allume (bord vert), un second l'éteint. Les touches
   allumées sont enfoncées juste avant l'action et relâchées juste après (après le dépôt pour un
@@ -173,7 +188,7 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   d'avant. Un petit cercle montre où est le regard.
 - `Modes/SettingsMode` et `SettingsWindow` (étape 7) : bouton « Paramètres » du menu. Une
   fenêtre plein écran, fond noir, avec à gauche quatre catégories dépliantes (02/11/2026) : Regard (Regard,
-  Fixation, Délais), Actions (Loupe et glisser, Défilement, Icônes), Affichage (Affichage, Clavier,
+  Fixation, Délais), Actions (Loupe et glisser, Défilement, Choix d'action), Affichage (Affichage, Clavier,
   Jeu) et Système (Général, Profils, Outils, À propos). L'onglet Général a en bas à droite un bouton « Quitter Prunel » puis la question « Quitter Prunel ? » (`BuildQuitConfirmation`) ; « Oui » appelle `SettingsMode.QuitPrunel`, qui ferme Prunel comme le menu. L'onglet « À propos » (issue #92) montre la
   version (`App.Version`), l'image de l'auteur (`Resources/Author.jpg`, intégrée à l'exe) et deux
   boutons dont les adresses viennent du fichier de langue ; `SettingsMode.OpenLink` les ouvre
@@ -239,7 +254,7 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   les profils gardent le jeton et l'appareil actuels. Si toutes les sonnettes activées échouent
   et que la sonnette de l'ordinateur est désactivée, `BellRinger` fait sonner l'ordinateur à la
   place (`BellResult.Fallback`).
-- `Modes/IconConfigMode` (étape 10) : onglet « Icônes » des paramètres, bouton « Configurer les
+- `Modes/IconConfigMode` (étape 10) : onglet « Choix d'action » des paramètres, bouton « Configurer les
   icônes ». Même mise en page que le choix d'action (`ActionChoiceLayout`, partagée par les
   deux modes), avec un disque gris à la place de la photo. Les quatorze emplacements (huit de la
   couronne, trois modificateurs à gauche, Copier / Couper / Coller en haut) portent une pastille :
@@ -248,9 +263,9 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   l'écran, avec toutes les actions du même groupe et « Annuler » ; une action peut être placée
   plusieurs fois). Chaque changement
   est enregistré dans `settings.json` (listes `CrownIcons`, `ModifierIcons`,
-  `UtilityIcons`, version 6 ; "" = emplacement vide) ; « Défaut » dans l'onglet « Icônes »
+  `UtilityIcons`, version 6 ; "" = emplacement vide) ; « Défaut » dans l'onglet « Choix d'action »
   remet la disposition d'origine. Dans le choix d'action, un emplacement vide est grisé et ne
-  fait rien. « Retour » ou Échap ramène à l'onglet « Icônes ». Liste des actions : `ActionCatalog`.
+  fait rien. « Retour » ou Échap ramène à l'onglet « Choix d'action ». Liste des actions : `ActionCatalog`.
 - `Modes/GameMode` (étape 9) : bouton « Jeu » du menu. Rien n'est dessiné ; l'utilisateur clique
   avec un contacteur externe ou la reconnaissance vocale. `GameMouse` « direct » (par défaut,
   pour Mindball Play) : le curseur suit le regard comme en mode mouvement avec suivi souris, avec

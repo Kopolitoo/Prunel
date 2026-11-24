@@ -30,11 +30,21 @@ namespace Prunel
         /// centerX / centerY: where P must appear, in screen pixels (center of the screen).
         /// Returns the top-left corner of the enlarged image, in screen pixels: the modes use it
         /// to convert a point of the photo back to real coordinates.
+        /// group: the photo and its ring, together in one element, so that the opening animation
+        /// (issue #154, OverlayWindow.AnimateChoiceOpening) can make them grow as one.
         /// </summary>
         public static Point Add(OverlayWindow layer, Canvas screen, BitmapSource photo, double side,
                                 double zoom, double pInPhotoX, double pInPhotoY,
-                                double centerX, double centerY)
+                                double centerX, double centerY, out UIElement group)
         {
+            // The photo and its ring go in a canvas without size at the top-left corner of the
+            // black screen: their positions stay those of the black screen.
+            Canvas photoGroup = new Canvas();
+            Canvas.SetLeft(photoGroup, 0);
+            Canvas.SetTop(photoGroup, 0);
+            screen.Children.Add(photoGroup);
+            group = photoGroup;
+
             double enlargedSide = side * zoom;
             double left = centerX - pInPhotoX * zoom;
             double top = centerY - pInPhotoY * zoom;
@@ -60,7 +70,7 @@ namespace Prunel
             image.Clip = new EllipseGeometry(centerInImage, radiusWpf, radiusWpf);
             Canvas.SetLeft(image, corner.X);
             Canvas.SetTop(image, corner.Y);
-            screen.Children.Add(image);
+            photoGroup.Children.Add(image);
 
             // The thin gray ring, just outside the visible part: the disc, cut by the edges of
             // the image (both grown by half the thickness, so the ring does not cover the photo).
@@ -74,7 +84,7 @@ namespace Prunel
             ring.Data = new CombinedGeometry(GeometryCombineMode.Intersect, disc, square);
             ring.Stroke = Brushes.Gray;
             ring.StrokeThickness = stroke;
-            screen.Children.Add(ring);
+            photoGroup.Children.Add(ring);
 
             return new Point(left, top);
         }

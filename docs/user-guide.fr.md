@@ -36,6 +36,11 @@ défilement, écriture…). Ce guide explique comment s'en servir. Pour l'instal
 Un écran noir montre la zone fixée, agrandie deux fois, dans un rond, avec une croix sur le
 point exact en son centre. Près d'un bord de l'écran, le rond est coupé droit par ce bord.
 Il apparaît et disparaît en fondu (un cinquième de seconde), pour que l'écran ne flashe pas.
+À l'ouverture, la photo grandit d'abord depuis sa vraie place à l'écran jusqu'au centre, puis
+les icônes apparaissent (moins d'une demi-seconde) ; les icônes ne marchent qu'une fois
+affichées. Le passage de la loupe au choix d'action (ou l'inverse) se fait en douceur de l'un
+à l'autre, sans flash. Pour couper cette animation : Paramètres, onglet « Choix d'action », « Animation
+d'ouverture ». Elle vaut aussi pour la loupe.
 Autour, des icônes : clic gauche, double clic, clic droit, loupe, glisser-déposer (bouton
 gauche, bouton droit, android), défilement. On regarde une icône jusqu'à ce que son anneau soit
 plein pour l'utiliser. Au bord gauche : **Ctrl**, **Maj**, **Alt** (un regard les active, le bord
@@ -50,7 +55,7 @@ Le double clic fait une courte pause entre ses deux clics (pour fermer deux ongl
 navigateur à la suite, par exemple). Pour la changer : Paramètres, onglet « Délais », « Pause du
 double clic » (en millisecondes, 200 par défaut ; 0 = aucune pause).
 
-Les icônes peuvent être déplacées ou retirées : Paramètres, onglet « Icônes », « Configurer les
+Les icônes peuvent être déplacées ou retirées : Paramètres, onglet « Choix d'action », « Configurer les
 icônes ».
 
 ## Loupe

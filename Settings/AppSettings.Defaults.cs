@@ -63,6 +63,7 @@ namespace Prunel
             MagnifierBeforeAction = true;
             MagnifierZoom = 4;
             MagnifierDelay = 0.8;
+            OpeningAnimation = true;
 
             AndroidPauseDuration = 1.0;
             DragDuration = 0.5;
@@ -370,6 +371,8 @@ namespace Prunel
                 GameCursorDeadZone = CursorDeadZone;
                 App.Log("Settings: updated to version 27 (game anti-jitter)");
             }
+
+            // Version 28 (OpeningAnimation): nothing to fix, it keeps its default value (yes).
 
             FileVersion = CurrentVersion;
             return true;

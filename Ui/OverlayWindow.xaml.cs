@@ -537,6 +537,110 @@ namespace Prunel
             ChoiceScreen.Opacity = 1;
         }
 
+        // ───────────────────────── Opening animation (issue #154) ─────────────────────────
+
+        /// <summary>
+        /// Durations of the opening animation of the magnifier and of the action choice, in
+        /// milliseconds: first the photo grows ([OpeningGrowMs]), then the buttons appear
+        /// ([OpeningButtonsMs]). Short, because the buttons only work once it is over.
+        /// </summary>
+        private const double OpeningGrowMs = 250;
+        private const double OpeningButtonsMs = 150;
+
+        /// <summary>
+        /// Frames per second asked for the opening animation (user: "smoother"). WPF animates at
+        /// 60 frames per second by default; a screen refreshing faster (120, 144 Hz) can then
+        /// show more images. On a 60 Hz screen, nothing changes.
+        /// </summary>
+        private const int OpeningFrameRate = 144;
+
+        /// <summary>
+        /// Plays the opening animation of the black screen just filled by the magnifier or the
+        /// action choice (issue #154), if the [OpeningAnimation] setting is on:
+        ///  1. the photo starts where P was seen just before, at the size it had there, then
+        ///     moves to its place in the center, enlarged ×zoom. Coming from the fixed gaze,
+        ///     that is P's real place on the screen, at real size (fromZoom 1): the photo covers
+        ///     exactly what it shows, then grows. Coming from the magnifier (or going to it),
+        ///     it is where P was shown on the magnifier (or the action choice), at its zoom;
+        ///  2. then everything else (buttons, cross, gaze circle) appears with a fade.
+        /// photo: the photo and its ring (RoundPhoto.Add). fromX / fromY: where P was seen just
+        /// before (screen pixels), enlarged ×fromZoom; shownX / shownY: where P is shown on the
+        /// black screen. Call it just after ShowChoiceScreen. Returns the duration of the
+        /// animation in milliseconds (0 if the setting is off): the modes ignore the gaze until
+        /// it is over, so that no button and no fixation counts while it is not fully shown.
+        /// </summary>
+        public double AnimateChoiceOpening(UIElement photo, double fromX, double fromY, double fromZoom,
+                                           double shownX, double shownY, double zoom)
+        {
+            if (!AppSettings.Current.OpeningAnimation || zoom <= 0 || fromZoom <= 0)
+            {
+                return 0;
+            }
+
+            // 1. The photo. A scale around the shown P (from fromZoom / zoom, to 1), and a
+            //    shift that brings the shown P to where P was seen (to 0 at the end). P thus
+            //    slides in a straight line from there to the center.
+            Point shown = ToWpf(shownX, shownY);
+            Point real = ToWpf(fromX, fromY);
+            ScaleTransform scale = new ScaleTransform(1, 1, shown.X, shown.Y);
+            TranslateTransform shift = new TranslateTransform();
+            TransformGroup transform = new TransformGroup();
+            transform.Children.Add(scale);
+            transform.Children.Add(shift);
+            photo.RenderTransform = transform;
+            // The photo is drawn once into an image kept by the graphics card, then only moved
+            // and resized: lighter for each frame. Removed at the end (sharp photo again).
+            photo.CacheMode = new BitmapCache();
+
+            Duration grow = new Duration(TimeSpan.FromMilliseconds(OpeningGrowMs));
+            // Fast at the start, slow at the end (user request): the photo "lands" gently.
+            CubicEase smooth = new CubicEase();
+            smooth.EasingMode = EasingMode.EaseOut;
+            double startScale = fromZoom / zoom;
+            DoubleAnimation scaleX = Animation(startScale, 1, grow, smooth);
+            scaleX.Completed += (s, e) => photo.CacheMode = null;
+            scale.BeginAnimation(ScaleTransform.ScaleXProperty, scaleX);
+            scale.BeginAnimation(ScaleTransform.ScaleYProperty, Animation(startScale, 1, grow, smooth));
+            shift.BeginAnimation(TranslateTransform.XProperty, Animation(real.X - shown.X, 0, grow, smooth));
+            shift.BeginAnimation(TranslateTransform.YProperty, Animation(real.Y - shown.Y, 0, grow, smooth));
+
+            // 2. Everything else: invisible during the growth, then a fade to its usual
+            //    opacity. At the end, the animation is removed: the element gets its own
+            //    opacity back (a button can then change it freely).
+            TimeSpan start = TimeSpan.FromMilliseconds(OpeningGrowMs);
+            Duration fade = new Duration(TimeSpan.FromMilliseconds(OpeningButtonsMs));
+            foreach (UIElement element in ChoiceScreen.Children)
+            {
+                if (element == photo)
+                {
+                    continue;
+                }
+                UIElement faded = element;
+                double usual = faded.Opacity;
+                DoubleAnimation appear = Animation(0, usual, fade, null);
+                appear.BeginTime = start;
+                appear.Completed += (s, e) =>
+                {
+                    faded.Opacity = usual;
+                    faded.BeginAnimation(OpacityProperty, null);
+                };
+                faded.Opacity = 0;   // invisible until the fade starts
+                faded.BeginAnimation(OpacityProperty, appear);
+            }
+
+            return OpeningGrowMs + OpeningButtonsMs;
+        }
+
+        /// <summary>An animation of a number, from "from" to "to".</summary>
+        private static DoubleAnimation Animation(double from, double to, Duration duration,
+                                                 IEasingFunction easing)
+        {
+            DoubleAnimation animation = new DoubleAnimation(from, to, duration);
+            animation.EasingFunction = easing;
+            Timeline.SetDesiredFrameRate(animation, OpeningFrameRate);
+            return animation;
+        }
+
         // ───────────────────────── Menu bar ─────────────────────────
 
         /// <summary>

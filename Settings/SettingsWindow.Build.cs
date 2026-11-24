@@ -71,9 +71,11 @@ namespace Prunel
                 double step = tab.Name == SettingsCatalog.ColorsTabName ? CompactStepRow
                             : tab.Name == DisplayTabName ? DisplayStepRow
                             : StepRow;
+                // "Action choice" tab: its settings go below the "Configure the icons" button.
+                double top = tab.Name == SettingsCatalog.IconsTabName ? IconsRowsTop : TopRow;
                 for (int i = 0; i < tab.Settings.Count; i++)
                 {
-                    BuildRow(tab.Settings[i], TopRow + i * step);
+                    BuildRow(tab.Settings[i], top + i * step);
                 }
                 if (tab.Name == SettingsCatalog.GeneralTabName)
                 {
@@ -529,8 +531,9 @@ namespace Prunel
         }
 
         /// <summary>
-        /// "Icônes" tab: an explanation, then a big button that opens the action
-        /// choice icon configuration screen. E71D = grid of squares.
+        /// "Action choice" tab (formerly "Icônes"): an explanation, then a small button that
+        /// opens the action choice icon configuration screen. Its settings come below
+        /// (IconsRowsTop).
         /// </summary>
         private void BuildIconsTab()
         {
@@ -544,20 +547,11 @@ namespace Prunel
             texts.Children.Add(explanation);
             Place(texts, LeftContent, TopRow + 20);
 
-            StackPanel button = new StackPanel();
-            button.Orientation = Orientation.Horizontal;
-            button.HorizontalAlignment = HorizontalAlignment.Center;
-            button.VerticalAlignment = VerticalAlignment.Center;
-            TextBlock symbol = Text("\uE71D", 60, White, false);
-            symbol.FontFamily = new FontFamily(IconFont);
-            symbol.VerticalAlignment = VerticalAlignment.Center;
-            symbol.Margin = new Thickness(0, 0, 30, 0);
-            button.Children.Add(symbol);
-            TextBlock word = Text(Texts.Get("settings.icons.configure"), 42, White, true);
-            word.VerticalAlignment = VerticalAlignment.Center;
-            button.Children.Add(word);
-
-            AddTarget(LeftContent + 170, 420, 800, 180, button, RequestIconConfig, false, false);
+            // A small button (user request): a big one was hard to avoid with the gaze while
+            // reading the tab or using the settings below it. E71D = grid of squares.
+            AddTarget(LeftContent + 340, 340, 460, 90,
+                      SmallButton("\uE71D", Texts.Get("settings.icons.configure")),
+                      RequestIconConfig, false, false);
         }
 
         /// <summary>
