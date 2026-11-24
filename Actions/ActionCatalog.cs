@@ -281,9 +281,10 @@ namespace Prunel
                     return new GazeButton("\uE765", null, Texts.Get("action.keyboard.label"));
                 case ChoiceAction.HoldLeft:
                     // E72E = padlock (the button stays "locked" down; symbol to check on screen).
-                    return new GazeButton("\uE72E", Texts.Get("action.badge.left"), Texts.Get("action.holdLeft.label"));
+                    // Violet background: these are game actions, not ordinary clicks.
+                    return new GazeButton("\uE72E", Texts.Get("action.badge.left"), Texts.Get("action.holdLeft.label")).MarkAsGame();
                 case ChoiceAction.HoldRight:
-                    return new GazeButton("\uE72E", Texts.Get("action.badge.right"), Texts.Get("action.holdRight.label"));
+                    return new GazeButton("\uE72E", Texts.Get("action.badge.right"), Texts.Get("action.holdRight.label")).MarkAsGame();
                 default:
                     return new GazeButton("", null, Texts.Get("action.back.label"));
             }

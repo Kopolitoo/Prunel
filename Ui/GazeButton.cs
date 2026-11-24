@@ -67,6 +67,9 @@ namespace Prunel
         // True for a button drawn grayed (empty slot, unavailable function).
         private bool _grayed;
 
+        // True for a game action button (violet background, see MarkAsGame).
+        private bool _game;
+
         // Size of the symbol relative to the button side (smaller for a word, see Text).
         private double _symbolFactor = 0.45;
 
@@ -218,6 +221,17 @@ namespace Prunel
             _label.Padding = new Thickness(ScreenMetrics.Units(8), ScreenMetrics.Units(2), ScreenMetrics.Units(8), ScreenMetrics.Units(2));
             _label.Child = text;
             _label.Visibility = Visibility.Collapsed;
+        }
+
+        /// <summary>
+        /// Gives the button the light violet background of game actions (Palette.GameBackground),
+        /// so "Hold left / right" are not mistaken for ordinary clicks.
+        /// </summary>
+        public GazeButton MarkAsGame()
+        {
+            _game = true;
+            _background.Background = Palette.GameBackground;
+            return this;
         }
 
         /// <summary>False for an empty or unavailable slot: it never activates (no ring).</summary>
@@ -385,7 +399,11 @@ namespace Prunel
         /// </summary>
         public void Draw(double progress, bool hover, bool showLabel)
         {
-            if (!_grayed)
+            if (_game && !_grayed)
+            {
+                _background.Background = hover ? Palette.GameHoverBackground : Palette.GameBackground;
+            }
+            else if (!_grayed)
             {
                 _background.Background = hover ? HoverBackground : NormalBackground;
             }

@@ -73,7 +73,7 @@ bouton retour au bord droit annule.
 
 Pour les jeux qui déplacent le personnage tant qu'un bouton de la souris est enfoncé (par exemple
 Back to Bed, bouton droit). On ajoute « Gauche maintenu » ou « Droit maintenu » sur la couronne
-dans la configuration des icônes (ils n'y sont pas par défaut). On fixe le point de départ et on
+dans la configuration des icônes (ils n'y sont pas par défaut ; leur fond violet léger rappelle que ce sont des actions de jeu). On fixe le point de départ et on
 le choisit : le bouton est enfoncé à cet endroit, puis le curseur suit le regard, bouton toujours
 enfoncé (même lissage et même anti-tremblement qu'en mode jeu). Pour lâcher, on jette un coup d'œil au grand
 bouton « Relâcher le bouton » (carré) au bord droit de l'écran : un regard bref suffit. Le bouton est aussi relâché avec Échap,

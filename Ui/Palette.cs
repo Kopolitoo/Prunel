@@ -33,6 +33,8 @@ namespace Prunel
         private static readonly Brush DayAmber = Frozen(Color.FromRgb(0xFF, 0xC8, 0x57));
         private static readonly Brush DaySwitch = Frozen(Color.FromRgb(0x0D, 0x6E, 0xFD));
         private static readonly Color DayOutline = Color.FromRgb(0x7F, 0xB8, 0xF0);
+        private static readonly Brush DayGameBackground = Frozen(Color.FromArgb(0xE0, 0x4E, 0x36, 0x75));
+        private static readonly Brush DayGameHoverBackground = Frozen(Color.FromArgb(0xFF, 0x6C, 0x4F, 0x9C));
 
         // ── Night colours: same hues, darker and softer.
         private static readonly Brush NightText = Frozen(Color.FromRgb(0xB4, 0xB4, 0xB4));
@@ -42,6 +44,8 @@ namespace Prunel
         private static readonly Brush NightAmber = Frozen(Color.FromRgb(0xA8, 0x86, 0x3C));
         private static readonly Brush NightSwitch = Frozen(Color.FromRgb(0x1C, 0x4A, 0x96));
         private static readonly Color NightOutline = Color.FromRgb(0x50, 0x78, 0xA0);
+        private static readonly Brush NightGameBackground = Frozen(Color.FromArgb(0xE0, 0x36, 0x26, 0x50));
+        private static readonly Brush NightGameHoverBackground = Frozen(Color.FromArgb(0xFF, 0x4A, 0x38, 0x6A));
 
         /// <summary>Text and symbols (pure white by day).</summary>
         public static Brush Text
@@ -89,6 +93,21 @@ namespace Prunel
         public static Color Outline
         {
             get { return Night ? NightOutline : DayOutline; }
+        }
+
+        /// <summary>
+        /// The light violet background of the buttons of game actions ("Hold left / right"),
+        /// so they are not mistaken for ordinary clicks (user request of 2026-11-24).
+        /// </summary>
+        public static Brush GameBackground
+        {
+            get { return Night ? NightGameBackground : DayGameBackground; }
+        }
+
+        /// <summary>The same violet, lighter, when the game action button is looked at.</summary>
+        public static Brush GameHoverBackground
+        {
+            get { return Night ? NightGameHoverBackground : DayGameHoverBackground; }
         }
 
         private static Brush Frozen(Color color)

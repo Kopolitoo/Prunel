@@ -421,6 +421,9 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
 4. Change "Anti-jitter" of the "Gaze" tab: the game value does not change.
 5. "Default" in the "Game" tab: "Game anti-jitter" goes back to 0.40 %.
 6. In French: « Anti-tremblement du jeu ».
+7. "Hold left" and "Hold right" have a light violet background (darker with night mode), in
+   the action choice and in the icon configuration screen; looked at, the violet gets lighter.
+   The other buttons keep their usual dark background.
 
 ## Full installation (Setup.exe, UI access)
 

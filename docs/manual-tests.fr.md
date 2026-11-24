@@ -461,6 +461,9 @@ jeton).
 4. Changer « Anti-tremblement » de l'onglet « Regard » : la valeur du jeu ne change pas.
 5. « Défaut » dans l'onglet « Jeu » : « Anti-tremblement du jeu » revient à 0.40 %.
 6. En anglais : « Game anti-jitter ».
+7. « Gauche maintenu » et « Droit maintenu » ont un fond violet léger (plus sombre en mode
+   nuit), dans le choix d'action et dans l'écran de configuration des icônes ; quand on les
+   regarde, le violet s'éclaircit. Les autres boutons gardent leur fond sombre habituel.
 
 ## Installation complète (Setup.exe, accès à l'interface)
 
