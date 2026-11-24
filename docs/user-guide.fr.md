@@ -36,6 +36,10 @@ défilement, écriture…). Ce guide explique comment s'en servir. Pour l'instal
 Un écran noir montre la zone fixée, agrandie deux fois, dans un rond, avec une croix sur le
 point exact en son centre. Près d'un bord de l'écran, le rond est coupé droit par ce bord.
 Il apparaît et disparaît en fondu (un cinquième de seconde), pour que l'écran ne flashe pas.
+À l'ouverture, la photo grandit d'abord depuis sa vraie place à l'écran jusqu'au centre, puis
+les icônes apparaissent (moins d'une demi-seconde) ; les icônes ne marchent qu'une fois
+affichées. Pour couper cette animation : Paramètres, onglet « Écran de choix », « Animation
+d'ouverture ». Elle vaut aussi pour la loupe.
 Autour, des icônes : clic gauche, double clic, clic droit, loupe, glisser-déposer (bouton
 gauche, bouton droit, android), défilement. On regarde une icône jusqu'à ce que son anneau soit
 plein pour l'utiliser. Au bord gauche : **Ctrl**, **Maj**, **Alt** (un regard les active, le bord

@@ -96,6 +96,10 @@ namespace Prunel
         private Step _step;
         private double _stepStartMs;
 
+        // Time (gaze clock, ms) from which the buttons count: the end of the opening animation
+        // (issue #154), or the moment the screen is shown if the animation is off.
+        private double _readyMs;
+
         /// <summary>Label of an empty slot, shown on hover.</summary>
         private static string EmptyLabel { get { return Texts.Get("actionChoice.emptySlot"); } }
 
@@ -198,6 +202,14 @@ namespace Prunel
         private void UpdateChoice(GazeState gaze)
         {
             AppSettings p = AppSettings.Current;
+
+            // Opening animation still running (issue #154): the buttons are not fully shown
+            // yet, nothing can be activated. Only the gaze circle moves.
+            if (gaze.NowMs < _readyMs)
+            {
+                MoveGazeCircle(gaze, p);
+                return;
+            }
 
             // Which button is looked at? Has one of them just activated?
             // (An empty slot never activates: see ButtonAimer.)
@@ -408,8 +420,9 @@ namespace Prunel
 
             // ── The enlarged photo, round, with P (and the cross) in the center of the screen
             //    (RoundPhoto.cs). Near an edge of the screen, the disc is cut flat by that edge.
+            UIElement photoGroup;
             RoundPhoto.Add(layer, screen, photo, side, zoom, _px - ox, _py - oy,
-                           placed.CenterX, placed.CenterY);
+                           placed.CenterX, placed.CenterY, out photoGroup);
 
             // ── The cross, in place of the cursor in the enlarged photo: always in its center.
             DrawCross(layer, screen, placed.CenterX, placed.CenterY);
@@ -453,6 +466,11 @@ namespace Prunel
             _gazeCirclePlaced = false;
 
             layer.ShowChoiceScreen();
+            // Opening animation (issue #154): the photo grows from P, then the buttons appear.
+            // The buttons only count once it is over (see UpdateChoice).
+            double animationMs = layer.AnimateChoiceOpening(photoGroup, _px, _py,
+                                                            placed.CenterX, placed.CenterY, zoom);
+            _readyMs = Manager.Gaze.NowMs + animationMs;
             _step = Step.Choice;
             App.LogDetail("Action choice: photo of " + side + " × " + side + " px");
             return true;

@@ -136,6 +136,14 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   ou aucun, suffit (issue #91).
   Son délai est `MagnifierDelay` (onglet « Loupe, glisser », `settings.json` version 16), et non
   `FixationDelay` : `FixationDetector` reçoit le délai à lire dans son constructeur.
+- Animation d'ouverture de la loupe et du choix d'action (issue #154, `OpeningAnimation`,
+  onglet « Écran de choix », `settings.json` version 28, oui par défaut) :
+  `OverlayWindow.AnimateChoiceOpening`. `RoundPhoto.Add` met la photo et son anneau dans un
+  seul groupe ; le groupe part à l'échelle 1 / zoom, décalé sur le vrai point P (il recouvre
+  exactement ce qu'il montre), et grandit jusqu'à sa place en 250 ms ; puis les autres éléments
+  de l'écran noir (boutons, croix, cercle du regard) apparaissent en fondu en 150 ms. Les modes
+  ignorent le regard (boutons et fixation) jusqu'à la fin de l'animation ; seul le petit cercle
+  du regard bouge.
 - Modificateurs (étape 6, `Modifiers`, `KeyboardInjector`) : dans le choix d'action, un
   regard sur « Ctrl », « Maj » ou « Alt » l'allume (bord vert), un second l'éteint. Les touches
   allumées sont enfoncées juste avant l'action et relâchées juste après (après le dépôt pour un
@@ -173,7 +181,7 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   d'avant. Un petit cercle montre où est le regard.
 - `Modes/SettingsMode` et `SettingsWindow` (étape 7) : bouton « Paramètres » du menu. Une
   fenêtre plein écran, fond noir, avec à gauche quatre catégories dépliantes (02/11/2026) : Regard (Regard,
-  Fixation, Délais), Actions (Loupe et glisser, Défilement, Icônes), Affichage (Affichage, Clavier,
+  Fixation, Délais), Actions (Loupe et glisser, Écran de choix, Défilement, Icônes), Affichage (Affichage, Clavier,
   Jeu) et Système (Général, Profils, Outils, À propos). L'onglet Général a en bas à droite un bouton « Quitter Prunel » puis la question « Quitter Prunel ? » (`BuildQuitConfirmation`) ; « Oui » appelle `SettingsMode.QuitPrunel`, qui ferme Prunel comme le menu. L'onglet « À propos » (issue #92) montre la
   version (`App.Version`), l'image de l'auteur (`Resources/Author.jpg`, intégrée à l'exe) et deux
   boutons dont les adresses viennent du fichier de langue ; `SettingsMode.OpenLink` les ouvre

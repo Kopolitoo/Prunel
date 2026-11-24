@@ -128,6 +128,13 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   the picture appears, with no ignored zone: a small gaze move, or none, is enough (issue #91).
   Its delay is `MagnifierDelay` ("Magnifier, drag" tab, `settings.json` version 16), not
   `FixationDelay`: `FixationDetector` takes the delay to read in its constructor.
+- Opening animation of the magnifier and of the action choice (issue #154, `OpeningAnimation`,
+  "Choice screen" tab, `settings.json` version 28, yes by default):
+  `OverlayWindow.AnimateChoiceOpening`. `RoundPhoto.Add` puts the photo and its ring in one
+  group; the group starts at scale 1 / zoom, shifted onto the real point P (it covers exactly
+  what it shows), and grows to its place in 250 ms; then the other elements of the black screen
+  (buttons, cross, gaze circle) fade in over 150 ms. The modes ignore the gaze (buttons and
+  fixation) until the end of the animation; only the small gaze circle moves.
 - Modifiers (step 6, `Modifiers`, `KeyboardInjector`): in the action choice, looking at "Ctrl",
   "Shift" or "Alt" turns it on (green border), a second look turns it off. The keys that are on
   are pressed just before the action and released just after (after the drop for a drag). They
@@ -165,7 +172,7 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   closes it and goes back to the previous mode. A small circle shows where the gaze is.
 - `Modes/SettingsMode` and `SettingsWindow` (step 7): "Settings" button of the menu. A
   full-screen window, black background, with four collapsible categories on the left: Gaze
-  (Gaze, Fixation, Delays), Actions (Magnifier, drag, Scroll, Icons), Display (Display,
+  (Gaze, Fixation, Delays), Actions (Magnifier, drag, Choice screen, Scroll, Icons), Display (Display,
   Keyboard, Game) and System (General, Profiles, Tools, About). The General tab has, in the bottom-right corner, a "Quit Prunel" button then the question "Quit Prunel?" (`BuildQuitConfirmation`); "Yes" calls `SettingsMode.QuitPrunel`, which closes Prunel like the menu. The "About" tab (issue #92) shows the version
   (`App.Version`), the author's picture (`Resources/Author.jpg`, built into the exe) and two
   buttons whose addresses come from the language file; `SettingsMode.OpenLink` opens them in

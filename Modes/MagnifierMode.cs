@@ -87,6 +87,10 @@ namespace Prunel
         private Step _step;
         private double _stepStartMs;
 
+        // Time (gaze clock, ms) from which the gaze counts on the photo: the end of the opening
+        // animation (issue #154), or the moment the photo is shown if the animation is off.
+        private double _readyMs;
+
         // The photographed zone (screen pixels): top-left corner and side.
         private int _ox;
         private int _oy;
@@ -208,6 +212,15 @@ namespace Prunel
         private void UpdateAim(GazeState gaze)
         {
             AppSettings p = AppSettings.Current;
+
+            // Opening animation still running (issue #154): the photo is not in its place yet,
+            // nothing counts (neither the "back" icon nor a fixation). The fixation thus starts
+            // counting when the photo is fully shown. Only the gaze circle moves.
+            if (gaze.NowMs < _readyMs)
+            {
+                MoveGazeCircle(gaze, p);
+                return;
+            }
 
             // a. Has the "back" icon just been activated?
             int active = _aimer.Update(gaze, p.ActivationDelay, p.ShowLabels);
@@ -349,8 +362,10 @@ namespace Prunel
             double cyScreen = height / 2;
             _centerX = cxScreen;
             _centerY = cyScreen;
+            UIElement photoGroup;
             Point imageCorner = RoundPhoto.Add(layer, screen, photo, side, _zoom,
-                                               _px - _ox, _py - _oy, cxScreen, cyScreen);
+                                               _px - _ox, _py - _oy, cxScreen, cyScreen,
+                                               out photoGroup);
             _left = imageCorner.X;
             _top = imageCorner.Y;
 
@@ -383,6 +398,11 @@ namespace Prunel
             _gazeCirclePlaced = false;
 
             layer.ShowChoiceScreen();
+            // Opening animation (issue #154): the photo grows from P, then the "back" icon
+            // appears. Nothing counts until it is over (see UpdateAim).
+            double animationMs = layer.AnimateChoiceOpening(photoGroup, _px, _py,
+                                                            cxScreen, cyScreen, _zoom);
+            _readyMs = Manager.Gaze.NowMs + animationMs;
             _step = Step.Aim;
             App.LogDetail("Magnifier: photo of " + side + " × " + side + " px, magnified ×" + _zoom.ToString("0.##"));
             return true;

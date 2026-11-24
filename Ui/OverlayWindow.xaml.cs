@@ -537,6 +537,92 @@ namespace Prunel
             ChoiceScreen.Opacity = 1;
         }
 
+        // ───────────────────────── Opening animation (issue #154) ─────────────────────────
+
+        /// <summary>
+        /// Durations of the opening animation of the magnifier and of the action choice, in
+        /// milliseconds: first the photo grows ([OpeningGrowMs]), then the buttons appear
+        /// ([OpeningButtonsMs]). Short, because the buttons only work once it is over.
+        /// </summary>
+        private const double OpeningGrowMs = 250;
+        private const double OpeningButtonsMs = 150;
+
+        /// <summary>
+        /// Plays the opening animation of the black screen just filled by the magnifier or the
+        /// action choice (issue #154), if the [OpeningAnimation] setting is on:
+        ///  1. the photo starts at its real place and size on the screen (it covers exactly
+        ///     what it shows), then grows to its place in the center, enlarged ×zoom;
+        ///  2. then everything else (buttons, cross, gaze circle) appears with a fade.
+        /// photo: the photo and its ring (RoundPhoto.Add). realX / realY: where P really is on
+        /// the screen; shownX / shownY: where P is shown on the black screen (screen pixels).
+        /// Call it just after ShowChoiceScreen. Returns the duration of the animation in
+        /// milliseconds (0 if the setting is off): the modes ignore the gaze until it is over,
+        /// so that no button and no fixation counts while it is not fully shown.
+        /// </summary>
+        public double AnimateChoiceOpening(UIElement photo, double realX, double realY,
+                                           double shownX, double shownY, double zoom)
+        {
+            if (!AppSettings.Current.OpeningAnimation || zoom <= 0)
+            {
+                return 0;
+            }
+
+            // 1. The photo. A scale around the shown P (from 1 / zoom: real size, to 1), and a
+            //    shift that brings the shown P to the real P (to 0 at the end). P thus slides in
+            //    a straight line from its real place to the center.
+            Point shown = ToWpf(shownX, shownY);
+            Point real = ToWpf(realX, realY);
+            ScaleTransform scale = new ScaleTransform(1, 1, shown.X, shown.Y);
+            TranslateTransform shift = new TranslateTransform();
+            TransformGroup transform = new TransformGroup();
+            transform.Children.Add(scale);
+            transform.Children.Add(shift);
+            photo.RenderTransform = transform;
+
+            Duration grow = new Duration(TimeSpan.FromMilliseconds(OpeningGrowMs));
+            CubicEase smooth = new CubicEase();
+            smooth.EasingMode = EasingMode.EaseInOut;
+            scale.BeginAnimation(ScaleTransform.ScaleXProperty, Animation(1 / zoom, 1, grow, smooth));
+            scale.BeginAnimation(ScaleTransform.ScaleYProperty, Animation(1 / zoom, 1, grow, smooth));
+            shift.BeginAnimation(TranslateTransform.XProperty, Animation(real.X - shown.X, 0, grow, smooth));
+            shift.BeginAnimation(TranslateTransform.YProperty, Animation(real.Y - shown.Y, 0, grow, smooth));
+
+            // 2. Everything else: invisible during the growth, then a fade to its usual
+            //    opacity. At the end, the animation is removed: the element gets its own
+            //    opacity back (a button can then change it freely).
+            TimeSpan start = TimeSpan.FromMilliseconds(OpeningGrowMs);
+            Duration fade = new Duration(TimeSpan.FromMilliseconds(OpeningButtonsMs));
+            foreach (UIElement element in ChoiceScreen.Children)
+            {
+                if (element == photo)
+                {
+                    continue;
+                }
+                UIElement faded = element;
+                double usual = faded.Opacity;
+                DoubleAnimation appear = Animation(0, usual, fade, null);
+                appear.BeginTime = start;
+                appear.Completed += (s, e) =>
+                {
+                    faded.Opacity = usual;
+                    faded.BeginAnimation(OpacityProperty, null);
+                };
+                faded.Opacity = 0;   // invisible until the fade starts
+                faded.BeginAnimation(OpacityProperty, appear);
+            }
+
+            return OpeningGrowMs + OpeningButtonsMs;
+        }
+
+        /// <summary>An animation of a number, from "from" to "to".</summary>
+        private static DoubleAnimation Animation(double from, double to, Duration duration,
+                                                 IEasingFunction easing)
+        {
+            DoubleAnimation animation = new DoubleAnimation(from, to, duration);
+            animation.EasingFunction = easing;
+            return animation;
+        }
+
         // ───────────────────────── Menu bar ─────────────────────────
 
         /// <summary>

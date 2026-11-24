@@ -106,8 +106,10 @@ namespace Prunel
         ///      missing from an older file, it keeps its default value.
         ///  27: issue #124 — GameCursorDeadZone. Missing from an older file, it takes the value
         ///      of CursorDeadZone, which game mode used until then: nothing changes for the user.
+        ///  28: issue #154 — OpeningAnimation (yes). Nothing to fix: missing from an older file,
+        ///      it keeps its default value.
         /// </summary>
-        public const int CurrentVersion = 27;
+        public const int CurrentVersion = 28;
 
         /// <summary>Format number of the file, so it can evolve one day without breaking everything.</summary>
         [DataMember(Order = 0)]
@@ -707,5 +709,13 @@ namespace Prunel
         /// </summary>
         [DataMember(Order = 156)]
         public double BellWindowsVolume { get; set; }
+
+        /// <summary>
+        /// Opening animation of the magnifier and of the action choice (issue #154): the photo
+        /// grows from its real place, then the buttons appear. Yes by default.
+        /// See OverlayWindow.AnimateChoiceOpening.
+        /// </summary>
+        [DataMember(Order = 157)]
+        public bool OpeningAnimation { get; set; }
     }
 }

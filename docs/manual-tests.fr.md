@@ -465,6 +465,25 @@ jeton).
    nuit), dans le choix d'action et dans l'écran de configuration des icônes ; quand on les
    regarde, le violet s'éclaircit. Les autres boutons gardent leur fond sombre habituel.
 
+## 33. Animation d'ouverture de la loupe et du choix d'action (issue #154)
+
+1. Installer la nouvelle version. Paramètres, catégorie « Actions » : un nouvel onglet « Écran de choix », avec « Animation
+   d'ouverture » activée.
+2. Regard fixe → choix d'action (loupe avant l'action désactivée) : la photo ronde part
+   exactement de l'endroit fixé, à sa vraie taille, et grandit jusqu'au centre de l'écran
+   (environ un quart de seconde) ; puis les icônes, la croix et le cercle du regard
+   apparaissent en fondu. Regarder une icône pendant l'animation ne fait rien ; une fois
+   affichées, les icônes marchent comme avant.
+3. Pareil avec « Loupe avant l'action » activée : la photo de la loupe grandit depuis
+   l'endroit fixé, puis l'icône « retour » apparaît ; la fixation sur la photo ne compte
+   qu'une fois la photo en place. Ensuite le choix d'action s'ouvre avec sa propre animation.
+4. Près d'un bord et dans un coin de l'écran : la photo part toujours de l'endroit fixé (coupée
+   droit par le bord) et finit au centre.
+5. Désactiver « Animation d'ouverture » : les écrans s'ouvrent d'un coup, comme avant (fondu du
+   noir seulement).
+6. « Défaut » dans l'onglet « Écran de choix » la réactive. En anglais : "Choice screen" tab,
+   "Opening animation".
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,

@@ -425,6 +425,23 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
    the action choice and in the icon configuration screen; looked at, the violet gets lighter.
    The other buttons keep their usual dark background.
 
+## 33. Opening animation of the magnifier and action choice (issue #154)
+
+1. Install the new version. Settings, "Actions" category: a new "Choice screen" tab, with "Opening animation"
+   on.
+2. Fixed gaze → action choice (magnifier before action off): the round picture starts exactly
+   on the place you stared at, at its real size, and grows to the center of the screen
+   (about a quarter of a second); then the icons, the cross and the gaze circle fade in.
+   Looking at an icon during the animation does nothing; once shown, icons work as before.
+3. Same with "Magnifier before action" on: the magnifier picture grows from the stared place,
+   then the "back" icon appears; the fixation on the picture only counts once it is in place.
+   Then the action choice opens with its own animation.
+4. Near an edge and in a corner of the screen: the picture still starts on the stared place
+   (cut flat by the edge) and ends in the center.
+5. Turn "Opening animation" off: the screens open at once, as before (black fade only).
+6. "Default" in the "Choice screen" tab turns it back on. In French: onglet « Écran de choix »,
+   « Animation d'ouverture ».
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,

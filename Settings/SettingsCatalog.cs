@@ -432,7 +432,7 @@ namespace Prunel
         public static readonly List<SettingsCategory> Categories = new List<SettingsCategory>
         {
             new SettingsCategory("category.gaze", "\uE890", "tab.gaze", "tab.fixation", "tab.delays", "tab.pause"),
-            new SettingsCategory("category.actions", "\uE7C9", "tab.magnifierDrag", "tab.scroll", IconsTabName, "tab.bell", AlexaTabName),
+            new SettingsCategory("category.actions", "\uE7C9", "tab.magnifierDrag", "tab.choiceScreen", "tab.scroll", IconsTabName, "tab.bell", AlexaTabName),
             new SettingsCategory("category.display", "\uE7F4", "tab.display", ColorsTabName, "tab.keyboard", "tab.prediction", "tab.sound", "tab.game"),
             new SettingsCategory("category.system", "\uE770", GeneralTabName, ProfilesTabName, ToolsTabName, AboutTabName)
         };
@@ -555,6 +555,12 @@ namespace Prunel
                                p => p.AndroidPauseDuration, (p, v) => p.AndroidPauseDuration = v),
                 Setting.Number("setting.dragDuration", " s", 0.05,
                                p => p.DragDuration, (p, v) => p.DragDuration = v)),
+
+            // E91B = photo ("Choice screen"): the black screen of the magnifier and of the
+            // action choice (issue #154).
+            new SettingsTab("tab.choiceScreen", "\uE91B",
+                Setting.YesOrNo("setting.openingAnimation",
+                                 p => p.OpeningAnimation, (p, v) => p.OpeningAnimation = v)),
 
             // EC8F = up and down arrows ("Scroll")
             new SettingsTab("tab.scroll", "\uEC8F",
