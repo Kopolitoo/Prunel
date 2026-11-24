@@ -240,6 +240,8 @@
   "setting.gamepadRelative.right": "Gamepad",
   "setting.gameSmoothing.name": "Game smoothing",
   "setting.gameSmoothing.help": "Smaller = calmer, larger = more responsive",
+  "setting.gameCursorDeadZone.name": "Game anti-jitter",
+  "setting.gameCursorDeadZone.help": "In game mode, the cursor does not move below this",
   "setting.gameSensitivity.name": "Sensitivity",
   "setting.gameSensitivity.help": "Relative mouse: multiplies the moves",
   "setting.keyDelay.name": "Typing delay",

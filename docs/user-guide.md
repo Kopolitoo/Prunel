@@ -69,7 +69,7 @@ edge cancels.
 
 For games that move the character while a mouse button is held (for example Back to Bed, right
 button). Add "Hold left" or "Hold right" to the crown in the icon configuration screen (they are
-not there by default). Stare at the starting point and choose it: the button is pressed there,
+not there by default; their light violet background says they are game actions). Stare at the starting point and choose it: the button is pressed there,
 then the cursor follows your gaze, button still held (same smoothing and anti-jitter as game
 mode). To let go, glance at the large "Release" button (square) on the right edge of the screen: a short look is enough. The
 button is also released with Escape, or when the gaze is lost for more than one second.
@@ -141,7 +141,10 @@ already open, it stays open: this is how you move to another field.
 
 Menu, "Game". Nothing is drawn; the mouse cursor follows your gaze directly (made for games like
 Mindball Play). Clicks are made with an external switch or voice recognition. Open the menu and
-choose "Quit the game" to go back. The "Game" tab of the settings has the game options.
+choose "Quit the game" to go back. The "Game" tab of the settings has the game options,
+including its own "Game smoothing" and "Game anti-jitter": they change only game mode (and
+"Hold left / right"), not movement mode. The game anti-jitter moves by 0.05 % steps, to aim
+finely.
 
 ## Settings
 
