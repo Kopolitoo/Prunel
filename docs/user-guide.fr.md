@@ -38,7 +38,8 @@ point exact en son centre. Près d'un bord de l'écran, le rond est coupé droit
 Il apparaît et disparaît en fondu (un cinquième de seconde), pour que l'écran ne flashe pas.
 À l'ouverture, la photo grandit d'abord depuis sa vraie place à l'écran jusqu'au centre, puis
 les icônes apparaissent (moins d'une demi-seconde) ; les icônes ne marchent qu'une fois
-affichées. Pour couper cette animation : Paramètres, onglet « Écran de choix », « Animation
+affichées. Le passage de la loupe au choix d'action (ou l'inverse) se fait en douceur de l'un
+à l'autre, sans flash. Pour couper cette animation : Paramètres, onglet « Écran de choix », « Animation
 d'ouverture ». Elle vaut aussi pour la loupe.
 Autour, des icônes : clic gauche, double clic, clic droit, loupe, glisser-déposer (bouton
 gauche, bouton droit, android), défilement. On regarde une icône jusqu'à ce que son anneau soit

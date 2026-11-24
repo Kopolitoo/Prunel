@@ -474,9 +474,14 @@ jeton).
    (environ un quart de seconde) ; puis les icônes, la croix et le cercle du regard
    apparaissent en fondu. Regarder une icône pendant l'animation ne fait rien ; une fois
    affichées, les icônes marchent comme avant.
+   La photo va vite au début et ralentit à la fin.
 3. Pareil avec « Loupe avant l'action » activée : la photo de la loupe grandit depuis
    l'endroit fixé, puis l'icône « retour » apparaît ; la fixation sur la photo ne compte
-   qu'une fois la photo en place. Ensuite le choix d'action s'ouvre avec sa propre animation.
+   qu'une fois la photo en place. Ensuite le choix d'action s'ouvre SANS repasser par le vrai
+   écran : l'écran noir reste, et sa photo part du point fixé sur la loupe (à la taille de la
+   loupe) puis rétrécit jusqu'au centre. Pas de flash.
+3b. « Retour » de la loupe (ouverte depuis la couronne du choix d'action) et « Loupe » du choix
+   d'action : même passage en douceur entre les deux écrans, dans les deux sens.
 4. Près d'un bord et dans un coin de l'écran : la photo part toujours de l'endroit fixé (coupée
    droit par le bord) et finit au centre.
 5. Désactiver « Animation d'ouverture » : les écrans s'ouvrent d'un coup, comme avant (fondu du

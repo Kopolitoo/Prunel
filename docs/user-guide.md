@@ -34,7 +34,9 @@ A black screen shows the area you stared at, enlarged twice, in a circle, with a
 exact point in its center. Near an edge of the screen, the circle is cut flat by that edge.
 It fades in and out gently (a fifth of a second), so the screen does not flash.
 When it opens, the picture first grows from its real place on the screen to the center, then
-the icons appear (less than half a second); the icons only work once they are shown. To turn
+the icons appear (less than half a second); the icons only work once they are shown. Going
+from the magnifier to the action choice (or back) is a smooth move from one to the other, with
+no flash. To turn
 this animation off: Settings, "Choice screen" tab, "Opening animation". It also applies to the
 magnifier.
 Around it, icons: left click, double click, right click, magnifier, drag and drop (left button,

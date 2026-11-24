@@ -140,10 +140,15 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   onglet « Écran de choix », `settings.json` version 28, oui par défaut) :
   `OverlayWindow.AnimateChoiceOpening`. `RoundPhoto.Add` met la photo et son anneau dans un
   seul groupe ; le groupe part à l'échelle 1 / zoom, décalé sur le vrai point P (il recouvre
-  exactement ce qu'il montre), et grandit jusqu'à sa place en 250 ms ; puis les autres éléments
-  de l'écran noir (boutons, croix, cercle du regard) apparaissent en fondu en 150 ms. Les modes
-  ignorent le regard (boutons et fixation) jusqu'à la fin de l'animation ; seul le petit cercle
-  du regard bouge.
+  exactement ce qu'il montre), et grandit jusqu'à sa place en 250 ms (rapide au début, lent à
+  la fin) ; puis les autres éléments de l'écran noir (boutons, croix, cercle du regard)
+  apparaissent en fondu en 150 ms. Les modes ignorent le regard (boutons et fixation) jusqu'à la
+  fin de l'animation ; seul le petit cercle du regard bouge. Entre la loupe et le choix d'action
+  (dans les deux sens, et le « retour » de la loupe), la transition est douce :
+  `Ui/ScreenSnapshot` garde une capture quatre fois plus large que la photo, passée d'un mode à
+  l'autre ; l'écran noir reste donc affiché et aucune nouvelle photo n'est prise (pas de flash) ;
+  la nouvelle photo part de l'endroit où P était montré sur l'écran qu'on quitte, à son zoom.
+  Si la nouvelle photo ne tient pas dans la capture, une nouvelle photo est prise comme avant.
 - Modificateurs (étape 6, `Modifiers`, `KeyboardInjector`) : dans le choix d'action, un
   regard sur « Ctrl », « Maj » ou « Alt » l'allume (bord vert), un second l'éteint. Les touches
   allumées sont enfoncées juste avant l'action et relâchées juste après (après le dépôt pour un

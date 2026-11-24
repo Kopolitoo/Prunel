@@ -433,9 +433,14 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
    on the place you stared at, at its real size, and grows to the center of the screen
    (about a quarter of a second); then the icons, the cross and the gaze circle fade in.
    Looking at an icon during the animation does nothing; once shown, icons work as before.
+   The picture moves fast at first and slows down at the end.
 3. Same with "Magnifier before action" on: the magnifier picture grows from the stared place,
    then the "back" icon appears; the fixation on the picture only counts once it is in place.
-   Then the action choice opens with its own animation.
+   Then the action choice opens WITHOUT going back to the real screen: the black screen stays,
+   and its picture starts from the point fixated on the magnifier (at the magnifier's size) and
+   shrinks to the center. No flash.
+3b. Magnifier "back" (coming from the action choice crown) and action choice "Magnifier": same
+   smooth move between the two screens, both ways.
 4. Near an edge and in a corner of the screen: the picture still starts on the stared place
    (cut flat by the edge) and ends in the center.
 5. Turn "Opening animation" off: the screens open at once, as before (black fade only).

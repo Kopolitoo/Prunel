@@ -100,6 +100,23 @@ namespace Prunel
         // (issue #154), or the moment the screen is shown if the animation is off.
         private double _readyMs;
 
+        // The screenshot (wider than the photo, see ScreenSnapshot): handed over by the
+        // magnifier, or taken here, and handed to the magnifier of the crown. With a snapshot
+        // handed over, the black screen stays and no new photo is taken (smooth transition).
+        private ScreenSnapshot _snapshot;
+        private bool _handedOver;
+        // True when this mode hands the black screen over to the next one (the magnifier):
+        // Quit then leaves it shown, the next mode replaces its content.
+        private bool _handingOver;
+
+        // The photographed square (screen pixels): top-left corner and side.
+        private int _ox;
+        private int _oy;
+        private int _side;
+        // Where P is shown on the black screen (screen pixels).
+        private double _centerX;
+        private double _centerY;
+
         /// <summary>Label of an empty slot, shown on hover.</summary>
         private static string EmptyLabel { get { return Texts.Get("actionChoice.emptySlot"); } }
 
@@ -128,6 +145,16 @@ namespace Prunel
             _aimer = new ButtonAimer(_buttons);
         }
 
+        /// <summary>
+        /// Opens the action choice on (x, y) coming from the magnifier, which hands over its
+        /// screenshot (ScreenSnapshot): smooth transition, no new photo (issue #154).
+        /// </summary>
+        public ActionChoiceMode(double x, double y, ScreenSnapshot snapshot) : this(x, y)
+        {
+            _snapshot = snapshot;
+            _handedOver = snapshot != null;
+        }
+
         public override string Name
         {
             get { return "Action choice"; }
@@ -136,12 +163,39 @@ namespace Prunel
         public override void Enter(GazeState gaze)
         {
             _aimer.Reset();
+            ComputeSquare();
 
-            // 1. CAPTURE: hide everything Prunel draws (at once, no fade), and wait a bit
-            //    before the photo.
-            Manager.Layer.HideAll(true);
+            // A snapshot handed over by the magnifier, holding the whole photo: the black
+            // screen of the magnifier stays shown, the photo is cut out of the snapshot.
+            if (_snapshot != null && !_snapshot.Contains(_ox, _oy, _side))
+            {
+                _snapshot = null;
+                _handedOver = false;
+            }
+
+            // 1. CAPTURE: otherwise, hide everything Prunel draws (at once, no fade), and wait a
+            //    bit before the photo.
+            if (_snapshot == null)
+            {
+                Manager.Layer.HideAll(true);
+            }
             _step = Step.Capture;
             _stepStartMs = gaze.NowMs;
+        }
+
+        /// <summary>
+        /// The photographed square: the square enclosing the circle, centered on P. Near an
+        /// edge of the screen, the square is shifted to stay fully on the screen (P is then no
+        /// longer in the center of the square; the round photo stays centered on P).
+        /// </summary>
+        private void ComputeSquare()
+        {
+            double width = Manager.ScreenWidth;
+            double height = Manager.ScreenHeight;
+            int side = (int)Math.Round(2 * AppSettings.Current.CaptureRadiusPx);   // [CaptureRadius] (issue #123)
+            _side = Math.Min(side, (int)Math.Min(width, height));
+            _ox = (int)Clamp(Math.Round(_px - _side / 2.0), 0, width - _side);
+            _oy = (int)Clamp(Math.Round(_py - _side / 2.0), 0, height - _side);
         }
 
         public override void Update(GazeState gaze)
@@ -151,7 +205,8 @@ namespace Prunel
             switch (_step)
             {
                 case Step.Capture:
-                    if (now - _stepStartMs >= WaitMs)
+                    // No wait with a snapshot handed over: nothing was hidden.
+                    if (_snapshot != null || now - _stepStartMs >= WaitMs)
                     {
                         bool succeeded;
                         try
@@ -189,8 +244,12 @@ namespace Prunel
         {
             // The black screen is hidden and cleared (the photo is no longer needed).
             // It fades out (issue #116); its content is cleared at the end of the fade.
-            Manager.Layer.HideChoiceScreen(true);
-            Manager.Layer.ClearChoiceScreen();
+            // Handed over to the magnifier: it stays as it is, the magnifier replaces its content.
+            if (!_handingOver)
+            {
+                Manager.Layer.HideChoiceScreen(true);
+                Manager.Layer.ClearChoiceScreen();
+            }
             _buttons.Clear();
             _actions.Clear();
             _gazeCircle = null;
@@ -290,9 +349,12 @@ namespace Prunel
 
             if (action == ChoiceAction.Magnifier)
             {
-                // The magnifier takes the picture around P itself (the black screen will be
-                // hidden by Quit, just before). "true": its "back" icon will return here.
-                Manager.ChangeMode(new MagnifierMode(_px, _py, true));
+                // The magnifier receives the screenshot: the black screen stays, and its photo
+                // grows from P as shown here (issue #154). "true": its "back" icon will return
+                // here.
+                _handingOver = _snapshot != null;
+                Manager.ChangeMode(new MagnifierMode(_px, _py, true,
+                    _snapshot == null ? null : _snapshot.HandOver(_centerX, _centerY, ActionChoiceLayout.Zoom)));
                 return;
             }
 
@@ -397,19 +459,21 @@ namespace Prunel
             double height = Manager.ScreenHeight;
             double size = p.IconSizePx;
 
-            // ── The photo: the square enclosing the circle, centered on P. Near an edge of the
-            //    screen, the square is shifted to stay fully on the screen (P is then no longer
-            //    in the center of the square; the round photo stays centered on P).
-            int side = (int)Math.Round(2 * p.CaptureRadiusPx);   // [CaptureRadius] (issue #123)
-            side = Math.Min(side, (int)Math.Min(width, height));
-            int ox = (int)Clamp(Math.Round(_px - side / 2.0), 0, width - side);
-            int oy = (int)Clamp(Math.Round(_py - side / 2.0), 0, height - side);
-
-            BitmapSource photo = ScreenCapture.Capture(ox, oy, side, side);
-            if (photo == null)
+            // ── The photo: the square computed on entry (ComputeSquare), cut out of the
+            //    snapshot handed over by the magnifier, or of a new, wider snapshot (kept for
+            //    the magnifier of the crown, see ScreenSnapshot).
+            int side = _side;
+            int ox = _ox;
+            int oy = _oy;
+            if (_snapshot == null)
             {
-                return false;
+                _snapshot = ScreenSnapshot.Take(_px, _py, side, width, height);
+                if (_snapshot == null || !_snapshot.Contains(ox, oy, side))
+                {
+                    return false;
+                }
             }
+            BitmapSource photo = _snapshot.Crop(ox, oy, side);
 
             layer.PrepareChoiceScreen();
             Canvas screen = layer.ChoiceScreen;
@@ -417,6 +481,8 @@ namespace Prunel
             // ── The layout (the same as the one of the icon configuration screen).
             ActionChoiceLayout placed = new ActionChoiceLayout(width, height, size, side);
             double zoom = ActionChoiceLayout.Zoom;
+            _centerX = placed.CenterX;
+            _centerY = placed.CenterY;
 
             // ── The enlarged photo, round, with P (and the cross) in the center of the screen
             //    (RoundPhoto.cs). Near an edge of the screen, the disc is cut flat by that edge.
@@ -466,9 +532,13 @@ namespace Prunel
             _gazeCirclePlaced = false;
 
             layer.ShowChoiceScreen();
-            // Opening animation (issue #154): the photo grows from P, then the buttons appear.
-            // The buttons only count once it is over (see UpdateChoice).
-            double animationMs = layer.AnimateChoiceOpening(photoGroup, _px, _py,
+            // Opening animation (issue #154): the photo grows from P (its real place, or where
+            // the magnifier showed it), then the buttons appear. The buttons only count once it
+            // is over (see UpdateChoice).
+            double fromX = _handedOver ? _snapshot.FromX : _px;
+            double fromY = _handedOver ? _snapshot.FromY : _py;
+            double fromZoom = _handedOver ? _snapshot.FromZoom : 1;
+            double animationMs = layer.AnimateChoiceOpening(photoGroup, fromX, fromY, fromZoom,
                                                             placed.CenterX, placed.CenterY, zoom);
             _readyMs = Manager.Gaze.NowMs + animationMs;
             _step = Step.Choice;

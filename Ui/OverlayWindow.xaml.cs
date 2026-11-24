@@ -550,28 +550,31 @@ namespace Prunel
         /// <summary>
         /// Plays the opening animation of the black screen just filled by the magnifier or the
         /// action choice (issue #154), if the [OpeningAnimation] setting is on:
-        ///  1. the photo starts at its real place and size on the screen (it covers exactly
-        ///     what it shows), then grows to its place in the center, enlarged ×zoom;
+        ///  1. the photo starts where P was seen just before, at the size it had there, then
+        ///     moves to its place in the center, enlarged ×zoom. Coming from the fixed gaze,
+        ///     that is P's real place on the screen, at real size (fromZoom 1): the photo covers
+        ///     exactly what it shows, then grows. Coming from the magnifier (or going to it),
+        ///     it is where P was shown on the magnifier (or the action choice), at its zoom;
         ///  2. then everything else (buttons, cross, gaze circle) appears with a fade.
-        /// photo: the photo and its ring (RoundPhoto.Add). realX / realY: where P really is on
-        /// the screen; shownX / shownY: where P is shown on the black screen (screen pixels).
-        /// Call it just after ShowChoiceScreen. Returns the duration of the animation in
-        /// milliseconds (0 if the setting is off): the modes ignore the gaze until it is over,
-        /// so that no button and no fixation counts while it is not fully shown.
+        /// photo: the photo and its ring (RoundPhoto.Add). fromX / fromY: where P was seen just
+        /// before (screen pixels), enlarged ×fromZoom; shownX / shownY: where P is shown on the
+        /// black screen. Call it just after ShowChoiceScreen. Returns the duration of the
+        /// animation in milliseconds (0 if the setting is off): the modes ignore the gaze until
+        /// it is over, so that no button and no fixation counts while it is not fully shown.
         /// </summary>
-        public double AnimateChoiceOpening(UIElement photo, double realX, double realY,
+        public double AnimateChoiceOpening(UIElement photo, double fromX, double fromY, double fromZoom,
                                            double shownX, double shownY, double zoom)
         {
-            if (!AppSettings.Current.OpeningAnimation || zoom <= 0)
+            if (!AppSettings.Current.OpeningAnimation || zoom <= 0 || fromZoom <= 0)
             {
                 return 0;
             }
 
-            // 1. The photo. A scale around the shown P (from 1 / zoom: real size, to 1), and a
-            //    shift that brings the shown P to the real P (to 0 at the end). P thus slides in
-            //    a straight line from its real place to the center.
+            // 1. The photo. A scale around the shown P (from fromZoom / zoom, to 1), and a
+            //    shift that brings the shown P to where P was seen (to 0 at the end). P thus
+            //    slides in a straight line from there to the center.
             Point shown = ToWpf(shownX, shownY);
-            Point real = ToWpf(realX, realY);
+            Point real = ToWpf(fromX, fromY);
             ScaleTransform scale = new ScaleTransform(1, 1, shown.X, shown.Y);
             TranslateTransform shift = new TranslateTransform();
             TransformGroup transform = new TransformGroup();
@@ -580,10 +583,12 @@ namespace Prunel
             photo.RenderTransform = transform;
 
             Duration grow = new Duration(TimeSpan.FromMilliseconds(OpeningGrowMs));
+            // Fast at the start, slow at the end (user request): the photo "lands" gently.
             CubicEase smooth = new CubicEase();
-            smooth.EasingMode = EasingMode.EaseInOut;
-            scale.BeginAnimation(ScaleTransform.ScaleXProperty, Animation(1 / zoom, 1, grow, smooth));
-            scale.BeginAnimation(ScaleTransform.ScaleYProperty, Animation(1 / zoom, 1, grow, smooth));
+            smooth.EasingMode = EasingMode.EaseOut;
+            double startScale = fromZoom / zoom;
+            scale.BeginAnimation(ScaleTransform.ScaleXProperty, Animation(startScale, 1, grow, smooth));
+            scale.BeginAnimation(ScaleTransform.ScaleYProperty, Animation(startScale, 1, grow, smooth));
             shift.BeginAnimation(TranslateTransform.XProperty, Animation(real.X - shown.X, 0, grow, smooth));
             shift.BeginAnimation(TranslateTransform.YProperty, Animation(real.Y - shown.Y, 0, grow, smooth));
 

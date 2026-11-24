@@ -132,9 +132,14 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   "Choice screen" tab, `settings.json` version 28, yes by default):
   `OverlayWindow.AnimateChoiceOpening`. `RoundPhoto.Add` puts the photo and its ring in one
   group; the group starts at scale 1 / zoom, shifted onto the real point P (it covers exactly
-  what it shows), and grows to its place in 250 ms; then the other elements of the black screen
-  (buttons, cross, gaze circle) fade in over 150 ms. The modes ignore the gaze (buttons and
-  fixation) until the end of the animation; only the small gaze circle moves.
+  what it shows), and grows to its place in 250 ms (fast at first, slow at the end); then the
+  other elements of the black screen (buttons, cross, gaze circle) fade in over 150 ms. The
+  modes ignore the gaze (buttons and fixation) until the end of the animation; only the small
+  gaze circle moves. Between the magnifier and the action choice (both ways, and the magnifier's
+  "back"), the transition is smooth: `Ui/ScreenSnapshot` keeps a screenshot four times wider
+  than the photo, handed from one mode to the other, so the black screen stays and no new photo
+  is taken (no flash); the new photo starts where P was shown on the screen just left, at its
+  zoom there. If the new photo does not fit in the snapshot, a new photo is taken as before.
 - Modifiers (step 6, `Modifiers`, `KeyboardInjector`): in the action choice, looking at "Ctrl",
   "Shift" or "Alt" turns it on (green border), a second look turns it off. The keys that are on
   are pressed just before the action and released just after (after the drop for a drag). They
