@@ -83,13 +83,16 @@ namespace Prunel
         }
 
         /// <summary>
-        /// "Export": writes a dated copy, for example "Dictionnaire 2026-11-25 20h15.json" (name
-        /// in the interface language). Returns the message to show (where it went, or the
-        /// failure).
+        /// "Export": writes a dated copy, for example "FR Dictionnaire 2026-11-25 20h15.json" (name
+        /// in the interface language). The prefix is the code of the prediction language at
+        /// export time (it follows the interface language): the personal dictionary is shared
+        /// by all languages, but the prefix tells which one was used when the copy was made.
+        /// Returns the message to show (where it went, or the failure).
         /// </summary>
         public static string Export(WordPredictor predictor)
         {
-            string name = Texts.Format("dictionaries.fileName", DateTime.Now.ToString("yyyy-MM-dd HH'h'mm"));
+            string name = Texts.Language.ToUpperInvariant() + " "
+                + Texts.Format("dictionaries.fileName", DateTime.Now.ToString("yyyy-MM-dd HH'h'mm"));
             string path = Path.Combine(Folder, name + ".json");
             return predictor.ExportTo(path)
                 ? Texts.Format("dictionaries.exported", path)

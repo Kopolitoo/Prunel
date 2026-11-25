@@ -163,7 +163,7 @@ clavier est déjà ouvert, il reste ouvert : c'est ainsi que l'on passe à un au
   est gardé. « Retirer des mots » revient à la suppression.
 - **Exporter, Fusionner, Remplacer** (même onglet « Prédiction », sous « Mes mots ») : le clavier
   apprend au fil de l'écriture (mots ajoutés, mots les plus utilisés, mots suivants).
-  « Exporter » écrit une copie datée dans `Documents\Prunel\Dictionaries` (pour la garder, ou
+  « Exporter » écrit une copie datée, précédée du code de la langue (« FR Dictionnaire … »), dans `Documents\Prunel\Dictionaries` (pour la garder, ou
   l'emporter sur un autre ordinateur). « Fusionner » montre les copies de ce dossier ; en
   regarder une l'ajoute à ce qui est appris (rien n'est perdu). « Remplacer » montre la même
   liste ; après la question « Remplacer… ? Oui / Non », ce qui est appris devient exactement la
