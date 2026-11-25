@@ -76,7 +76,8 @@ namespace Prunel
         // 120 high buttons of two rows.
         private const double DisplayStepRow = 150;
         // "Action choice" tab: its settings start below the "Configure the icons" button
-        // (340 to 430, see BuildIconsTab). Room for two rows (issue #154, then #155).
+        // (340 to 430, see BuildIconsTab). Room for three rows (issues #154, #161, #155): the
+        // third one ends at 510 + 2 × 184 + 160 = 1038, above the bottom (1080).
         private const double IconsRowsTop = 510;
         private const double RowHeight = 160;
         private const double LabelWidth = 520;
@@ -91,6 +92,10 @@ namespace Prunel
         private const double SwitchWidth = 150;   // the track (the "pill")
         private const double SwitchHeight = 76;
         private const double SwitchButton = 60;     // the sliding knob
+        // The smaller target of a switch (issue #161, "Action choice" tab): the track (150),
+        // its gap and "Oui" / "Non" (30 + about 90), with a margin on each side.
+        private const double SmallSwitchWidth = 340;
+        private const double SmallSwitchHeight = 96;
         // Bootstrap blue; softer with [NightMode] (see Palette).
         private static Brush ActiveTrack
         {

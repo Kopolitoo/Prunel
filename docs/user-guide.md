@@ -38,7 +38,8 @@ the icons appear (less than half a second); the icons only work once they are sh
 from the magnifier to the action choice (or back) is a smooth move from one to the other, with
 no flash. To turn
 this animation off: Settings, "Action choice" tab, "Opening animation". It also applies to the
-magnifier. In the same tab, "Background transparency" lets the real screen show around the
+magnifier. "Animation duration" (0.4 s by default, 0.2 to 2 s) makes it slower or faster.
+In the same tab, "Background transparency" lets the real screen show around the
 picture (100 % by default = no black background at all; 0 % = fully black).
 Around it, icons: left click, double click, right click, magnifier, drag and drop (left button,
 right button, android), scroll. Look at an icon until its ring is full to use it. On the left

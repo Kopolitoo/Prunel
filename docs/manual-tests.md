@@ -481,6 +481,18 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
 5. Set it to 0: a still gaze no longer releases the button; "Release", Escape and a lost gaze
    still do. "Default" puts it back to 1.5 s. In French: « Relâcher le bouton maintenu ».
 
+## 36. Opening animation duration and smaller switch (issue #161)
+
+1. Install the new version (settings older than version 31). Settings, "Action choice" tab:
+   "Opening animation", then "Animation duration" (0.4 s), then "Background transparency". The
+   three rows fit above the bottom of the page.
+2. The "Opening animation" switch is smaller than the switches of the other tabs (about the
+   size of the "Configure the icons" button); looking at it still turns it on and off.
+3. Set "Animation duration" to 2 s: the picture of the magnifier and of the action choice grows
+   slowly, then the icons appear; they only work once shown. Set it to 0.2 s: very fast.
+4. "Default" in the "Action choice" tab puts it back to 0.4 s (same speed as before). In French:
+   « Durée de l'animation ».
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,

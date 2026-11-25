@@ -558,12 +558,11 @@ namespace Prunel
         // ───────────────────────── Opening animation (issue #154) ─────────────────────────
 
         /// <summary>
-        /// Durations of the opening animation of the magnifier and of the action choice, in
-        /// milliseconds: first the photo grows ([OpeningGrowMs]), then the buttons appear
-        /// ([OpeningButtonsMs]). Short, because the buttons only work once it is over.
+        /// Share of the opening animation ([OpeningDuration], issue #161) during which the photo
+        /// grows; the buttons appear during the rest. 5/8: 250 ms of growth and 150 ms of fade
+        /// with the default 0.4 s, as before the setting existed.
         /// </summary>
-        private const double OpeningGrowMs = 250;
-        private const double OpeningButtonsMs = 150;
+        private const double OpeningGrowShare = 0.625;
 
         /// <summary>
         /// Frames per second asked for the opening animation (user: "smoother"). WPF animates at
@@ -594,6 +593,9 @@ namespace Prunel
             {
                 return 0;
             }
+            double totalMs = AppSettings.Current.OpeningDuration * 1000.0;
+            double growMs = totalMs * OpeningGrowShare;
+            double buttonsMs = totalMs - growMs;
 
             // 1. The photo. A scale around the shown P (from fromZoom / zoom, to 1), and a
             //    shift that brings the shown P to where P was seen (to 0 at the end). P thus
@@ -610,7 +612,7 @@ namespace Prunel
             // and resized: lighter for each frame. Removed at the end (sharp photo again).
             photo.CacheMode = new BitmapCache();
 
-            Duration grow = new Duration(TimeSpan.FromMilliseconds(OpeningGrowMs));
+            Duration grow = new Duration(TimeSpan.FromMilliseconds(growMs));
             // Fast at the start, slow at the end (user request): the photo "lands" gently.
             CubicEase smooth = new CubicEase();
             smooth.EasingMode = EasingMode.EaseOut;
@@ -625,8 +627,8 @@ namespace Prunel
             // 2. Everything else: invisible during the growth, then a fade to its usual
             //    opacity. At the end, the animation is removed: the element gets its own
             //    opacity back (a button can then change it freely).
-            TimeSpan start = TimeSpan.FromMilliseconds(OpeningGrowMs);
-            Duration fade = new Duration(TimeSpan.FromMilliseconds(OpeningButtonsMs));
+            TimeSpan start = TimeSpan.FromMilliseconds(growMs);
+            Duration fade = new Duration(TimeSpan.FromMilliseconds(buttonsMs));
             foreach (UIElement element in ChoiceScreen.Children)
             {
                 if (element == photo)
@@ -646,7 +648,7 @@ namespace Prunel
                 faded.BeginAnimation(OpacityProperty, appear);
             }
 
-            return OpeningGrowMs + OpeningButtonsMs;
+            return totalMs;
         }
 
         /// <summary>An animation of a number, from "from" to "to".</summary>

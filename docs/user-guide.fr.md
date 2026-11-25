@@ -40,7 +40,8 @@ Il apparaît et disparaît en fondu (un cinquième de seconde), pour que l'écra
 les icônes apparaissent (moins d'une demi-seconde) ; les icônes ne marchent qu'une fois
 affichées. Le passage de la loupe au choix d'action (ou l'inverse) se fait en douceur de l'un
 à l'autre, sans flash. Pour couper cette animation : Paramètres, onglet « Choix d'action », « Animation
-d'ouverture ». Elle vaut aussi pour la loupe. Dans le même onglet, « Transparence du fond »
+d'ouverture ». Elle vaut aussi pour la loupe. « Durée de l'animation » (0,4 s par défaut, de
+0,2 à 2 s) la rend plus lente ou plus rapide. Dans le même onglet, « Transparence du fond »
 laisse voir le vrai écran autour de la photo (100 % par défaut = plus de fond noir du tout ;
 0 % = entièrement noir).
 Autour, des icônes : clic gauche, double clic, clic droit, loupe, glisser-déposer (bouton

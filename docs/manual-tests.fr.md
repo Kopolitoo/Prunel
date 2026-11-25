@@ -527,6 +527,20 @@ jeton).
 5. Régler sur 0 : un regard fixe ne relâche plus le bouton ; « Relâcher », Échap et le regard
    perdu le relâchent toujours. « Défaut » remet 1,5 s. En anglais : "Release the held button".
 
+## 36. Durée de l'animation d'ouverture et interrupteur plus petit (issue #161)
+
+1. Installer la nouvelle version (paramètres d'avant la version 31). Paramètres, onglet « Choix
+   d'action » : « Animation d'ouverture », puis « Durée de l'animation » (0,4 s), puis
+   « Transparence du fond ». Les trois lignes tiennent au-dessus du bas de la page.
+2. L'interrupteur « Animation d'ouverture » est plus petit que ceux des autres onglets (environ
+   la taille du bouton « Configurer les icônes ») ; le regarder l'active et le désactive
+   toujours.
+3. Mettre « Durée de l'animation » à 2 s : la photo de la loupe et du choix d'action grandit
+   lentement, puis les icônes apparaissent ; elles ne marchent qu'une fois affichées. La mettre à
+   0,2 s : très rapide.
+4. « Défaut » dans l'onglet « Choix d'action » remet 0,4 s (même vitesse qu'avant). En anglais :
+   "Animation duration".
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,
