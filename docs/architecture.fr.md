@@ -397,7 +397,8 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   réutilisée pour un mot (`SettingsWindow.StartWordPage`, clavier du regard, 40 caractères au
   plus). « Enregistrer » appelle `WordPredictor.SaveWord` : un seul mot, avec une lettre et sans
   espace ; une correction passe les utilisations et les paires au nouveau mot (`MoveLearning`),
-  fusionnées dedans s'il est déjà connu. Enregistrer ou annuler ramène à la liste (message vert
+  fusionnées dedans s'il est déjà connu. Un mot à retirer demande deux fois `ActivationDelay`
+  (`RemoveDelayFactor`). Enregistrer ou annuler ramène à la liste (message vert
   « Mot ajouté » / « Mot corrigé »).
 - Le calque se remet au-dessus de toutes les fenêtres deux fois par seconde.
 - `app.manifest` : déclare Prunel « sensible au DPI », pour que le regard, le curseur et le

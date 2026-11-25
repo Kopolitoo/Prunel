@@ -510,7 +510,8 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
    back to the list, "Word fixed", "zorglob" instead of "zorglub". Typing "zo" on the keyboard
    suggests "zorglob" (no longer "zorglub").
 5. Fix a word into a dictionary word (e.g. "zorglob" → "bonjour"): it leaves the list.
-6. "Remove words": the trash cans come back; looking at a word removes it, as before. "Back to
+6. "Remove words": the trash cans come back. Looking at a word removes it only after twice the
+   activation delay (its ring fills twice as slowly); the other buttons keep the usual delay. "Back to
    the settings" goes back to the Prediction tab.
 7. The log only says "My words: ..." / "Prediction: one added word fixed", never the words.
 

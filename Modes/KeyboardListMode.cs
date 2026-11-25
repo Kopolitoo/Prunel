@@ -20,6 +20,7 @@ namespace Prunel
     ///     (as for removing an icon in the icon configuration), and we stay in the list to be able
     ///     to remove
     ///     others. Lexique words are never affected.
+    ///     A word to remove needs the gaze twice as long as the other buttons (user request).
     ///     Issue #163: at the bottom, "Add a word" and "Fix words". "Fix words" switches the
     ///     list to FIX: each word gets a pencil, and looking at it opens the word page of the
     ///     settings with that word and the gaze keyboard (SettingsMode.ForWord); "Remove words"
@@ -73,6 +74,12 @@ namespace Prunel
         // The buttons shown and what each one does (same order).
         private readonly List<GazeButton> _buttons = new List<GazeButton>();
         private readonly List<Action> _actions = new List<Action>();
+
+        // My words: the indexes (in _buttons) of the buttons that REMOVE a word. They need the
+        // gaze twice as long ([ActivationDelay] × RemoveDelayFactor): removing a word is not a
+        // trivial action (user request, issue #163).
+        private readonly HashSet<int> _removeButtons = new HashSet<int>();
+        private const double RemoveDelayFactor = 2;
         private readonly ButtonAimer _aimer;
 
         // The content of the list: the layouts (Language) or the words (My words).
@@ -165,7 +172,9 @@ namespace Prunel
             AppSettings p = AppSettings.Current;
             // Each item already has its name written underneath: no hover label, it would
             // overlap this name (as in the icon configuration).
-            int active = _aimer.Update(gaze, p.ActivationDelay, false);
+            double delay = _removeButtons.Contains(_aimer.Aimed)
+                ? p.ActivationDelay * RemoveDelayFactor : p.ActivationDelay;
+            int active = _aimer.Update(gaze, delay, false);
             if (active >= 0)
             {
                 _actions[active]();
@@ -189,6 +198,7 @@ namespace Prunel
             Manager.Layer.ClearChoiceScreen();
             _buttons.Clear();
             _actions.Clear();
+            _removeButtons.Clear();
             _gazeCircle = null;
             _gazeCircleBackground = null;
         }
@@ -315,6 +325,7 @@ namespace Prunel
             Canvas screen = layer.ChoiceScreen;
             _buttons.Clear();
             _actions.Clear();
+            _removeButtons.Clear();
 
             // ── The rounded rectangle, centered.
             double l = width * ListRatio;
@@ -480,6 +491,7 @@ namespace Prunel
                             button = new GazeButton("", null, Texts.Get("list.removeWord"));
                             button.SetConfigBadge(false);
                             action = () => RemoveWord(word);
+                            _removeButtons.Add(_buttons.Count);   // index it gets in AddButton
                         }
                         name = word;
                     }

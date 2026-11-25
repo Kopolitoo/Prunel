@@ -75,7 +75,7 @@
   "keyboard.layoutInvalid": "Disposition du clavier incorrecte (voir le journal)",
   "list.layouts.help": "Regarde une disposition pour la choisir.",
   "list.profiles.help": "Regarde un profil pour le choisir (une confirmation suit).",
-  "list.words.help": "Regarde un mot pour le retirer de ton dictionnaire.",
+  "list.words.help": "Regarde un mot deux fois plus longtemps que d'habitude pour le retirer de ton dictionnaire.",
   "list.backToKeyboard": "Retour au clavier",
   "list.backToSettings": "Retour aux paramètres",
   "list.previousPage": "Page précédente",

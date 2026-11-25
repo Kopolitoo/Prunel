@@ -376,7 +376,7 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   as a word page (`SettingsWindow.StartWordPage`, gaze keyboard, max 40 characters).
   "Save" calls `WordPredictor.SaveWord`: one word with a letter and no space; a fix moves the
   usage count and pairs to the new word (`MoveLearning`), merged into it if it is already
-  known. Saving or cancelling goes back to the list (green message "Word added" / "Word
+  known. A word to remove needs twice `ActivationDelay` (`RemoveDelayFactor`). Saving or cancelling goes back to the list (green message "Word added" / "Word
   fixed").
 - The overlay puts itself back above all windows twice per second.
 - `app.manifest`: declares Prunel "DPI aware", so that the gaze, the cursor and the drawing use

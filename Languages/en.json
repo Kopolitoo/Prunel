@@ -75,7 +75,7 @@
   "keyboard.layoutInvalid": "Invalid keyboard layout (see the log)",
   "list.layouts.help": "Look at a layout to choose it.",
   "list.profiles.help": "Look at a profile to choose it (a confirmation follows).",
-  "list.words.help": "Look at a word to remove it from your dictionary.",
+  "list.words.help": "Look at a word twice as long as usual to remove it from your dictionary.",
   "list.backToKeyboard": "Back to the keyboard",
   "list.backToSettings": "Back to the settings",
   "list.previousPage": "Previous page",

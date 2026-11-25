@@ -560,7 +560,9 @@ jeton).
    « zorglub ». En tapant « zo » au clavier, « zorglob » est proposé (plus « zorglub »).
 5. Corriger un mot en un mot du dictionnaire (par exemple « zorglob » → « bonjour ») : il quitte
    la liste.
-6. « Retirer des mots » : les corbeilles reviennent ; regarder un mot le retire, comme avant.
+6. « Retirer des mots » : les corbeilles reviennent. Regarder un mot le retire seulement après
+   deux fois le délai d'activation (son anneau se remplit deux fois moins vite) ; les autres
+   boutons gardent le délai habituel.
    « Retour aux paramètres » ramène à l'onglet Prédiction.
 7. Le journal dit seulement « My words: ... » / « Prediction: one added word fixed », jamais les
    mots.
