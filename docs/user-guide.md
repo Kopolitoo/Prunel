@@ -197,7 +197,9 @@ repeat) or a yes / no switch. Changes apply at once and are saved.
   at first, 10 to 100 %; the Windows volume still applies). **Windows volume while ringing**
   (80 % at first): while the bell rings, the Windows volume is raised to this level if it is
   lower (and unmuted), then put back as it was; 0 = the Windows volume is not touched. While the bell rings, the short
-  key and button sounds keep quiet, so they do not cut it.
+  key and button sounds keep quiet, so they do not cut it. The **Test** button below the
+  settings rings the computer bell once with these settings, even when it is off, to hear it
+  without leaving the settings.
 - **Alexa** tab ("Actions" category): the **Alexa bell** (off at first). When it is on, "Call"
   also rings an Amazon Echo speaker, through the free [Voice Monkey](https://voicemonkey.io)
   service (an Alexa skill; its free plan allows about 200 calls a month). One-time setup, which

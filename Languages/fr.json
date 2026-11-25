@@ -300,6 +300,8 @@
   "settings.alexa.pasteToken": "Coller le jeton",
   "settings.alexa.pasteDevice": "Coller l'appareil",
   "settings.alexa.test": "Tester",
+  "settings.bell.test": "Tester",
+  "settings.bell.testOk": "La sonnette de l'ordinateur sonne",
   "settings.alexa.help": "Copiez le jeton (app.voicemonkey.io, Tokens) ou l'identifiant du déclencheur de routine (Devices) avec Ctrl+C, puis regardez le bouton correspondant. Dans l'application Alexa, une routine lancée par cet appareil joue la sonnette sur l'Echo.",
   "settings.alexa.clipboardWrong": "Le presse-papiers ne contient pas de jeton ni d'identifiant (copiez-le d'abord, sans espaces)",
   "settings.alexa.tokenPasted": "Jeton enregistré",

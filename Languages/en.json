@@ -300,6 +300,8 @@
   "settings.alexa.pasteToken": "Paste token",
   "settings.alexa.pasteDevice": "Paste device",
   "settings.alexa.test": "Test",
+  "settings.bell.test": "Test",
+  "settings.bell.testOk": "The computer bell rings",
   "settings.alexa.help": "Copy the token (app.voicemonkey.io, Tokens) or the routine trigger id (Devices) with Ctrl+C, then look at the matching button. In the Alexa app, a routine started by this device plays the doorbell on the Echo.",
   "settings.alexa.clipboardWrong": "The clipboard holds no token or id (copy it first, without spaces)",
   "settings.alexa.tokenPasted": "Token saved",

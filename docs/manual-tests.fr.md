@@ -410,6 +410,11 @@ Uniquement au regard.
    de Windows à 90 % : inchangé. « Volume de Windows pendant la sonnerie » à 0 : le volume n'est
    jamais touché.
 10. Quitter Prunel pendant la sonnerie : le volume de Windows revient.
+11. Onglet « Sonnette » (issue #162) : un petit bouton « Tester » est sous les quatre réglages. Le
+    regarder : la sonnette sonne avec la durée et les volumes actuels, « La sonnette de
+    l'ordinateur sonne » s'affiche sous le bouton. Changer la durée ou le volume, puis « Tester » de
+    nouveau : le son suit. Désactiver « Sonnette de l'ordinateur » : « Tester » sonne quand même.
+    Garder le regard sur « Tester » ne sonne qu'une fois.
 
 ## 30. Sonnette d'appel sur une enceinte Alexa (étape call-bell, partie 2)
 

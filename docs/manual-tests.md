@@ -374,6 +374,10 @@ Gaze only.
    to 20 %. Same with the sound muted: unmuted while ringing, muted again after. Windows volume
    at 90 %: unchanged. "Windows volume while ringing" at 0: the volume is never touched.
 10. Quit Prunel during the ringing: the Windows volume comes back.
+11. "Bell" tab (issue #162): a small "Test" button is below the four settings. Look at it: the
+    bell rings with the current duration and volumes, "The computer bell rings" shows below the
+    button. Change the duration or the volume, then "Test" again: the sound follows. Turn
+    "Computer bell" off: "Test" still rings. Keeping the gaze on "Test" rings only once.
 
 ## 30. Call bell on an Alexa speaker (step call-bell, part 2)
 
