@@ -175,7 +175,10 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
 - Bouton maintenu (issue #126, `Modes/HoldButtonMode`) : actions de couronne `HoldLeft` /
   `HoldRight` (pas placées par défaut). Le bouton est enfoncé sur P, puis le curseur suit le
   regard comme la souris directe du jeu (`GameSmoothing`, `GameCursorDeadZone` ; bouton violet, `GazeButton.MarkAsGame`) jusqu'à un bref regard (0,05 s) sur
-  le bouton « Relâcher » du bord droit (deux fois la taille des icônes), Échap, ou un regard perdu 1 s ; `Quit` relâche toujours le bouton
+  le bouton « Relâcher » du bord droit (deux fois la taille des icônes), Échap, un regard perdu 1 s,
+  ou un regard fixe (`FixationDetector`) pendant `HoldReleaseDelay` (issue #158, 1,5 s, 0 = désactivé,
+  onglet « Pause », `settings.json` version 30 ; anneau vert `ShowRing` dès 20 % du délai) : le curseur est posé sur le point fixé, puis
+  `MovementMode(x, y)` ignore une nouvelle fixation à cet endroit ; `Quit` relâche toujours le bouton
   et les modificateurs.
 - `GazeButton` : un bouton activable au regard (symbole de la police Windows, pastille,
   anneau, libellé au survol), dessiné sur le calque. Il peut être vide (« + » grisé),

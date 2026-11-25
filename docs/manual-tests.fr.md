@@ -505,6 +505,22 @@ jeton).
 5. « Défaut » dans l'onglet « Choix d'action » la remet à 100 %. En anglais : "Background
    transparency".
 
+## 35. Relâcher le bouton maintenu par un regard fixe (issue #158)
+
+1. Installer la nouvelle version (paramètres d'avant la version 30). Paramètres, catégorie
+   « Regard », onglet « Pause » : « Relâcher le bouton maintenu » (1,5 s) sous « Délai avant la
+   pause ».
+2. Dans Paint, « Gauche maintenu » (voir le test 28), tracer un trait, puis garder le regard
+   fixe sur un endroit : au bout d'environ 1,5 s, le trait s'arrête juste là, retour au mode
+   mouvement. Pendant ce temps, un arc vert se remplit autour de l'endroit (il apparaît après
+   environ 0,3 s, puis se ferme quand le bouton est relâché). Aucun clic ne suit aussitôt (le regard doit d'abord quitter l'endroit).
+3. Glisser un fichier dans l'Explorateur avec « Gauche maintenu » : regarder un dossier et garder
+   le regard fixe : le fichier est déposé dans ce dossier.
+4. Un regard qui bouge lentement (suivre une ligne) ne relâche pas le bouton ; un arrêt court
+   (moins de 1,5 s) non plus.
+5. Régler sur 0 : un regard fixe ne relâche plus le bouton ; « Relâcher », Échap et le regard
+   perdu le relâchent toujours. « Défaut » remet 1,5 s. En anglais : "Release the held button".
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,

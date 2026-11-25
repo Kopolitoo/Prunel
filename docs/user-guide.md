@@ -80,6 +80,10 @@ not there by default; their light violet background says they are game actions).
 then the cursor follows your gaze, button still held (same smoothing and anti-jitter as game
 mode). To let go, glance at the large "Release" button (square) on the right edge of the screen: a short look is enough. The
 button is also released with Escape, or when the gaze is lost for more than one second.
+You can also simply keep your gaze still where you want to stop: after 1.5 s the button is
+released there (handy to drop something); a green arc fills around that spot meanwhile. This delay is set in Settings, "Gaze" category,
+"Pause" tab, "Release the held button"; 0 turns it off (for games where you look at one spot
+with the button held).
 
 ## Scroll
 

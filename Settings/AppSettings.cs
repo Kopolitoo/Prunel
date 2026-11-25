@@ -110,8 +110,10 @@ namespace Prunel
         ///      it keeps its default value.
         ///  29: issue #155 — ChoiceBackgroundTransparency (100 %). Nothing to fix: missing from
         ///      an older file, it gets its default value (no black background, user's choice).
+        ///  30: issue #158 — HoldReleaseDelay (1.5 s). Nothing to fix: missing from an older
+        ///      file, it gets its default value.
         /// </summary>
-        public const int CurrentVersion = 29;
+        public const int CurrentVersion = 30;
 
         /// <summary>Format number of the file, so it can evolve one day without breaking everything.</summary>
         [DataMember(Order = 0)]
@@ -327,6 +329,14 @@ namespace Prunel
         /// <summary>Duration of a lost gaze before the automatic pause, in seconds.</summary>
         [DataMember(Order = 45)]
         public double AutoPauseDelay { get; set; }
+
+        /// <summary>
+        /// Hold button mode (issue #158): a gaze fixed for this long, in seconds, releases the
+        /// button where one looks. 1.5 by default; 0 = off (the button then stays held while
+        /// the gaze rests, as before). See HoldButtonMode.
+        /// </summary>
+        [DataMember(Order = 46)]
+        public double HoldReleaseDelay { get; set; }
 
         // ───────────────────────── Magnifier ─────────────────────────
 

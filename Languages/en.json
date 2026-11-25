@@ -190,6 +190,8 @@
   "setting.autoPause.help": "Pause when the gaze is lost for a long time",
   "setting.autoPauseDelay.name": "Delay before the pause",
   "setting.autoPauseDelay.help": "Gaze lost (eyes closed, head turned)",
+  "setting.holdReleaseDelay.name": "Release the held button",
+  "setting.holdReleaseDelay.help": "Gaze fixed for this time (0 = never)",
   "setting.circleRadius.name": "Circle radius",
   "setting.circleRadius.help": "Movement mode and fixed gaze",
   "setting.captureRadius.name": "Capture radius",

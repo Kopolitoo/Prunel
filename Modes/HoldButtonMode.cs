@@ -30,6 +30,11 @@ namespace Prunel
     ///   - the caregiver's Escape key (or "Escape" said to Dragon): App.OnEscape releases all
     ///     the buttons and keys and returns to movement mode;
     ///   - the gaze LOST (no measure) for more than [LostReleaseMs] (a blink is shorter);
+    ///   - the gaze FIXED (still, see FixationDetector) for [HoldReleaseDelay], 1.5 s by
+    ///     default (issue #158): one stops where one looks, without going to the right edge
+    ///     (for a drag and drop: look at the drop point and wait). 0 = off (games where the
+    ///     button must stay held while the gaze rests). A green arc fills around the fixed
+    ///     point during the delay (user request), from [RingStart] of the delay on;
     ///   - any mode change, a screen change or an error: Quit releases everything.
     /// The menu does not open during this mode (MenuAllowed stays "no"): looking below the
     /// screen just leaves the cursor where it is.
@@ -64,6 +69,13 @@ namespace Prunel
         /// <summary>Size of the "Release" button: twice the usual icon size (user request after testing).</summary>
         private const double ReleaseSizeFactor = 2;
 
+        /// <summary>
+        /// Share of [HoldReleaseDelay] after which the arc of the fixed gaze appears (issue
+        /// #158): before that, the gaze is often only slowing down, and an arc popping up at
+        /// each short stop would be distracting. Starting value, to adjust after testing.
+        /// </summary>
+        private const double RingStart = 0.2;
+
         private readonly MouseSide _button;
 
         // The aimed point P of the action choice, where the button is pressed.
@@ -80,6 +92,10 @@ namespace Prunel
 
         // True when the cursor is "on the way" behind the smoothed gaze (see GameMode.DirectMouse).
         private bool _cursorOnTheWay;
+
+        // Recognizes a fixed gaze during the hold (issue #158), with [HoldReleaseDelay].
+        private readonly FixationDetector _fixation =
+            new FixationDetector(() => AppSettings.Current.HoldReleaseDelay);
 
         private Step _step;
         private double _stepStartMs;
@@ -109,6 +125,7 @@ namespace Prunel
             _placed = false;
             _cursorOnTheWay = false;
             _lostStartMs = -1;
+            _fixation.Reset();
         }
 
         public override void Update(GazeState gaze)
@@ -142,6 +159,7 @@ namespace Prunel
             }
             _step = Step.Finished;
 
+            Manager.Layer.HideRing();
             Manager.Layer.HideDragSurface();
             Manager.Layer.DragSurface.Children.Clear();
             _buttons.Clear();
@@ -180,6 +198,7 @@ namespace Prunel
             // in front of the eyetracker).
             if (!gaze.Available)
             {
+                ResetFixation();
                 if (_lostStartMs < 0)
                 {
                     _lostStartMs = gaze.NowMs;
@@ -199,6 +218,7 @@ namespace Prunel
             if (!gaze.OnScreen)
             {
                 _placed = false;
+                ResetFixation();
                 return;
             }
 
@@ -206,7 +226,38 @@ namespace Prunel
             // the character run to the right edge just because one wants to stop).
             if (_buttons.Count > 0 && _buttons[0].Contains(gaze.X, gaze.Y))
             {
+                ResetFixation();
                 return;
+            }
+
+            // Gaze fixed for [HoldReleaseDelay] (issue #158): release where one looks. The
+            // cursor is first put on the fixated point, so that a drag and drop ends exactly
+            // there (the anti-jitter may have left it a few pixels away).
+            if (p.HoldReleaseDelay > 0)
+            {
+                _fixation.Add(gaze);
+                if (_fixation.Progress >= RingStart)
+                {
+                    Manager.Layer.ShowRing(_fixation.X, _fixation.Y, p.CircleRadiusPx, _fixation.Progress);
+                }
+                else
+                {
+                    Manager.Layer.HideRing();
+                }
+                if (_fixation.Reached)
+                {
+                    MouseInjector.PointTo(_fixation.X, _fixation.Y);
+                    App.LogDetail("Hold button: gaze fixed, button released");
+                    // As after a drag and drop: the gaze still rests on this point, so a new
+                    // fixation there is ignored until the gaze has left it (otherwise a click
+                    // would follow at once).
+                    Manager.ChangeMode(new MovementMode(_fixation.X, _fixation.Y));
+                    return;
+                }
+            }
+            else
+            {
+                ResetFixation();
             }
 
             if (!_placed)
@@ -225,6 +276,13 @@ namespace Prunel
             }
             _smoothed.Follow(gaze.X, gaze.Y, gaze.NowMs);
             MoveCursor();
+        }
+
+        /// <summary>Forgets the fixed gaze in progress and hides its arc.</summary>
+        private void ResetFixation()
+        {
+            _fixation.Reset();
+            Manager.Layer.HideRing();
         }
 
         /// <summary>

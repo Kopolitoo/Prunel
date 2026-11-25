@@ -190,6 +190,8 @@
   "setting.autoPause.help": "Pause quand le regard est perdu longtemps",
   "setting.autoPauseDelay.name": "Délai avant la pause",
   "setting.autoPauseDelay.help": "Regard perdu (yeux fermés, tête tournée)",
+  "setting.holdReleaseDelay.name": "Relâcher le bouton maintenu",
+  "setting.holdReleaseDelay.help": "Regard fixe pendant ce temps (0 = jamais)",
   "setting.circleRadius.name": "Rayon du cercle",
   "setting.circleRadius.help": "Mode mouvement et regard fixe",
   "setting.captureRadius.name": "Rayon de la capture",
