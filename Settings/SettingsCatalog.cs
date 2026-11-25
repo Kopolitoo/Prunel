@@ -49,6 +49,12 @@ namespace Prunel
         /// </summary>
         public string Key { get; private set; }
 
+        /// <summary>The symbol shown in front of the row (issue #165), see SettingsCatalog.SymbolOf.</summary>
+        public string Symbol
+        {
+            get { return SettingsCatalog.SymbolOf(Key); }
+        }
+
         /// <summary>The displayed name, in the current language (for example "Délai de fixation").</summary>
         public string Name
         {
@@ -372,6 +378,78 @@ namespace Prunel
     /// </summary>
     internal static class SettingsCatalog
     {
+        /// <summary>
+        /// The symbol shown in front of each setting row (issue #165), in the icon font of the
+        /// tabs (Segoe Fluent Icons / Segoe MDL2 Assets). A setting missing from this list gets
+        /// the gear (E713). The same symbol may serve several settings (stopwatch = a delay).
+        /// </summary>
+        private static readonly Dictionary<string, string> SettingSymbols = new Dictionary<string, string>
+        {
+            { "setting.smoothing", "\uE9E9" },   // equalizer
+            { "setting.cursorDeadZone", "\uE8B3" },   // dotted square
+            { "setting.maxMeasureAge", "\uE823" },   // clock
+            { "setting.mouseTracking", "\uE890" },   // eye
+            { "setting.fixationRadius", "\uE707" },   // pin
+            { "setting.fixationDelay", "\uE916" },   // stopwatch
+            { "setting.maxFixationSpeed", "\uE945" },   // lightning
+            { "setting.directClick", "\uE7C9" },   // hand
+            { "setting.directClickDelay", "\uE916" },   // stopwatch
+            { "setting.activationDelay", "\uE916" },   // stopwatch
+            { "setting.optionsIconDelay", "\uE712" },   // "…"
+            { "setting.menuDelay", "\uE700" },   // menu
+            { "setting.menuCloseDelay", "\uE711" },   // cross
+            { "setting.doubleClickGap", "\uE769" },   // pause
+            { "setting.autoPause", "\uE769" },   // pause
+            { "setting.autoPauseDelay", "\uE916" },   // stopwatch
+            { "setting.holdReleaseDelay", "\uE7C9" },   // hand
+            { "setting.circleRadius", "\uE7C8" },   // circle
+            { "setting.captureRadius", "\uE722" },   // camera
+            { "setting.iconSize", "\uE71D" },   // grid
+            { "setting.interfaceSize", "\uE740" },   // full screen
+            { "setting.showLabels", "\uE8EC" },   // tag
+            { "setting.circleColor", "\uE790" },   // palette
+            { "setting.circleThickness", "\uE771" },   // brush
+            { "setting.highContrast", "\uE706" },   // sun
+            { "setting.nightMode", "\uE708" },   // moon
+            { "setting.magnifierBeforeAction", "\uE71E" },   // magnifier
+            { "setting.magnifierZoom", "\uE8A3" },   // zoom in
+            { "setting.magnifierDelay", "\uE916" },   // stopwatch
+            { "setting.androidPauseDuration", "\uE769" },   // pause
+            { "setting.dragDuration", "\uE7C9" },   // hand
+            { "setting.maxScrollSpeed", "\uE945" },   // lightning
+            { "setting.scrollInactiveWindows", "\uE8A7" },   // windows
+            { "setting.relativeMouse", "\uE7FC" },   // gamepad
+            { "setting.gamepadRelative", "\uE7FC" },   // gamepad
+            { "setting.gameSmoothing", "\uE9E9" },   // equalizer
+            { "setting.gameCursorDeadZone", "\uE8B3" },   // dotted square
+            { "setting.gameSensitivity", "\uE945" },   // lightning
+            { "setting.openingAnimation", "\uE768" },   // play
+            { "setting.openingDuration", "\uE916" },   // stopwatch
+            { "setting.choiceBackgroundTransparency", "\uE8B9" },   // picture
+            { "setting.keyDelay", "\uE916" },   // stopwatch
+            { "setting.keyRepeat", "\uE8EE" },   // repeat
+            { "setting.autoCapitalize", "\uE8D2" },   // font
+            { "setting.keyboardHeight", "\uE70E" },   // up arrow
+            { "setting.keyboardSize", "\uE740" },   // full screen
+            { "setting.lengthPenalty", "\uE8CB" },   // sort
+            { "setting.keySound", "\uE765" },   // keyboard
+            { "setting.buttonSound", "\uE767" },   // speaker
+            { "setting.computerBell", "\uE770" },   // computer
+            { "setting.bellDuration", "\uE916" },   // stopwatch
+            { "setting.bellVolume", "\uE767" },   // speaker
+            { "setting.bellWindowsVolume", "\uE767" },   // speaker
+            { "setting.alexaBell", "\uE7F5" },   // speakers
+            { "setting.startWithWindows", "\uE7E8" },   // power
+            { "setting.detailedLog", "\uE8A5" },   // document
+        };
+
+        /// <summary>The symbol of a setting (see SettingSymbols), the gear if it has none.</summary>
+        public static string SymbolOf(string key)
+        {
+            string symbol;
+            return SettingSymbols.TryGetValue(key, out symbol) ? symbol : "\uE713";
+        }
+
         /// <summary>The name of the "Icons" tab, recognized by SettingsWindow.</summary>
         public const string IconsTabName = "tab.icons";
 

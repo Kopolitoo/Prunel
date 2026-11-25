@@ -515,6 +515,16 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
    the settings" goes back to the Prediction tab.
 7. The log only says "My words: ..." / "Prediction: one added word fixed", never the words.
 
+## 38. A symbol in front of each setting (issue #165)
+
+1. Open the settings and go through every tab of the four categories: each setting row has a
+   grey symbol on the left of its name (stopwatch for the delays, eye, magnifier, palette,
+   keyboard, bell…). No symbol is an empty square.
+2. Long names ("Windows volume while ringing", in French « Volume de Windows pendant la
+   sonnerie ») go onto two lines and do not run under the buttons; name and explanation stay
+   inside the row.
+3. The buttons ("−", value, "+", switches) are at the same place as before and work as before.
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,

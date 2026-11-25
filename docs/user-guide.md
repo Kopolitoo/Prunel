@@ -165,7 +165,8 @@ finely.
 ## Settings
 
 Menu, "Settings". A black full-screen page with four categories on the left: **Gaze**,
-**Actions**, **Interface**, **System**. Each setting has "−" and "+" (keep your gaze on them to
+**Actions**, **Interface**, **System**. Each setting has a small symbol in front of its name,
+to spot it at a glance, and "−" and "+" (keep your gaze on them to
 repeat) or a yes / no switch. Changes apply at once and are saved.
 
 - **Default** (top right): puts back the original values of the shown tab.

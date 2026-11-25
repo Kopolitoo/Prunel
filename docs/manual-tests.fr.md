@@ -567,6 +567,17 @@ jeton).
 7. Le journal dit seulement « My words: ... » / « Prediction: one added word fixed », jamais les
    mots.
 
+## 38. Un symbole devant chaque réglage (issue #165)
+
+1. Ouvrir les paramètres et parcourir tous les onglets des quatre catégories : chaque ligne de
+   réglage a un symbole gris à gauche de son nom (chronomètre pour les délais, œil, loupe,
+   palette, clavier, sonnette…). Aucun symbole n'est un carré vide.
+2. Les noms longs (« Volume de Windows pendant la sonnerie », en anglais "Windows volume while
+   ringing") passent sur deux lignes et ne vont pas sous les boutons ; nom et explication
+   restent dans la ligne.
+3. Les boutons (« − », valeur, « + », interrupteurs) sont à la même place qu'avant et marchent
+   comme avant.
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,
