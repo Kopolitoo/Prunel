@@ -162,6 +162,11 @@ namespace Prunel
         private string _nameToReplace;
         private string _nameError;
 
+        // The same page used for a word of "My words" (issue #163) instead of a profile name:
+        // true while it is, and the word being fixed (null = a new word).
+        private bool _wordPage;
+        private string _oldWord;
+
         // The part of the page left free by the gaze keyboard, in page units (whole page
         // below the title when the keyboard is not shown).
         private double _freeTop = TopRow;
@@ -256,6 +261,43 @@ namespace Prunel
 
         /// <summary>The profile name page closes: the mode hides the gaze keyboard.</summary>
         public event Action NamingEnded;
+
+        /// <summary>
+        /// "Save" on the word page (issue #163): the word being fixed (null = a new word) and
+        /// the typed word. The mode saves it, then goes back to the "My words" list, or calls
+        /// ShowWordError.
+        /// </summary>
+        public event Action<string, string> WordSaveRequested;
+
+        /// <summary>"Cancel" (or Escape) on the word page: the mode goes back to the "My words" list.</summary>
+        public event Action WordPageClosed;
+
+        /// <summary>
+        /// Opens the word page (issue #163), with the gaze keyboard: an empty box to add a word
+        /// (oldWord null), or the word to fix, the text cursor at its end.
+        /// </summary>
+        public void StartWordPage(string oldWord)
+        {
+            ConfirmInput();
+            App.LogDetail(oldWord == null ? "My words: add page opened" : "My words: fix page opened");
+            _naming = true;
+            _wordPage = true;
+            _oldWord = oldWord;
+            _nameText = oldWord ?? "";
+            _selectName = false;
+            _nameToReplace = null;
+            _nameError = null;
+            _message = null;
+            Build();
+            Notify(NamingStarted);
+        }
+
+        /// <summary>The word could not be saved: the reason is shown under the box, the typed word is kept.</summary>
+        public void ShowWordError(string error)
+        {
+            _nameError = error;
+            Build();
+        }
 
         /// <summary>
         /// The gaze keyboard is shown between "top" and "bottom" (page units, see ToPage), or

@@ -165,6 +165,8 @@ namespace Prunel
                 _naming = false;
                 _nameBox = null;
                 _nameToReplace = null;
+                _wordPage = false;
+                _oldWord = null;
                 Notify(NamingEnded);
             }
             _tab = num;

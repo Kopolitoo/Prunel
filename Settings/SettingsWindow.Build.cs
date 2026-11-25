@@ -82,8 +82,12 @@ namespace Prunel
                 if (tab.Name == SettingsCatalog.GeneralTabName)
                 {
                     BuildFileInfo(TopRow + tab.Settings.Count * StepRow);
-                    BuildMyWordsButton();
+                    BuildLanguageButton();
                     BuildQuitButton();
+                }
+                if (tab.Name == SettingsCatalog.PredictionTabName)
+                {
+                    BuildMyWordsButton(TopRow + tab.Settings.Count * StepRow);
                 }
                 if (tab.Name == DisplayTabName)
                 {
@@ -467,23 +471,32 @@ namespace Prunel
         }
 
         /// <summary>
-        /// "Général" tab: a medium "Mes mots" button (small enough not to catch the
-        /// gaze by mistake, issue #57), below
-        /// the settings file reminder. It opens the list of words added to the keyboard's
-        /// personal dictionary (KeyboardListMode), to remove some. The Clavier tab had no room
-        /// left (five settings). E82D = dictionary.
+        /// "Prediction" tab, below its row (issue #163, formerly in the "General" tab): a small
+        /// "My words" button (460 × 90, small enough not to catch the gaze by mistake), then
+        /// its explanation. It opens the list of the words added to the keyboard's personal
+        /// dictionary (KeyboardListMode), to remove, fix or add some. E82D = dictionary.
         /// </summary>
-        private void BuildMyWordsButton()
+        private void BuildMyWordsButton(double top)
         {
-            AddTarget(LeftContent + 55, 670, 460, 120, BigButton("\uE82D", Texts.Get("settings.myWords")),
+            AddTarget(LeftContent + 340, top + 60, 460, 90, SmallButton("\uE82D", Texts.Get("settings.myWords")),
                          () => Notify(MyWordsRequested), false, false);
-            // The interface language, next to "Mes mots". E774 = globe.
-            AddTarget(LeftContent + 665, 670, 460, 120, BigButton("\uE774", Texts.LanguageName),
+            TextBlock explanation = Text(Texts.Get("settings.myWordsHelp"), 23, Soft, false);
+            explanation.TextWrapping = TextWrapping.Wrap;
+            explanation.Width = 1140;
+            Place(explanation, LeftContent, top + 180);
+        }
+
+        /// <summary>
+        /// "General" tab: a medium button with the interface language, below the settings
+        /// file reminder (E774 = globe). Looking at it switches to the next language.
+        /// </summary>
+        private void BuildLanguageButton()
+        {
+            AddTarget(LeftContent + 55, 670, 460, 120, BigButton("\uE774", Texts.LanguageName),
                          NextLanguage, false, false);
-            // Below the buttons: the message of the language button if there is one, otherwise
-            // the explanation.
+            // Below the button: its message if there is one, otherwise the explanation.
             TextBlock explanation = string.IsNullOrEmpty(_message)
-                ? Text(Texts.Get("settings.myWordsHelp"), 23, Soft, false)
+                ? Text(Texts.Get("settings.languageHelp"), 23, Soft, false)
                 : Text(_message, 30, SettingTarget.Accent, true);
             explanation.TextWrapping = TextWrapping.Wrap;
             explanation.Width = 1140;

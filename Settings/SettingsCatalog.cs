@@ -382,15 +382,21 @@ namespace Prunel
         }
 
         /// <summary>
-        /// The name of the "General" tab, recognized by SettingsWindow (which adds the "My
-        /// words" button to it).
+        /// The name of the "General" tab, recognized by SettingsWindow (which adds the
+        /// language and "Quit Prunel" buttons to it).
         /// </summary>
         public const string GeneralTabName = "tab.general";
 
-        /// <summary>The index of the "General" tab (to come back to it after the "My words" list).</summary>
-        public static int GeneralTabIndex
+        /// <summary>
+        /// The name of the "Prediction" tab, recognized by SettingsWindow (which adds the "My
+        /// words" button to it, issue #163).
+        /// </summary>
+        public const string PredictionTabName = "tab.prediction";
+
+        /// <summary>The index of the "Prediction" tab (to come back to it after the "My words" list).</summary>
+        public static int PredictionTabIndex
         {
-            get { return Math.Max(0, Tabs.FindIndex(o => o.Name == GeneralTabName)); }
+            get { return Math.Max(0, Tabs.FindIndex(o => o.Name == PredictionTabName)); }
         }
 
         /// <summary>
@@ -439,7 +445,7 @@ namespace Prunel
         {
             new SettingsCategory("category.gaze", "\uE890", "tab.gaze", "tab.fixation", "tab.delays", "tab.pause"),
             new SettingsCategory("category.actions", "\uE7C9", "tab.magnifierDrag", "tab.scroll", IconsTabName, BellTabName, AlexaTabName),
-            new SettingsCategory("category.display", "\uE7F4", "tab.display", ColorsTabName, "tab.keyboard", "tab.prediction", "tab.sound", "tab.game"),
+            new SettingsCategory("category.display", "\uE7F4", "tab.display", ColorsTabName, "tab.keyboard", PredictionTabName, "tab.sound", "tab.game"),
             new SettingsCategory("category.system", "\uE770", GeneralTabName, ProfilesTabName, ToolsTabName, AboutTabName)
         };
 
@@ -626,7 +632,8 @@ namespace Prunel
 
             // E82F = light bulb ("Prediction"): the word prediction of the gaze keyboard
             // (see WordPredictor). A tab of its own: "Keyboard" already has 5 rows, the maximum.
-            new SettingsTab("tab.prediction", "\uE82F",
+            // Below the row: the "My words" button (see SettingsWindow.BuildMyWordsButton).
+            new SettingsTab(PredictionTabName, "\uE82F",
                 // Issue #122: short words first, 1.0 (no preference) to 2.0.
                 Setting.Number("setting.lengthPenalty", "", 0.1,
                                p => p.LengthPenalty, (p, v) => p.LengthPenalty = v)),

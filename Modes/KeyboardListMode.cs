@@ -11,7 +11,7 @@ namespace Prunel
     /// KEYBOARD LIST MODE ("clavier-options").
     ///
     /// Two lists: "Language" opens from the menu bar of the gaze keyboard, "My words" from
-    /// the General tab of the settings:
+    /// the Prediction tab of the settings:
     ///   - LANGUAGE: the layouts found in the Keyboards folder (one per JSON file). The one in
     ///     use has a green border. Looking at another one chooses it (saved in settings.json),
     ///     then we go back to the keyboard;
@@ -20,6 +20,12 @@ namespace Prunel
     ///     (as for removing an icon in the icon configuration), and we stay in the list to be able
     ///     to remove
     ///     others. Lexique words are never affected.
+    ///     A word to remove needs the gaze twice as long as the other buttons (user request).
+    ///     Issue #163: at the bottom, "Add a word" and "Fix words". "Fix words" switches the
+    ///     list to FIX: each word gets a pencil, and looking at it opens the word page of the
+    ///     settings with that word and the gaze keyboard (SettingsMode.ForWord); "Remove words"
+    ///     switches back. "Add a word" opens the same page, empty. Saving or cancelling comes
+    ///     back here.
     ///
     /// A third list, which has nothing to do with the
     /// keyboard but reuses the same layout:
@@ -68,6 +74,12 @@ namespace Prunel
         // The buttons shown and what each one does (same order).
         private readonly List<GazeButton> _buttons = new List<GazeButton>();
         private readonly List<Action> _actions = new List<Action>();
+
+        // My words: the indexes (in _buttons) of the buttons that REMOVE a word. They need the
+        // gaze twice as long ([ActivationDelay] × RemoveDelayFactor): removing a word is not a
+        // trivial action (user request, issue #163).
+        private readonly HashSet<int> _removeButtons = new HashSet<int>();
+        private const double RemoveDelayFactor = 2;
         private readonly ButtonAimer _aimer;
 
         // The content of the list: the layouts (Language) or the words (My words).
@@ -81,6 +93,13 @@ namespace Prunel
         // A message shown under the title (error), or null.
         private string _message;
 
+        // A message shown under the title in green ("Word added"…), or null (issue #163).
+        private string _notice;
+
+        // My words: true when looking at a word opens it to fix it, false when it removes it
+        // (issue #163). Removing comes first, as before.
+        private bool _fixing;
+
         // True as long as the screen could not be built (overlay not ready yet).
         private bool _toBuild;
 
@@ -90,9 +109,14 @@ namespace Prunel
         private readonly Smoother _smoothed = new Smoother();
         private bool _gazeCirclePlaced;
 
-        public KeyboardListMode(ListKind kind)
+        /// <summary>
+        /// notice: My words, a green sentence under the title ("Word added"…, issue #163), or
+        /// null for the usual explanation.
+        /// </summary>
+        public KeyboardListMode(ListKind kind, string notice = null)
         {
             _kind = kind;
+            _notice = notice;
             _aimer = new ButtonAimer(_buttons);
         }
 
@@ -148,7 +172,9 @@ namespace Prunel
             AppSettings p = AppSettings.Current;
             // Each item already has its name written underneath: no hover label, it would
             // overlap this name (as in the icon configuration).
-            int active = _aimer.Update(gaze, p.ActivationDelay, false);
+            double delay = _removeButtons.Contains(_aimer.Aimed)
+                ? p.ActivationDelay * RemoveDelayFactor : p.ActivationDelay;
+            int active = _aimer.Update(gaze, delay, false);
             if (active >= 0)
             {
                 _actions[active]();
@@ -172,6 +198,7 @@ namespace Prunel
             Manager.Layer.ClearChoiceScreen();
             _buttons.Clear();
             _actions.Clear();
+            _removeButtons.Clear();
             _gazeCircle = null;
             _gazeCircleBackground = null;
         }
@@ -180,7 +207,7 @@ namespace Prunel
 
         /// <summary>
         /// "Back" button or Escape key (also called by App): Language → movement mode, where
-        /// the keyboard reappears; My words → the settings, General tab; Profiles → the
+        /// the keyboard reappears; My words → the settings, Prediction tab; Profiles → the
         /// settings, Profiles tab.
         /// </summary>
         public void Back()
@@ -188,7 +215,7 @@ namespace Prunel
             App.LogDetail(Name + ": back");
             if (_kind == ListKind.MyWords)
             {
-                Manager.ChangeMode(new SettingsMode(SettingsCatalog.GeneralTabIndex));
+                Manager.ChangeMode(new SettingsMode(SettingsCatalog.PredictionTabIndex));
             }
             else if (_kind == ListKind.Profiles)
             {
@@ -204,6 +231,24 @@ namespace Prunel
         {
             _page += offset;
             Build();
+        }
+
+        /// <summary>My words: "Fix words" / "Remove words" switches what looking at a word does (issue #163).</summary>
+        private void SwitchFixing()
+        {
+            _fixing = !_fixing;
+            _notice = null;
+            App.LogDetail("My words: " + (_fixing ? "fix" : "remove") + " words");
+            Build();
+        }
+
+        /// <summary>
+        /// My words: "Add a word" (word null) or a word to fix. The settings open on the word
+        /// page with the gaze keyboard; they come back here (issue #163).
+        /// </summary>
+        private void OpenWordPage(string word)
+        {
+            Manager.ChangeMode(SettingsMode.ForWord(word));
         }
 
         /// <summary>Language: a layout is chosen; we go back to the keyboard if it reads correctly.</summary>
@@ -237,6 +282,7 @@ namespace Prunel
         {
             Manager.Keyboard.Predictor.Delete(word);
             _words.Remove(word);
+            _notice = null;
             Build();
         }
 
@@ -279,6 +325,7 @@ namespace Prunel
             Canvas screen = layer.ChoiceScreen;
             _buttons.Clear();
             _actions.Clear();
+            _removeButtons.Clear();
 
             // ── The rounded rectangle, centered.
             double l = width * ListRatio;
@@ -317,14 +364,14 @@ namespace Prunel
             }
             double yTitle = top + size * 0.35;
             AddCenteredText(layer, screen, title, centerX, yTitle, l, titleFont, Palette.Text, true);
-            string explanation = _message ?? (_kind == ListKind.Language
+            string explanation = _message ?? _notice ?? (_kind == ListKind.Language
                 ? Texts.Get("list.layouts.help")
                 : _kind == ListKind.Profiles
                 ? Texts.Get("list.profiles.help")
-                : Texts.Get("list.words.help"));
+                : Texts.Get(_fixing ? "list.words.fixHelp" : "list.words.help"));
             double yExplanation = yTitle + titleFont * 1.5;
             AddCenteredText(layer, screen, explanation, centerX, yExplanation, l, nameFont,
-                               _message != null ? Brushes.Orange : Soft, false);
+                               _message != null ? Brushes.Orange : _notice != null ? Palette.GazeGreen : Soft, false);
 
             // ── "Back" (cross E711): on the right of the screen, vertically centered, OUTSIDE
             //    the list rectangle (in the middle of the right margin), so as not to aim at it
@@ -340,9 +387,24 @@ namespace Prunel
             AddCenteredText(layer, screen, backName, xBack, yBack + size / 2 + nameFont * 0.4,
                                rightMargin - space / 2, nameFont, Soft, false);
 
-            // ── The bottom row: Previous page · Next page (E72B / E72A = arrows).
+            // ── The bottom row: Previous page · Next page (E72B / E72A = arrows). My words:
+            //    "Add a word" and "Fix words" / "Remove words" between them (issue #163).
             double yBottom = top + h - size / 2 - nameFont * 2.5;
             double bottomStep = size + 2 * space;
+            if (_kind == ListKind.MyWords)
+            {
+                // E710 = plus; E70F = pencil (fix), E74D = trash can (remove).
+                string addName = Texts.Get("list.words.add");
+                AddButton(layer, screen, new GazeButton("\uE710", null, addName), () => OpenWordPage(null),
+                              centerX - bottomStep * 0.5, yBottom, size);
+                AddCenteredText(layer, screen, addName, centerX - bottomStep * 0.5,
+                                   yBottom + size / 2 + nameFont * 0.4, bottomStep, nameFont, Soft, false);
+                string switchName = Texts.Get(_fixing ? "list.words.removeMode" : "list.words.fixMode");
+                AddButton(layer, screen, new GazeButton(_fixing ? "\uE74D" : "\uE70F", null, switchName), SwitchFixing,
+                              centerX + bottomStep * 0.5, yBottom, size);
+                AddCenteredText(layer, screen, switchName, centerX + bottomStep * 0.5,
+                                   yBottom + size / 2 + nameFont * 0.4, bottomStep, nameFont, Soft, false);
+            }
             if (_page > 0)
             {
                 AddButton(layer, screen, new GazeButton("", null, Texts.Get("list.previousPage")), () => ChangePage(-1),
@@ -417,10 +479,20 @@ namespace Prunel
                     else
                     {
                         string word = _words[isFirst + i];   // copy for the function below
-                        // E74D = trash can, with the red "−" badge of the icon configuration.
-                        button = new GazeButton("", null, Texts.Get("list.removeWord"));
-                        button.SetConfigBadge(false);
-                        action = () => RemoveWord(word);
+                        if (_fixing)
+                        {
+                            // E70F = pencil: opens the word page to fix it (issue #163).
+                            button = new GazeButton("\uE70F", null, Texts.Get("list.fixWord"));
+                            action = () => OpenWordPage(word);
+                        }
+                        else
+                        {
+                            // E74D = trash can, with the red "−" badge of the icon configuration.
+                            button = new GazeButton("", null, Texts.Get("list.removeWord"));
+                            button.SetConfigBadge(false);
+                            action = () => RemoveWord(word);
+                            _removeButtons.Add(_buttons.Count);   // index it gets in AddButton
+                        }
                         name = word;
                     }
                     AddButton(layer, screen, button, action, x, y, size);

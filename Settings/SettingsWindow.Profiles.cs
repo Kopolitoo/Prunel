@@ -15,6 +15,9 @@ namespace Prunel
     /// </summary>
     internal sealed partial class SettingsWindow : Window
     {
+        /// <summary>Longest word of "My words" that can be typed (issue #163).</summary>
+        private const int WordMaxLength = 40;
+
         /// <summary>
         /// "Profils" tab: an explanation with the profiles folder, then two medium
         /// buttons one above the other (same height as those of "Outils", but wider for the
@@ -123,11 +126,18 @@ namespace Prunel
             const double ButtonWidth = 240;
             double y = NamingTop(ContentHeight);
 
-            Place(Text(Texts.Get("settings.profiles.nameTitle"), 36, White, true), LeftContent, y);
+            // The same page serves for a word of "My words" (issue #163).
+            string title = !_wordPage ? Texts.Get("settings.profiles.nameTitle")
+                         : _oldWord == null ? Texts.Get("settings.words.addTitle")
+                         : Texts.Format("settings.words.fixTitle", _oldWord);
+            TextBlock titleBlock = Text(title, 36, White, true);
+            titleBlock.TextTrimming = TextTrimming.CharacterEllipsis;
+            titleBlock.Width = 1180;
+            Place(titleBlock, LeftContent, y);
 
             TextBox box = new TextBox();
             box.Text = _nameText ?? "";
-            box.MaxLength = SettingsProfiles.NameMaxLength;
+            box.MaxLength = _wordPage ? WordMaxLength : SettingsProfiles.NameMaxLength;
             box.FontSize = 46;
             box.FontFamily = new FontFamily("Segoe UI");
             box.Width = BoxWidth;
@@ -154,7 +164,7 @@ namespace Prunel
                          SymbolAndWord("\uE711", Texts.Get("common.cancel")), CancelNaming, false, false);
 
             TextBlock below = _nameError == null
-                ? Text(Texts.Get("settings.profiles.nameHelp"), 23, Soft, false)
+                ? Text(Texts.Get(_wordPage ? "settings.words.help" : "settings.profiles.nameHelp"), 23, Soft, false)
                 : Text(_nameError, 28, SettingTarget.Accent, true);
             below.TextWrapping = TextWrapping.Wrap;
             below.Width = 1180;
@@ -208,6 +218,16 @@ namespace Prunel
             {
                 return;
             }
+            if (_wordPage)
+            {
+                // A word of "My words": the mode checks and saves it (WordPredictor.SaveWord).
+                Action<string, string> subscribers = WordSaveRequested;
+                if (subscribers != null)
+                {
+                    subscribers(_oldWord, _nameText ?? "");
+                }
+                return;
+            }
             string error;
             string name = SettingsProfiles.CleanName(_nameText, out error);
             if (error != null)
@@ -256,6 +276,14 @@ namespace Prunel
         /// <summary>"Annuler": nothing is saved, back to the "Profils" tab.</summary>
         private void CancelNaming()
         {
+            if (_wordPage)
+            {
+                // Back to the "My words" list, nothing changes.
+                App.LogDetail("My words: cancelled");
+                EndNaming(null);
+                Notify(WordPageClosed);
+                return;
+            }
             App.LogDetail("Profiles: save cancelled");
             EndNaming(null);
         }
@@ -269,6 +297,8 @@ namespace Prunel
             _nameText = null;
             _nameToReplace = null;
             _nameError = null;
+            _wordPage = false;
+            _oldWord = null;
             _message = message;
             if (wasNaming)
             {

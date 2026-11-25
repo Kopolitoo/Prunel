@@ -560,6 +560,125 @@ namespace Prunel
         }
 
         /// <summary>
+        /// The "My words" list (issue #163): adds a word typed by hand (oldWord null), or fixes
+        /// an added word (oldWord = the word as it is stored). The new word is trimmed. Returns
+        /// null when done (file saved at once), otherwise the key of the text explaining why
+        /// not: empty, a space inside, no letter (issue #61), or already known (add only).
+        ///
+        /// A fix keeps what was learnt: the usage count and the word pairs (next word) of the
+        /// old word go to the new one. If the new word is already known (Lexique or another
+        /// added word), the old one is merged into it and leaves the list. The words are never
+        /// written to the log (privacy).
+        /// </summary>
+        public string SaveWord(string oldWord, string newWord)
+        {
+            string word = (newWord ?? "").Trim();
+            if (word.Length == 0)
+            {
+                return "words.error.empty";
+            }
+            foreach (char c in word)
+            {
+                if (char.IsWhiteSpace(c))
+                {
+                    return "words.error.space";
+                }
+            }
+            if (!HasLetter(word))
+            {
+                return "words.error.noLetter";
+            }
+
+            if (oldWord == null)
+            {
+                if (KnownShape(word) != null)
+                {
+                    return "words.error.known";
+                }
+                Add(word);
+                return null;
+            }
+
+            int idx = _addedWords.IndexOf(oldWord);
+            if (idx < 0)
+            {
+                return "words.error.gone";   // removed meanwhile (should not happen)
+            }
+            if (word == oldWord)
+            {
+                return null;   // nothing changed
+            }
+
+            // Already known under another stored form (not just the same word with another
+            // case): the old word is merged into it.
+            string known = KnownShape(word);
+            if (known != null && !string.Equals(known, oldWord, StringComparison.Ordinal))
+            {
+                _addedWords.RemoveAt(idx);
+                _addedKeys.RemoveAt(idx);
+                MoveLearning(oldWord, known);
+                App.LogDetail("Prediction: one added word merged into a known word (" + _addedWords.Count + " left)");
+                SavePersonal();
+                return null;
+            }
+
+            _addedWords[idx] = word;
+            _addedKeys[idx] = Key(word);
+            MoveLearning(oldWord, word);
+            App.LogDetail("Prediction: one added word fixed");
+            SavePersonal();
+            return null;
+        }
+
+        /// <summary>
+        /// Gives the usage count and the word pairs of "from" to "to" (added up if "to" already
+        /// has some), then forgets "from".
+        /// </summary>
+        private void MoveLearning(string from, string to)
+        {
+            int n;
+            if (_usages.TryGetValue(from, out n))
+            {
+                _usages.Remove(from);
+                int m;
+                _usages.TryGetValue(to, out m);
+                _usages[to] = m + n;
+            }
+
+            // The words written after "from".
+            Dictionary<string, int> after;
+            if (_followers.TryGetValue(from, out after))
+            {
+                _followers.Remove(from);
+                Dictionary<string, int> target;
+                if (!_followers.TryGetValue(to, out target))
+                {
+                    target = new Dictionary<string, int>(StringComparer.Ordinal);
+                    _followers[to] = target;
+                }
+                foreach (KeyValuePair<string, int> pair in after)
+                {
+                    int times;
+                    target.TryGetValue(pair.Key, out times);
+                    target[pair.Key] = times + pair.Value;
+                }
+            }
+
+            // "from" written after other words.
+            foreach (Dictionary<string, int> followers in _followers.Values)
+            {
+                int times;
+                if (followers.TryGetValue(from, out times))
+                {
+                    followers.Remove(from);
+                    int already;
+                    followers.TryGetValue(to, out already);
+                    followers[to] = already + times;
+                }
+            }
+        }
+
+        /// <summary>
         /// A copy of the list of words added with the "+" box,
         /// in alphabetical order (ignoring accents and case).
         /// </summary>
