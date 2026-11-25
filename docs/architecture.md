@@ -167,7 +167,10 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
 - Hold a button (issue #126, `Modes/HoldButtonMode`): crown actions `HoldLeft` / `HoldRight`
   (not placed by default). The button is pressed on P, then the cursor follows the gaze like the
   direct game mouse (`GameSmoothing`, `GameCursorDeadZone`; violet button, `GazeButton.MarkAsGame`) until a short glance (0.05 s) at the
-  "Release" button on the right edge (twice the icon size), Escape, or a gaze lost for 1 s; `Quit` always releases the button and the modifiers.
+  "Release" button on the right edge (twice the icon size), Escape, a gaze lost for 1 s, or a
+  gaze fixed (`FixationDetector`) for `HoldReleaseDelay` (issue #158, 1.5 s, 0 = off, "Pause" tab,
+  `settings.json` version 30; green ring `ShowRing` from 20 % of the delay): the cursor is put on the fixated point, then `MovementMode(x, y)`
+  ignores a new fixation there; `Quit` always releases the button and the modifiers.
 - `GazeButton`: a button activated by gaze (symbol of the Windows font, badge, ring, label on
   hover), drawn on the overlay. It can be empty (greyed "+"), unavailable (its symbol, greyed) or
   lit (green border, for a switch).

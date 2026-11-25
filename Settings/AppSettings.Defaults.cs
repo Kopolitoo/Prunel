@@ -59,6 +59,7 @@ namespace Prunel
             MenuCloseDelay = 1.0;
             AutoPause = true;
             AutoPauseDelay = 10;
+            HoldReleaseDelay = 1.5;
 
             MagnifierBeforeAction = true;
             MagnifierZoom = 4;
@@ -153,6 +154,7 @@ namespace Prunel
             MenuDelay = Clamp(MenuDelay, 0.1, 10);
             MenuCloseDelay = Clamp(MenuCloseDelay, 0.1, 10);
             AutoPauseDelay = Clamp(AutoPauseDelay, 5, 300);
+            HoldReleaseDelay = Clamp(HoldReleaseDelay, 0, 10);
 
             MagnifierZoom = Clamp(MagnifierZoom, 1, 10);
             MagnifierDelay = Clamp(MagnifierDelay, 0.1, 10);
@@ -376,7 +378,8 @@ namespace Prunel
 
             // Version 28 (OpeningAnimation): nothing to fix, it keeps its default value (yes).
             // Version 29 (ChoiceBackgroundTransparency): nothing to fix, it gets its default
-            // value (100 %: no black background, the user's choice).
+            // value (100 %: no black background, the user's choice). Version 30
+            // (HoldReleaseDelay): nothing to fix, it gets its default value (1.5 s).
 
             FileVersion = CurrentVersion;
             return true;

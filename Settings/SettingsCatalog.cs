@@ -511,12 +511,16 @@ namespace Prunel
                                p => p.DoubleClickGap, (p, v) => p.DoubleClickGap = v)),
 
             // E769 = pause ("Pause"): the automatic pause (see ModeManager.WatchAutoPause).
-            // A tab of its own: a page holds at most 5 setting rows, and "Delays" has 4.
+            // A tab of its own: a page holds at most 5 setting rows, and "Delays" has 5.
             new SettingsTab("tab.pause", "\uE769",
                 Setting.YesOrNo("setting.autoPause",
                                  p => p.AutoPause, (p, v) => p.AutoPause = v),
                 Setting.Number("setting.autoPauseDelay", " s", 5,
-                               p => p.AutoPauseDelay, (p, v) => p.AutoPauseDelay = v)),
+                               p => p.AutoPauseDelay, (p, v) => p.AutoPauseDelay = v),
+                // Issue #158: the other "stop by itself", the held button released by a fixed
+                // gaze (0 = off). Here because "Delays" is full.
+                Setting.Number("setting.holdReleaseDelay", " s", 0.1,
+                               p => p.HoldReleaseDelay, (p, v) => p.HoldReleaseDelay = v)),
 
             // E7F4 = screen ("Display")
             new SettingsTab("tab.display", "",

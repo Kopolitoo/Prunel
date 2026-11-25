@@ -85,6 +85,11 @@ le choisit : le bouton est enfoncé à cet endroit, puis le curseur suit le rega
 enfoncé (même lissage et même anti-tremblement qu'en mode jeu). Pour lâcher, on jette un coup d'œil au grand
 bouton « Relâcher le bouton » (carré) au bord droit de l'écran : un regard bref suffit. Le bouton est aussi relâché avec Échap,
 ou quand le regard est perdu plus d'une seconde.
+On peut aussi simplement garder le regard fixe là où l'on veut s'arrêter : au bout de 1,5 s, le
+bouton est relâché à cet endroit (pratique pour déposer quelque chose) ; un arc vert se remplit
+autour de cet endroit pendant ce temps. Ce délai se règle dans
+Paramètres, catégorie « Regard », onglet « Pause », « Relâcher le bouton maintenu » ; 0 le
+désactive (pour les jeux où l'on regarde un endroit fixe, bouton enfoncé).
 
 ## Défilement
 

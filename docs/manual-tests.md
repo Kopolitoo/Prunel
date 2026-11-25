@@ -461,6 +461,21 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
 5. "Default" in the "Action choice" tab puts it back to 100 %. In French: « Transparence du
    fond ».
 
+## 35. Release the held button by a fixed gaze (issue #158)
+
+1. Install the new version (settings older than version 30). Settings, "Gaze" category, "Pause"
+   tab: "Release the held button" (1.5 s) below "Delay before the pause".
+2. In Paint, "Hold left" (see test 28), draw a line, then keep the gaze still on one spot: after
+   about 1.5 s the line stops right there, back to movement mode. Meanwhile a green arc fills
+   around the spot (it appears after about 0.3 s, then closes when the button is released). No click follows at once
+   (the gaze must leave the spot first).
+3. Drag a file in Explorer with "Hold left": look at a folder and keep the gaze still: the file
+   is dropped into that folder.
+4. Moving the gaze slowly (following a line) does not release the button; neither does a short
+   stop (less than 1.5 s).
+5. Set it to 0: a still gaze no longer releases the button; "Release", Escape and a lost gaze
+   still do. "Default" puts it back to 1.5 s. In French: « Relâcher le bouton maintenu ».
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,
