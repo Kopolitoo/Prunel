@@ -151,6 +151,13 @@ already open, it stays open: this is how you move to another field.
   "Add a word" opens a page with the gaze keyboard to type a new word, then "Save". "Fix
   words" puts a pencil on each word: look at a misspelt word, fix it with the keyboard, then
   "Save"; what the keyboard learnt about it is kept. "Remove words" goes back to removing.
+- **Export, Merge, Replace** (same "Prediction" tab, below "My words"): the keyboard learns as
+  you write (added words, the words you use most, the next words). "Export" writes a dated
+  copy in `Documents\Prunel\Dictionaries` (to keep it, or to take it to another computer).
+  "Merge" shows the copies of that folder; looking at one adds it to what is learnt (nothing is
+  lost). "Replace" shows the same list; after the question "Replace…? Yes / No", what is learnt
+  becomes exactly the chosen copy. The current dictionary is kept first as "Automatic backup":
+  replacing with it goes back.
 - Close the keyboard with the button above it, from the keyboard bar, or with Escape.
 
 ## Game mode
@@ -248,6 +255,7 @@ repeat) or a yes / no switch. Changes apply at once and are saved.
 | Settings | `%APPDATA%\Prunel\settings.json` (can be opened with Notepad) |
 | Personal dictionary | `%APPDATA%\Prunel\personal-dictionary.json` |
 | Profiles | `Documents\Prunel\Profiles` |
+| Exported dictionaries | `Documents\Prunel\Dictionaries` |
 | Log | `%LOCALAPPDATA%\Prunel\prunel.log` |
 
 Coming from GazeBar (the former name of Prunel, up to version 0.2.0): at its first start,

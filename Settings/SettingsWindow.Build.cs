@@ -66,6 +66,10 @@ namespace Prunel
             {
                 BuildProfileConfirmation();
             }
+            else if (_dictionaryToConfirm != null)
+            {
+                BuildDictionaryConfirmation();
+            }
             else
             {
                 // "Bell" tab: compact rows, to leave room for its "Test" button below them.
@@ -496,6 +500,81 @@ namespace Prunel
             explanation.TextWrapping = TextWrapping.Wrap;
             explanation.Width = 1140;
             Place(explanation, LeftContent, top + 180);
+
+            // Issue #164: three small buttons side by side, as in the "Alexa" tab, far below
+            // "My words": export the dictionary, merge an exported one, replace with an exported
+            // one. E74E = floppy disk, E8B5 = import, E72C = circular arrows. Then their help
+            // and the message of the last button.
+            double y = top + 290;
+            AddTarget(LeftContent, y, 370, 90, SmallButton("\uE74E", Texts.Get("settings.dictionary.export")),
+                         () => Notify(DictionaryExportRequested), false, false);
+            AddTarget(LeftContent + 385, y, 370, 90, SmallButton("\uE8B5", Texts.Get("settings.dictionary.merge")),
+                         () => RequestDictionaryList(false), false, false);
+            AddTarget(LeftContent + 770, y, 370, 90, SmallButton("\uE72C", Texts.Get("settings.dictionary.replace")),
+                         () => RequestDictionaryList(true), false, false);
+            TextBlock help = Text(Texts.Format("settings.dictionary.help", DictionaryFiles.Folder), 23, Soft, false);
+            help.TextWrapping = TextWrapping.Wrap;
+            help.Width = 1140;
+            Place(help, LeftContent, y + 110);
+            BuildMessage();
+        }
+
+        /// <summary>"Merge" or "Replace": the mode opens the list of the exported dictionaries.</summary>
+        private void RequestDictionaryList(bool replace)
+        {
+            ConfirmInput();
+            Action<bool> subscribers = DictionaryListRequested;
+            if (subscribers != null)
+            {
+                subscribers(replace);
+            }
+        }
+
+        /// <summary>
+        /// The question "Replace My words with …?" (issue #164), like the profile load
+        /// question: "Yes" and "No" in the middle of the page. Below the question: the current
+        /// dictionary is kept as an automatic backup first.
+        /// </summary>
+        private void BuildDictionaryConfirmation()
+        {
+            TextBlock question = Text(Texts.Format("settings.dictionary.replaceQuestion", _dictionaryToConfirm.DisplayName),
+                                      40, White, true);
+            question.TextWrapping = TextWrapping.Wrap;
+            question.Width = 1140;
+            Place(question, LeftContent, 260);
+
+            TextBlock precision = Text(Texts.Format("settings.dictionary.replaceHelp", Texts.Get("dictionaries.backupName")),
+                                       23, Soft, false);
+            precision.TextWrapping = TextWrapping.Wrap;
+            precision.Width = 1140;
+            Place(precision, LeftContent, 380);
+
+            AddTarget(640, 480, 300, SideButton, Word(Texts.Get("common.yes"), 42), ConfirmDictionary, false, false);
+            AddTarget(1040, 480, 300, SideButton, Word(Texts.Get("common.no"), 42), CancelDictionary, false, false);
+        }
+
+        /// <summary>"Yes": the mode replaces the dictionary, then shows the message here.</summary>
+        private void ConfirmDictionary()
+        {
+            FoundDictionary dictionary = _dictionaryToConfirm;
+            _dictionaryToConfirm = null;
+            Action<FoundDictionary> subscribers = DictionaryReplaceRequested;
+            if (subscribers != null && dictionary != null)
+            {
+                subscribers(dictionary);
+            }
+            else
+            {
+                Build();
+            }
+        }
+
+        /// <summary>"No": back to the "Prediction" tab, nothing changes.</summary>
+        private void CancelDictionary()
+        {
+            App.LogDetail("Dictionaries: replace cancelled");
+            _dictionaryToConfirm = null;
+            Build();
         }
 
         /// <summary>

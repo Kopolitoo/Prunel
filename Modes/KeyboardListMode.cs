@@ -27,6 +27,11 @@ namespace Prunel
     ///     switches back. "Add a word" opens the same page, empty. Saving or cancelling comes
     ///     back here.
     ///
+    /// A fourth list, DICTIONARIES (issue #164): the dictionaries exported in
+    /// Documents\Prunel\Dictionaries, the most recent first (see DictionaryFiles), opened by
+    /// "Merge" or "Replace" in the Prediction tab. Looking at one merges it at once, or (Replace)
+    /// goes back to the settings, which ask "Yes / No".
+    ///
     /// A third list, which has nothing to do with the
     /// keyboard but reuses the same layout:
     ///   - PROFILES: the settings profiles of the Documents\Prunel\Profiles folder, the most
@@ -54,7 +59,8 @@ namespace Prunel
         {
             Language,
             MyWords,
-            Profiles
+            Profiles,
+            Dictionaries
         }
 
         /// <summary>Proportion of the screen taken by the list (as in the icon configuration).</summary>
@@ -86,6 +92,11 @@ namespace Prunel
         private List<FoundLayout> _layouts = new List<FoundLayout>();
         private List<string> _words = new List<string>();
         private List<FoundProfile> _profiles = new List<FoundProfile>();
+        private List<FoundDictionary> _dictionaries = new List<FoundDictionary>();
+
+        // Dictionaries (issue #164): true when the chosen one REPLACES My words (after a
+        // question in the settings), false when it is MERGED at once.
+        private bool _replace;
 
         // The page shown (0 = the first).
         private int _page;
@@ -120,6 +131,17 @@ namespace Prunel
             _aimer = new ButtonAimer(_buttons);
         }
 
+        /// <summary>
+        /// The list of the exported dictionaries (issue #164), for "Merge" (replace false) or
+        /// "Replace" (replace true). Looking at one goes back to the settings, Prediction tab.
+        /// </summary>
+        public static KeyboardListMode ForDictionaries(bool replace)
+        {
+            KeyboardListMode mode = new KeyboardListMode(ListKind.Dictionaries);
+            mode._replace = replace;
+            return mode;
+        }
+
         public override string Name
         {
             get
@@ -128,6 +150,8 @@ namespace Prunel
                 {
                     case ListKind.Language: return Texts.Get("menu.keyboardLayout");
                     case ListKind.Profiles: return Texts.Get("tab.profiles");
+                    case ListKind.Dictionaries:
+                        return Texts.Get(_replace ? "list.dictionaries.replaceTitle" : "list.dictionaries.mergeTitle");
                     default: return Texts.Get("settings.myWords");
                 }
             }
@@ -151,6 +175,10 @@ namespace Prunel
             else if (_kind == ListKind.Profiles)
             {
                 _profiles = SettingsProfiles.List();
+            }
+            else if (_kind == ListKind.Dictionaries)
+            {
+                _dictionaries = DictionaryFiles.List();
             }
             else
             {
@@ -213,7 +241,7 @@ namespace Prunel
         public void Back()
         {
             App.LogDetail(Name + ": back");
-            if (_kind == ListKind.MyWords)
+            if (_kind == ListKind.MyWords || _kind == ListKind.Dictionaries)
             {
                 Manager.ChangeMode(new SettingsMode(SettingsCatalog.PredictionTabIndex));
             }
@@ -275,6 +303,23 @@ namespace Prunel
         {
             App.LogDetail("Profiles: profile chosen, confirmation requested");
             Manager.ChangeMode(new SettingsMode(SettingsCatalog.ProfilesTabIndex, profile));
+        }
+
+        /// <summary>
+        /// Dictionaries (issue #164): "Merge" adds the chosen dictionary at once, then the
+        /// settings show the result; "Replace" goes back to the settings, which ask "Yes / No"
+        /// first.
+        /// </summary>
+        private void ChooseDictionary(FoundDictionary dictionary)
+        {
+            if (_replace)
+            {
+                App.LogDetail("Dictionaries: dictionary chosen, confirmation requested");
+                Manager.ChangeMode(SettingsMode.ForDictionary(null, dictionary));
+                return;
+            }
+            string message = DictionaryFiles.Merge(Manager.Keyboard.Predictor, dictionary);
+            Manager.ChangeMode(SettingsMode.ForDictionary(message, null));
         }
 
         /// <summary>My words: the word is removed from the personal dictionary, the list is redrawn.</summary>
@@ -348,6 +393,7 @@ namespace Prunel
             // ── The number of items and pages.
             int number = _kind == ListKind.Language ? _layouts.Count
                        : _kind == ListKind.Profiles ? _profiles.Count
+                       : _kind == ListKind.Dictionaries ? _dictionaries.Count
                        : _words.Count;
             int pages = Math.Max(1, (number + PerPage - 1) / PerPage);
             // After a removal, the last page may be empty: go back one.
@@ -368,6 +414,8 @@ namespace Prunel
                 ? Texts.Get("list.layouts.help")
                 : _kind == ListKind.Profiles
                 ? Texts.Get("list.profiles.help")
+                : _kind == ListKind.Dictionaries
+                ? Texts.Get(_replace ? "list.dictionaries.replaceHelp" : "list.dictionaries.mergeHelp")
                 : Texts.Get(_fixing ? "list.words.fixHelp" : "list.words.help"));
             double yExplanation = yTitle + titleFont * 1.5;
             AddCenteredText(layer, screen, explanation, centerX, yExplanation, l, nameFont,
@@ -432,6 +480,8 @@ namespace Prunel
                     ? Texts.Get("list.layouts.empty")
                     : _kind == ListKind.Profiles
                     ? Texts.Get("list.profiles.empty")
+                    : _kind == ListKind.Dictionaries
+                    ? Texts.Get("list.dictionaries.empty")
                     : Texts.Get("list.words.empty");
                 AddCenteredText(layer, screen, empty, centerX, (gridTop + gridBottom) / 2 - nameFont,
                                    l * 0.8, nameFont * 1.3, Soft, false);
@@ -475,6 +525,15 @@ namespace Prunel
                         button = new GazeButton(profile.IsBackup ? "\uE7A7" : "\uE77B", null, Texts.Get("list.loadProfile"));
                         action = () => ChooseProfile(profile);
                         name = profile.DisplayName;
+                    }
+                    else if (_kind == ListKind.Dictionaries)
+                    {
+                        FoundDictionary dictionary = _dictionaries[isFirst + i];   // copy for the function below
+                        // E82D = dictionary; E7A7 = "undo" arrow for the automatic backup.
+                        button = new GazeButton(dictionary.IsBackup ? "\uE7A7" : "\uE82D", null,
+                                                Texts.Get(_replace ? "list.replaceDictionary" : "list.mergeDictionary"));
+                        action = () => ChooseDictionary(dictionary);
+                        name = dictionary.DisplayName;
                     }
                     else
                     {

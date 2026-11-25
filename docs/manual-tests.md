@@ -525,6 +525,23 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
    inside the row.
 3. The buttons ("−", value, "+", switches) are at the same place as before and work as before.
 
+## 39. Export, merge and replace the dictionary (issue #164)
+
+1. Settings, "Prediction" tab: below "My words", three small buttons "Export", "Merge",
+   "Replace", and their help with the folder `Documents\Prunel\Dictionaries`.
+2. Add "zorglub" to My words. "Export": the message shows the file
+   `Dictionary <date>.json`; it is in the folder (Explorer).
+3. Remove "zorglub" from My words. "Merge": the list shows the exported dictionary; look at it:
+   back to the Prediction tab, "… merged with My words"; "zorglub" is back in My words.
+4. Add "zorglab". "Replace", look at the exported dictionary: the question "Replace My words …?"
+   with "Yes / No". "No": nothing changes. Again, "Yes": "My words replaced"; "zorglab" is gone,
+   "zorglub" is there. The folder now holds `auto-backup.json`.
+5. "Replace" with "Automatic backup" (arrow symbol), "Yes": "zorglab" is back.
+6. An empty folder: the list says "No exported dictionary yet". A broken file (Notepad, delete
+   half of it): "This file cannot be read: nothing changed".
+7. The log only says "Prediction: dictionary merged / replaced (N added words)", never the
+   words.
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,

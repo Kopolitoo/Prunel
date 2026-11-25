@@ -399,7 +399,14 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   plus). « Enregistrer » appelle `WordPredictor.SaveWord` : un seul mot, avec une lettre et sans
   espace ; une correction passe les utilisations et les paires au nouveau mot (`MoveLearning`),
   fusionnées dedans s'il est déjà connu. Un mot à retirer demande deux fois `ActivationDelay`
-  (`RemoveDelayFactor`). Enregistrer ou annuler ramène à la liste (message vert
+  (`RemoveDelayFactor`). Issue #164 (`Typing/DictionaryFiles`) : « Exporter », « Fusionner »,
+  « Remplacer » dans l'onglet Prédiction. Exporter écrit `WordPredictor.ExportTo` (même JSON que
+  `personal-dictionary.json`) dans `Documents\Prunel\Dictionaries\Dictionnaire <date>.json`.
+  Fusionner et Remplacer ouvrent `KeyboardListMode.ForDictionaries` (sorte `Dictionaries`) ;
+  Fusionner appelle tout de suite `ImportFrom(path, false)` (mots ajoutés sauf s'ils sont connus,
+  utilisations et paires additionnées), Remplacer revient à `SettingsMode.ForDictionary` pour
+  « Oui / Non », puis exporte le dictionnaire actuel dans `auto-backup.json` et appelle
+  `ImportFrom(path, true)` (vidé d'abord). Un fichier illisible ne change rien. Enregistrer ou annuler ramène à la liste (message vert
   « Mot ajouté » / « Mot corrigé »).
 - Le calque se remet au-dessus de toutes les fenêtres deux fois par seconde.
 - `app.manifest` : déclare Prunel « sensible au DPI », pour que le regard, le curseur et le

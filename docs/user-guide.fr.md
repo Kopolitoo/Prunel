@@ -160,6 +160,14 @@ clavier est déjà ouvert, il reste ouvert : c'est ainsi que l'on passe à un au
   « Enregistrer ». « Corriger des mots » met un crayon sur chaque mot : regarder un mot mal
   écrit, le corriger avec le clavier, puis « Enregistrer » ; ce que le clavier a appris sur lui
   est gardé. « Retirer des mots » revient à la suppression.
+- **Exporter, Fusionner, Remplacer** (même onglet « Prédiction », sous « Mes mots ») : le clavier
+  apprend au fil de l'écriture (mots ajoutés, mots les plus utilisés, mots suivants).
+  « Exporter » écrit une copie datée dans `Documents\Prunel\Dictionaries` (pour la garder, ou
+  l'emporter sur un autre ordinateur). « Fusionner » montre les copies de ce dossier ; en
+  regarder une l'ajoute à ce qui est appris (rien n'est perdu). « Remplacer » montre la même
+  liste ; après la question « Remplacer… ? Oui / Non », ce qui est appris devient exactement la
+  copie choisie. Le dictionnaire actuel est d'abord gardé sous « Sauvegarde automatique » :
+  remplacer par lui revient en arrière.
 - On ferme le clavier par le bouton au-dessus de lui, par la barre du clavier, ou avec Échap.
 
 ## Mode jeu
@@ -268,6 +276,7 @@ sont enregistrés.
 | Réglages | `%APPDATA%\Prunel\settings.json` (s'ouvre avec le Bloc-notes) |
 | Dictionnaire personnel | `%APPDATA%\Prunel\personal-dictionary.json` |
 | Profils | `Documents\Prunel\Profiles` |
+| Dictionnaires exportés | `Documents\Prunel\Dictionaries` |
 | Journal | `%LOCALAPPDATA%\Prunel\prunel.log` |
 
 Si l'on vient de GazeBar (l'ancien nom de Prunel, jusqu'à la version 0.2.0) : au premier
