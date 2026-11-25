@@ -79,6 +79,9 @@ namespace Prunel
             // it would be toggled on and off endlessly.
             bool repeatable = true;
 
+            // True when the keyboard goes back to the start page after this key (issue #145).
+            bool backToStart = false;
+
             if (d.Prediction.HasValue)
             {
                 // A suggestion box. No repetition: by keeping looking at it, the word
@@ -90,6 +93,11 @@ namespace Prunel
             else if (d.Text != null)
             {
                 Write(d);
+                // An accented letter is typed: the next letter is almost always a plain one, so
+                // the letters page comes back by itself (pages with "backAfterLetter").
+                KeyboardPage shown = _layout.Page(_page);
+                backToStart = shown != null && shown.BackAfterLetter && ContainsLetter(d.Text)
+                    && !string.Equals(_page, _layout.StartPage, StringComparison.OrdinalIgnoreCase);
             }
             else if (d.Key != null)
             {
@@ -124,6 +132,14 @@ namespace Prunel
             else
             {
                 App.Log("Keyboard: key \"" + d.Label + "\" has no known action");
+            }
+
+            if (backToStart)
+            {
+                // Build blocks the key that is now under the gaze until the gaze leaves it:
+                // the letter of the start page at that place is not typed by mistake.
+                ChangePage(_layout.StartPage);
+                return;
             }
 
             if (!repeatable || !AppSettings.Current.KeyRepeat)

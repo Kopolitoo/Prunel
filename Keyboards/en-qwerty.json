@@ -93,7 +93,8 @@
         {"row": 2, "col": 11, "label": ",", "text": ","},
         {"row": 3, "col": 5, "label": "␣", "width": 2, "text": " "},
         {"row": 3, "col": 10, "label": "Enter", "width": 2, "key": "Enter"}
-      ]
+      ],
+      "backAfterLetter": true
     },
     {
       "name": "numbers",

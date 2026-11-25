@@ -29,6 +29,8 @@ namespace Prunel
     ///   "modifier": "Shift"    Shift, CapsLock, Ctrl, Alt or Win;
     ///   "prediction": 1        word suggestion cell no. 1, 2 or 3 (filled by the prediction);
     ///   "command": "DeleteWord"  DeleteWord or DeleteLetter.
+    /// A page may also say "backAfterLetter": true: after one of its keys types a letter, the
+    /// keyboard goes back to the start page (the accents page, issue #145).
     /// And for the look:
     ///   "label"      the text shown on the key;
     ///   "shiftText"  optional: the text typed with Shift or Caps Lock (otherwise: the text in
@@ -251,6 +253,15 @@ namespace Prunel
 
         [DataMember(Name = "keys", Order = 1)]
         public List<LayoutKey> Keys { get; set; }
+
+        /// <summary>
+        /// Optional: true on a page whose letters are typed one at a time, such as the accents
+        /// page (issue #145). After a key of this page types a letter (é, à, ç…), the keyboard
+        /// goes back to the start page, because the next letter is almost always a plain one.
+        /// A key that types no letter (« » - ’ ! ? . ,) leaves the page shown.
+        /// </summary>
+        [DataMember(Name = "backAfterLetter", Order = 2, EmitDefaultValue = false)]
+        public bool BackAfterLetter { get; set; }
     }
 
     /// <summary>
