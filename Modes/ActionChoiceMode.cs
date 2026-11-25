@@ -492,7 +492,8 @@ namespace Prunel
                            placed.CenterX, placed.CenterY, out photoGroup);
 
             // ── The cross, in place of the cursor in the enlarged photo: always in its center.
-            DrawCross(layer, screen, placed.CenterX, placed.CenterY);
+            //    Half length 20 px of the 4K screen, black line 5 units, white line 2 units.
+            Cross.Draw(layer, screen, placed.CenterX, placed.CenterY, 20, 5, 2);
 
             // ── The three groups of slots (crown, utility buttons at the top, modifiers on the
             //    left), with the layout chosen in the settings.
@@ -597,38 +598,6 @@ namespace Prunel
             _buttons.Add(button);
             _actions.Add(action);
             return button;
-        }
-
-        /// <summary>
-        /// Draws a cross centered on (x, y) in screen pixels: a thick black line underneath, a
-        /// thin white line on top, so that it can be seen on every background.
-        /// </summary>
-        private static void DrawCross(OverlayWindow layer, Canvas screen, double x, double y)
-        {
-            Point center = layer.ToWpf(x, y);
-            // Half length: 20 px of the 4K screen; thicknesses: units of the reference screen
-            // (see ScreenMetrics.cs).
-            double half = layer.LengthToWpf(ScreenMetrics.Px(20));
-            double thick = ScreenMetrics.Units(5);
-            double end = ScreenMetrics.Units(2);
-
-            AddLine(screen, center.X - half, center.Y, center.X + half, center.Y, Brushes.Black, thick);
-            AddLine(screen, center.X, center.Y - half, center.X, center.Y + half, Brushes.Black, thick);
-            AddLine(screen, center.X - half, center.Y, center.X + half, center.Y, Palette.Text, end);
-            AddLine(screen, center.X, center.Y - half, center.X, center.Y + half, Palette.Text, end);
-        }
-
-        private static void AddLine(Canvas screen, double x1, double y1, double x2, double y2,
-                                         Brush color, double thickness)
-        {
-            Line stroke = new Line();
-            stroke.X1 = x1;
-            stroke.Y1 = y1;
-            stroke.X2 = x2;
-            stroke.Y2 = y2;
-            stroke.Stroke = color;
-            stroke.StrokeThickness = thickness;
-            screen.Children.Add(stroke);
         }
 
         private static double Clamp(double val, double min, double max)

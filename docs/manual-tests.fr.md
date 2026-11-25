@@ -54,7 +54,10 @@ Dans l'Explorateur, on fixe un fichier, on ouvre le choix d'action, on
 regarde « Ctrl » (bord vert) puis « clic gauche » ; on recommence sur un autre fichier : les deux
 sont sélectionnés. Puis on fixe un fichier, on choisit « glisser-déposer gauche » (quatre flèches,
 pastille G), on regarde le dossier d'arrivée (la ligne en pointillés suit), on le fixe, on affine
-dans la loupe : le fichier est déplacé. Le bouton « retour » à droite annule.
+dans la loupe : le fichier est déplacé. Le bouton « retour » à droite annule. Arrivée proche du
+départ (un fichier voisin) : dans la loupe, une petite croix (plus petite que celle du choix
+d'action) marque le point de départ ; un regard fixe dessus est une arrivée normale. Arrivée
+lointaine : pas de croix.
 
 ## 6. Paramètres
 

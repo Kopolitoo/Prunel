@@ -74,7 +74,8 @@ de fixation du mode mouvement.
 
 On choisit un glisser-déposer dans le choix d'action, puis on regarde la destination : une ligne
 pointillée suit le regard. On fixe la destination, on l'affine dans la loupe, et l'élément est
-déplacé. « Android » ajoute une pause avant le déplacement (pour les applications tactiles). Le
+déplacé. Dans la loupe, une petite croix marque le point de départ quand il est dans la photo.
+« Android » ajoute une pause avant le déplacement (pour les applications tactiles). Le
 bouton retour au bord droit annule.
 
 ## Garder un bouton de la souris enfoncé

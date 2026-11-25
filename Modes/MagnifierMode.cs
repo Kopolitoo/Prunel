@@ -127,6 +127,13 @@ namespace Prunel
         /// </summary>
         private const double BackZoneFactor = 1.3;
 
+        /// <summary>
+        /// Half length of the cross marking the start of a drag and drop on the photo
+        /// (issue #170), in 4K screen pixels: smaller than the cross of the action choice
+        /// (20 px), so that it is not mistaken for the aimed point.
+        /// </summary>
+        private const double StartCrossHalfLength = 12;
+
         // The small circle following the gaze: two ellipses (black line underneath, green on top).
         private Ellipse _gazeCircleBackground;
         private Ellipse _gazeCircle;
@@ -453,6 +460,14 @@ namespace Prunel
             back.Place(layer, screen, xBack, cyScreen, size);
             _buttons.Add(back);
 
+            // ── During a drag and drop: a small cross on the start point (issue #170), if it is
+            //    on the visible photo. It is only a landmark: a fixation on it is a normal drop
+            //    point. Added outside the photo group, it appears with the fade (issue #154).
+            if (_drag != null)
+            {
+                DrawStartCross(layer, screen);
+            }
+
             // ── The small gaze circle, added LAST to be drawn on top.
             //    It will appear at the first on-screen measure.
             _gazeCircleBackground = new Ellipse();
@@ -481,6 +496,32 @@ namespace Prunel
             _step = Step.Aim;
             App.LogDetail("Magnifier: photo of " + side + " × " + side + " px, magnified ×" + _zoom.ToString("0.##"));
             return true;
+        }
+
+        /// <summary>
+        /// Draws the small cross on the start point of the drag and drop (issue #170): where it
+        /// falls on the enlarged photo (the fixation conversion, reversed), only if it is inside
+        /// the photographed zone and on the visible disc. Otherwise nothing is drawn.
+        /// </summary>
+        private void DrawStartCross(OverlayWindow layer, Canvas screen)
+        {
+            double sx = _drag.StartX;
+            double sy = _drag.StartY;
+            if (sx < _ox || sx > _ox + _side || sy < _oy || sy > _oy + _side)
+            {
+                return;
+            }
+            // Example with a zoom of 4: a start point 25 px to the right of the left edge of the
+            // photographed zone is shown 25 × 4 = 100 px to the right of the left edge of the
+            // enlarged photo.
+            double x = _left + (sx - _ox) * _zoom;
+            double y = _top + (sy - _oy) * _zoom;
+            if (!OnPhoto(x, y))
+            {
+                return;
+            }
+            // Black line 4 units, white line 2 units (the action choice: 5 and 2).
+            Cross.Draw(layer, screen, x, y, StartCrossHalfLength, 4, 2);
         }
 
         /// <summary>

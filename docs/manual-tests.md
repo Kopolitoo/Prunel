@@ -50,7 +50,9 @@ In File Explorer, stare at a file, open the action choice, look at "Ctrl" (green
 border) then "Left click"; do it again on another file: both are selected. Then stare at a file,
 choose "Drag left" (four arrows, badge L), look at the destination folder (the dotted
 line follows), stare at it, refine in the magnifier: the file is moved. The "back" button on the
-right cancels.
+right cancels. Drop point close to the start (a neighbouring file): in the magnifier, a small
+cross (smaller than the one of the action choice) marks the start point; a fixation on it is
+a normal drop point. Drop point far away: no cross.
 
 ## 6. Settings
 
