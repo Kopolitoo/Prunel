@@ -515,7 +515,8 @@ namespace Prunel
             new SettingsTab("tab.pause", "\uE769",
                 Setting.YesOrNo("setting.autoPause",
                                  p => p.AutoPause, (p, v) => p.AutoPause = v),
-                Setting.Number("setting.autoPauseDelay", " s", 5,
+                // By 1 s steps (issue #160): 5 s steps were too coarse.
+                Setting.Number("setting.autoPauseDelay", " s", 1,
                                p => p.AutoPauseDelay, (p, v) => p.AutoPauseDelay = v),
                 // Issue #158: the other "stop by itself", the held button released by a fixed
                 // gaze (0 = off). Here because "Delays" is full.
