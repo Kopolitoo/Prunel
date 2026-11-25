@@ -92,10 +92,10 @@ namespace Prunel
         private const double SwitchWidth = 150;   // the track (the "pill")
         private const double SwitchHeight = 76;
         private const double SwitchButton = 60;     // the sliding knob
-        // The smaller target of a switch (issue #161, "Action choice" tab): the track (150),
-        // its gap and "Oui" / "Non" (30 + about 90), with a margin on each side.
-        private const double SmallSwitchWidth = 340;
-        private const double SmallSwitchHeight = 96;
+        // The gaze target of a switch (issue #161, smaller than before in every tab): the track
+        // (150), its gap and "Oui" / "Non" (30 + about 90), with a margin on each side.
+        private const double SwitchTargetWidth = 340;
+        private const double SwitchTargetHeight = 96;
         // Bootstrap blue; softer with [NightMode] (see Palette).
         private static Brush ActiveTrack
         {

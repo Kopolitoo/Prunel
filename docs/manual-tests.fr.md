@@ -532,9 +532,10 @@ jeton).
 1. Installer la nouvelle version (paramètres d'avant la version 31). Paramètres, onglet « Choix
    d'action » : « Animation d'ouverture », puis « Durée de l'animation » (0,4 s), puis
    « Transparence du fond ». Les trois lignes tiennent au-dessus du bas de la page.
-2. L'interrupteur « Animation d'ouverture » est plus petit que ceux des autres onglets (environ
-   la taille du bouton « Configurer les icônes ») ; le regarder l'active et le désactive
-   toujours.
+2. L'interrupteur « Animation d'ouverture » est plus petit qu'avant (environ la taille du bouton
+   « Configurer les icônes »), comme tous les interrupteurs des paramètres (Pause, Couleurs,
+   Sons, Général…) ; en regarder un l'active et le désactive toujours, et garder le regard dessus
+   ne le bascule qu'une fois.
 3. Mettre « Durée de l'animation » à 2 s : la photo de la loupe et du choix d'action grandit
    lentement, puis les icônes apparaissent ; elles ne marchent qu'une fois affichées. La mettre à
    0,2 s : très rapide.

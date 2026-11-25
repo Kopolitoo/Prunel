@@ -486,8 +486,9 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
 1. Install the new version (settings older than version 31). Settings, "Action choice" tab:
    "Opening animation", then "Animation duration" (0.4 s), then "Background transparency". The
    three rows fit above the bottom of the page.
-2. The "Opening animation" switch is smaller than the switches of the other tabs (about the
-   size of the "Configure the icons" button); looking at it still turns it on and off.
+2. The "Opening animation" switch is smaller than before (about the size of the "Configure the
+   icons" button), like every switch of the settings (Pause, Colours, Sound, General…); looking
+   at one still turns it on and off, and keeping the gaze on it toggles it only once.
 3. Set "Animation duration" to 2 s: the picture of the magnifier and of the action choice grows
    slowly, then the icons appear; they only work once shown. Set it to 0.2 s: very fast.
 4. "Default" in the "Action choice" tab puts it back to 0.4 s (same speed as before). In French:

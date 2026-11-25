@@ -143,9 +143,9 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   exactement ce qu'il montre), et grandit jusqu'à sa place pendant les 5/8 de `OpeningDuration`
   (issue #161, 0,4 s par défaut, de 0,2 à 2 s, version 31 : 250 ms ; rapide au début, lent à
   la fin) ; puis les autres éléments de l'écran noir (boutons, croix, cercle du regard)
-  apparaissent en fondu pendant les 3/8 restants (150 ms par défaut). Dans cet onglet,
-  l'interrupteur oui / non a une cible plus petite (`BuildRow` smallSwitch, 340 × 96 au lieu de
-  538 × 120). Les modes ignorent le regard (boutons et fixation) jusqu'à la
+  apparaissent en fondu pendant les 3/8 restants (150 ms par défaut). Tous les
+  interrupteurs oui / non des paramètres ont maintenant une cible plus petite
+  (`SwitchTargetWidth` × `SwitchTargetHeight`, 340 × 96 au lieu de 538 × 120). Les modes ignorent le regard (boutons et fixation) jusqu'à la
   fin de l'animation ; seul le petit cercle du regard bouge. Les animations demandent 144 images
   par seconde (`Timeline.DesiredFrameRate`, 60 par défaut dans WPF) et la photo est gardée en
   cache par la carte graphique pendant qu'elle bouge (`BitmapCache`, retiré à la fin). Entre la loupe et le choix d'action

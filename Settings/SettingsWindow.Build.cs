@@ -74,13 +74,10 @@ namespace Prunel
                             : tab.Name == DisplayTabName ? DisplayStepRow
                             : StepRow;
                 // "Action choice" tab: its settings go below the "Configure the icons" button.
-                bool iconsTab = tab.Name == SettingsCatalog.IconsTabName;
-                double top = iconsTab ? IconsRowsTop : TopRow;
+                double top = tab.Name == SettingsCatalog.IconsTabName ? IconsRowsTop : TopRow;
                 for (int i = 0; i < tab.Settings.Count; i++)
                 {
-                    // "Action choice" tab: a smaller switch (issue #161), like its small
-                    // "Configure the icons" button.
-                    BuildRow(tab.Settings[i], top + i * step, iconsTab);
+                    BuildRow(tab.Settings[i], top + i * step);
                 }
                 if (tab.Name == SettingsCatalog.GeneralTabName)
                 {
@@ -215,12 +212,8 @@ namespace Prunel
             return row;
         }
 
-        /// <summary>
-        /// A setting row: name and explanation, then the buttons. smallSwitch: a yes / no gets
-        /// a smaller target (SmallSwitchWidth × SmallSwitchHeight) instead of the width of two
-        /// choice buttons (issue #161).
-        /// </summary>
-        private void BuildRow(Setting setting, double top, bool smallSwitch = false)
+        /// <summary>A setting row: name and explanation, then the buttons.</summary>
+        private void BuildRow(Setting setting, double top)
         {
             // Name and explanation, vertically centred in the row height.
             StackPanel texts = new StackPanel();
@@ -248,17 +241,11 @@ namespace Prunel
                 // SettingsMode blocks the target until the gaze leaves it: staying on it
                 // therefore does not toggle the switch over and over.
                 bool current = setting.ReadYesNo(P);
-                UIElement drawing = SwitchDrawing(current, current ? setting.RightWord : setting.WrongWord);
-                if (smallSwitch)
-                {
-                    AddTarget(x, top + (RowHeight - SmallSwitchHeight) / 2, SmallSwitchWidth, SmallSwitchHeight,
-                              drawing, () => ChangeYesNo(setting, !current), false, false);
-                }
-                else
-                {
-                    AddTarget(x, y, 2 * ChoiceWidth + Gap, SideButton, drawing,
-                              () => ChangeYesNo(setting, !current), false, false);
-                }
+                // A small target (issue #161, user request: in every tab), no longer the width of
+                // two choice buttons: easier to avoid while reading the page.
+                AddTarget(x, top + (RowHeight - SwitchTargetHeight) / 2, SwitchTargetWidth, SwitchTargetHeight,
+                          SwitchDrawing(current, current ? setting.RightWord : setting.WrongWord),
+                          () => ChangeYesNo(setting, !current), false, false);
                 return;
             }
 
