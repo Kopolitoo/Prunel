@@ -241,8 +241,11 @@ namespace Prunel
                 // SettingsMode blocks the target until the gaze leaves it: staying on it
                 // therefore does not toggle the switch over and over.
                 bool current = setting.ReadYesNo(P);
-                AddTarget(x, y, 2 * ChoiceWidth + Gap, SideButton, SwitchDrawing(current, current ? setting.RightWord : setting.WrongWord),
-                             () => ChangeYesNo(setting, !current), false, false);
+                // A small target (issue #161, user request: in every tab), no longer the width of
+                // two choice buttons: easier to avoid while reading the page.
+                AddTarget(x, top + (RowHeight - SwitchTargetHeight) / 2, SwitchTargetWidth, SwitchTargetHeight,
+                          SwitchDrawing(current, current ? setting.RightWord : setting.WrongWord),
+                          () => ChangeYesNo(setting, !current), false, false);
                 return;
             }
 

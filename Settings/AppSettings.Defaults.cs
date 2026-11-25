@@ -65,6 +65,7 @@ namespace Prunel
             MagnifierZoom = 4;
             MagnifierDelay = 0.8;
             OpeningAnimation = true;
+            OpeningDuration = 0.4;   // 250 ms of growth + 150 ms of fade, as before issue #161
             ChoiceBackgroundTransparency = 100;   // user choice: no black background
 
             AndroidPauseDuration = 1.0;
@@ -185,6 +186,7 @@ namespace Prunel
                 ? sizeChoice : CustomSizeText;
             // Only 0, 25, 50 or 75: another value goes to the nearest (40 → 50, 90 → 75).
             ChoiceBackgroundTransparency = Clamp(ChoiceBackgroundTransparency, 0, 100);
+            OpeningDuration = Clamp(OpeningDuration, 0.2, 2);
             KeyboardTransparency = Math.Round(Clamp(KeyboardTransparency, 0, 75) / 25) * 25;
             LengthPenalty = Clamp(LengthPenalty, 1, 2);
             BellDuration = Clamp(BellDuration, 2, 30);
@@ -379,7 +381,8 @@ namespace Prunel
             // Version 28 (OpeningAnimation): nothing to fix, it keeps its default value (yes).
             // Version 29 (ChoiceBackgroundTransparency): nothing to fix, it gets its default
             // value (100 %: no black background, the user's choice). Version 30
-            // (HoldReleaseDelay): nothing to fix, it gets its default value (1.5 s).
+            // (HoldReleaseDelay): nothing to fix, it gets its default value (1.5 s). Version 31
+            // (OpeningDuration): nothing to fix, it gets its default value (0.4 s).
 
             FileVersion = CurrentVersion;
             return true;

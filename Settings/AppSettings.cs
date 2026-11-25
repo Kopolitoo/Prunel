@@ -112,8 +112,10 @@ namespace Prunel
         ///      an older file, it gets its default value (no black background, user's choice).
         ///  30: issue #158 — HoldReleaseDelay (1.5 s). Nothing to fix: missing from an older
         ///      file, it gets its default value.
+        ///  31: issue #161 — OpeningDuration (0.4 s, the former fixed duration). Nothing to fix:
+        ///      missing from an older file, it gets its default value.
         /// </summary>
-        public const int CurrentVersion = 30;
+        public const int CurrentVersion = 31;
 
         /// <summary>Format number of the file, so it can evolve one day without breaking everything.</summary>
         [DataMember(Order = 0)]
@@ -738,5 +740,14 @@ namespace Prunel
         /// </summary>
         [DataMember(Order = 158)]
         public double ChoiceBackgroundTransparency { get; set; }
+
+        /// <summary>
+        /// Duration of the opening animation of the magnifier and of the action choice, in
+        /// seconds (issue #161): the photo grows during 5/8 of it, the buttons appear during the
+        /// remaining 3/8. 0.4 s by default (250 + 150 ms, as before), 0.2 to 2 s.
+        /// See OverlayWindow.AnimateChoiceOpening.
+        /// </summary>
+        [DataMember(Order = 159)]
+        public double OpeningDuration { get; set; }
     }
 }

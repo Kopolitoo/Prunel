@@ -226,6 +226,8 @@
   "setting.magnifierDelay.help": "Temps de regard sur la photo",
   "setting.openingAnimation.name": "Animation d'ouverture",
   "setting.openingAnimation.help": "La photo grandit, puis les boutons apparaissent",
+  "setting.openingDuration.name": "Durée de l'animation",
+  "setting.openingDuration.help": "Plus long = plus lent, les boutons marchent une fois finie",
   "setting.choiceBackgroundTransparency.name": "Transparence du fond",
   "setting.choiceBackgroundTransparency.help": "Voir l'écran derrière (100 % = plus de fond noir)",
   "setting.androidPauseDuration.name": "Pause android",

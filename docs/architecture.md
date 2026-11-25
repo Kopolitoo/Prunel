@@ -132,8 +132,11 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   "Action choice" tab, `settings.json` version 28, yes by default):
   `OverlayWindow.AnimateChoiceOpening`. `RoundPhoto.Add` puts the photo and its ring in one
   group; the group starts at scale 1 / zoom, shifted onto the real point P (it covers exactly
-  what it shows), and grows to its place in 250 ms (fast at first, slow at the end); then the
-  other elements of the black screen (buttons, cross, gaze circle) fade in over 150 ms. The
+  what it shows), and grows to its place during 5/8 of `OpeningDuration` (issue #161, 0.4 s by
+  default, 0.2 to 2 s, version 31: 250 ms; fast at first, slow at the end); then the other
+  elements of the black screen (buttons, cross, gaze circle) fade in over the remaining 3/8
+  (150 ms by default). Every yes / no switch of the settings now has a smaller target
+  (`SwitchTargetWidth` × `SwitchTargetHeight`, 340 × 96 instead of 538 × 120). The
   modes ignore the gaze (buttons and fixation) until the end of the animation; only the small
   gaze circle moves. The animations ask for 144 frames per second (`Timeline.DesiredFrameRate`,
   60 by default in WPF) and the photo is cached by the graphics card while it moves

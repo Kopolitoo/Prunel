@@ -598,6 +598,9 @@ namespace Prunel
             new SettingsTab(IconsTabName, "\uE71D",
                 Setting.YesOrNo("setting.openingAnimation",
                                  p => p.OpeningAnimation, (p, v) => p.OpeningAnimation = v),
+                // Issue #161: how long the opening animation lasts.
+                Setting.Number("setting.openingDuration", " s", 0.1,
+                               p => p.OpeningDuration, (p, v) => p.OpeningDuration = v),
                 // Issue #155: see the real screen around the photo, up to no background at all.
                 Setting.Number("setting.choiceBackgroundTransparency", " %", 10,
                                p => p.ChoiceBackgroundTransparency, (p, v) => p.ChoiceBackgroundTransparency = v)),
