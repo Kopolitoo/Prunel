@@ -50,7 +50,7 @@ l'explication de la classe.
 | `Actions` | ce que propose le choix d'action : `ActionCatalog`, `ActionChoiceLayout`, `Modifiers`, `DragGesture` |
 | `Typing` | le clavier au regard et la prédiction de mots : `GazeKeyboard`, `KeyboardKey`, `KeyboardLayout`, `WordPredictor` |
 | `Settings` | le fichier des réglages, les profils et la fenêtre des paramètres : `AppSettings`, `SettingsCatalog`, `SettingsProfiles`, `SettingsWindow`, `SettingTarget` |
-| `Ui` | fenêtres et boutons au regard : `OverlayWindow`, `DiagnosticWindow`, `CursorSampler`, `GazeButton`, `ButtonAimer`, `IGazeTarget`, `Texts`, `CircleColors`, `Palette` |
+| `Ui` | fenêtres et boutons au regard : `OverlayWindow`, `DiagnosticWindow`, `CursorSampler`, `GazeButton`, `ButtonAimer`, `IGazeTarget`, `Texts`, `CircleColors`, `Palette`, `Cross` |
 | `Bell` | la sonnette d'appel : `IBell`, `BellRinger`, `ComputerBell`, `VoiceMonkeyBell`, `SecretStore` |
 | `Platform` | appels à Windows : `NativeMethods`, `MouseInjector`, `KeyboardInjector`, `KeyboardHook`, `MouseClickHook`, `WheelScroller`, `CursorWaker`, `ScreenCapture`, `ScreenMetrics`, `WindowsStartup`, `UiAccess`, `SoundFeedback`, `WindowsVolume` |
 | `Languages`, `Keyboards`, `Dictionaries` | fichiers de données copiés à côté de `Prunel.exe` (textes, dispositions de clavier, dictionnaires de prédiction) |
@@ -169,7 +169,9 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
 - Glisser-déposer (étape 6) : depuis la couronne du choix d'action, en trois temps.
   1. `Modes/DragTargetMode` : le cercle suit le regard, une ligne blanche en pointillés part
      du point de départ ; une fixation choisit l'arrivée.
-  2. `Modes/MagnifierMode` : la loupe affine l'arrivée.
+  2. `Modes/MagnifierMode` : la loupe affine l'arrivée. Une petite croix (`Ui/Cross`,
+     partagée avec le choix d'action) marque le point de départ quand il est sur la photo
+     visible (issue #170).
   3. `Modes/DragExecutionMode` : bouton enfoncé au départ, curseur déplacé jusqu'à l'arrivée
      en `DragDuration` (0,5 s), bouton relâché. Pour le glisser-déposer **android**, une pause
      de `AndroidPauseDuration` (1 s) sépare l'appui du déplacement (il remplace l'appui long).

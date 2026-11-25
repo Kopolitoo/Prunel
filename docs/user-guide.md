@@ -70,6 +70,7 @@ delay of movement mode.
 
 Choose a drag and drop in the action choice, then look at the destination: a dotted line
 follows your gaze. Stare at the destination, refine it in the magnifier, and the item is moved.
+In the magnifier, a small cross marks the start point when it is inside the photo.
 "Android" adds a pause before moving (for touch-style apps). The "back" button on the right
 edge cancels.
 

@@ -47,7 +47,7 @@ The three biggest classes are "partial" classes: one class written in several fi
 | `Actions` | what the action choice offers: `ActionCatalog`, `ActionChoiceLayout`, `Modifiers`, `DragGesture` |
 | `Typing` | the gaze keyboard and word prediction: `GazeKeyboard`, `KeyboardKey`, `KeyboardLayout`, `WordPredictor` |
 | `Settings` | the settings file, profiles and settings window: `AppSettings`, `SettingsCatalog`, `SettingsProfiles`, `SettingsWindow`, `SettingTarget` |
-| `Ui` | windows and gaze buttons: `OverlayWindow`, `DiagnosticWindow`, `CursorSampler`, `GazeButton`, `ButtonAimer`, `IGazeTarget`, `Texts`, `CircleColors`, `Palette` |
+| `Ui` | windows and gaze buttons: `OverlayWindow`, `DiagnosticWindow`, `CursorSampler`, `GazeButton`, `ButtonAimer`, `IGazeTarget`, `Texts`, `CircleColors`, `Palette`, `Cross` |
 | `Bell` | the call bell: `IBell`, `BellRinger`, `ComputerBell`, `VoiceMonkeyBell`, `SecretStore` |
 | `Platform` | calls to Windows: `NativeMethods`, `MouseInjector`, `KeyboardInjector`, `KeyboardHook`, `MouseClickHook`, `WheelScroller`, `CursorWaker`, `ScreenCapture`, `ScreenMetrics`, `WindowsStartup`, `UiAccess`, `SoundFeedback`, `WindowsVolume` |
 | `Languages`, `Keyboards`, `Dictionaries` | data files copied next to `Prunel.exe` (texts, keyboard layouts, prediction dictionaries) |
@@ -159,7 +159,9 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
 - Drag and drop (step 6): from the crown of the action choice, in three stages.
   1. `Modes/DragTargetMode`: the circle follows the gaze, a dotted white line starts from the
      starting point; a fixation chooses the end point.
-  2. `Modes/MagnifierMode`: the magnifier refines the end point.
+  2. `Modes/MagnifierMode`: the magnifier refines the end point. A small cross (`Ui/Cross`,
+     shared with the action choice) marks the start point when it is on the visible photo
+     (issue #170).
   3. `Modes/DragExecutionMode`: button pressed at the start, cursor moved to the end point in
      `DragDuration` (0.5 s), button released. For the **android** drag and drop, a pause of
      `AndroidPauseDuration` (1 s) separates the press from the movement (it replaces the long
