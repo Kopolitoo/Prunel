@@ -214,7 +214,8 @@ n'apparaît dans `%LOCALAPPDATA%\Prunel\` et le journal ne contient aucune posit
 Uniquement au regard et à la voix : pas besoin de toucher la souris ni le câble USB.
 
 1. Paramètres, catégorie « Regard », onglet « Pause » : « Pause automatique » est activée,
-   « Délai avant la pause » vaut 10 s. Régler le délai sur 5 s, puis revenir au mode mouvement.
+   « Délai avant la pause » vaut 10 s. « − » et « + » le changent d'une seconde à la fois
+   (issue #160). Régler le délai sur 5 s, puis revenir au mode mouvement.
 2. Fermer les yeux (ou tourner la tête loin de l'eyetracker) environ 6 secondes, puis regarder
    de nouveau l'écran : le cercle a disparu et un bouton rond « Reprendre » est au centre de
    l'écran. Ailleurs sur l'écran, rien n'est cliqué et le curseur ne bouge pas.

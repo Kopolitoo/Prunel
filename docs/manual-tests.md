@@ -201,7 +201,8 @@ reopen the window: everything starts from 0 again. No new file appears in
 Gaze and voice only: no need to touch the mouse or the USB cable.
 
 1. Settings, "Gaze" category, "Pause" tab: "Automatic pause" is on, "Delay before the pause"
-   is 10 s. Set the delay to 5 s, then go back to movement mode.
+   is 10 s. "−" and "+" change it by one second at a time (issue #160). Set the delay to 5 s,
+   then go back to movement mode.
 2. Close your eyes (or turn your head away from the eyetracker) for about 6 seconds, then look
    at the screen again: the circle is gone and a round "Resume" button is in the middle of the
    screen. Elsewhere on the screen, nothing is clicked and the cursor does not move.
