@@ -68,7 +68,9 @@ namespace Prunel
             }
             else
             {
-                double step = tab.Name == SettingsCatalog.ColorsTabName ? CompactStepRow
+                // "Bell" tab: compact rows, to leave room for its "Test" button below them.
+                double step = tab.Name == SettingsCatalog.ColorsTabName || tab.Name == SettingsCatalog.BellTabName
+                            ? CompactStepRow
                             : tab.Name == DisplayTabName ? DisplayStepRow
                             : StepRow;
                 // "Action choice" tab: its settings go below the "Configure the icons" button.
@@ -90,6 +92,10 @@ namespace Prunel
                 if (tab.Name == SettingsCatalog.ColorsTabName)
                 {
                     BuildCirclePreview(TopRow + tab.Settings.Count * step);
+                }
+                if (tab.Name == SettingsCatalog.BellTabName)
+                {
+                    BuildBellTab();
                 }
                 if (tab.Name == SettingsCatalog.AlexaTabName)
                 {
@@ -494,6 +500,19 @@ namespace Prunel
         {
             AddTarget(PageWidth - 460 - 20, 920, 460, 110, BigButton("\uE7E8", Texts.Get("menu.quit")),
                          RequestQuit, false, false);
+        }
+
+        /// <summary>
+        /// "Bell" tab, below its four compact rows (they end at 92 + 3 × 164 + 160 = 744): a
+        /// small "Test" button (issue #162), like the one of the "Alexa" tab, then the message
+        /// of the button (870). Small, so that the gaze can rest on the page without ringing.
+        /// E7ED = ringer.
+        /// </summary>
+        private void BuildBellTab()
+        {
+            AddTarget(LeftContent, 770, 370, 90, SmallButton("\uE7ED", Texts.Get("settings.bell.test")),
+                         TestComputerBell, false, false);
+            BuildMessage();
         }
 
         /// <summary>

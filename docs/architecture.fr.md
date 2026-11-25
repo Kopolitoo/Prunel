@@ -249,7 +249,9 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   `BellRinger.RingAllAsync` fait sonner toutes les sonnettes activées, chacune de son côté, et
   ignore un nouvel appel pendant 5 s. `ComputerBell` : un « ding-dong » calculé en mémoire (WAV
   construit par `SoundFeedback.ToWav`) et joué avec `SoundPlayer` ; réglages `ComputerBell`,
-  `BellDuration`, `BellVolume` (onglet « Sonnette », version 24 des paramètres). Pendant qu'elle
+  `BellDuration`, `BellVolume` (onglet « Sonnette », version 24 des paramètres ;
+  son bouton « Tester », `SettingsWindow.BuildBellTab`, fait sonner `ComputerBell` directement,
+  sans `BellRinger`, issue #162). Pendant qu'elle
   sonne, `SoundFeedback` se tait (Windows ne joue qu'un son `SoundPlayer` à la fois).
   `BellWindowsVolume` (80 %, 0 = désactivé, version 26) : `ComputerBell` monte le volume de
   Windows à ce niveau et réactive le son pendant la sonnerie, puis remet le volume d'origine

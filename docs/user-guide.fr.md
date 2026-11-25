@@ -209,7 +209,9 @@ sont enregistrés.
   pendant la sonnerie, le volume de Windows est monté à ce niveau s'il est plus bas (et le son
   est réactivé s'il était coupé), puis remis comme avant ; 0 = le volume de Windows n'est pas
   touché. Pendant que la sonnette sonne, les petits sons des touches et des
-  boutons se taisent, pour ne pas la couper.
+  boutons se taisent, pour ne pas la couper. Le bouton **Tester**, sous les réglages, fait sonner
+  la sonnette de l'ordinateur une fois avec ces réglages, même si elle est désactivée, pour
+  l'entendre sans quitter les paramètres.
 - Onglet **Alexa** (catégorie « Actions ») : la **sonnette Alexa** (désactivée au départ).
   Activée, « Appeler » sonne aussi sur une enceinte Amazon Echo, par le service gratuit
   [Voice Monkey](https://voicemonkey.io) (une skill Alexa ; sa formule gratuite permet environ

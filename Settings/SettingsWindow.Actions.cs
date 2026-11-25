@@ -125,6 +125,23 @@ namespace Prunel
             Build();
         }
 
+        /// <summary>
+        /// "Bell" tab (issue #162): rings the computer bell once with the current duration and
+        /// volumes, even if the computer bell is off, and shows the result. Not through
+        /// BellRinger: no Alexa call and no 5 s wait between two tests.
+        /// </summary>
+        private async void TestComputerBell()
+        {
+            bool ok = await new ComputerBell().RingAsync(P);
+            App.Log("Settings: computer bell test " + (ok ? "OK" : "failed"));
+            if (!IsVisible)
+            {
+                return;
+            }
+            _message = Texts.Get(ok ? "settings.bell.testOk" : "bell.failed");
+            Build();
+        }
+
         /// <summary>The text of the clipboard, trimmed ("" if none or unreadable).</summary>
         private static string ClipboardText()
         {

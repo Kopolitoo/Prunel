@@ -408,6 +408,11 @@ namespace Prunel
         /// <summary>Name of the "Couleurs" tab (step color-themes).</summary>
         public const string ColorsTabName = "tab.colors";
 
+        /// <summary>
+        /// The "Bell" tab (computer bell): four settings, then a "Test" button (issue #162).
+        /// </summary>
+        public const string BellTabName = "tab.bell";
+
         /// <summary>The "Alexa" tab (call bell on an Alexa speaker): one setting and three buttons.</summary>
         public const string AlexaTabName = "tab.alexa";
 
@@ -433,7 +438,7 @@ namespace Prunel
         public static readonly List<SettingsCategory> Categories = new List<SettingsCategory>
         {
             new SettingsCategory("category.gaze", "\uE890", "tab.gaze", "tab.fixation", "tab.delays", "tab.pause"),
-            new SettingsCategory("category.actions", "\uE7C9", "tab.magnifierDrag", "tab.scroll", IconsTabName, "tab.bell", AlexaTabName),
+            new SettingsCategory("category.actions", "\uE7C9", "tab.magnifierDrag", "tab.scroll", IconsTabName, BellTabName, AlexaTabName),
             new SettingsCategory("category.display", "\uE7F4", "tab.display", ColorsTabName, "tab.keyboard", "tab.prediction", "tab.sound", "tab.game"),
             new SettingsCategory("category.system", "\uE770", GeneralTabName, ProfilesTabName, ToolsTabName, AboutTabName)
         };
@@ -631,7 +636,8 @@ namespace Prunel
                                  p => p.ButtonSound, (p, v) => p.ButtonSound = v)),
 
             // E7ED = ringer ("Bell"): the call bell of the menu (see BellRinger, ComputerBell).
-            new SettingsTab("tab.bell", "\uE7ED",
+            // Below the rows: a "Test" button (see SettingsWindow.BuildBellTab, issue #162).
+            new SettingsTab(BellTabName, "\uE7ED",
                 Setting.YesOrNo("setting.computerBell",
                                  p => p.ComputerBell, (p, v) => p.ComputerBell = v),
                 Setting.Number("setting.bellDuration", " s", 1,

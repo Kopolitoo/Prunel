@@ -236,7 +236,8 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   answers without blocking the gaze). `BellRinger.RingAllAsync` rings all the bells that are on,
   each on its own side, and ignores a new call for 5 s. `ComputerBell`: a "ding-dong" computed in
   memory (WAV built by `SoundFeedback.ToWav`) and played with `SoundPlayer`; settings
-  `ComputerBell`, `BellDuration`, `BellVolume` ("Bell" tab, settings version 24). While it rings,
+  `ComputerBell`, `BellDuration`, `BellVolume` ("Bell" tab, settings version 24; its "Test" button,
+  `SettingsWindow.BuildBellTab`, rings `ComputerBell` directly, without `BellRinger`, issue #162). While it rings,
   `SoundFeedback` keeps quiet (Windows plays one `SoundPlayer` sound at a time).
   `BellWindowsVolume` (80 %, 0 = off, version 26): `ComputerBell` raises the Windows volume to
   it and unmutes while ringing, then puts the original volume back (`Platform/WindowsVolume`:
