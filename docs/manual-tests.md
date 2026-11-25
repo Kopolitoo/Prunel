@@ -544,6 +544,16 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
 7. The log only says "Prediction: dictionary merged / replaced (N added words)", never the
    words.
 
+## 40. Back to the letters after an accented letter (issue #145)
+
+1. Open the keyboard, look at the accents key "À,È,Ê": the accents page.
+2. Look at "é": it is typed AND the letters page comes back by itself.
+3. Keep looking at the same place: the letter now under the gaze is NOT typed until the gaze
+   leaves it and comes back.
+4. Accents page again, look at « or ! or -: the character is typed and the accents page STAYS.
+5. With Shift on, "é" types "É" and the letters page comes back.
+6. Same with the English keyboard (QWERTY, accents page "á à â…").
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,

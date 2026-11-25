@@ -131,7 +131,7 @@ flashes green and types. Above the keyboard, the circle works as usual (you can 
 another place). Five pages: letters, accents, numbers and punctuation, symbols and navigation,
 F1 to F12. A page key looked at by mistake ("123.!", "[(/", "F1..F12"…) is undone by keeping
 your gaze on the same place: after twice the key delay, the keyboard goes back to the previous
-page.
+page. After an accented letter (é, à, ç…), the keyboard goes back to the letters page by itself.
 
 You can also put "Keyboard" on the crown of the action choice (icon configuration). Fix your
 gaze on the field where you want to write, then choose "Keyboard": Prunel first clicks there,

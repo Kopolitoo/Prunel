@@ -137,7 +137,8 @@ s'allume, clignote en vert et écrit. Au-dessus du clavier, le cercle fonctionne
 (on peut cliquer ailleurs). Cinq pages : lettres, accents, chiffres et ponctuation, symboles et
 navigation, F1 à F12. Une touche de page regardée par erreur (« 123.! », « [(/ », « F1..F12 »…)
 s'annule en gardant le regard au même endroit : après deux fois le délai des touches, le clavier
-revient à la page d'avant.
+revient à la page d'avant. Après une lettre accentuée (é, à, ç…), le clavier revient tout seul à
+la page des lettres.
 
 On peut aussi placer « Clavier » sur la couronne du choix d'action (configuration des icônes).
 On fixe le champ où l'on veut écrire, puis on choisit « Clavier » : Prunel clique d'abord à cet

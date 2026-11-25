@@ -600,6 +600,17 @@ jeton).
 7. Le journal dit seulement « Prediction: dictionary merged / replaced (N added words) », jamais
    les mots.
 
+## 40. Retour aux lettres après une lettre accentuée (issue #145)
+
+1. Ouvrir le clavier, regarder la touche des accents « À,È,Ê » : la page des accents.
+2. Regarder « é » : elle s'écrit ET la page des lettres revient toute seule.
+3. Garder le regard au même endroit : la lettre maintenant sous le regard ne s'écrit PAS tant que
+   le regard ne l'a pas quittée puis n'y est pas revenu.
+4. De nouveau la page des accents, regarder « ou ! ou - : le caractère s'écrit et la page des
+   accents RESTE.
+5. Avec Maj allumée, « é » écrit « É » et la page des lettres revient.
+6. Pareil avec le clavier anglais (QWERTY, page d'accents « á à â… »).
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,
