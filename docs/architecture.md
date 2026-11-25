@@ -198,7 +198,8 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   buttons whose addresses come from the language file; `SettingsMode.OpenLink` opens them in
   the default browser and goes back to movement mode. Only the open category shows its tabs,
   below it and indented; looking at another category opens it on its first tab (list in
-  `SettingsCatalog`). Each setting: its name, an explanation, then "−", the value, "+" (or a
+  `SettingsCatalog`). Each setting: a grey symbol (issue #165, `SettingsCatalog.SymbolOf`, gear
+  by default), its name (on two lines if long), an explanation, then "−", the value, "+" (or a
   rounded switch for a yes / no: looking at it toggles it). Keeping the gaze on "−" or "+"
   repeats the change every 0.4 s. "Default" (top right) resets the values of the shown tab, after
   confirmation; "Back" (middle of the right edge) or Escape goes back to movement mode. Numbers

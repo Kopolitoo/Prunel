@@ -81,6 +81,10 @@ namespace Prunel
         private const double IconsRowsTop = 510;
         private const double RowHeight = 160;
         private const double LabelWidth = 520;
+        // The symbol in front of each setting row (issue #165): its size and the width it takes
+        // at the start of the label (the name and explanation come after it).
+        private const double RowSymbolSize = 40;
+        private const double RowSymbolWidth = 64;
         private const double Gap = 18;
         private const double SideButton = 120;         // "−", "+", button height
         private const double ValueWidth = 290;

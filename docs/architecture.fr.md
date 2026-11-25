@@ -208,7 +208,8 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   boutons dont les adresses viennent du fichier de langue ; `SettingsMode.OpenLink` les ouvre
   dans le navigateur par défaut et revient au mode mouvement. Seule la catégorie ouverte montre ses onglets, en dessous d'elle
   et en retrait ; regarder une autre catégorie l'ouvre sur son premier onglet (liste dans
-  `SettingsCatalog`). Chaque réglage : son nom, une
+  `SettingsCatalog`). Chaque réglage : un symbole gris (issue #165,
+  `SettingsCatalog.SymbolOf`, engrenage par défaut), son nom (sur deux lignes s'il est long), une
   explication, puis « − », la valeur, « + » (ou un interrupteur arrondi pour un oui / non : le
   regarder l'inverse). Garder le regard sur « − » ou
   « + » répète le changement toutes les 0,4 s. « Défaut » (en haut à droite) remet les valeurs de

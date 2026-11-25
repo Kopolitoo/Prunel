@@ -219,22 +219,34 @@ namespace Prunel
         /// <summary>A setting row: name and explanation, then the buttons.</summary>
         private void BuildRow(Setting setting, double top)
         {
-            // Name and explanation, vertically centred in the row height.
-            StackPanel texts = new StackPanel();
-            texts.Width = LabelWidth;
-            texts.Height = RowHeight;
+            // The symbol of the setting (issue #165), in grey like the tabs, vertically centred
+            // in the row height, in front of the name and explanation.
+            TextBlock symbol = Text(setting.Symbol, RowSymbolSize, Soft, false);
+            symbol.FontFamily = new FontFamily(IconFont);
+            symbol.VerticalAlignment = VerticalAlignment.Center;
+            Grid symbolFrame = new Grid();
+            symbolFrame.Width = RowSymbolWidth;
+            symbolFrame.Height = RowHeight;
+            symbolFrame.Children.Add(symbol);
+            Place(symbolFrame, LeftContent, top);
+
+            // Name and explanation, vertically centred in the row height, after the symbol. A
+            // long name goes onto two lines rather than under the buttons.
+            double textWidth = LabelWidth - RowSymbolWidth;
             StackPanel center = new StackPanel();
             center.VerticalAlignment = VerticalAlignment.Center;
-            center.Children.Add(Text(setting.Name, 36, White, true));
+            TextBlock name = Text(setting.Name, 36, White, true);
+            name.TextWrapping = TextWrapping.Wrap;
+            center.Children.Add(name);
             TextBlock explanation = Text(setting.Explanation, 23, Soft, false);
             explanation.TextWrapping = TextWrapping.Wrap;
             explanation.Margin = new Thickness(0, 6, 0, 0);
             center.Children.Add(explanation);
             Grid textFrame = new Grid();
-            textFrame.Width = LabelWidth;
+            textFrame.Width = textWidth;
             textFrame.Height = RowHeight;
             textFrame.Children.Add(center);
-            Place(textFrame, LeftContent, top);
+            Place(textFrame, LeftContent + RowSymbolWidth, top);
 
             double x = LeftContent + LabelWidth + Gap;
             double y = top + (RowHeight - SideButton) / 2;
