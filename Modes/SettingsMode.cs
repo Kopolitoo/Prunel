@@ -67,6 +67,11 @@ namespace Prunel
         private readonly bool _wordPage;
         private readonly string _oldWord;
 
+        // Coming back from the list of the exported dictionaries (issue #164): a message to
+        // show (after "Merge"), or a dictionary to confirm for "Replace" (or null).
+        private string _startMessage;
+        private FoundDictionary _dictionaryToReplace;
+
         private SettingsWindow _window;
         private ButtonAimer _aimer;
 
@@ -99,6 +104,19 @@ namespace Prunel
         public static SettingsMode ForWord(string oldWord)
         {
             return new SettingsMode(SettingsCatalog.PredictionTabIndex, null, true, oldWord);
+        }
+
+        /// <summary>
+        /// Back from the list of the exported dictionaries (issue #164), on the "Prediction"
+        /// tab: with the message of a merge, or with the question "Replace My words with …?"
+        /// for the chosen dictionary. Both null: back without a choice.
+        /// </summary>
+        public static SettingsMode ForDictionary(string message, FoundDictionary toReplace)
+        {
+            SettingsMode mode = new SettingsMode(SettingsCatalog.PredictionTabIndex);
+            mode._startMessage = message;
+            mode._dictionaryToReplace = toReplace;
+            return mode;
         }
 
         private SettingsMode(int tab, FoundProfile profileToConfirm, bool wordPage, string oldWord)
@@ -135,6 +153,9 @@ namespace Prunel
             window.NamingEnded += HideKeyboard;
             window.WordSaveRequested += SaveWord;
             window.WordPageClosed += BackToMyWords;
+            window.DictionaryExportRequested += ExportDictionary;
+            window.DictionaryListRequested += OpenDictionaryList;
+            window.DictionaryReplaceRequested += ReplaceDictionary;
             _aimer = new ButtonAimer(window.Targets);
             _version = -1;
             _repeatedTarget = -1;
@@ -148,6 +169,14 @@ namespace Prunel
             if (_wordPage)
             {
                 window.StartWordPage(_oldWord);
+            }
+            else if (_dictionaryToReplace != null)
+            {
+                window.AskReplaceDictionary(_dictionaryToReplace);
+            }
+            else if (_startMessage != null)
+            {
+                window.ShowMessage(_startMessage);
             }
 
             _circlePlaced = gaze.OnScreen;
@@ -262,6 +291,9 @@ namespace Prunel
                 window.NamingEnded -= HideKeyboard;
                 window.WordSaveRequested -= SaveWord;
                 window.WordPageClosed -= BackToMyWords;
+                window.DictionaryExportRequested -= ExportDictionary;
+                window.DictionaryListRequested -= OpenDictionaryList;
+                window.DictionaryReplaceRequested -= ReplaceDictionary;
                 window.CloseSettings();
                 // A profile name being typed: the keyboard is hidden (and closed again if it
                 // was opened only for the name).
@@ -333,6 +365,33 @@ namespace Prunel
             }
             Manager.ChangeMode(new KeyboardListMode(KeyboardListMode.ListKind.MyWords,
                 Texts.Get(oldWord == null ? "list.words.added" : "list.words.fixed")));
+        }
+
+        /// <summary>"Export the dictionary" (issue #164): a dated copy, then where it went.</summary>
+        private void ExportDictionary()
+        {
+            string message = DictionaryFiles.Export(Manager.Keyboard.Predictor);
+            if (_window != null)
+            {
+                _window.ShowMessage(message);
+            }
+        }
+
+        /// <summary>"Merge" or "Replace" (issue #164): the list of the exported dictionaries.</summary>
+        private void OpenDictionaryList(bool replace)
+        {
+            App.LogDetail("Settings: dictionary list (" + (replace ? "replace" : "merge") + ")");
+            Manager.ChangeMode(KeyboardListMode.ForDictionaries(replace));
+        }
+
+        /// <summary>"Yes" to "Replace My words with …?" (issue #164).</summary>
+        private void ReplaceDictionary(FoundDictionary dictionary)
+        {
+            string message = DictionaryFiles.Replace(Manager.Keyboard.Predictor, dictionary);
+            if (_window != null)
+            {
+                _window.ShowMessage(message);
+            }
         }
 
         /// <summary>"Cancel" (or Escape) on the word page: back to the "My words" list.</summary>

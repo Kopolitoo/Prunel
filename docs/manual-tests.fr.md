@@ -578,6 +578,25 @@ jeton).
 3. Les boutons (« − », valeur, « + », interrupteurs) sont à la même place qu'avant et marchent
    comme avant.
 
+## 39. Exporter, fusionner et remplacer le dictionnaire (issue #164)
+
+1. Paramètres, onglet « Prédiction » : sous « Mes mots », trois petits boutons « Exporter »,
+   « Fusionner », « Remplacer », et leur aide avec le dossier `Documents\Prunel\Dictionaries`.
+2. Ajouter « zorglub » à Mes mots. « Exporter » : le message montre le fichier
+   `Dictionnaire <date>.json` ; il est dans le dossier (Explorateur).
+3. Retirer « zorglub » de Mes mots. « Fusionner » : la liste montre le dictionnaire exporté ; le
+   regarder : retour à l'onglet Prédiction, « … fusionné avec Mes mots » ; « zorglub » est de
+   retour dans Mes mots.
+4. Ajouter « zorglab ». « Remplacer », regarder le dictionnaire exporté : la question
+   « Remplacer Mes mots … ? » avec « Oui / Non ». « Non » : rien ne change. De nouveau, « Oui » :
+   « Mes mots remplacés » ; « zorglab » a disparu, « zorglub » est là. Le dossier contient
+   maintenant `auto-backup.json`.
+5. « Remplacer » par « Sauvegarde automatique » (symbole flèche), « Oui » : « zorglab » revient.
+6. Dossier vide : la liste dit « Aucun dictionnaire exporté pour l'instant ». Un fichier abîmé
+   (Bloc-notes, en effacer la moitié) : « Ce fichier est illisible : rien n'a changé ».
+7. Le journal dit seulement « Prediction: dictionary merged / replaced (N added words) », jamais
+   les mots.
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,

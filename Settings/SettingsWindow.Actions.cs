@@ -173,6 +173,7 @@ namespace Prunel
             _confirmation = false;
             _quitConfirmation = false;
             _profileToConfirm = null;
+            _dictionaryToConfirm = null;
             _message = null;
             App.LogDetail("Settings: tab " + SettingsCatalog.Tabs[num].Name);
             Build();

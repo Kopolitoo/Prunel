@@ -166,6 +166,9 @@ namespace Prunel
         private string _nameToReplace;
         private string _nameError;
 
+        // The exported dictionary chosen for "Replace", awaiting "Yes / No" (issue #164), or null.
+        private FoundDictionary _dictionaryToConfirm;
+
         // The same page used for a word of "My words" (issue #163) instead of a profile name:
         // true while it is, and the word being fixed (null = a new word).
         private bool _wordPage;
@@ -294,6 +297,28 @@ namespace Prunel
             _message = null;
             Build();
             Notify(NamingStarted);
+        }
+
+        /// <summary>"Export the dictionary" of the "Prediction" tab (issue #164): the mode writes it, then ShowMessage.</summary>
+        public event Action DictionaryExportRequested;
+
+        /// <summary>
+        /// "Merge" (false) or "Replace" (true) of the "Prediction" tab (issue #164): the mode
+        /// opens the list of the exported dictionaries.
+        /// </summary>
+        public event Action<bool> DictionaryListRequested;
+
+        /// <summary>"Yes" to "Replace My words with …?" (issue #164): the dictionary to load.</summary>
+        public event Action<FoundDictionary> DictionaryReplaceRequested;
+
+        /// <summary>
+        /// Back from the list with a dictionary chosen for "Replace" (issue #164): the page
+        /// shows the question "Replace My words with …? Yes / No".
+        /// </summary>
+        public void AskReplaceDictionary(FoundDictionary dictionary)
+        {
+            _dictionaryToConfirm = dictionary;
+            Build();
         }
 
         /// <summary>The word could not be saved: the reason is shown under the box, the typed word is kept.</summary>

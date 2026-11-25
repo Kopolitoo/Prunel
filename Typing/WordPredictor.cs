@@ -798,49 +798,7 @@ namespace Prunel
             }
             try
             {
-                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(PersonalFile));
-                PersonalFile file;
-                using (FileStream stream = File.OpenRead(path))
-                {
-                    file = (PersonalFile)serializer.ReadObject(stream);
-                }
-                if (file != null && file.Words != null)
-                {
-                    foreach (PersonalWord m in file.Words)
-                    {
-                        if (m == null || string.IsNullOrWhiteSpace(m.Word))
-                        {
-                            continue;
-                        }
-                        if (m.Added && !_addedWords.Contains(m.Word))
-                        {
-                            _addedWords.Add(m.Word);
-                            _addedKeys.Add(Key(m.Word));
-                        }
-                        if (m.Usages > 0)
-                        {
-                            _usages[m.Word] = m.Usages;
-                        }
-                    }
-                }
-                if (file != null && file.Followers != null)
-                {
-                    foreach (WordPair pair in file.Followers)
-                    {
-                        if (pair == null || string.IsNullOrEmpty(pair.Before) || string.IsNullOrEmpty(pair.After) ||
-                            pair.Number <= 0)
-                        {
-                            continue;
-                        }
-                        Dictionary<string, int> followers;
-                        if (!_followers.TryGetValue(pair.Before, out followers))
-                        {
-                            followers = new Dictionary<string, int>(StringComparer.Ordinal);
-                            _followers[pair.Before] = followers;
-                        }
-                        followers[pair.After] = pair.Number;
-                    }
-                }
+                Apply(ReadPersonalFile(path));
                 App.Log("Prediction: personal dictionary read (" + _addedWords.Count + " added words, " +
                         _usages.Count + " words with usages, " + _followers.Count +
                         " words with followers)");
@@ -859,6 +817,66 @@ namespace Prunel
             }
         }
 
+        /// <summary>Reads a personal dictionary file (or an exported copy). Throws if unreadable.</summary>
+        private static PersonalFile ReadPersonalFile(string path)
+        {
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(PersonalFile));
+            using (FileStream stream = File.OpenRead(path))
+            {
+                return (PersonalFile)serializer.ReadObject(stream);
+            }
+        }
+
+        /// <summary>
+        /// Adds the content of a personal dictionary file to what is in memory: its added words
+        /// (unless already known), and its usage counts and word pairs, ADDED to the current
+        /// ones. On an empty dictionary (startup, replace), that is simply the file's content.
+        /// </summary>
+        private void Apply(PersonalFile file)
+        {
+            if (file != null && file.Words != null)
+            {
+                foreach (PersonalWord m in file.Words)
+                {
+                    if (m == null || string.IsNullOrWhiteSpace(m.Word))
+                    {
+                        continue;
+                    }
+                    if (m.Added && !_addedWords.Contains(m.Word) && KnownShape(m.Word) == null)
+                    {
+                        _addedWords.Add(m.Word);
+                        _addedKeys.Add(Key(m.Word));
+                    }
+                    if (m.Usages > 0)
+                    {
+                        int n;
+                        _usages.TryGetValue(m.Word, out n);
+                        _usages[m.Word] = n + m.Usages;
+                    }
+                }
+            }
+            if (file != null && file.Followers != null)
+            {
+                foreach (WordPair pair in file.Followers)
+                {
+                    if (pair == null || string.IsNullOrEmpty(pair.Before) || string.IsNullOrEmpty(pair.After) ||
+                        pair.Number <= 0)
+                    {
+                        continue;
+                    }
+                    Dictionary<string, int> followers;
+                    if (!_followers.TryGetValue(pair.Before, out followers))
+                    {
+                        followers = new Dictionary<string, int>(StringComparer.Ordinal);
+                        _followers[pair.Before] = followers;
+                    }
+                    int times;
+                    followers.TryGetValue(pair.After, out times);
+                    followers[pair.After] = times + pair.Number;
+                }
+            }
+        }
+
         /// <summary>
         /// Saves the personal dictionary: first to a temporary file, then moved over the old
         /// one (if the computer shuts down mid-write, the old one stays).
@@ -866,6 +884,21 @@ namespace Prunel
         private void SavePersonal()
         {
             _toSave = false;
+            string path = PersonalPath;
+            try
+            {
+                WritePersonalFile(ToFile(), path);
+            }
+            catch (Exception ex)
+            {
+                // Never crash the program because of this file.
+                App.Log("Prediction: failed to save the personal dictionary: " + ex.Message);
+            }
+        }
+
+        /// <summary>What is in memory, in the form of the file.</summary>
+        private PersonalFile ToFile()
+        {
             PersonalFile file = new PersonalFile();
             // Version 2: word pairs added (Followers). A version 1 file is read
             // as is: it simply has no pairs.
@@ -893,34 +926,87 @@ namespace Prunel
                     file.Followers.Add(new WordPair { Before = before.Key, After = after.Key, Number = after.Value });
                 }
             }
+            return file;
+        }
 
-            string path = PersonalPath;
+        /// <summary>
+        /// Writes a personal dictionary file: first to a temporary file, then moved over the
+        /// old one (if the computer shuts down mid-write, the old one stays). Throws on error.
+        /// </summary>
+        private static void WritePersonalFile(PersonalFile file, string path)
+        {
             string temp = path + ".tmp";
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(PersonalFile));
+            using (FileStream stream = File.Create(temp))
+            using (XmlDictionaryWriter writer = JsonReaderWriterFactory.CreateJsonWriter(
+                       stream, new UTF8Encoding(false), false, true, "  "))
+            {
+                serializer.WriteObject(writer, file);
+                writer.Flush();
+            }
+            if (File.Exists(path))
+            {
+                File.Replace(temp, path, null);
+            }
+            else
+            {
+                File.Move(temp, path);
+            }
+        }
+
+        // ───────────────────────── Export and load (issue #164) ─────────────────────────
+
+        /// <summary>
+        /// Writes a copy of the personal dictionary (added words, usage counts, word pairs)
+        /// to "path". Returns false if it could not be written. The words are not logged.
+        /// </summary>
+        public bool ExportTo(string path)
+        {
             try
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(path));
-                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(PersonalFile));
-                using (FileStream stream = File.Create(temp))
-                using (XmlDictionaryWriter writer = JsonReaderWriterFactory.CreateJsonWriter(
-                           stream, new UTF8Encoding(false), false, true, "  "))
-                {
-                    serializer.WriteObject(writer, file);
-                    writer.Flush();
-                }
-                if (File.Exists(path))
-                {
-                    File.Replace(temp, path, null);
-                }
-                else
-                {
-                    File.Move(temp, path);
-                }
+                WritePersonalFile(ToFile(), path);
+                App.Log("Prediction: personal dictionary exported (" + _addedWords.Count + " added words)");
+                return true;
             }
             catch (Exception ex)
             {
-                // Never crash the program because of this file.
-                App.Log("Prediction: failed to save the personal dictionary: " + ex.Message);
+                App.Log("Prediction: failed to export the personal dictionary: " + ex.Message);
+                return false;
             }
+        }
+
+        /// <summary>
+        /// Loads an exported dictionary. replace false = MERGE: its words are added, its
+        /// usage counts and word pairs added to the current ones (nothing is lost). replace
+        /// true = REPLACE: the personal dictionary becomes exactly the file's content (the
+        /// caller keeps a backup first). The file is read before anything changes: an
+        /// unreadable file leaves the dictionary as it was. Returns false in that case.
+        /// </summary>
+        public bool ImportFrom(string path, bool replace)
+        {
+            PersonalFile file;
+            try
+            {
+                file = ReadPersonalFile(path);
+            }
+            catch (Exception ex)
+            {
+                App.Log("Prediction: unreadable dictionary file, nothing loaded. " + ex.Message);
+                return false;
+            }
+            if (replace)
+            {
+                _addedWords.Clear();
+                _addedKeys.Clear();
+                _usages.Clear();
+                _followers.Clear();
+            }
+            Apply(file);
+            App.Log("Prediction: dictionary " + (replace ? "replaced" : "merged") + " (" +
+                    _addedWords.Count + " added words)");
+            SavePersonal();
+            return true;
         }
     }
 
