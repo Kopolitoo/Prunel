@@ -532,7 +532,7 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
 1. Settings, "Prediction" tab: below "My words", three small buttons "Export", "Merge",
    "Replace", and their help with the folder `Documents\Prunel\Dictionaries`.
 2. Add "zorglub" to My words. "Export": the message shows the file
-   `Dictionary <date>.json`; it is in the folder (Explorer).
+   `EN Dictionary <date>.json` (FR in French: code of the prediction language); it is in the folder (Explorer).
 3. Remove "zorglub" from My words. "Merge": the list shows the exported dictionary; look at it:
    back to the Prediction tab, "… merged with My words"; "zorglub" is back in My words.
 4. Add "zorglab". "Replace", look at the exported dictionary: the question "Replace My words …?"

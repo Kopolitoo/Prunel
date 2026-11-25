@@ -586,7 +586,7 @@ jeton).
 1. Paramètres, onglet « Prédiction » : sous « Mes mots », trois petits boutons « Exporter »,
    « Fusionner », « Remplacer », et leur aide avec le dossier `Documents\Prunel\Dictionaries`.
 2. Ajouter « zorglub » à Mes mots. « Exporter » : le message montre le fichier
-   `Dictionnaire <date>.json` ; il est dans le dossier (Explorateur).
+   `FR Dictionnaire <date>.json` (EN en anglais : code de la langue de prédiction) ; il est dans le dossier (Explorateur).
 3. Retirer « zorglub » de Mes mots. « Fusionner » : la liste montre le dictionnaire exporté ; le
    regarder : retour à l'onglet Prédiction, « … fusionné avec Mes mots » ; « zorglub » est de
    retour dans Mes mots.
