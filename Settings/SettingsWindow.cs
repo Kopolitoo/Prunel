@@ -87,8 +87,8 @@ namespace Prunel
         private const double ChoiceWidth = 260;       // the two buttons of a choice between two words
 
         // ── The switch of a yes / no setting (Bootstrap "switch" style).
-        //    The gaze TARGET stays large (the room of two "Non" and "Oui"
-        //    buttons: 2 × 260 + 18 = 538 × 120); the drawn switch sits inside it.
+        //    The gaze target is SwitchTargetWidth × SwitchTargetHeight (below); the drawn
+        //    switch sits inside it.
         private const double SwitchWidth = 150;   // the track (the "pill")
         private const double SwitchHeight = 76;
         private const double SwitchButton = 60;     // the sliding knob
