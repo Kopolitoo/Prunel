@@ -145,9 +145,9 @@ Clavier ouvert, on regarde sous l'écran : la barre du clavier montre aussi
 « Zone de saisie » et « Disposition du clavier ». « Zone de saisie » : le bord devient vert, une
 bande apparaît au-dessus des touches ; on tape « bonjour à tous » : la bande le montre ; une
 flèche la vide. « Disposition du clavier » : la liste montre « Français AZERTY » avec un bord vert ; « Retour au
-clavier » ramène au clavier. Paramètres, onglet Général, « Mes mots » : « zorglub » (ajouté à
+clavier » ramène au clavier. Paramètres, onglet Prédiction, « Mes mots » : « zorglub » (ajouté à
 l'étape 13) est dans la liste ; on le regarde : il disparaît ; « Retour aux paramètres » ramène à
-l'onglet Général. En tapant « zo », il n'est plus proposé.
+l'onglet Prédiction. En tapant « zo », il n'est plus proposé.
 « Transparence » (montre « 0 % ») : on la regarde : « 25 % », les fonds du clavier laissent
 voir la fenêtre derrière ; encore : « 50 % », « 75 % », puis « 0 % » (opaque comme avant). À 75 %,
 les lettres, l'éclair vert et le survol restent bien visibles. On ferme et rouvre Prunel : la
@@ -541,6 +541,29 @@ jeton).
    0,2 s : très rapide.
 4. « Défaut » dans l'onglet « Choix d'action » remet 0,4 s (même vitesse qu'avant). En anglais :
    "Animation duration".
+
+## 37. Mes mots : corriger, ajouter à la main, bouton dans Prédiction (issue #163)
+
+1. Paramètres, onglet « Général » : plus de bouton « Mes mots », le bouton de langue est à
+   gauche. Onglet « Prédiction » : un petit bouton « Mes mots » sous « Mots courts d'abord ». Le
+   regarder.
+2. La liste montre deux boutons en bas : « Ajouter un mot » et « Corriger des mots ». Regarder
+   « Ajouter un mot » : les paramètres s'ouvrent sur l'onglet Prédiction, titre « Mot à ajouter à
+   Mes mots », case vide, le clavier du regard dessous. Taper « zorglub », regarder
+   « Enregistrer » : retour à la liste, « Mot ajouté. » en vert, « zorglub » y est.
+3. De nouveau « Ajouter un mot » : taper « zorglub » : « Ce mot est déjà dans le dictionnaire. »
+   Taper « 12 » : « Un mot a besoin d'au moins une lettre ». Taper « a b » : « Un seul mot ».
+   « Annuler » : retour à la liste, rien ne change. Échap (dit à Dragon) annule aussi.
+4. « Corriger des mots » : chaque mot a un crayon, l'explication dit « Regarde un mot pour le
+   corriger ». Regarder « zorglub » : la case contient « zorglub », le curseur à la fin. En faire
+   « zorglob », « Enregistrer » : retour à la liste, « Mot corrigé », « zorglob » à la place de
+   « zorglub ». En tapant « zo » au clavier, « zorglob » est proposé (plus « zorglub »).
+5. Corriger un mot en un mot du dictionnaire (par exemple « zorglob » → « bonjour ») : il quitte
+   la liste.
+6. « Retirer des mots » : les corbeilles reviennent ; regarder un mot le retire, comme avant.
+   « Retour aux paramètres » ramène à l'onglet Prédiction.
+7. Le journal dit seulement « My words: ... » / « Prediction: one added word fixed », jamais les
+   mots.
 
 ## Installation complète (Setup.exe, accès à l'interface)
 

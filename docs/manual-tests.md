@@ -135,8 +135,8 @@ Keyboard open, look below the screen: the keyboard bar also shows "Input box" an
 "Keyboard layout". "Input box": the border turns green, a band appears above the keys; type
 "hello everyone": the band shows it; an arrow empties it. "Keyboard layout": the list shows the
 layouts, the one in use with a green border; "Back to the keyboard" goes back to the keyboard.
-Settings, General tab, "My words": "zorglub" (added in step 13) is in the list; look at it: it
-disappears; "Back to the settings" goes back to the General tab. Typing "zo", it is no longer
+Settings, Prediction tab, "My words": "zorglub" (added in step 13) is in the list; look at it: it
+disappears; "Back to the settings" goes back to the Prediction tab. Typing "zo", it is no longer
 suggested.
 "Transparency" (shows "0 %"): look at it: "25 %", the keyboard backgrounds let the window behind
 show through; again: "50 %", "75 %", then "0 %" (opaque as before). At 75 %, the letters,
@@ -493,6 +493,26 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
    slowly, then the icons appear; they only work once shown. Set it to 0.2 s: very fast.
 4. "Default" in the "Action choice" tab puts it back to 0.4 s (same speed as before). In French:
    « Durée de l'animation ».
+
+## 37. My words: fix, add by hand, button in Prediction (issue #163)
+
+1. Settings, "General" tab: no more "My words" button, the language button is on the left.
+   "Prediction" tab: a small "My words" button below "Short words first". Look at it.
+2. The list shows two buttons at the bottom: "Add a word" and "Fix words". Look at "Add a
+   word": the settings open on the Prediction tab, title "Word to add to My words", empty box,
+   the gaze keyboard below. Type "zorglub", look at "Save": back to the list, "Word added." in
+   green, "zorglub" is there.
+3. "Add a word" again: type "zorglub": "This word is already in the dictionary." Type "12": "A
+   word needs at least one letter". Type "a b": "One word only". "Cancel": back to the list,
+   nothing changes. Escape (said to Dragon) cancels too.
+4. "Fix words": each word gets a pencil, the explanation says "Look at a word to fix it". Look
+   at "zorglub": the box holds "zorglub", the cursor at the end. Make it "zorglob", "Save":
+   back to the list, "Word fixed", "zorglob" instead of "zorglub". Typing "zo" on the keyboard
+   suggests "zorglob" (no longer "zorglub").
+5. Fix a word into a dictionary word (e.g. "zorglob" → "bonjour"): it leaves the list.
+6. "Remove words": the trash cans come back; looking at a word removes it, as before. "Back to
+   the settings" goes back to the Prediction tab.
+7. The log only says "My words: ..." / "Prediction: one added word fixed", never the words.
 
 ## Full installation (Setup.exe, UI access)
 

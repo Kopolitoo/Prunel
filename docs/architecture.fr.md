@@ -384,14 +384,21 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   (français) l'apostrophe termine le mot élidé (« l' »). Une nouvelle installation démarre avec le
   clavier anglais ; un ancien fichier de réglages (avant la version 10) garde le clavier français.
 - Options du clavier (étape 14, `KeyboardListMode`) : deux boutons de plus dans la barre du
-  clavier, et un bouton « Mes mots » dans l'onglet Général des paramètres. « Zone de saisie » (interrupteur, bord vert, `InputBox`) : une bande au-dessus des
+  clavier, et un bouton « Mes mots » dans les paramètres (onglet Prédiction depuis l'issue #163, onglet Général avant). « Zone de saisie » (interrupteur, bord vert, `InputBox`) : une bande au-dessus des
   touches montre les derniers mots tapés (simple aperçu : le texte part toujours dans le
   logiciel ; elle se vide quand le curseur de texte a pu bouger : flèche, Tab, raccourci, clic
   ailleurs). « Disposition du clavier » (appelé « Langue » avant l'étape
   clavier-anglais) : liste des dispositions du dossier `Keyboards` (bord vert = celle utilisée) ;
-  le choix est retenu (`KeyboardLayout`). Le dictionnaire, lui, suit la langue de l'interface. « Mes mots » (onglet Général des paramètres) : liste des mots
+  le choix est retenu (`KeyboardLayout`). Le dictionnaire, lui, suit la langue de l'interface. « Mes mots » (onglet Prédiction des paramètres) : liste des mots
   ajoutés avec « + », par pages de 12 ; regarder un mot le retire du dictionnaire personnel (avec ses utilisations et ses paires).
-  `settings.json` version 10.
+  `settings.json` version 10. Issue #163 : deux boutons de plus en bas de la liste. « Corriger
+  des mots » met un crayon sur chaque mot ; en regarder un, comme « Ajouter un mot », ouvre
+  `SettingsMode.ForWord` : les paramètres sur l'onglet Prédiction, avec la page du nom de profil
+  réutilisée pour un mot (`SettingsWindow.StartWordPage`, clavier du regard, 40 caractères au
+  plus). « Enregistrer » appelle `WordPredictor.SaveWord` : un seul mot, avec une lettre et sans
+  espace ; une correction passe les utilisations et les paires au nouveau mot (`MoveLearning`),
+  fusionnées dedans s'il est déjà connu. Enregistrer ou annuler ramène à la liste (message vert
+  « Mot ajouté » / « Mot corrigé »).
 - Le calque se remet au-dessus de toutes les fenêtres deux fois par seconde.
 - `app.manifest` : déclare Prunel « sensible au DPI », pour que le regard, le curseur et le
   dessin utilisent les mêmes pixels, même avec une mise à l'échelle de Windows à 125 % ou 150 %.

@@ -363,14 +363,21 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   installation starts with the English keyboard; an older settings file (before version 10)
   keeps the French keyboard.
 - Keyboard options (step 14, `KeyboardListMode`): two more buttons in the keyboard bar, and a
-  "My words" button in the General tab of the settings. "Input box" (switch, green border,
+  "My words" button in the settings (Prediction tab since issue #163, General tab before). "Input box" (switch, green border,
   `InputBox`): a band above the keys shows the last typed words (a plain preview: the text
   always goes to the software; it empties when the text cursor may have moved: arrow, Tab,
   shortcut, click elsewhere). "Keyboard layout": list of the layouts of the `Keyboards` folder
   (green border = the one in use); the choice is remembered (`KeyboardLayout`). "My words"
-  (General tab of the settings): list of the words added with "+", in pages of 12; looking at a
+  (Prediction tab of the settings): list of the words added with "+", in pages of 12; looking at a
   word removes it from the personal dictionary (with its usage counts and pairs).
-  `settings.json` version 10.
+  `settings.json` version 10. Issue #163: two more buttons at the bottom of the list. "Fix
+  words" switches the list to a pencil per word; looking at one, like "Add a word", opens
+  `SettingsMode.ForWord`: the settings on the Prediction tab with the profile name page reused
+  as a word page (`SettingsWindow.StartWordPage`, gaze keyboard, max 40 characters).
+  "Save" calls `WordPredictor.SaveWord`: one word with a letter and no space; a fix moves the
+  usage count and pairs to the new word (`MoveLearning`), merged into it if it is already
+  known. Saving or cancelling goes back to the list (green message "Word added" / "Word
+  fixed").
 - The overlay puts itself back above all windows twice per second.
 - `app.manifest`: declares Prunel "DPI aware", so that the gaze, the cursor and the drawing use
   the same pixels, even with a Windows scaling of 125 % or 150 %.

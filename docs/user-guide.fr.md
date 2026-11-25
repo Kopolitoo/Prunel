@@ -154,7 +154,11 @@ clavier est déjà ouvert, il reste ouvert : c'est ainsi que l'on passe à un au
   75 %, les lettres restent nettes), le mettre en pause, afficher la « Zone de saisie » (un aperçu de
   ce qui est écrit), choisir la « Disposition du clavier » (AZERTY, QWERTY…), appeler (sonnette, comme dans la
   barre classique).
-- **Mes mots** (Paramètres, onglet « Général ») : les mots ajoutés ; en regarder un le retire.
+- **Mes mots** (Paramètres, onglet « Prédiction ») : les mots ajoutés ; en regarder un le retire.
+  « Ajouter un mot » ouvre une page avec le clavier du regard pour écrire un nouveau mot, puis
+  « Enregistrer ». « Corriger des mots » met un crayon sur chaque mot : regarder un mot mal
+  écrit, le corriger avec le clavier, puis « Enregistrer » ; ce que le clavier a appris sur lui
+  est gardé. « Retirer des mots » revient à la suppression.
 - On ferme le clavier par le bouton au-dessus de lui, par la barre du clavier, ou avec Échap.
 
 ## Mode jeu

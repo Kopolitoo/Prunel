@@ -25,8 +25,10 @@ namespace Prunel
     /// The "Configure icons" button of the "Icons" tab opens the icon configuration
     /// screen (IconConfigMode), which comes back here, on this tab.
     ///
-    /// The "My words" button of the "General" tab opens the list of the words added
-    /// to the keyboard (KeyboardListMode), which comes back here, on this tab.
+    /// The "My words" button of the "Prediction" tab opens the list of the words added
+    /// to the keyboard (KeyboardListMode), which comes back here, on this tab. From the list,
+    /// "Add a word" and "Fix" come back here with the word page open (ForWord): the gaze
+    /// keyboard types the word, "Save" or "Cancel" go back to the list (issue #163).
     ///
     /// "Tools" tab (buttons moved from the menu bar):
     ///   - "Calibration" starts the eyetracker tool then switches to calibration mode (which
@@ -60,6 +62,11 @@ namespace Prunel
         // The profile chosen in the list, to confirm when opening (or null).
         private readonly FoundProfile _profileToConfirm;
 
+        // Coming from the "My words" list (issue #163): open the word page at once, to add a
+        // word (_wordPage with _oldWord null) or to fix _oldWord.
+        private readonly bool _wordPage;
+        private readonly string _oldWord;
+
         private SettingsWindow _window;
         private ButtonAimer _aimer;
 
@@ -82,6 +89,23 @@ namespace Prunel
         {
             _startTab = tab;
             _profileToConfirm = profileToConfirm;
+        }
+
+        /// <summary>
+        /// "My words" list (issue #163): opens the settings on the "Prediction" tab, with the
+        /// word page and the gaze keyboard: an empty box to add a word (oldWord null), or the
+        /// word to fix. Saving or cancelling goes back to the list.
+        /// </summary>
+        public static SettingsMode ForWord(string oldWord)
+        {
+            return new SettingsMode(SettingsCatalog.PredictionTabIndex, null, true, oldWord);
+        }
+
+        private SettingsMode(int tab, FoundProfile profileToConfirm, bool wordPage, string oldWord)
+            : this(tab, profileToConfirm)
+        {
+            _wordPage = wordPage;
+            _oldWord = oldWord;
         }
 
         public override string Name
@@ -109,6 +133,8 @@ namespace Prunel
             window.ProfileLoadRequested += LoadProfile;
             window.NamingStarted += ShowKeyboard;
             window.NamingEnded += HideKeyboard;
+            window.WordSaveRequested += SaveWord;
+            window.WordPageClosed += BackToMyWords;
             _aimer = new ButtonAimer(window.Targets);
             _version = -1;
             _repeatedTarget = -1;
@@ -119,6 +145,10 @@ namespace Prunel
             // caregiver in the window is then enough.)
             window.Activate();
             _window = window;
+            if (_wordPage)
+            {
+                window.StartWordPage(_oldWord);
+            }
 
             _circlePlaced = gaze.OnScreen;
             if (_circlePlaced)
@@ -230,6 +260,8 @@ namespace Prunel
                 window.ProfileLoadRequested -= LoadProfile;
                 window.NamingStarted -= ShowKeyboard;
                 window.NamingEnded -= HideKeyboard;
+                window.WordSaveRequested -= SaveWord;
+                window.WordPageClosed -= BackToMyWords;
                 window.CloseSettings();
                 // A profile name being typed: the keyboard is hidden (and closed again if it
                 // was opened only for the name).
@@ -274,12 +306,38 @@ namespace Prunel
         }
 
         /// <summary>
-        /// "My words" button of the "General" tab: the list of the words added to the
+        /// "My words" button of the "Prediction" tab: the list of the words added to the
         /// keyboard, which comes back here, on this tab.
         /// </summary>
         private void OpenMyWords()
         {
             App.LogDetail("Settings: my words");
+            Manager.ChangeMode(new KeyboardListMode(KeyboardListMode.ListKind.MyWords));
+        }
+
+        /// <summary>
+        /// "Save" on the word page (issue #163): the word is added or fixed in the personal
+        /// dictionary, then back to the "My words" list. If it cannot be (empty, a space, no
+        /// letter, already known), the reason is shown under the box and we stay.
+        /// </summary>
+        private void SaveWord(string oldWord, string newWord)
+        {
+            string error = Manager.Keyboard.Predictor.SaveWord(oldWord, newWord);
+            if (error != null)
+            {
+                if (_window != null)
+                {
+                    _window.ShowWordError(Texts.Get(error));
+                }
+                return;
+            }
+            Manager.ChangeMode(new KeyboardListMode(KeyboardListMode.ListKind.MyWords,
+                Texts.Get(oldWord == null ? "list.words.added" : "list.words.fixed")));
+        }
+
+        /// <summary>"Cancel" (or Escape) on the word page: back to the "My words" list.</summary>
+        private void BackToMyWords()
+        {
             Manager.ChangeMode(new KeyboardListMode(KeyboardListMode.ListKind.MyWords));
         }
 

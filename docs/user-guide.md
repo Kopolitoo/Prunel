@@ -146,7 +146,10 @@ already open, it stays open: this is how you move to another field.
   "Keyboard" tab, by 5 % steps), make its background see-through ("Transparency": 0, 25, 50 or 75 %, the
   letters stay clear), call (bell, as in the classic bar), pause it, show the "Input box" (a preview of what you typed), choose
   the "Keyboard layout" (QWERTY, AZERTY…).
-- **My words** (Settings, "General" tab): the words you added; look at one to remove it.
+- **My words** (Settings, "Prediction" tab): the words you added; look at one to remove it.
+  "Add a word" opens a page with the gaze keyboard to type a new word, then "Save". "Fix
+  words" puts a pencil on each word: look at a misspelt word, fix it with the keyboard, then
+  "Save"; what the keyboard learnt about it is kept. "Remove words" goes back to removing.
 - Close the keyboard with the button above it, from the keyboard bar, or with Escape.
 
 ## Game mode
