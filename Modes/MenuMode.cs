@@ -17,11 +17,14 @@ namespace Prunel
     /// (issue #54), activated by the gaze
     /// (GazeButton): one looks at a button for [ActivationDelay], its ring fills up, then it
     /// activates. From left to right:
-    ///   Settings       opens settings mode;
     ///   Keyboard       opens Prunel's gaze keyboard (see GazeKeyboard), then closes
     ///                  the menu. If it is already open (hidden by game mode), closes it;
-    ///   Pause          switches to pause mode;
-    ///   Quit           asks for confirmation ("Yes, quit" / "No"), then closes Prunel.
+    ///   Pause          switches to pause mode.
+    /// The two buttons are further apart than in the other bars (ClassicGap4K).
+    ///
+    /// SETTINGS BUTTON: it appears with the bar, on its own near the bottom-LEFT corner of the
+    /// screen (like the shortcuts button on the right, user's choice 2026-11-26). It opens
+    /// settings mode.
     ///
     /// Calibration and Diagnostic are not in the bar: they
     /// are in the "Tools" tab of the settings (see SettingsWindow).
@@ -31,7 +34,7 @@ namespace Prunel
     /// switch: looking at it unfolds the SHORTCUTS COLUMN above it (green border), looking at it
     /// again folds it. The column groups shortcuts and modes used often, and will grow over
     /// time. From bottom to top:
-    ///   Windows + Tab  sends Windows + Tab (Task View: all the open windows), then closes the
+    ///   Applications   sends Windows + Tab (Task View: all the open windows), then closes the
     ///                  menu and returns to movement mode, to pick a window with a gaze click;
     ///   Game           switches to game mode. Coming from game mode, this button
     ///                  becomes "Quit game" (green border) and returns to movement mode;
@@ -40,7 +43,8 @@ namespace Prunel
     ///   Mouse tracking switch: green border when the option is on. The menu stays open; the
     ///                  gaze must leave the button before it can be used again.
     /// Game, Call and Mouse tracking were in the bar before: they are only in the column now
-    /// (user's choice, 2026-11-26).
+    /// (user's choice, 2026-11-26). "Quit Prunel" left the menu too: it is in the General tab of
+    /// the settings (the "Yes" / "No" confirmation below stays, for a later Quit shortcut).
     /// Unfolding is animated: the buttons come out from under the shortcuts button and slide
     /// up to their place, fast at first and slow at the end (GazeButton.SlideFrom).
     /// Their labels are on the left (above, they would cover the button above). The bar stays
@@ -102,7 +106,7 @@ namespace Prunel
             Pause,
             Bell,
             Shortcuts,
-            WindowsTab,
+            Applications,
             Resume,
             MouseTracking,
             Quit,
@@ -123,6 +127,13 @@ namespace Prunel
         {
             get { return ScreenMetrics.Px(ButtonGap4K); }
         }
+
+        /// <summary>
+        /// Space between the buttons of the classic bar (Keyboard, Pause), in 4K screen pixels:
+        /// wider than ButtonGap, now that the bar has only two buttons (user's choice,
+        /// 2026-11-26).
+        /// </summary>
+        private const double ClassicGap4K = 200;
 
         /// <summary>
         /// Space around the row of buttons, in 4K screen pixels. The bar has no background
@@ -187,6 +198,10 @@ namespace Prunel
         // _shortcutsLeftZone < 0 = no shortcuts button.
         private double _shortcutsLeftZone = -1;
         private double _shortcutsTopZone;
+
+        // The zone of the settings button (with its margin); _settingsRightZone < 0 = none.
+        private double _settingsRightZone = -1;
+        private double _settingsTopZone;
 
         // Time (ms) when the gaze left the bar; -1 = it is inside.
         private double _outsideBarStartMs = -1;
@@ -429,7 +444,7 @@ namespace Prunel
                     Build();
                     break;
 
-                case MenuAction.WindowsTab:
+                case MenuAction.Applications:
                     // Task View (issue #151). The menu closes and we go to movement mode, even
                     // from the game: the open windows are then picked with a normal gaze click.
                     KeyboardInjector.TypeKey(NativeMethods.VK_TAB, false,
@@ -608,32 +623,31 @@ namespace Prunel
             else
             {
                 // Symbols of the Windows font (Segoe MDL2 Assets / Segoe Fluent Icons):
-                //   E713 gear, E765 keyboard, E769 pause, E768 play, E7E8 power button.
-                Add(buttons, actions, new GazeButton("", null, Texts.Get("menu.settings")), MenuAction.Settings);
+                //   E765 keyboard, E769 pause. Settings is on its own on the left (PlaceSettings).
                 Add(buttons, actions, new GazeButton("", null, Texts.Get("menu.keyboard")), MenuAction.Keyboard);
                 // (From the pause, only "Resume" is shown: so here, we are never in pause.)
                 Add(buttons, actions, new GazeButton("", null, Texts.Get("menu.pause")), MenuAction.Pause);
-                Add(buttons, actions, new GazeButton("", null, Texts.Get("menu.quit")), MenuAction.Quit);
             }
 
-            // ── The shortcuts button, on its own on the right (see the class comment): only
-            //    with the classic bar.
-            bool withShortcuts = !KeyboardMenu && !_confirmation && !FromPause;
+            // ── The settings and shortcuts buttons, on their own in the corners (see the class
+            //    comment): only with the classic bar, whose buttons are further apart.
+            bool withCorners = !KeyboardMenu && !_confirmation && !FromPause;
+            double gap = withCorners ? ScreenMetrics.Px(ClassicGap4K) : ButtonGap;
 
             // ── Button size: [IconSize], reduced if the bar does not fit in the screen
             //    width. With the shortcuts button, the room of one button and one gap is kept
             //    on each side of the bar, so that the bar stays centered without touching it.
             int n = buttons.Count;
-            int slots = withShortcuts ? n + 2 : n;
+            int slots = withCorners ? n + 2 : n;
             // The menu buttons are twice as big as the other icons.
             double size = 2 * p.IconSizePx;
-            double maxSize = (width - ScreenMetrics.Px(20) - 2 * Padding - (slots - 1) * ButtonGap) / slots;
+            double maxSize = (width - ScreenMetrics.Px(20) - 2 * Padding - (slots - 1) * gap) / slots;
             size = Math.Max(ScreenMetrics.Px(20), Math.Min(size, maxSize));
 
             // ── The bar rectangle, centered at the bottom. Nothing is drawn for it: the bar has
             //    no background, only its buttons (each one has its own dark disc). The
             //    rectangle sets where the buttons go and the "in the bar" zone.
-            double barWidth = n * size + (n - 1) * ButtonGap + 2 * Padding;
+            double barWidth = n * size + (n - 1) * gap + 2 * Padding;
             double barHeight = size + 2 * Padding;
             double left = (width - barWidth) / 2;
             double top = height - ScreenMetrics.Px(BottomMargin4K) - barHeight;
@@ -642,7 +656,7 @@ namespace Prunel
             //    screen).
             for (int i = 0; i < n; i++)
             {
-                double x = left + Padding + size / 2 + i * (size + ButtonGap);
+                double x = left + Padding + size / 2 + i * (size + gap);
                 double y = top + Padding + size / 2;
                 buttons[i].Place(layer, surface, x, y, size, true);
                 _buttons.Add(buttons[i]);
@@ -683,10 +697,12 @@ namespace Prunel
             _rightZone = left + barWidth + zoneMargin;
             _topZone = zoneTop - zoneMargin;
 
-            // ── The shortcuts button and its column.
+            // ── The settings button (left), the shortcuts button and its column (right).
             _shortcutsLeftZone = -1;
-            if (withShortcuts)
+            _settingsRightZone = -1;
+            if (withCorners)
             {
+                PlaceSettings(layer, surface, size, top + Padding + size / 2, zoneMargin);
                 PlaceShortcuts(layer, surface, p, size, top + Padding + size / 2, zoneMargin);
             }
 
@@ -708,6 +724,25 @@ namespace Prunel
         }
 
         /// <summary>
+        /// Places the settings button near the bottom-left corner, at the height of the bar
+        /// (rowY: center of the bar's buttons). Notes its zone, with its margin, for InBar.
+        /// </summary>
+        private void PlaceSettings(OverlayWindow layer, Canvas surface, double size, double rowY,
+                                   double zoneMargin)
+        {
+            double x = ScreenMetrics.Px(BottomMargin4K) + Padding + size / 2;
+
+            // E713 = gear. Label above, as in the bar.
+            GazeButton settings = new GazeButton("\uE713", null, Texts.Get("menu.settings"));
+            settings.Place(layer, surface, x, rowY, size, true);
+            _buttons.Add(settings);
+            _actions.Add(MenuAction.Settings);
+
+            _settingsRightZone = x + size / 2 + zoneMargin;
+            _settingsTopZone = rowY - size / 2 - zoneMargin;
+        }
+
+        /// <summary>
         /// Places the shortcuts button near the bottom-right corner, at the height of the bar
         /// (rowY: center of the bar's buttons), and, if it is unfolded, the shortcuts column
         /// above it. Notes their zone, with its margin, for InBar.
@@ -725,7 +760,7 @@ namespace Prunel
                 //   E7C4 = task view, E7ED = ringer.
                 List<GazeButton> column = new List<GazeButton>();
                 List<MenuAction?> actions = new List<MenuAction?>();
-                Add(column, actions, new GazeButton("\uE7C4", null, Texts.Get("menu.windowsTab")), MenuAction.WindowsTab);
+                Add(column, actions, new GazeButton("\uE7C4", null, Texts.Get("menu.applications")), MenuAction.Applications);
                 AddGameButton(column, actions);
                 Add(column, actions, new GazeButton("\uE7ED", null, Texts.Get("menu.bell")), MenuAction.Bell);
                 AddMouseTrackingButton(column, actions, p);
@@ -804,8 +839,8 @@ namespace Prunel
         }
 
         /// <summary>
-        /// True if the gaze is on the bar, on the shortcuts button or its column (with their
-        /// margin), or down below the screen.
+        /// True if the gaze is on the bar, on the settings button, on the shortcuts button or its
+        /// column (with their margin), or down below the screen.
         /// </summary>
         private bool InBar(GazeState gaze)
         {
@@ -814,6 +849,11 @@ namespace Prunel
                 return true;
             }
             if (gaze.X >= _leftZone && gaze.X <= _rightZone && gaze.Y >= _topZone)
+            {
+                return true;
+            }
+            // The settings button, from the left edge of the screen.
+            if (_settingsRightZone >= 0 && gaze.X <= _settingsRightZone && gaze.Y >= _settingsTopZone)
             {
                 return true;
             }

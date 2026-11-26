@@ -106,14 +106,14 @@ Regarder **sous l'écran** une demi-seconde : la barre de menu s'ouvre en bas : 
 boutons bien espacés, sans fond derrière eux. Elle s'ouvre depuis le mode mouvement, la pause et
 le mode jeu. Boutons :
 
-- **Paramètres** : voir plus bas.
 - **Clavier** : le clavier du regard.
 - **Pause** / **Reprendre** : voir plus bas.
-- **Quitter Prunel** : demande d'abord « Oui » ou « Non ».
+- **Paramètres** : un bouton seul près du coin en bas à gauche, qui apparaît avec la barre (voir
+  plus bas). Pour quitter Prunel : Paramètres, onglet « Général ».
 - **Raccourcis** : un bouton seul près du coin en bas à droite, qui apparaît avec la barre. On
   le regarde : une colonne de raccourcis sort de sous lui et monte (bord vert) ; on le regarde
   de nouveau pour la replier. Cette colonne s'enrichira avec le temps. De bas en haut :
-  - **Windows + Tab** : affiche toutes les fenêtres ouvertes (vue des tâches) : le menu se
+  - **Applications** (Windows + Tab) : affiche toutes les fenêtres ouvertes (vue des tâches) : le menu se
     ferme, on regarde la fenêtre voulue et on clique dessus au regard comme d'habitude.
   - **Jeu** : mode jeu (voir plus bas). Depuis le mode jeu, il devient **Quitter le jeu**.
   - **Appeler** (sonnette) : sonne pour appeler quelqu'un. Avec la **sonnette de
@@ -261,8 +261,8 @@ sont enregistrés.
   son pour tous les autres boutons (menu, choix d'action, icône d'options, paramètres). Le son
   suit le volume de Windows.
 - Onglet **Général**, en bas à droite : le bouton **Quitter Prunel**, puis la question « Quitter
-  Prunel ? » (Oui / Non). Quitter reste ainsi toujours possible depuis les paramètres, même si
-  le menu ne montre plus son bouton « Quitter ».
+  Prunel ? » (Oui / Non). C'est l'endroit pour quitter Prunel : le menu n'a plus de bouton
+  « Quitter ».
 - Onglet **Outils** : **Calibration** (lance la calibration de l'eyetracker) et **Diagnostic**
   (montre le regard et le curseur en direct, et la stabilité du regard en haut, au milieu et en
   bas de l'écran ; rien n'est enregistré).

@@ -197,11 +197,12 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   ouvre une barre centrée en bas de l'écran (boutons seuls, sans fond, espacés de 100 px sur
   un écran 4K : issue #54), uniquement depuis les modes mouvement et pause
   (et plus tard jeu, depuis l'étape 6 ; c'est le `ModeManager` qui surveille). La loupe, le
-  choix d'action et le glisser-déposer ont leur bouton « retour ». Boutons : Paramètres, Clavier
-  (le clavier au regard, étape 12), Pause (ou Reprendre si l'on vient de la pause), Quitter
-  Prunel (avec confirmation « Oui » / « Non »), et, seul près du coin en bas à droite, Raccourcis
+  choix d'action et le glisser-déposer ont leur bouton « retour ». Boutons : Clavier
+  (le clavier au regard, étape 12) et Pause (ou Reprendre si l'on vient de la pause), espacés de
+  200 px (`ClassicGap4K`) ; seul près du coin en bas à gauche, Paramètres (`PlaceSettings`) ;
+  seul près du coin en bas à droite, Raccourcis
   (étape shortcuts-menu, interrupteur, `_shortcuts`) : il déplie au-dessus de lui une colonne de
-  raccourcis (`PlaceShortcuts`, étiquettes à gauche) : Windows + Tab (vue des tâches, issue #151,
+  raccourcis (`PlaceShortcuts`, étiquettes à gauche) : Applications (Windows + Tab : vue des tâches, issue #151,
   envoyé par `KeyboardInjector.TypeKey`, puis mode mouvement), Jeu (ou Quitter le jeu), Appeler,
   Suivi souris (interrupteur, bord vert quand il est activé). Le dépliage est animé
   (`GazeButton.SlideFrom`, 300 ms, EaseOut) : les boutons sortent de sous le bouton Raccourcis.
@@ -211,7 +212,7 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
 - `Modes/SettingsMode` et `SettingsWindow` (étape 7) : bouton « Paramètres » du menu. Une
   fenêtre plein écran, fond noir, avec à gauche quatre catégories dépliantes (02/11/2026) : Regard (Regard,
   Fixation, Délais), Actions (Loupe et glisser, Défilement, Choix d'action), Affichage (Affichage, Clavier,
-  Jeu) et Système (Général, Profils, Outils, À propos). L'onglet Général a en bas à droite un bouton « Quitter Prunel » puis la question « Quitter Prunel ? » (`BuildQuitConfirmation`) ; « Oui » appelle `SettingsMode.QuitPrunel`, qui ferme Prunel comme le menu. L'onglet « À propos » (issue #92) montre la
+  Jeu) et Système (Général, Profils, Outils, À propos). L'onglet Général a en bas à droite un bouton « Quitter Prunel » puis la question « Quitter Prunel ? » (`BuildQuitConfirmation`) ; « Oui » appelle `SettingsMode.QuitPrunel`, qui ferme Prunel (Quitter a quitté le menu le 26/11/2026). L'onglet « À propos » (issue #92) montre la
   version (`App.Version`), l'image de l'auteur (`Resources/Author.jpg`, intégrée à l'exe) et deux
   boutons dont les adresses viennent du fichier de langue ; `SettingsMode.OpenLink` les ouvre
   dans le navigateur par défaut et revient au mode mouvement. Seule la catégorie ouverte montre ses onglets, en dessous d'elle

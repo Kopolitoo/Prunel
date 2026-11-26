@@ -100,14 +100,14 @@ Look **below the screen** for half a second: the menu bar opens at the bottom: a
 well-spaced buttons, with no background behind them. It opens from movement mode, pause and
 game mode. Buttons:
 
-- **Settings**: see below.
 - **Keyboard**: the gaze keyboard.
 - **Pause** / **Resume**: see below.
-- **Quit Prunel**: asks "Yes" or "No" first.
+- **Settings**: a button on its own near the bottom-left corner, shown with the bar (see
+  below). To quit Prunel: Settings, "General" tab.
 - **Shortcuts**: a button on its own near the bottom-right corner, shown with the bar. Look
   at it: a column of shortcuts comes out from under it and slides up (green border); look at
   it again to fold it. This column will grow over time. From bottom to top:
-  - **Windows + Tab**: shows all the open windows (Task View): the menu closes, look at the
+  - **Applications** (Windows + Tab): shows all the open windows (Task View): the menu closes, look at the
     window you want and click it with the gaze as usual.
   - **Game**: game mode (see below). From game mode, it becomes **Quit the game**.
   - **Call** (bell): rings to call someone. With the **computer bell** (on at first), a loud
@@ -240,8 +240,8 @@ repeat) or a yes / no switch. Changes apply at once and are saved.
   computer bell is off, the computer rings instead. Until the answer comes, the menu shows
   "Calling…".
 - **General** tab, bottom-right corner: the **Quit Prunel** button, then the question "Quit
-  Prunel?" (Yes / No). Quitting thus always stays possible from the settings, even if the menu
-  no longer shows its "Quit" button.
+  Prunel?" (Yes / No). This is the place to quit Prunel: the menu no longer has a "Quit"
+  button.
 - **Tools** tab: **Calibration** (starts the eyetracker calibration) and **Diagnostic** (shows
   the gaze and the cursor live, and how steady the gaze is at the top, middle and bottom of the
   screen; nothing is saved).

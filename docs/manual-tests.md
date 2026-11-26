@@ -554,14 +554,16 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
 5. With Shift on, "é" types "É" and the letters page comes back.
 6. Same with the English keyboard (QWERTY, accents page "á à â…").
 
-## 41. Shortcuts column of the menu (step shortcuts-menu, issue #151)
+## 41. Settings and Shortcuts buttons of the menu (step shortcuts-menu, issue #151)
 
 1. Open several windows (Notepad, Explorer, a browser). Open the menu: the bar is centered as
    before, and a "Shortcuts" button (grid of squares) shows on its own near the bottom-right
-   corner, without touching the bar.
-   The bar only has Settings, Keyboard, Pause and Quit Prunel (no Game, Call, Mouse tracking).
+   corner, without touching the bar. A "Settings" button (gear) shows the same way near the
+   bottom-left corner, and opens the settings. The bar only has Keyboard and Pause, well apart
+   (about twice the old gap); no Game, Call, Mouse tracking, Quit Prunel. Looking at the
+   Settings button does not close the menu.
 2. Look at "Shortcuts": it gets a green border and a column unfolds above it, from bottom to
-   top: Windows + Tab, Game, Call, Mouse tracking. The buttons come out from under "Shortcuts"
+   top: Applications, Game, Call, Mouse tracking. The buttons come out from under "Shortcuts"
    and slide up, fast at first and slow at the end (about 0.3 s), all arriving together. They
    do not come back animated when "Call" or "Mouse tracking" is used. With the "Labels"
    setting on, the labels are on the left of the buttons.
@@ -569,15 +571,15 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
    comes back. Looking at it again folds the column.
 4. While looking at the column, the menu does not close and no gaze circle shows. Look away
    from the bar and the column for one second: the whole menu closes.
-5. "Windows + Tab": the menu closes and Task View shows the open windows; the circle shows
+5. "Applications": the menu closes and Task View shows the open windows; the circle shows
    above it and a gaze click on a window brings it to the front.
 6. "Mouse tracking" in the column: the border changes and the column stays open. "Call"
    rings, the message shows above the bar, the column stays open. "Game" switches to game mode;
    from game mode, the column shows "Quit game" (green border).
-7. No "Shortcuts" button: menu opened from the pause (only "Resume"), keyboard bar, "Quit"
-   confirmation.
-8. Small icon size and large icon size (settings): the button never covers the bar, and the
-   column fits in the screen.
+7. No "Settings" or "Shortcuts" button: menu opened from the pause (only "Resume"), keyboard
+   bar.
+8. Small icon size and large icon size (settings): the two corner buttons never cover the bar,
+   and the column fits in the screen.
 
 ## Full installation (Setup.exe, UI access)
 

@@ -25,7 +25,7 @@
   "menu.keyboard": "Keyboard",
   "menu.mouseTracking": "Mouse tracking",
   "menu.shortcuts": "Shortcuts",
-  "menu.windowsTab": "Windows + Tab (open windows)",
+  "menu.applications": "Applications",
   "menu.quit": "Quit Prunel",
   "actionChoice.emptySlot": "Empty slot (set it up in the settings)",
   "action.leftClick.short": "Left click",

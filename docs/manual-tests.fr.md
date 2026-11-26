@@ -611,15 +611,16 @@ jeton).
 5. Avec Maj allumée, « é » écrit « É » et la page des lettres revient.
 6. Pareil avec le clavier anglais (QWERTY, page d'accents « á à â… »).
 
-## 41. Colonne de raccourcis du menu (étape shortcuts-menu, issue #151)
+## 41. Boutons Paramètres et Raccourcis du menu (étape shortcuts-menu, issue #151)
 
 1. Ouvrir plusieurs fenêtres (Bloc-notes, Explorateur, un navigateur). Ouvrir le menu : la barre
    est centrée comme avant, et un bouton « Raccourcis » (grille de carrés) apparaît seul près du
-   coin en bas à droite, sans toucher la barre.
-   La barre n'a plus que Paramètres, Clavier, Pause et Quitter Prunel (plus de Jeu, Appeler,
-   Suivi souris).
+   coin en bas à droite, sans toucher la barre. Un bouton « Paramètres » (engrenage) apparaît de
+   la même façon près du coin en bas à gauche, et ouvre les paramètres. La barre n'a plus que
+   Clavier et Pause, bien espacés (environ deux fois l'ancien écart) ; plus de Jeu, Appeler,
+   Suivi souris, Quitter Prunel. Regarder le bouton Paramètres ne ferme pas le menu.
 2. Regarder « Raccourcis » : il prend un bord vert et une colonne se déplie au-dessus, de bas en
-   haut : Windows + Tab, Jeu, Appeler, Suivi souris. Les boutons sortent de sous « Raccourcis »
+   haut : Applications, Jeu, Appeler, Suivi souris. Les boutons sortent de sous « Raccourcis »
    et montent, vite au départ et lentement à l'arrivée (environ 0,3 s), et arrivent tous
    ensemble. Ils ne rejouent pas l'animation quand on utilise « Appeler » ou « Suivi souris ».
    Avec le réglage « Libellés », les libellés sont à gauche des boutons.
@@ -627,15 +628,15 @@ jeton).
    quitté puis n'y est pas revenu. Le regarder de nouveau replie la colonne.
 4. En regardant la colonne, le menu ne se ferme pas et aucun cercle ne s'affiche. Regarder hors
    de la barre et de la colonne pendant une seconde : tout le menu se ferme.
-5. « Windows + Tab » : le menu se ferme et la vue des tâches montre les fenêtres ouvertes ; le
+5. « Applications » : le menu se ferme et la vue des tâches montre les fenêtres ouvertes ; le
    cercle s'affiche par-dessus et un clic du regard sur une fenêtre la met au premier plan.
 6. « Suivi souris » dans la colonne : le bord change et la colonne reste ouverte.
    « Appeler » sonne, le message s'affiche au-dessus de la barre, la colonne reste ouverte. « Jeu »
    passe en mode jeu ; depuis le mode jeu, la colonne montre « Quitter le jeu » (bord vert).
-7. Pas de bouton « Raccourcis » : menu ouvert depuis la pause (seulement « Reprendre »), barre du
-   clavier, confirmation de « Quitter ».
-8. Petite et grande taille d'icônes (paramètres) : le bouton ne couvre jamais la barre, et la
-   colonne tient dans l'écran.
+7. Pas de bouton « Paramètres » ni « Raccourcis » : menu ouvert depuis la pause (seulement
+   « Reprendre »), barre du clavier.
+8. Petite et grande taille d'icônes (paramètres) : les deux boutons des coins ne couvrent jamais
+   la barre, et la colonne tient dans l'écran.
 
 ## Installation complète (Setup.exe, accès à l'interface)
 
