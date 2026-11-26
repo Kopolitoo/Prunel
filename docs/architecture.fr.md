@@ -199,10 +199,11 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   (et plus tard jeu, depuis l'étape 6 ; c'est le `ModeManager` qui surveille). La loupe, le
   choix d'action et le glisser-déposer ont leur bouton « retour ». Boutons : Paramètres, Jeu, Clavier
   (le clavier au regard, étape 12), Pause (ou Reprendre si l'on vient de la pause), Suivi souris (interrupteur, bord vert
-  quand il est activé), Quitter Prunel (avec confirmation « Oui » / « Non »), et Raccourcis
-  (étape shortcuts-menu) : il remplace la barre par une rangée de raccourcis, construite comme la
-  barre (`_shortcuts`) : Windows + Tab (vue des tâches, issue #151, envoyé par
-  `KeyboardInjector.TypeKey`, puis mode mouvement), Jeu, Appeler, Suivi souris et Retour.
+  quand il est activé), Quitter Prunel (avec confirmation « Oui » / « Non »), et, seul près du coin en bas à droite, Raccourcis
+  (étape shortcuts-menu, interrupteur, `_shortcuts`) : il déplie au-dessus de lui une colonne de
+  raccourcis (`PlaceShortcuts`, étiquettes à gauche) : Windows + Tab (vue des tâches, issue #151,
+  envoyé par `KeyboardInjector.TypeKey`, puis mode mouvement), Jeu, Appeler, Suivi souris. Le
+  bouton et la colonne comptent comme « dans la barre ».
   Regarder hors de la barre pendant `MenuCloseDelay` (1 s) la ferme et ramène au mode
   d'avant. Un petit cercle montre où est le regard.
 - `Modes/SettingsMode` et `SettingsWindow` (étape 7) : bouton « Paramètres » du menu. Une

@@ -611,23 +611,27 @@ jeton).
 5. Avec Maj allumée, « é » écrit « É » et la page des lettres revient.
 6. Pareil avec le clavier anglais (QWERTY, page d'accents « á à â… »).
 
-## 41. Rangée de raccourcis du menu (étape shortcuts-menu, issue #151)
+## 41. Colonne de raccourcis du menu (étape shortcuts-menu, issue #151)
 
-1. Ouvrir plusieurs fenêtres (Bloc-notes, Explorateur, un navigateur). Ouvrir le menu : un bouton
-   « Raccourcis » (grille de carrés) est dans la barre, entre « Clavier » et « Appeler ».
-2. Regarder « Raccourcis » : la barre est remplacée par Windows + Tab, Jeu, Appeler, Suivi souris,
-   Retour. Le bouton maintenant sous le regard ne se déclenche PAS tant que le regard ne l'a pas
-   quitté puis n'y est pas revenu.
-3. « Retour » : la barre revient. De nouveau « Raccourcis », puis regarder ailleurs une seconde :
-   tout le menu se ferme.
-4. « Windows + Tab » : le menu se ferme et la vue des tâches montre les fenêtres ouvertes. Le
-   cercle du regard s'affiche par-dessus (installation complète, accès à l'interface), et un clic
-   du regard sur une fenêtre la met au premier plan.
-5. « Suivi souris » dans la rangée : bord vert allumé / éteint, la rangée reste ouverte.
-   « Appeler » sonne comme dans la barre. « Jeu » passe en mode jeu ; depuis le mode jeu, la rangée
-   montre « Quitter le jeu » (bord vert), et « Windows + Tab » ramène au mode mouvement.
-6. Pareil en français et en anglais : « Raccourcis » / « Shortcuts », « Windows + Tab (fenêtres
-   ouvertes) ».
+1. Ouvrir plusieurs fenêtres (Bloc-notes, Explorateur, un navigateur). Ouvrir le menu : la barre
+   est centrée comme avant, et un bouton « Raccourcis » (grille de carrés) apparaît seul près du
+   coin en bas à droite, sans toucher la barre.
+2. Regarder « Raccourcis » : il prend un bord vert et une colonne se déplie au-dessus, de bas en
+   haut : Windows + Tab, Jeu, Appeler, Suivi souris. Avec le réglage « Libellés », les
+   libellés sont à gauche des boutons.
+3. Le bouton reste sous le regard : il ne replie PAS la colonne tant que le regard ne l'a pas
+   quitté puis n'y est pas revenu. Le regarder de nouveau replie la colonne.
+4. En regardant la colonne, le menu ne se ferme pas et aucun cercle ne s'affiche. Regarder hors
+   de la barre et de la colonne pendant une seconde : tout le menu se ferme.
+5. « Windows + Tab » : le menu se ferme et la vue des tâches montre les fenêtres ouvertes ; le
+   cercle s'affiche par-dessus et un clic du regard sur une fenêtre la met au premier plan.
+6. « Suivi souris » dans la colonne : le bord change dans la colonne ET dans la barre.
+   « Appeler » sonne, le message s'affiche au-dessus de la barre, la colonne reste ouverte. « Jeu »
+   passe en mode jeu ; depuis le mode jeu, la colonne montre « Quitter le jeu » (bord vert).
+7. Pas de bouton « Raccourcis » : menu ouvert depuis la pause (seulement « Reprendre »), barre du
+   clavier, confirmation de « Quitter ».
+8. Petite et grande taille d'icônes (paramètres) : le bouton ne couvre jamais la barre, et la
+   colonne tient dans l'écran.
 
 ## Installation complète (Setup.exe, accès à l'interface)
 

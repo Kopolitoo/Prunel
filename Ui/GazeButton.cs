@@ -270,10 +270,13 @@ namespace Prunel
         /// places it, centered on (x, y) in screen pixels, with a side of [size] pixels.
         /// labelAbove: the label is shown above the button instead of below (for the menu bar,
         /// stuck to the bottom of the screen: below, it would be hidden).
+        /// labelLeft: the label is shown on the left of the button, vertically centered (for the
+        /// shortcuts column of the menu, stuck to the right edge: above, it would cover the
+        /// button above). It wins over labelAbove.
         /// "= false": optional parameter; if it is not given, it is false.
         /// </summary>
         public void Place(OverlayWindow layer, Canvas surface, double x, double y, double size,
-                           bool labelAbove = false)
+                           bool labelAbove = false, bool labelLeft = false)
         {
             X = x;
             Y = y;
@@ -296,10 +299,15 @@ namespace Prunel
             _ringRadius = side / 2 * Math.Sqrt(2) + ScreenMetrics.Units(4);
             _centerWpf = center;
 
-            // The label is centered under the button (or above, if requested).
+            // The label is centered under the button (or above, or on the left, if requested).
             _label.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
             Canvas.SetLeft(_label, center.X - _label.DesiredSize.Width / 2);
-            if (labelAbove)
+            if (labelLeft)
+            {
+                Canvas.SetLeft(_label, center.X - side / 2 - ScreenMetrics.Units(12) - _label.DesiredSize.Width);
+                Canvas.SetTop(_label, center.Y - _label.DesiredSize.Height / 2);
+            }
+            else if (labelAbove)
             {
                 Canvas.SetTop(_label, center.Y - side / 2 - ScreenMetrics.Units(12) - _label.DesiredSize.Height);
             }

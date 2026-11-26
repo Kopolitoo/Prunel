@@ -190,10 +190,11 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   (the `ModeManager` watches for it). The magnifier, the action choice and the drag and drop
   have their own "back" button. Buttons: Settings, Game, Keyboard (the gaze keyboard, step 12),
   Pause (or Resume when coming from pause), Mouse tracking (switch, green border when on), Quit
-  Prunel (with a "Yes" / "No" confirmation), and Shortcuts (step shortcuts-menu): it replaces the
-  bar by a row of shortcuts, built like the bar (`_shortcuts`): Windows + Tab (Task View, issue
-  #151, sent by `KeyboardInjector.TypeKey`, then movement mode), Game, Call, Mouse tracking and
-  Back. Looking outside the bar for `MenuCloseDelay` (1 s)
+  Prunel (with a "Yes" / "No" confirmation), and, on its own near the bottom-right corner, Shortcuts (step shortcuts-menu, switch,
+  `_shortcuts`): it unfolds above it a column of shortcuts (`PlaceShortcuts`, labels on the
+  left): Windows + Tab (Task View, issue #151, sent by `KeyboardInjector.TypeKey`, then
+  movement mode), Game, Call, Mouse tracking. The button and the column count as "in the bar".
+  Looking outside the bar for `MenuCloseDelay` (1 s)
   closes it and goes back to the previous mode. A small circle shows where the gaze is.
 - `Modes/SettingsMode` and `SettingsWindow` (step 7): "Settings" button of the menu. A
   full-screen window, black background, with four collapsible categories on the left: Gaze
