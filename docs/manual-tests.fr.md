@@ -638,6 +638,24 @@ jeton).
 8. Petite et grande taille d'icônes (paramètres) : les deux boutons des coins ne couvrent jamais
    la barre, et la colonne tient dans l'écran.
 
+## 42. Choisir les boutons de la colonne de raccourcis (issue #147)
+
+1. Paramètres, catégorie « Actions » : un onglet « Raccourcis » (symbole grille) est entre
+   « Choix d'action » et « Sonnette ». Il montre quatre lignes « Place 1 (en bas) » … « Place 4
+   (en haut) », avec au départ Applications, Jeu, Appeler, Suivi souris.
+2. « + » sur Place 1 : Jeu, Appeler, Suivi souris, Quitter Prunel, Aucun, puis de nouveau
+   Applications. Le mot le plus long (« Quitter Prunel ») tient entre « − » et « + ».
+3. Place 1 = Quitter Prunel, Place 3 = Aucun. Ouvrir le menu, « Raccourcis » : la colonne a
+   trois boutons, de bas en haut : Quitter Prunel (symbole marche/arrêt), Jeu, Suivi souris.
+4. « Quitter Prunel » dans la colonne : la colonne disparaît et la barre demande « Oui » /
+   « Non » ; « Non » ramène la barre (colonne repliée), « Oui » ferme Prunel.
+5. Les quatre places sur Aucun : le bouton Raccourcis se déplie et se replie toujours (bord
+   vert), sans bouton au-dessus.
+6. « Défaut » sur l'onglet : retour à Applications, Jeu, Appeler, Suivi souris.
+7. Un ancien fichier de réglages (de la 0.5.0) : la colonne a Applications, Jeu, Appeler, Suivi
+   souris. Dans `settings.json`, "Shortcut2": "zorglub" → cette place devient Aucun.
+8. Pareil en français et en anglais (onglet « Shortcuts », « Place 1 (bottom) », « None »…).
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,

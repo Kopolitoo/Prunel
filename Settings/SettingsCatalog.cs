@@ -441,6 +441,10 @@ namespace Prunel
             { "setting.alexaBell", "\uE7F5" },   // speakers
             { "setting.startWithWindows", "\uE7E8" },   // power
             { "setting.detailedLog", "\uE8A5" },   // document
+            { "setting.shortcut1", "\uE71D" },   // grid (the shortcuts button of the menu)
+            { "setting.shortcut2", "\uE71D" },
+            { "setting.shortcut3", "\uE71D" },
+            { "setting.shortcut4", "\uE71D" },
         };
 
         /// <summary>The symbol of a setting (see SettingSymbols), the gear if it has none.</summary>
@@ -497,6 +501,9 @@ namespace Prunel
         /// </summary>
         public const string BellTabName = "tab.bell";
 
+        /// <summary>The name of the "Shortcuts" tab (step shortcuts-menu).</summary>
+        public const string ShortcutsTabName = "tab.shortcuts";
+
         /// <summary>The "Alexa" tab (call bell on an Alexa speaker): one setting and three buttons.</summary>
         public const string AlexaTabName = "tab.alexa";
 
@@ -522,7 +529,7 @@ namespace Prunel
         public static readonly List<SettingsCategory> Categories = new List<SettingsCategory>
         {
             new SettingsCategory("category.gaze", "\uE890", "tab.gaze", "tab.fixation", "tab.delays", "tab.pause"),
-            new SettingsCategory("category.actions", "\uE7C9", "tab.magnifierDrag", "tab.scroll", IconsTabName, BellTabName, AlexaTabName),
+            new SettingsCategory("category.actions", "\uE7C9", "tab.magnifierDrag", "tab.scroll", IconsTabName, ShortcutsTabName, BellTabName, AlexaTabName),
             new SettingsCategory("category.display", "\uE7F4", "tab.display", ColorsTabName, "tab.keyboard", PredictionTabName, "tab.sound", "tab.game"),
             new SettingsCategory("category.system", "\uE770", GeneralTabName, ProfilesTabName, ToolsTabName, AboutTabName)
         };
@@ -722,6 +729,19 @@ namespace Prunel
                                  p => p.KeySound, (p, v) => p.KeySound = v),
                 Setting.YesOrNo("setting.buttonSound",
                                  p => p.ButtonSound, (p, v) => p.ButtonSound = v)),
+
+            // E71D = grid of squares, like the shortcuts button of the menu ("Shortcuts"): the
+            // four places of the shortcuts column, from bottom to top (issue #147). Each one is
+            // a choice among MenuShortcuts (or no button).
+            new SettingsTab(ShortcutsTabName, "\uE71D",
+                Setting.Choice("setting.shortcut1", MenuShortcuts.TextKeys,
+                               p => p.Shortcut1Index, (p, v) => p.Shortcut1Index = v),
+                Setting.Choice("setting.shortcut2", MenuShortcuts.TextKeys,
+                               p => p.Shortcut2Index, (p, v) => p.Shortcut2Index = v),
+                Setting.Choice("setting.shortcut3", MenuShortcuts.TextKeys,
+                               p => p.Shortcut3Index, (p, v) => p.Shortcut3Index = v),
+                Setting.Choice("setting.shortcut4", MenuShortcuts.TextKeys,
+                               p => p.Shortcut4Index, (p, v) => p.Shortcut4Index = v)),
 
             // E7ED = ringer ("Bell"): the call bell of the menu (see BellRinger, ComputerBell).
             // Below the rows: a "Test" button (see SettingsWindow.BuildBellTab, issue #162).

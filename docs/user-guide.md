@@ -106,7 +106,8 @@ game mode. Buttons:
   below). To quit Prunel: Settings, "General" tab.
 - **Shortcuts**: a button on its own near the bottom-right corner, shown with the bar. Look
   at it: a column of shortcuts comes out from under it and slides up (green border); look at
-  it again to fold it. This column will grow over time. From bottom to top:
+  it again to fold it. Its four places are chosen in the settings ("Shortcuts" tab, see below).
+  At first, from bottom to top:
   - **Applications** (Windows + Tab): shows all the open windows (Task View): the menu closes, look at the
     window you want and click it with the gaze as usual.
   - **Game**: game mode (see below). From game mode, it becomes **Quit the game**.
@@ -213,6 +214,10 @@ repeat) or a yes / no switch. Changes apply at once and are saved.
 - **Sound** tab: two yes / no options, both off at first. **Key sound**: a short "tick" for each
   key of the gaze keyboard. **Button sound**: a short sound for every other button (menu, action
   choice, options icon, settings). The sound plays at the Windows volume.
+- **Shortcuts** tab ("Actions" category): the four places of the menu's shortcuts column,
+  from bottom (place 1) to top (place 4). For each one, "−" / "+" chooses among **Applications**,
+  **Game**, **Call**, **Mouse tracking**, **Quit Prunel** (asks "Yes" / "No" first) or **None**
+  (the column is then shorter). At first: Applications, Game, Call, Mouse tracking.
 - **Bell** tab ("Actions" category): **Computer bell** (yes at first): the menu's "Call" button
   rings on this computer. **Bell duration** (6 s at first, 2 to 30 s) and **Bell volume** (80 %
   at first, 10 to 100 %; the Windows volume still applies). **Windows volume while ringing**

@@ -581,6 +581,24 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
 8. Small icon size and large icon size (settings): the two corner buttons never cover the bar,
    and the column fits in the screen.
 
+## 42. Choose the buttons of the shortcuts column (issue #147)
+
+1. Settings, "Actions" category: a "Shortcuts" tab (grid symbol) is between "Action choice" and
+   "Bell". It shows four rows "Place 1 (bottom)" … "Place 4 (top)", with Applications, Game,
+   Call, Mouse tracking at first.
+2. "+" on Place 1: Game, Call, Mouse tracking, Quit Prunel, None, then back to Applications.
+   The longest word ("Quit Prunel", « Quitter Prunel ») fits between "−" and "+".
+3. Place 1 = Quit Prunel, Place 3 = None. Open the menu, "Shortcuts": the column has three
+   buttons, bottom to top: Quit Prunel (power symbol), Game, Mouse tracking.
+4. "Quit Prunel" in the column: the column disappears and the bar asks "Yes" / "No"; "No"
+   brings the bar back (column folded), "Yes" closes Prunel.
+5. All four places on None: the Shortcuts button still unfolds and folds (green border), with
+   no button above it.
+6. "Default" on the tab: back to Applications, Game, Call, Mouse tracking.
+7. An older settings file (from 0.5.0): the column has Applications, Game, Call, Mouse
+   tracking. In `settings.json`, "Shortcut2": "zorglub" → that place becomes None.
+8. Same in French and English (tab « Raccourcis », « Place 1 (en bas) », « Aucun »…).
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,

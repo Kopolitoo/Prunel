@@ -33,7 +33,9 @@ namespace Prunel
     /// on its own, near the bottom-right corner of the screen (the bar stays centered). It is a
     /// switch: looking at it unfolds the SHORTCUTS COLUMN above it (green border), looking at it
     /// again folds it. The column groups shortcuts and modes used often, and will grow over
-    /// time. From bottom to top:
+    /// time. It has four places, chosen in the settings ("Actions" category, "Shortcuts" tab,
+    /// issue #147; see MenuShortcuts); an empty place is skipped. The buttons that can be
+    /// placed there (by default the first four, from bottom to top):
     ///   Applications   sends Windows + Tab (Task View: all the open windows), then closes the
     ///                  menu and returns to movement mode, to pick a window with a gaze click;
     ///   Game           switches to game mode. Coming from game mode, this button
@@ -41,10 +43,11 @@ namespace Prunel
     ///   Call           rings the call bell (step call-bell, see BellRinger). The menu stays
     ///                  open, with "Call sent" (or the problem) above the bar;
     ///   Mouse tracking switch: green border when the option is on. The menu stays open; the
-    ///                  gaze must leave the button before it can be used again.
+    ///                  gaze must leave the button before it can be used again;
+    ///   Quit           asks for confirmation ("Yes, quit" / "No"), then closes Prunel.
     /// Game, Call and Mouse tracking were in the bar before: they are only in the column now
-    /// (user's choice, 2026-11-26). "Quit Prunel" left the menu too: it is in the General tab of
-    /// the settings (the "Yes" / "No" confirmation below stays, for a later Quit shortcut).
+    /// (user's choice, 2026-11-26). "Quit Prunel" left the bar too: it is in the General tab of
+    /// the settings, and can be placed in the column.
     /// Unfolding is animated: the buttons come out from under the shortcuts button and slide
     /// up to their place, fast at first and slow at the end (GazeButton.SlideFrom).
     /// Their labels are on the left (above, they would cover the button above). The bar stays
@@ -756,14 +759,14 @@ namespace Prunel
             double zoneTop = rowY - size / 2;
             if (_shortcuts)
             {
-                // The column, from bottom to top (see the class comment).
-                //   E7C4 = task view, E7ED = ringer.
+                // The column, from bottom to top: the four places chosen in the settings
+                // (issue #147). An empty place is skipped: the column is then shorter.
                 List<GazeButton> column = new List<GazeButton>();
                 List<MenuAction?> actions = new List<MenuAction?>();
-                Add(column, actions, new GazeButton("\uE7C4", null, Texts.Get("menu.applications")), MenuAction.Applications);
-                AddGameButton(column, actions);
-                Add(column, actions, new GazeButton("\uE7ED", null, Texts.Get("menu.bell")), MenuAction.Bell);
-                AddMouseTrackingButton(column, actions, p);
+                foreach (string name in p.Shortcuts)
+                {
+                    AddShortcut(column, actions, name, p);
+                }
 
                 // Same size as the bar, reduced if the column does not fit above the button.
                 int k = column.Count;
@@ -801,6 +804,36 @@ namespace Prunel
 
             _shortcutsLeftZone = x - size / 2 - zoneMargin;
             _shortcutsTopZone = zoneTop - zoneMargin;
+        }
+
+        /// <summary>
+        /// Adds the button of a shortcut name (see MenuShortcuts) to the column; nothing for
+        /// "none" or an unknown name.
+        /// </summary>
+        private void AddShortcut(List<GazeButton> buttons, List<MenuAction?> actions, string name,
+                                 AppSettings p)
+        {
+            switch (name)
+            {
+                case MenuShortcuts.Applications:
+                    // E7C4 = task view.
+                    Add(buttons, actions, new GazeButton("\uE7C4", null, Texts.Get("menu.applications")), MenuAction.Applications);
+                    break;
+                case MenuShortcuts.Game:
+                    AddGameButton(buttons, actions);
+                    break;
+                case MenuShortcuts.Bell:
+                    // E7ED = ringer.
+                    Add(buttons, actions, new GazeButton("\uE7ED", null, Texts.Get("menu.bell")), MenuAction.Bell);
+                    break;
+                case MenuShortcuts.MouseTracking:
+                    AddMouseTrackingButton(buttons, actions, p);
+                    break;
+                case MenuShortcuts.Quit:
+                    // E7E8 = power button. Asks "Yes" / "No" first (see MenuAction.Quit).
+                    Add(buttons, actions, new GazeButton("\uE7E8", null, Texts.Get("menu.quit")), MenuAction.Quit);
+                    break;
+            }
         }
 
         /// <summary>

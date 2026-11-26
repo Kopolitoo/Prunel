@@ -66,6 +66,13 @@ namespace Prunel
             MagnifierDelay = 0.8;
             OpeningAnimation = true;
             OpeningDuration = 0.4;   // 250 ms of growth + 150 ms of fade, as before issue #161
+
+            // The shortcuts column of the menu, from bottom to top (as it was before it could
+            // be chosen).
+            Shortcut1 = MenuShortcuts.Applications;
+            Shortcut2 = MenuShortcuts.Game;
+            Shortcut3 = MenuShortcuts.Bell;
+            Shortcut4 = MenuShortcuts.MouseTracking;
             ChoiceBackgroundTransparency = 100;   // user choice: no black background
 
             AndroidPauseDuration = 1.0;
@@ -187,6 +194,11 @@ namespace Prunel
             // Only 0, 25, 50 or 75: another value goes to the nearest (40 → 50, 90 → 75).
             ChoiceBackgroundTransparency = Clamp(ChoiceBackgroundTransparency, 0, 100);
             OpeningDuration = Clamp(OpeningDuration, 0.2, 2);
+            // An unknown shortcut name (typo…) leaves its place empty.
+            Shortcut1 = MenuShortcuts.Known(Shortcut1);
+            Shortcut2 = MenuShortcuts.Known(Shortcut2);
+            Shortcut3 = MenuShortcuts.Known(Shortcut3);
+            Shortcut4 = MenuShortcuts.Known(Shortcut4);
             KeyboardTransparency = Math.Round(Clamp(KeyboardTransparency, 0, 75) / 25) * 25;
             LengthPenalty = Clamp(LengthPenalty, 1, 2);
             BellDuration = Clamp(BellDuration, 2, 30);
@@ -382,7 +394,8 @@ namespace Prunel
             // Version 29 (ChoiceBackgroundTransparency): nothing to fix, it gets its default
             // value (100 %: no black background, the user's choice). Version 30
             // (HoldReleaseDelay): nothing to fix, it gets its default value (1.5 s). Version 31
-            // (OpeningDuration): nothing to fix, it gets its default value (0.4 s).
+            // (OpeningDuration): nothing to fix, it gets its default value (0.4 s). Version 32
+            // (Shortcut1 … Shortcut4): nothing to fix, they get their default value.
 
             FileVersion = CurrentVersion;
             return true;
