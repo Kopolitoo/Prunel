@@ -17,23 +17,43 @@ namespace Prunel
     /// (issue #54), activated by the gaze
     /// (GazeButton): one looks at a button for [ActivationDelay], its ring fills up, then it
     /// activates. From left to right:
-    ///   Settings       opens settings mode;
-    ///   Game           switches to game mode. Coming from game mode, this button
-    ///                  becomes "Quit game" and returns to movement mode;
     ///   Keyboard       opens Prunel's gaze keyboard (see GazeKeyboard), then closes
     ///                  the menu. If it is already open (hidden by game mode), closes it;
-    ///   Call           rings the call bell (step call-bell, see BellRinger). The menu stays
-    ///                  open, with "Call sent" (or the problem) above the bar;
-    ///   Pause          switches to pause mode;
-    ///   Mouse tracking switch: green border when the option is on. The menu stays open; the
-    ///                  gaze must leave the button before it can be used again;
-    ///   Quit           asks for confirmation ("Yes, quit" / "No"), then closes Prunel.
+    ///   Pause          switches to pause mode.
+    /// The two buttons are further apart than in the other bars (ClassicGap4K).
+    ///
+    /// SETTINGS BUTTON: it appears with the bar, on its own near the bottom-LEFT corner of the
+    /// screen (like the shortcuts button on the right, user's choice 2026-11-26). It opens
+    /// settings mode.
     ///
     /// Calibration and Diagnostic are not in the bar: they
     /// are in the "Tools" tab of the settings (see SettingsWindow).
     ///
-    /// From game mode, the "Quit game" button has a green border, like a lit switch: it shows
-    /// that game mode is active.
+    /// SHORTCUTS BUTTON (step shortcuts-menu, issues #147 and #151): it appears with the bar,
+    /// on its own, near the bottom-right corner of the screen (the bar stays centered). It is a
+    /// switch: looking at it unfolds the SHORTCUTS COLUMN above it (green border), looking at it
+    /// again folds it. The column groups shortcuts and modes used often, and will grow over
+    /// time. From bottom to top:
+    ///   Applications   sends Windows + Tab (Task View: all the open windows), then closes the
+    ///                  menu and returns to movement mode, to pick a window with a gaze click;
+    ///   Game           switches to game mode. Coming from game mode, this button
+    ///                  becomes "Quit game" (green border) and returns to movement mode;
+    ///   Call           rings the call bell (step call-bell, see BellRinger). The menu stays
+    ///                  open, with "Call sent" (or the problem) above the bar;
+    ///   Mouse tracking switch: green border when the option is on. The menu stays open; the
+    ///                  gaze must leave the button before it can be used again.
+    /// Game, Call and Mouse tracking were in the bar before: they are only in the column now
+    /// (user's choice, 2026-11-26). "Quit Prunel" left the menu too: it is in the General tab of
+    /// the settings (the "Yes" / "No" confirmation below stays, for a later Quit shortcut).
+    /// Unfolding is animated: the buttons come out from under the shortcuts button and slide
+    /// up to their place, fast at first and slow at the end (GazeButton.SlideFrom).
+    /// Their labels are on the left (above, they would cover the button above). The bar stays
+    /// usable while the column is open. The button and the column count as "in the bar" for
+    /// closing. Not shown from the pause, in the keyboard bar, nor during the "Quit"
+    /// confirmation.
+    ///
+    /// From game mode, the "Quit game" button of the column has a green border, like a lit
+    /// switch: it shows that game mode is active.
     ///
     /// From PAUSE mode: the bar first shows ONLY the "Resume"
     /// button (play). This way, during the pause, a downward gaze cannot trigger anything else.
@@ -85,6 +105,8 @@ namespace Prunel
             Language,
             Pause,
             Bell,
+            Shortcuts,
+            Applications,
             Resume,
             MouseTracking,
             Quit,
@@ -107,6 +129,13 @@ namespace Prunel
         }
 
         /// <summary>
+        /// Space between the buttons of the classic bar (Keyboard, Pause), in 4K screen pixels:
+        /// wider than ButtonGap, now that the bar has only two buttons (user's choice,
+        /// 2026-11-26).
+        /// </summary>
+        private const double ClassicGap4K = 200;
+
+        /// <summary>
         /// Space around the row of buttons, in 4K screen pixels. The bar has no background
         /// (issue #54): this padding only sets where the buttons sit and the "in the bar" zone.
         /// </summary>
@@ -126,6 +155,12 @@ namespace Prunel
         /// </summary>
         private const double ZoneMargin4K = 60;
 
+        /// <summary>
+        /// Duration of the shortcuts column unfolding, in milliseconds. All the buttons arrive
+        /// together: the farthest one goes the fastest.
+        /// </summary>
+        private const double ColumnSlideMs = 300;
+
         // The buttons shown, and the action of each one (same order; null = unavailable button).
         private readonly List<GazeButton> _buttons = new List<GazeButton>();
         private readonly List<MenuAction?> _actions = new List<MenuAction?>();
@@ -136,6 +171,13 @@ namespace Prunel
 
         // True during the "Quit" confirmation.
         private bool _confirmation;
+
+        // True while the shortcuts column is unfolded.
+        private bool _shortcuts;
+
+        // True when the next Build must animate the column unfolding (only right after looking
+        // at the shortcuts button, not when the bar is rebuilt for a message or a switch).
+        private bool _animateColumn;
 
         // A message shown above the bar (null = none).
         private string _message;
@@ -151,6 +193,15 @@ namespace Prunel
         private double _leftZone;
         private double _rightZone;
         private double _topZone;
+
+        // The zone of the shortcuts button and its column (with its margin), in screen pixels;
+        // _shortcutsLeftZone < 0 = no shortcuts button.
+        private double _shortcutsLeftZone = -1;
+        private double _shortcutsTopZone;
+
+        // The zone of the settings button (with its margin); _settingsRightZone < 0 = none.
+        private double _settingsRightZone = -1;
+        private double _settingsTopZone;
 
         // Time (ms) when the gaze left the bar; -1 = it is inside.
         private double _outsideBarStartMs = -1;
@@ -193,6 +244,7 @@ namespace Prunel
             // The ModeManager has already noted the previous mode: that is where we will return.
             _back = Manager.PreviousMode;
             _confirmation = false;
+            _shortcuts = false;
             _message = null;
             _outsideBarStartMs = -1;
             _alreadyShown = false;
@@ -384,6 +436,23 @@ namespace Prunel
                     RingBell();
                     break;
 
+                case MenuAction.Shortcuts:
+                    // Switch: unfolds or folds the shortcuts column. The menu stays open; the bar
+                    // is rebuilt and the button waits for the gaze to leave it.
+                    _shortcuts = !_shortcuts;
+                    _animateColumn = _shortcuts;
+                    Build();
+                    break;
+
+                case MenuAction.Applications:
+                    // Task View (issue #151). The menu closes and we go to movement mode, even
+                    // from the game: the open windows are then picked with a normal gaze click.
+                    KeyboardInjector.TypeKey(NativeMethods.VK_TAB, false,
+                                             new ushort[] { NativeMethods.VK_LWIN });
+                    App.Log("Menu: Windows + Tab sent");
+                    Manager.ChangeMode(new MovementMode());
+                    break;
+
                 case MenuAction.Resume:
                     // End of the pause: straight back to movement mode, without showing the
                     // other buttons.
@@ -394,13 +463,15 @@ namespace Prunel
                     // Switch: toggle the option, save it, and stay in the menu.
                     AppSettings.Current.MouseTracking = !AppSettings.Current.MouseTracking;
                     AppSettings.Current.Save();
-                    _buttons[num].SetLit(AppSettings.Current.MouseTracking);
                     App.Log("Mouse tracking: " + (AppSettings.Current.MouseTracking ? "yes" : "no"));
-                    _aimer.BlockUntilExit();
+                    // The bar is rebuilt (new border, without animating the column again). The
+                    // button waits for the gaze to leave it.
+                    Build();
                     break;
 
                 case MenuAction.Quit:
                     _confirmation = true;
+                    _shortcuts = false;
                     _message = Texts.Get("menu.quitQuestion");
                     Build();
                     break;
@@ -552,43 +623,31 @@ namespace Prunel
             else
             {
                 // Symbols of the Windows font (Segoe MDL2 Assets / Segoe Fluent Icons):
-                //   E713 gear, E7FC gamepad, E765 keyboard, E769 pause,
-                //   E768 play, E962 mouse, E7E8 power button.
-                Add(buttons, actions, new GazeButton("", null, Texts.Get("menu.settings")), MenuAction.Settings);
-                if (_back is GameMode)
-                {
-                    // Green border: game mode is active.
-                    GazeButton quitGame = new GazeButton("\uE7FC", null, Texts.Get("menu.quitGame"));
-                    quitGame.SetLit(true);
-                    Add(buttons, actions, quitGame, MenuAction.QuitGame);
-                }
-                else
-                {
-                    Add(buttons, actions, new GazeButton("\uE7FC", null, Texts.Get("menu.game")), MenuAction.Game);
-                }
+                //   E765 keyboard, E769 pause. Settings is on its own on the left (PlaceSettings).
                 Add(buttons, actions, new GazeButton("", null, Texts.Get("menu.keyboard")), MenuAction.Keyboard);
-                // E7ED = ringer: the call bell (step call-bell), in the middle of the bar.
-                Add(buttons, actions, new GazeButton("\uE7ED", null, Texts.Get("menu.bell")), MenuAction.Bell);
                 // (From the pause, only "Resume" is shown: so here, we are never in pause.)
                 Add(buttons, actions, new GazeButton("", null, Texts.Get("menu.pause")), MenuAction.Pause);
-                GazeButton tracking = new GazeButton("", null, Texts.Get("menu.mouseTracking"));
-                tracking.SetLit(p.MouseTracking);
-                Add(buttons, actions, tracking, MenuAction.MouseTracking);
-                Add(buttons, actions, new GazeButton("", null, Texts.Get("menu.quit")), MenuAction.Quit);
             }
 
+            // ── The settings and shortcuts buttons, on their own in the corners (see the class
+            //    comment): only with the classic bar, whose buttons are further apart.
+            bool withCorners = !KeyboardMenu && !_confirmation && !FromPause;
+            double gap = withCorners ? ScreenMetrics.Px(ClassicGap4K) : ButtonGap;
+
             // ── Button size: [IconSize], reduced if the bar does not fit in the screen
-            //    width.
+            //    width. With the shortcuts button, the room of one button and one gap is kept
+            //    on each side of the bar, so that the bar stays centered without touching it.
             int n = buttons.Count;
+            int slots = withCorners ? n + 2 : n;
             // The menu buttons are twice as big as the other icons.
             double size = 2 * p.IconSizePx;
-            double maxSize = (width - ScreenMetrics.Px(20) - 2 * Padding - (n - 1) * ButtonGap) / n;
+            double maxSize = (width - ScreenMetrics.Px(20) - 2 * Padding - (slots - 1) * gap) / slots;
             size = Math.Max(ScreenMetrics.Px(20), Math.Min(size, maxSize));
 
             // ── The bar rectangle, centered at the bottom. Nothing is drawn for it: the bar has
             //    no background, only its buttons (each one has its own dark disc). The
             //    rectangle sets where the buttons go and the "in the bar" zone.
-            double barWidth = n * size + (n - 1) * ButtonGap + 2 * Padding;
+            double barWidth = n * size + (n - 1) * gap + 2 * Padding;
             double barHeight = size + 2 * Padding;
             double left = (width - barWidth) / 2;
             double top = height - ScreenMetrics.Px(BottomMargin4K) - barHeight;
@@ -597,7 +656,7 @@ namespace Prunel
             //    screen).
             for (int i = 0; i < n; i++)
             {
-                double x = left + Padding + size / 2 + i * (size + ButtonGap);
+                double x = left + Padding + size / 2 + i * (size + gap);
                 double y = top + Padding + size / 2;
                 buttons[i].Place(layer, surface, x, y, size, true);
                 _buttons.Add(buttons[i]);
@@ -638,6 +697,15 @@ namespace Prunel
             _rightZone = left + barWidth + zoneMargin;
             _topZone = zoneTop - zoneMargin;
 
+            // ── The settings button (left), the shortcuts button and its column (right).
+            _shortcutsLeftZone = -1;
+            _settingsRightZone = -1;
+            if (withCorners)
+            {
+                PlaceSettings(layer, surface, size, top + Padding + size / 2, zoneMargin);
+                PlaceShortcuts(layer, surface, p, size, top + Padding + size / 2, zoneMargin);
+            }
+
             // Keyboard bar: the keyboard (if at the bottom) moves up above the bar and its
             // optional message, with a small gap.
             if (KeyboardMenu)
@@ -655,6 +723,114 @@ namespace Prunel
             _built = true;
         }
 
+        /// <summary>
+        /// Places the settings button near the bottom-left corner, at the height of the bar
+        /// (rowY: center of the bar's buttons). Notes its zone, with its margin, for InBar.
+        /// </summary>
+        private void PlaceSettings(OverlayWindow layer, Canvas surface, double size, double rowY,
+                                   double zoneMargin)
+        {
+            double x = ScreenMetrics.Px(BottomMargin4K) + Padding + size / 2;
+
+            // E713 = gear. Label above, as in the bar.
+            GazeButton settings = new GazeButton("\uE713", null, Texts.Get("menu.settings"));
+            settings.Place(layer, surface, x, rowY, size, true);
+            _buttons.Add(settings);
+            _actions.Add(MenuAction.Settings);
+
+            _settingsRightZone = x + size / 2 + zoneMargin;
+            _settingsTopZone = rowY - size / 2 - zoneMargin;
+        }
+
+        /// <summary>
+        /// Places the shortcuts button near the bottom-right corner, at the height of the bar
+        /// (rowY: center of the bar's buttons), and, if it is unfolded, the shortcuts column
+        /// above it. Notes their zone, with its margin, for InBar.
+        /// </summary>
+        private void PlaceShortcuts(OverlayWindow layer, Canvas surface, AppSettings p,
+                                    double size, double rowY, double zoneMargin)
+        {
+            double width = Manager.ScreenWidth;
+            double x = width - ScreenMetrics.Px(BottomMargin4K) - Padding - size / 2;
+
+            double zoneTop = rowY - size / 2;
+            if (_shortcuts)
+            {
+                // The column, from bottom to top (see the class comment).
+                //   E7C4 = task view, E7ED = ringer.
+                List<GazeButton> column = new List<GazeButton>();
+                List<MenuAction?> actions = new List<MenuAction?>();
+                Add(column, actions, new GazeButton("\uE7C4", null, Texts.Get("menu.applications")), MenuAction.Applications);
+                AddGameButton(column, actions);
+                Add(column, actions, new GazeButton("\uE7ED", null, Texts.Get("menu.bell")), MenuAction.Bell);
+                AddMouseTrackingButton(column, actions, p);
+
+                // Same size as the bar, reduced if the column does not fit above the button.
+                int k = column.Count;
+                double room = rowY - size / 2 - ScreenMetrics.Px(BottomMargin4K);
+                double columnSize = Math.Min(size, (room - k * ButtonGap) / k);
+                columnSize = Math.Max(ScreenMetrics.Px(20), columnSize);
+
+                double y = rowY - size / 2;
+                for (int i = 0; i < k; i++)
+                {
+                    y -= ButtonGap + columnSize / 2;
+                    column[i].Place(layer, surface, x, y, columnSize, false, true);
+                    if (_animateColumn)
+                    {
+                        // Comes out from under the shortcuts button (placed after, so drawn
+                        // on top of the column).
+                        column[i].SlideFrom(layer, x, rowY, ColumnSlideMs);
+                    }
+                    _buttons.Add(column[i]);
+                    _actions.Add(actions[i]);
+                    y -= columnSize / 2;
+                }
+                zoneTop = y;
+            }
+            _animateColumn = false;
+
+            // The shortcuts button, placed after the column: drawn on top of it, it hides the
+            // buttons at the start of the unfolding.
+            // E71D = grid of squares. Green border while the column is unfolded.
+            GazeButton shortcuts = new GazeButton("\uE71D", null, Texts.Get("menu.shortcuts"));
+            shortcuts.SetLit(_shortcuts);
+            shortcuts.Place(layer, surface, x, rowY, size, false, true);
+            _buttons.Add(shortcuts);
+            _actions.Add(MenuAction.Shortcuts);
+
+            _shortcutsLeftZone = x - size / 2 - zoneMargin;
+            _shortcutsTopZone = zoneTop - zoneMargin;
+        }
+
+        /// <summary>
+        /// The "Game" button, or "Quit game" (green border: game mode is active) when coming
+        /// from game mode. Shared by the bar and the shortcuts row.
+        /// </summary>
+        private void AddGameButton(List<GazeButton> buttons, List<MenuAction?> actions)
+        {
+            // E7FC = gamepad.
+            if (_back is GameMode)
+            {
+                GazeButton quitGame = new GazeButton("\uE7FC", null, Texts.Get("menu.quitGame"));
+                quitGame.SetLit(true);
+                Add(buttons, actions, quitGame, MenuAction.QuitGame);
+            }
+            else
+            {
+                Add(buttons, actions, new GazeButton("\uE7FC", null, Texts.Get("menu.game")), MenuAction.Game);
+            }
+        }
+
+        /// <summary>The "Mouse tracking" switch (green border when on). Bar and shortcuts row.</summary>
+        private static void AddMouseTrackingButton(List<GazeButton> buttons, List<MenuAction?> actions, AppSettings p)
+        {
+            // E962 = mouse.
+            GazeButton tracking = new GazeButton("\uE962", null, Texts.Get("menu.mouseTracking"));
+            tracking.SetLit(p.MouseTracking);
+            Add(buttons, actions, tracking, MenuAction.MouseTracking);
+        }
+
         private static void Add(List<GazeButton> buttons, List<MenuAction?> actions,
                                     GazeButton button, MenuAction? action)
         {
@@ -662,14 +838,27 @@ namespace Prunel
             actions.Add(action);
         }
 
-        /// <summary>True if the gaze is on the bar (with its margin), or down below the screen.</summary>
+        /// <summary>
+        /// True if the gaze is on the bar, on the settings button, on the shortcuts button or its
+        /// column (with their margin), or down below the screen.
+        /// </summary>
         private bool InBar(GazeState gaze)
         {
             if (gaze.BelowScreen)
             {
                 return true;
             }
-            return gaze.X >= _leftZone && gaze.X <= _rightZone && gaze.Y >= _topZone;
+            if (gaze.X >= _leftZone && gaze.X <= _rightZone && gaze.Y >= _topZone)
+            {
+                return true;
+            }
+            // The settings button, from the left edge of the screen.
+            if (_settingsRightZone >= 0 && gaze.X <= _settingsRightZone && gaze.Y >= _settingsTopZone)
+            {
+                return true;
+            }
+            // The shortcuts button and its column, up to the right edge of the screen.
+            return _shortcutsLeftZone >= 0 && gaze.X >= _shortcutsLeftZone && gaze.Y >= _shortcutsTopZone;
         }
     }
 }

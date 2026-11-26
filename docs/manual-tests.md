@@ -359,7 +359,7 @@ Gaze only.
 
 ## 29. Call bell on the computer (step call-bell)
 
-1. Open the menu from movement mode: a "Call" button (bell) is in the middle of the bar. Look at
+1. Open the menu from movement mode: "Shortcuts", then the "Call" button (bell) of the column. Look at
    it: a "ding-dong" rings on the computer for about 6 s, "Call sent" shows above the bar, the
    menu stays open.
 2. Look at "Call" again within 5 s: nothing rings, "Call already sent". After 5 s it rings again.
@@ -370,7 +370,7 @@ Gaze only.
    cut the bell.
 6. Open the gaze keyboard, then its bar (look below the screen): a "Call" button is there too,
    and rings.
-7. From the pause: the bar only shows "Resume" (no bell). From game mode: "Call" is there.
+7. From the pause: the bar only shows "Resume" (no bell). From game mode: "Call" is in the Shortcuts column.
 8. With a Bluetooth speaker as the Windows output: the bell rings in the speaker.
 9. Windows volume at 20 %, then "Call": the volume goes up to 80 % during the ringing, then back
    to 20 %. Same with the sound muted: unmuted while ringing, muted again after. Windows volume
@@ -553,6 +553,33 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
 4. Accents page again, look at « or ! or -: the character is typed and the accents page STAYS.
 5. With Shift on, "é" types "É" and the letters page comes back.
 6. Same with the English keyboard (QWERTY, accents page "á à â…").
+
+## 41. Settings and Shortcuts buttons of the menu (step shortcuts-menu, issue #151)
+
+1. Open several windows (Notepad, Explorer, a browser). Open the menu: the bar is centered as
+   before, and a "Shortcuts" button (grid of squares) shows on its own near the bottom-right
+   corner, without touching the bar. A "Settings" button (gear) shows the same way near the
+   bottom-left corner, and opens the settings. The bar only has Keyboard and Pause, well apart
+   (about twice the old gap); no Game, Call, Mouse tracking, Quit Prunel. Looking at the
+   Settings button does not close the menu.
+2. Look at "Shortcuts": it gets a green border and a column unfolds above it, from bottom to
+   top: Applications, Game, Call, Mouse tracking. The buttons come out from under "Shortcuts"
+   and slide up, fast at first and slow at the end (about 0.3 s), all arriving together. They
+   do not come back animated when "Call" or "Mouse tracking" is used. With the "Labels"
+   setting on, the labels are on the left of the buttons.
+3. The button stays under the gaze: it does NOT fold the column until the gaze leaves it and
+   comes back. Looking at it again folds the column.
+4. While looking at the column, the menu does not close and no gaze circle shows. Look away
+   from the bar and the column for one second: the whole menu closes.
+5. "Applications": the menu closes and Task View shows the open windows; the circle shows
+   above it and a gaze click on a window brings it to the front.
+6. "Mouse tracking" in the column: the border changes and the column stays open. "Call"
+   rings, the message shows above the bar, the column stays open. "Game" switches to game mode;
+   from game mode, the column shows "Quit game" (green border).
+7. No "Settings" or "Shortcuts" button: menu opened from the pause (only "Resume"), keyboard
+   bar.
+8. Small icon size and large icon size (settings): the two corner buttons never cover the bar,
+   and the column fits in the screen.
 
 ## Full installation (Setup.exe, UI access)
 

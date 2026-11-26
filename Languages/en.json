@@ -24,6 +24,8 @@
   "menu.game": "Game",
   "menu.keyboard": "Keyboard",
   "menu.mouseTracking": "Mouse tracking",
+  "menu.shortcuts": "Shortcuts",
+  "menu.applications": "Applications",
   "menu.quit": "Quit Prunel",
   "actionChoice.emptySlot": "Empty slot (set it up in the settings)",
   "action.leftClick.short": "Left click",

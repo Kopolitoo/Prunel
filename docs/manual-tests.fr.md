@@ -392,8 +392,8 @@ Uniquement au regard.
 
 ## 29. Sonnette d'appel sur l'ordinateur (étape call-bell)
 
-1. Ouvrir le menu depuis le mode mouvement : un bouton « Appeler » (sonnette) est au milieu de la
-   barre. Le regarder : un « ding-dong » sonne sur l'ordinateur pendant environ 6 s, « Appel
+1. Ouvrir le menu depuis le mode mouvement : « Raccourcis », puis le bouton « Appeler » (sonnette)
+   de la colonne. Le regarder : un « ding-dong » sonne sur l'ordinateur pendant environ 6 s, « Appel
    envoyé » s'affiche au-dessus de la barre, le menu reste ouvert.
 2. Regarder de nouveau « Appeler » dans les 5 s : rien ne sonne, « Appel déjà envoyé ». Après
    5 s, ça sonne de nouveau.
@@ -406,7 +406,7 @@ Uniquement au regard.
 6. Ouvrir le clavier du regard, puis sa barre (regarder sous l'écran) : un bouton « Appeler » y
    est aussi, et sonne.
 7. Depuis la pause : la barre ne montre que « Reprendre » (pas de sonnette). Depuis le mode jeu :
-   « Appeler » est là.
+   « Appeler » est dans la colonne Raccourcis.
 8. Avec une enceinte Bluetooth comme sortie de Windows : la sonnette sonne dans l'enceinte.
 9. Volume de Windows à 20 %, puis « Appeler » : le volume monte à 80 % pendant la sonnerie, puis
    revient à 20 %. Pareil avec le son coupé : réactivé pendant la sonnerie, recoupé après. Volume
@@ -610,6 +610,33 @@ jeton).
    accents RESTE.
 5. Avec Maj allumée, « é » écrit « É » et la page des lettres revient.
 6. Pareil avec le clavier anglais (QWERTY, page d'accents « á à â… »).
+
+## 41. Boutons Paramètres et Raccourcis du menu (étape shortcuts-menu, issue #151)
+
+1. Ouvrir plusieurs fenêtres (Bloc-notes, Explorateur, un navigateur). Ouvrir le menu : la barre
+   est centrée comme avant, et un bouton « Raccourcis » (grille de carrés) apparaît seul près du
+   coin en bas à droite, sans toucher la barre. Un bouton « Paramètres » (engrenage) apparaît de
+   la même façon près du coin en bas à gauche, et ouvre les paramètres. La barre n'a plus que
+   Clavier et Pause, bien espacés (environ deux fois l'ancien écart) ; plus de Jeu, Appeler,
+   Suivi souris, Quitter Prunel. Regarder le bouton Paramètres ne ferme pas le menu.
+2. Regarder « Raccourcis » : il prend un bord vert et une colonne se déplie au-dessus, de bas en
+   haut : Applications, Jeu, Appeler, Suivi souris. Les boutons sortent de sous « Raccourcis »
+   et montent, vite au départ et lentement à l'arrivée (environ 0,3 s), et arrivent tous
+   ensemble. Ils ne rejouent pas l'animation quand on utilise « Appeler » ou « Suivi souris ».
+   Avec le réglage « Libellés », les libellés sont à gauche des boutons.
+3. Le bouton reste sous le regard : il ne replie PAS la colonne tant que le regard ne l'a pas
+   quitté puis n'y est pas revenu. Le regarder de nouveau replie la colonne.
+4. En regardant la colonne, le menu ne se ferme pas et aucun cercle ne s'affiche. Regarder hors
+   de la barre et de la colonne pendant une seconde : tout le menu se ferme.
+5. « Applications » : le menu se ferme et la vue des tâches montre les fenêtres ouvertes ; le
+   cercle s'affiche par-dessus et un clic du regard sur une fenêtre la met au premier plan.
+6. « Suivi souris » dans la colonne : le bord change et la colonne reste ouverte.
+   « Appeler » sonne, le message s'affiche au-dessus de la barre, la colonne reste ouverte. « Jeu »
+   passe en mode jeu ; depuis le mode jeu, la colonne montre « Quitter le jeu » (bord vert).
+7. Pas de bouton « Paramètres » ni « Raccourcis » : menu ouvert depuis la pause (seulement
+   « Reprendre »), barre du clavier.
+8. Petite et grande taille d'icônes (paramètres) : les deux boutons des coins ne couvrent jamais
+   la barre, et la colonne tient dans l'écran.
 
 ## Installation complète (Setup.exe, accès à l'interface)
 

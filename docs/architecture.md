@@ -188,14 +188,20 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   opens a bar centred at the bottom of the screen (buttons only, no background, 100 px apart
   on a 4K screen: issue #54), only from the movement, pause and game modes
   (the `ModeManager` watches for it). The magnifier, the action choice and the drag and drop
-  have their own "back" button. Buttons: Settings, Game, Keyboard (the gaze keyboard, step 12),
-  Pause (or Resume when coming from pause), Mouse tracking (switch, green border when on), Quit
-  Prunel (with a "Yes" / "No" confirmation). Looking outside the bar for `MenuCloseDelay` (1 s)
-  closes it and goes back to the previous mode. A small circle shows where the gaze is.
+  have their own "back" button. Buttons: Keyboard (the gaze keyboard, step 12) and Pause (or
+  Resume when coming from pause), 200 px apart (`ClassicGap4K`); on its own near the
+  bottom-left corner, Settings (`PlaceSettings`); on its own near the bottom-right corner,
+  Shortcuts (step shortcuts-menu, switch,
+  `_shortcuts`): it unfolds above it a column of shortcuts (`PlaceShortcuts`, labels on the
+  left): Applications (Windows + Tab: Task View, issue #151, sent by `KeyboardInjector.TypeKey`, then
+  movement mode), Game (or Quit game), Call, Mouse tracking (switch, green border when on).
+  Unfolding is animated (`GazeButton.SlideFrom`, 300 ms, EaseOut): the buttons come out from
+  under the Shortcuts button. The button and the column count as "in the bar". Looking
+  outside the bar for `MenuCloseDelay` (1 s) closes it and goes back to the previous mode. A small circle shows where the gaze is.
 - `Modes/SettingsMode` and `SettingsWindow` (step 7): "Settings" button of the menu. A
   full-screen window, black background, with four collapsible categories on the left: Gaze
   (Gaze, Fixation, Delays), Actions (Magnifier, drag, Scroll, Action choice), Display (Display,
-  Keyboard, Game) and System (General, Profiles, Tools, About). The General tab has, in the bottom-right corner, a "Quit Prunel" button then the question "Quit Prunel?" (`BuildQuitConfirmation`); "Yes" calls `SettingsMode.QuitPrunel`, which closes Prunel like the menu. The "About" tab (issue #92) shows the version
+  Keyboard, Game) and System (General, Profiles, Tools, About). The General tab has, in the bottom-right corner, a "Quit Prunel" button then the question "Quit Prunel?" (`BuildQuitConfirmation`); "Yes" calls `SettingsMode.QuitPrunel`, which closes Prunel (Quit left the menu on 2026-11-26). The "About" tab (issue #92) shows the version
   (`App.Version`), the author's picture (`Resources/Author.jpg`, built into the exe) and two
   buttons whose addresses come from the language file; `SettingsMode.OpenLink` opens them in
   the default browser and goes back to movement mode. Only the open category shows its tabs,

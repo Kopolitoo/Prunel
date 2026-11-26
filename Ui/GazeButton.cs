@@ -2,6 +2,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
 namespace Prunel
@@ -270,10 +271,13 @@ namespace Prunel
         /// places it, centered on (x, y) in screen pixels, with a side of [size] pixels.
         /// labelAbove: the label is shown above the button instead of below (for the menu bar,
         /// stuck to the bottom of the screen: below, it would be hidden).
+        /// labelLeft: the label is shown on the left of the button, vertically centered (for the
+        /// shortcuts column of the menu, stuck to the right edge: above, it would cover the
+        /// button above). It wins over labelAbove.
         /// "= false": optional parameter; if it is not given, it is false.
         /// </summary>
         public void Place(OverlayWindow layer, Canvas surface, double x, double y, double size,
-                           bool labelAbove = false)
+                           bool labelAbove = false, bool labelLeft = false)
         {
             X = x;
             Y = y;
@@ -296,10 +300,15 @@ namespace Prunel
             _ringRadius = side / 2 * Math.Sqrt(2) + ScreenMetrics.Units(4);
             _centerWpf = center;
 
-            // The label is centered under the button (or above, if requested).
+            // The label is centered under the button (or above, or on the left, if requested).
             _label.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
             Canvas.SetLeft(_label, center.X - _label.DesiredSize.Width / 2);
-            if (labelAbove)
+            if (labelLeft)
+            {
+                Canvas.SetLeft(_label, center.X - side / 2 - ScreenMetrics.Units(12) - _label.DesiredSize.Width);
+                Canvas.SetTop(_label, center.Y - _label.DesiredSize.Height / 2);
+            }
+            else if (labelAbove)
             {
                 Canvas.SetTop(_label, center.Y - side / 2 - ScreenMetrics.Units(12) - _label.DesiredSize.Height);
             }
@@ -332,6 +341,47 @@ namespace Prunel
 
         private Point _centerWpf;
         private double _ringRadius;
+
+        /// <summary>
+        /// Animates the button (after Place): its drawing starts from (fromX, fromY), in screen
+        /// pixels, and slides to its place in [durationMs] ms, fast at first and slow at the end
+        /// ("EaseOut"), while going from transparent to opaque. Used by the shortcuts column of
+        /// the menu: the buttons come out from under the shortcuts button.
+        /// Only the drawing moves: the activation zone is at its final place at once (the
+        /// activation delay is much longer than the animation).
+        /// </summary>
+        public void SlideFrom(OverlayWindow layer, double fromX, double fromY, double durationMs)
+        {
+            Point start = layer.ToWpf(fromX, fromY);
+
+            // One TranslateTransform shared by all the parts of the button: they move together.
+            TranslateTransform offset = new TranslateTransform();
+            Duration duration = new Duration(TimeSpan.FromMilliseconds(durationMs));
+            CubicEase slowed = new CubicEase();
+            slowed.EasingMode = EasingMode.EaseOut;
+
+            DoubleAnimation moveX = new DoubleAnimation(start.X - _centerWpf.X, 0, duration);
+            moveX.EasingFunction = slowed;
+            DoubleAnimation moveY = new DoubleAnimation(start.Y - _centerWpf.Y, 0, duration);
+            moveY.EasingFunction = slowed;
+            // Smoother on a fast screen (as for the opening of the magnifier, issue #154).
+            Timeline.SetDesiredFrameRate(moveX, 144);
+            Timeline.SetDesiredFrameRate(moveY, 144);
+
+            foreach (UIElement part in new UIElement[] { _background, _configBadge, _ring, _label })
+            {
+                if (part == null)
+                {
+                    continue;
+                }
+                part.RenderTransform = offset;
+                DoubleAnimation fade = new DoubleAnimation(0, 1, duration);
+                fade.EasingFunction = slowed;
+                part.BeginAnimation(UIElement.OpacityProperty, fade);
+            }
+            offset.BeginAnimation(TranslateTransform.XProperty, moveX);
+            offset.BeginAnimation(TranslateTransform.YProperty, moveY);
+        }
 
         /// <summary>
         /// Size of the ACTIVATION ZONE (the zone where the gaze "touches" the button), relative
