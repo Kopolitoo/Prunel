@@ -249,6 +249,7 @@ namespace Prunel
         internal const uint KEYEVENTF_UNICODE = 0x0004;
         internal const ushort VK_BACK = 0x08;     // Backspace (delete)
         internal const ushort VK_LWIN = 0x5B;     // left Windows key
+        internal const ushort VK_TAB = 0x09;      // Tab (Task View, with Windows)
 
         /// <summary>
         /// Gives the key (and modifiers) producing a character with the Windows keyboard

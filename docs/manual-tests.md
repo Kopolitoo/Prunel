@@ -554,6 +554,21 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
 5. With Shift on, "é" types "É" and the letters page comes back.
 6. Same with the English keyboard (QWERTY, accents page "á à â…").
 
+## 41. Shortcuts row of the menu (step shortcuts-menu, issue #151)
+
+1. Open several windows (Notepad, Explorer, a browser). Open the menu: a "Shortcuts" button
+   (grid of squares) is in the bar, between "Keyboard" and "Call".
+2. Look at "Shortcuts": the bar is replaced by Windows + Tab, Game, Call, Mouse tracking, Back.
+   The button now under the gaze does NOT activate until the gaze leaves it and comes back.
+3. "Back": the bar comes back. "Shortcuts" again, then look away for one second: the whole menu
+   closes.
+4. "Windows + Tab": the menu closes and Task View shows the open windows. The gaze circle shows
+   above it (full installation, UI access), and a gaze click on a window brings it to the front.
+5. "Mouse tracking" in the row: green border on / off, the row stays open. "Call" rings as in the
+   bar. "Game" switches to game mode; from game mode, the row shows "Quit game" (green border),
+   and "Windows + Tab" returns to movement mode.
+6. Same in French and English: labels "Shortcuts" / "Raccourcis", "Windows + Tab (open windows)".
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,

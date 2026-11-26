@@ -126,6 +126,10 @@ depuis le mode mouvement et le regard fixe, jamais pendant le choix d'action, la
 défilement, le jeu ou les paramètres. Regarder sous l'écran ou à côté ne compte pas. Pour changer
 le délai ou la désactiver : Paramètres, catégorie « Regard », onglet « Pause ».
 - **Suivi souris** : activé / désactivé (bord vert quand il est activé).
+- **Raccourcis** : la barre est remplacée par une rangée de raccourcis. **Windows + Tab**
+  affiche toutes les fenêtres ouvertes (vue des tâches) : le menu se ferme, on regarde la fenêtre
+  voulue et on clique dessus au regard comme d'habitude. **Jeu**, **Appeler** et **Suivi souris**
+  marchent comme dans la barre. **Retour** ramène la barre. Cette rangée s'enrichira avec le temps.
 - **Quitter Prunel** : demande d'abord « Oui » ou « Non ».
 
 Regarder hors de la barre pendant une seconde la ferme.

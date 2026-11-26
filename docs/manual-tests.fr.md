@@ -611,6 +611,24 @@ jeton).
 5. Avec Maj allumée, « é » écrit « É » et la page des lettres revient.
 6. Pareil avec le clavier anglais (QWERTY, page d'accents « á à â… »).
 
+## 41. Rangée de raccourcis du menu (étape shortcuts-menu, issue #151)
+
+1. Ouvrir plusieurs fenêtres (Bloc-notes, Explorateur, un navigateur). Ouvrir le menu : un bouton
+   « Raccourcis » (grille de carrés) est dans la barre, entre « Clavier » et « Appeler ».
+2. Regarder « Raccourcis » : la barre est remplacée par Windows + Tab, Jeu, Appeler, Suivi souris,
+   Retour. Le bouton maintenant sous le regard ne se déclenche PAS tant que le regard ne l'a pas
+   quitté puis n'y est pas revenu.
+3. « Retour » : la barre revient. De nouveau « Raccourcis », puis regarder ailleurs une seconde :
+   tout le menu se ferme.
+4. « Windows + Tab » : le menu se ferme et la vue des tâches montre les fenêtres ouvertes. Le
+   cercle du regard s'affiche par-dessus (installation complète, accès à l'interface), et un clic
+   du regard sur une fenêtre la met au premier plan.
+5. « Suivi souris » dans la rangée : bord vert allumé / éteint, la rangée reste ouverte.
+   « Appeler » sonne comme dans la barre. « Jeu » passe en mode jeu ; depuis le mode jeu, la rangée
+   montre « Quitter le jeu » (bord vert), et « Windows + Tab » ramène au mode mouvement.
+6. Pareil en français et en anglais : « Raccourcis » / « Shortcuts », « Windows + Tab (fenêtres
+   ouvertes) ».
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,

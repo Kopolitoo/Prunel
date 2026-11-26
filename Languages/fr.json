@@ -24,6 +24,8 @@
   "menu.game": "Jeu",
   "menu.keyboard": "Clavier",
   "menu.mouseTracking": "Suivi souris",
+  "menu.shortcuts": "Raccourcis",
+  "menu.windowsTab": "Windows + Tab (fenêtres ouvertes)",
   "menu.quit": "Quitter Prunel",
   "actionChoice.emptySlot": "Emplacement libre (à configurer dans les paramètres)",
   "action.leftClick.short": "Clic gauche",

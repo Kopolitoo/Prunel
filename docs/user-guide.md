@@ -120,6 +120,10 @@ movement mode and fixed gaze, never during the action choice, the magnifier, scr
 game or the settings. Looking below or beside the screen does not count. To change the delay
 or turn it off: Settings, "Gaze" category, "Pause" tab.
 - **Mouse tracking**: on / off (green border when on).
+- **Shortcuts**: the bar is replaced by a row of shortcuts. **Windows + Tab** shows all the
+  open windows (Task View): the menu closes, look at the window you want and click it with the
+  gaze as usual. **Game**, **Call** and **Mouse tracking** work as in the bar. **Back** brings
+  the bar back. This row will grow over time.
 - **Quit Prunel**: asks "Yes" or "No" first.
 
 Look away from the bar for one second to close it.

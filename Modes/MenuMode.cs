@@ -22,6 +22,8 @@ namespace Prunel
     ///                  becomes "Quit game" and returns to movement mode;
     ///   Keyboard       opens Prunel's gaze keyboard (see GazeKeyboard), then closes
     ///                  the menu. If it is already open (hidden by game mode), closes it;
+    ///   Shortcuts      shows the SHORTCUTS row instead of the bar (step shortcuts-menu, see
+    ///                  below);
     ///   Call           rings the call bell (step call-bell, see BellRinger). The menu stays
     ///                  open, with "Call sent" (or the problem) above the bar;
     ///   Pause          switches to pause mode;
@@ -31,6 +33,17 @@ namespace Prunel
     ///
     /// Calibration and Diagnostic are not in the bar: they
     /// are in the "Tools" tab of the settings (see SettingsWindow).
+    ///
+    /// SHORTCUTS ROW (step shortcuts-menu, issues #147 and #151): same place and same
+    /// buttons as the bar, it groups shortcuts and modes used often. It will grow over time.
+    /// From left to right:
+    ///   Windows + Tab  sends Windows + Tab (Task View: all the open windows), then closes the
+    ///                  menu and returns to movement mode, to pick a window with a gaze click;
+    ///   Game           as in the bar ("Quit game", lit, coming from game mode);
+    ///   Call           as in the bar;
+    ///   Mouse tracking as in the bar (switch);
+    ///   Back           shows the bar again (on the right, like the other "Back" buttons).
+    /// Closing works as for the bar: looking away from the row closes the whole menu.
     ///
     /// From game mode, the "Quit game" button has a green border, like a lit switch: it shows
     /// that game mode is active.
@@ -85,6 +98,9 @@ namespace Prunel
             Language,
             Pause,
             Bell,
+            Shortcuts,
+            ShortcutsBack,
+            WindowsTab,
             Resume,
             MouseTracking,
             Quit,
@@ -136,6 +152,9 @@ namespace Prunel
 
         // True during the "Quit" confirmation.
         private bool _confirmation;
+
+        // True while the shortcuts row is shown instead of the bar.
+        private bool _shortcuts;
 
         // A message shown above the bar (null = none).
         private string _message;
@@ -193,6 +212,7 @@ namespace Prunel
             // The ModeManager has already noted the previous mode: that is where we will return.
             _back = Manager.PreviousMode;
             _confirmation = false;
+            _shortcuts = false;
             _message = null;
             _outsideBarStartMs = -1;
             _alreadyShown = false;
@@ -384,6 +404,28 @@ namespace Prunel
                     RingBell();
                     break;
 
+                case MenuAction.Shortcuts:
+                    // The menu stays open: the shortcuts row replaces the bar.
+                    _shortcuts = true;
+                    _message = null;
+                    Build();
+                    break;
+
+                case MenuAction.ShortcutsBack:
+                    _shortcuts = false;
+                    _message = null;
+                    Build();
+                    break;
+
+                case MenuAction.WindowsTab:
+                    // Task View (issue #151). The menu closes and we go to movement mode, even
+                    // from the game: the open windows are then picked with a normal gaze click.
+                    KeyboardInjector.TypeKey(NativeMethods.VK_TAB, false,
+                                             new ushort[] { NativeMethods.VK_LWIN });
+                    App.Log("Menu: Windows + Tab sent");
+                    Manager.ChangeMode(new MovementMode());
+                    break;
+
                 case MenuAction.Resume:
                     // End of the pause: straight back to movement mode, without showing the
                     // other buttons.
@@ -541,6 +583,16 @@ namespace Prunel
                 Add(buttons, actions, new GazeButton("\uE7ED", null, Texts.Get("menu.bell")), MenuAction.Bell);
                 Add(buttons, actions, new GazeButton("\uE769", null, Texts.Get("menu.pause")), MenuAction.Pause);
             }
+            else if (_shortcuts && !_confirmation)
+            {
+                // Shortcuts row (see the class comment).
+                //   E7C4 = task view, E72B = back arrow.
+                Add(buttons, actions, new GazeButton("\uE7C4", null, Texts.Get("menu.windowsTab")), MenuAction.WindowsTab);
+                AddGameButton(buttons, actions);
+                Add(buttons, actions, new GazeButton("\uE7ED", null, Texts.Get("menu.bell")), MenuAction.Bell);
+                AddMouseTrackingButton(buttons, actions, p);
+                Add(buttons, actions, new GazeButton("\uE72B", null, Texts.Get("common.back")), MenuAction.ShortcutsBack);
+            }
             else if (_confirmation)
             {
                 // "No" is on the right, "Yes" on the left. The bar is shorter and centered:
@@ -555,25 +607,15 @@ namespace Prunel
                 //   E713 gear, E7FC gamepad, E765 keyboard, E769 pause,
                 //   E768 play, E962 mouse, E7E8 power button.
                 Add(buttons, actions, new GazeButton("", null, Texts.Get("menu.settings")), MenuAction.Settings);
-                if (_back is GameMode)
-                {
-                    // Green border: game mode is active.
-                    GazeButton quitGame = new GazeButton("\uE7FC", null, Texts.Get("menu.quitGame"));
-                    quitGame.SetLit(true);
-                    Add(buttons, actions, quitGame, MenuAction.QuitGame);
-                }
-                else
-                {
-                    Add(buttons, actions, new GazeButton("\uE7FC", null, Texts.Get("menu.game")), MenuAction.Game);
-                }
+                AddGameButton(buttons, actions);
                 Add(buttons, actions, new GazeButton("", null, Texts.Get("menu.keyboard")), MenuAction.Keyboard);
-                // E7ED = ringer: the call bell (step call-bell), in the middle of the bar.
+                // E71D = grid of squares: the shortcuts row (step shortcuts-menu).
+                Add(buttons, actions, new GazeButton("\uE71D", null, Texts.Get("menu.shortcuts")), MenuAction.Shortcuts);
+                // E7ED = ringer: the call bell (step call-bell).
                 Add(buttons, actions, new GazeButton("\uE7ED", null, Texts.Get("menu.bell")), MenuAction.Bell);
                 // (From the pause, only "Resume" is shown: so here, we are never in pause.)
                 Add(buttons, actions, new GazeButton("", null, Texts.Get("menu.pause")), MenuAction.Pause);
-                GazeButton tracking = new GazeButton("", null, Texts.Get("menu.mouseTracking"));
-                tracking.SetLit(p.MouseTracking);
-                Add(buttons, actions, tracking, MenuAction.MouseTracking);
+                AddMouseTrackingButton(buttons, actions, p);
                 Add(buttons, actions, new GazeButton("", null, Texts.Get("menu.quit")), MenuAction.Quit);
             }
 
@@ -653,6 +695,34 @@ namespace Prunel
             layer.ShowMenuBar(!_alreadyShown);
             _alreadyShown = true;
             _built = true;
+        }
+
+        /// <summary>
+        /// The "Game" button, or "Quit game" (green border: game mode is active) when coming
+        /// from game mode. Shared by the bar and the shortcuts row.
+        /// </summary>
+        private void AddGameButton(List<GazeButton> buttons, List<MenuAction?> actions)
+        {
+            // E7FC = gamepad.
+            if (_back is GameMode)
+            {
+                GazeButton quitGame = new GazeButton("\uE7FC", null, Texts.Get("menu.quitGame"));
+                quitGame.SetLit(true);
+                Add(buttons, actions, quitGame, MenuAction.QuitGame);
+            }
+            else
+            {
+                Add(buttons, actions, new GazeButton("\uE7FC", null, Texts.Get("menu.game")), MenuAction.Game);
+            }
+        }
+
+        /// <summary>The "Mouse tracking" switch (green border when on). Bar and shortcuts row.</summary>
+        private static void AddMouseTrackingButton(List<GazeButton> buttons, List<MenuAction?> actions, AppSettings p)
+        {
+            // E962 = mouse.
+            GazeButton tracking = new GazeButton("\uE962", null, Texts.Get("menu.mouseTracking"));
+            tracking.SetLit(p.MouseTracking);
+            Add(buttons, actions, tracking, MenuAction.MouseTracking);
         }
 
         private static void Add(List<GazeButton> buttons, List<MenuAction?> actions,
