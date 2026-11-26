@@ -402,6 +402,31 @@ namespace Prunel
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool AttachThreadInput(uint threadAttach, uint threadAttachTo, [MarshalAs(UnmanagedType.Bool)] bool attach);
 
+        // ───────────────────────── Active window watch (log) ─────────────────────────
+        //
+        // See ForegroundWatch: Windows tells Prunel each time another window becomes active.
+
+        /// <summary>The function Windows calls for each watched event.</summary>
+        internal delegate void WinEventProc(IntPtr hook, uint eventType, IntPtr window,
+                                            int objectId, int childId, uint thread, uint timeMs);
+
+        /// <summary>Asks Windows to call a function for some events (here: the active window changed).</summary>
+        [DllImport("user32.dll")]
+        internal static extern IntPtr SetWinEventHook(uint eventMin, uint eventMax, IntPtr module,
+                                                      WinEventProc callback, uint process, uint thread, uint flags);
+
+        /// <summary>Stops a watch started with SetWinEventHook.</summary>
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool UnhookWinEvent(IntPtr hook);
+
+        /// <summary>Reads the class name of a window (its "kind", for example Chrome_WidgetWin_1).</summary>
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        internal static extern int GetClassName(IntPtr window, System.Text.StringBuilder name, int maxCount);
+
+        internal const uint EVENT_SYSTEM_FOREGROUND = 0x0003;   // another window became active
+        internal const uint WINEVENT_OUTOFCONTEXT = 0x0000;     // the call comes through Prunel's message loop
+
         /// <summary>The number of the calling thread (here, the one of Prunel's display).</summary>
         [DllImport("kernel32.dll")]
         internal static extern uint GetCurrentThreadId();

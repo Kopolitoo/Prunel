@@ -52,7 +52,7 @@ l'explication de la classe.
 | `Settings` | le fichier des réglages, les profils et la fenêtre des paramètres : `AppSettings`, `SettingsCatalog`, `SettingsProfiles`, `SettingsWindow`, `SettingTarget` |
 | `Ui` | fenêtres et boutons au regard : `OverlayWindow`, `DiagnosticWindow`, `CursorSampler`, `GazeButton`, `ButtonAimer`, `IGazeTarget`, `Texts`, `CircleColors`, `Palette`, `Cross` |
 | `Bell` | la sonnette d'appel : `IBell`, `BellRinger`, `ComputerBell`, `VoiceMonkeyBell`, `SecretStore` |
-| `Platform` | appels à Windows : `NativeMethods`, `MouseInjector`, `KeyboardInjector`, `KeyboardHook`, `MouseClickHook`, `WheelScroller`, `CursorWaker`, `ScreenCapture`, `ScreenMetrics`, `WindowsStartup`, `UiAccess`, `SoundFeedback`, `WindowsVolume` |
+| `Platform` | appels à Windows : `NativeMethods`, `MouseInjector`, `KeyboardInjector`, `KeyboardHook`, `MouseClickHook`, `WheelScroller`, `CursorWaker`, `ScreenCapture`, `ScreenMetrics`, `WindowsStartup`, `UiAccess`, `SoundFeedback`, `WindowsVolume`, `ForegroundWatch` |
 | `Languages`, `Keyboards`, `Dictionaries` | fichiers de données copiés à côté de `Prunel.exe` (textes, dispositions de clavier, dictionnaires de prédiction) |
 | `Resources` | l'icône du programme |
 | `Install` | l'installateur de l'installation complète (accès à l'interface) : `Prunel.iss` (Inno Setup) et `setup-certificate.ps1` |
@@ -506,6 +506,11 @@ Pour ajouter une langue : copier `en.json` en `xx.json`, traduire les valeurs (j
   touches, menu…) seulement quand le réglage « Journal détaillé » est activé. À 5 Mo, le fichier
   devient `prunel.old.log` et un nouveau commence. Ne jamais écrire de coordonnées du regard ni
   de texte tapé dans le journal.
+- `ForegroundWatch` (dossier `Platform`) écrit « Active window: programme (classe) » dans le
+  journal détaillé chaque fois qu'une autre fenêtre devient active (`SetWinEventHook` de Windows,
+  événement « premier plan »). Il aide à voir si Prunel ou un autre programme a pris le clavier
+  (les raccourcis de Dragon vont à la fenêtre active). Nom du programme et classe seulement :
+  jamais le titre de la fenêtre.
 - `DiagnosticWindow` (onglet « Outils » des paramètres) montre le curseur et le regard en direct ;
   `CursorSampler` (1000 lectures par seconde) ne tourne que pendant que cette fenêtre est ouverte.
 - `GazeStability` (dossier `Gaze`), affiché dans la fenêtre Diagnostic, compte la stabilité du

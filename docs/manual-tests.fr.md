@@ -658,6 +658,20 @@ jeton).
    souris. Dans `settings.json`, "Shortcut2": "zorglub" → cette place devient Aucun.
 8. Pareil en français et en anglais (onglet « Shortcuts », « Place 1 (bottom) », « None »…).
 
+## 43. Quelle fenêtre a le clavier (raccourcis de Dragon)
+
+1. « Journal détaillé » activé. Lancer Prunel, ouvrir un navigateur, cliquer dans une page.
+2. Dans le journal, une ligne « Active window: chrome (Chrome_WidgetWin_1) » (ou msedge,
+   firefox…) quand le navigateur devient actif. Ni titre de fenêtre ni position dans ces lignes.
+3. Mouvement, regard fixe, loupe, choix d'action, menu, clavier du regard : aucune ligne
+   « Active window: PRUNEL » (la couche ne prend jamais le clavier).
+4. Paramètres ouverts depuis le menu : « Active window: PRUNEL (…) » ; à leur fermeture, une ligne
+   nomme le programme devenu actif ensuite.
+5. Mode défilement sur une autre fenêtre que la fenêtre active : une ligne nomme le programme de
+   cette fenêtre.
+6. Quand « page précédente » / « page suivante » de Dragon ne marchent pas, noter l'heure et lire
+   les dernières lignes « Active window » d'avant : elles disent quel programme avait le clavier.
+
 ## Installation complète (Setup.exe, accès à l'interface)
 
 Prendre le zip `Prunel-setup-…` de la compilation automatique (page Actions de la pull request,

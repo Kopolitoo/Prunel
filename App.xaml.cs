@@ -29,6 +29,7 @@ namespace Prunel
         private OverlayWindow _layer;
         private ModeManager _modes;
         private KeyboardHook _keyboard;
+        private ForegroundWatch _foregroundWatch;
         private DiagnosticWindow _diagnostic;
 
         /// <summary>
@@ -136,6 +137,11 @@ namespace Prunel
             // no longer match the text (issue #96).
             _keyboard.OtherKeyPressed += () => _modes.Keyboard.ForgetAfterOutsideInput();
             _keyboard.Install();
+
+            // Detailed log: which program becomes active, and when (Dragon's shortcuts go to
+            // the active window).
+            _foregroundWatch = new ForegroundWatch();
+            _foregroundWatch.Install();
         }
 
         /// <summary>
@@ -248,6 +254,10 @@ namespace Prunel
             if (_keyboard != null)
             {
                 _keyboard.Dispose();
+            }
+            if (_foregroundWatch != null)
+            {
+                _foregroundWatch.Dispose();
             }
             if (_modes != null)
             {
