@@ -204,14 +204,18 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   (étape shortcuts-menu, interrupteur, `_shortcuts`) : il déplie au-dessus de lui une colonne de
   raccourcis (`PlaceShortcuts`, étiquettes à gauche) : Applications (Windows + Tab : vue des tâches, issue #151,
   envoyé par `KeyboardInjector.TypeKey`, puis mode mouvement), Jeu (ou Quitter le jeu), Appeler,
-  Suivi souris (interrupteur, bord vert quand il est activé). Le dépliage est animé
+  Suivi souris (interrupteur, bord vert quand il est activé). La colonne a quatre places
+  (`Shortcut1` … `Shortcut4`, `settings.json` version 32, onglet « Raccourcis » de la catégorie
+  « Actions », issue #147), chacune avec un nom de `Actions/MenuShortcuts` (« applications »,
+  « game », « bell », « mouseTracking », « quit », ou « none » : sautée), construites par
+  `MenuMode.AddShortcut` ; Quitter demande d'abord « Oui » / « Non ». Le dépliage est animé
   (`GazeButton.SlideFrom`, 300 ms, EaseOut) : les boutons sortent de sous le bouton Raccourcis.
   Le bouton et la colonne comptent comme « dans la barre ».
   Regarder hors de la barre pendant `MenuCloseDelay` (1 s) la ferme et ramène au mode
   d'avant. Un petit cercle montre où est le regard.
 - `Modes/SettingsMode` et `SettingsWindow` (étape 7) : bouton « Paramètres » du menu. Une
   fenêtre plein écran, fond noir, avec à gauche quatre catégories dépliantes (02/11/2026) : Regard (Regard,
-  Fixation, Délais), Actions (Loupe et glisser, Défilement, Choix d'action), Affichage (Affichage, Clavier,
+  Fixation, Délais), Actions (Loupe et glisser, Défilement, Choix d'action, Raccourcis, Sonnette, Alexa), Affichage (Affichage, Clavier,
   Jeu) et Système (Général, Profils, Outils, À propos). L'onglet Général a en bas à droite un bouton « Quitter Prunel » puis la question « Quitter Prunel ? » (`BuildQuitConfirmation`) ; « Oui » appelle `SettingsMode.QuitPrunel`, qui ferme Prunel (Quitter a quitté le menu le 26/11/2026). L'onglet « À propos » (issue #92) montre la
   version (`App.Version`), l'image de l'auteur (`Resources/Author.jpg`, intégrée à l'exe) et deux
   boutons dont les adresses viennent du fichier de langue ; `SettingsMode.OpenLink` les ouvre

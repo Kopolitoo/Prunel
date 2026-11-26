@@ -112,7 +112,8 @@ le mode jeu. Boutons :
   plus bas). Pour quitter Prunel : Paramètres, onglet « Général ».
 - **Raccourcis** : un bouton seul près du coin en bas à droite, qui apparaît avec la barre. On
   le regarde : une colonne de raccourcis sort de sous lui et monte (bord vert) ; on le regarde
-  de nouveau pour la replier. Cette colonne s'enrichira avec le temps. De bas en haut :
+  de nouveau pour la replier. Ses quatre places se choisissent dans les paramètres (onglet
+  « Raccourcis », voir plus bas). Au départ, de bas en haut :
   - **Applications** (Windows + Tab) : affiche toutes les fenêtres ouvertes (vue des tâches) : le menu se
     ferme, on regarde la fenêtre voulue et on clique dessus au regard comme d'habitude.
   - **Jeu** : mode jeu (voir plus bas). Depuis le mode jeu, il devient **Quitter le jeu**.
@@ -227,6 +228,11 @@ sont enregistrés.
   est grand, plus les mots courts passent devant les longs dans les trois cases du clavier du
   regard ; 1,0 = aucune préférence, seuls comptent la fréquence du mot et votre usage. Si des mots
   longs utiles arrivent trop tard, baissez-le ; si des mots longs rares gênent, montez-le.
+- Onglet **Raccourcis** (catégorie « Actions ») : les quatre places de la colonne de raccourcis
+  du menu, du bas (place 1) vers le haut (place 4). Pour chacune, « − » / « + » choisit parmi
+  **Applications**, **Jeu**, **Appeler**, **Suivi souris**, **Quitter Prunel** (demande d'abord
+  « Oui » / « Non ») ou **Aucun** (la colonne est alors plus courte). Au départ : Applications,
+  Jeu, Appeler, Suivi souris.
 - Onglet **Sonnette** (catégorie « Actions ») : **Sonnette de l'ordinateur** (oui au départ) :
   le bouton « Appeler » du menu sonne sur cet ordinateur. **Durée de la sonnerie** (6 s au
   départ, de 2 à 30 s) et **Volume de la sonnette** (80 % au départ, de 10 à 100 % ; le volume de

@@ -195,12 +195,16 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   `_shortcuts`): it unfolds above it a column of shortcuts (`PlaceShortcuts`, labels on the
   left): Applications (Windows + Tab: Task View, issue #151, sent by `KeyboardInjector.TypeKey`, then
   movement mode), Game (or Quit game), Call, Mouse tracking (switch, green border when on).
+  The column has four places (`Shortcut1` … `Shortcut4`, `settings.json` version 32, "Shortcuts"
+  tab of the "Actions" category, issue #147), each holding a name of `Actions/MenuShortcuts`
+  ("applications", "game", "bell", "mouseTracking", "quit", or "none": skipped), built by
+  `MenuMode.AddShortcut`; Quit asks "Yes" / "No" first.
   Unfolding is animated (`GazeButton.SlideFrom`, 300 ms, EaseOut): the buttons come out from
   under the Shortcuts button. The button and the column count as "in the bar". Looking
   outside the bar for `MenuCloseDelay` (1 s) closes it and goes back to the previous mode. A small circle shows where the gaze is.
 - `Modes/SettingsMode` and `SettingsWindow` (step 7): "Settings" button of the menu. A
   full-screen window, black background, with four collapsible categories on the left: Gaze
-  (Gaze, Fixation, Delays), Actions (Magnifier, drag, Scroll, Action choice), Display (Display,
+  (Gaze, Fixation, Delays), Actions (Magnifier, drag, Scroll, Action choice, Shortcuts, Bell, Alexa), Display (Display,
   Keyboard, Game) and System (General, Profiles, Tools, About). The General tab has, in the bottom-right corner, a "Quit Prunel" button then the question "Quit Prunel?" (`BuildQuitConfirmation`); "Yes" calls `SettingsMode.QuitPrunel`, which closes Prunel (Quit left the menu on 2026-11-26). The "About" tab (issue #92) shows the version
   (`App.Version`), the author's picture (`Resources/Author.jpg`, built into the exe) and two
   buttons whose addresses come from the language file; `SettingsMode.OpenLink` opens them in

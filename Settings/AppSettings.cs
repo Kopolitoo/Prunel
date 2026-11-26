@@ -114,8 +114,12 @@ namespace Prunel
         ///      file, it gets its default value.
         ///  31: issue #161 — OpeningDuration (0.4 s, the former fixed duration). Nothing to fix:
         ///      missing from an older file, it gets its default value.
+        ///  32: step shortcuts-menu (issue #147) — Shortcut1 … Shortcut4, the four places of the
+        ///      shortcuts column of the menu. Nothing to fix: missing from an older file, they get
+        ///      their default value (Applications, Game, Call, Mouse tracking: the column as it
+        ///      was).
         /// </summary>
-        public const int CurrentVersion = 31;
+        public const int CurrentVersion = 32;
 
         /// <summary>Format number of the file, so it can evolve one day without breaking everything.</summary>
         [DataMember(Order = 0)]
@@ -749,5 +753,56 @@ namespace Prunel
         /// </summary>
         [DataMember(Order = 159)]
         public double OpeningDuration { get; set; }
+
+        // ───────────────────────── Shortcuts column of the menu ─────────────────────────
+
+        /// <summary>
+        /// The four places of the shortcuts column of the menu, from bottom to top (step
+        /// shortcuts-menu, issue #147). Each one holds a button name of MenuShortcuts
+        /// ("applications", "game", "bell", "mouseTracking", "quit") or "none".
+        /// </summary>
+        [DataMember(Order = 160)]
+        public string Shortcut1 { get; set; }
+
+        [DataMember(Order = 161)]
+        public string Shortcut2 { get; set; }
+
+        [DataMember(Order = 162)]
+        public string Shortcut3 { get; set; }
+
+        [DataMember(Order = 163)]
+        public string Shortcut4 { get; set; }
+
+        // The places of Shortcut1 … Shortcut4 in the list of MenuShortcuts (for settings mode).
+        // Not saved.
+        public int Shortcut1Index
+        {
+            get { return MenuShortcuts.IndexOf(Shortcut1); }
+            set { Shortcut1 = MenuShortcuts.NameAt(value); }
+        }
+
+        public int Shortcut2Index
+        {
+            get { return MenuShortcuts.IndexOf(Shortcut2); }
+            set { Shortcut2 = MenuShortcuts.NameAt(value); }
+        }
+
+        public int Shortcut3Index
+        {
+            get { return MenuShortcuts.IndexOf(Shortcut3); }
+            set { Shortcut3 = MenuShortcuts.NameAt(value); }
+        }
+
+        public int Shortcut4Index
+        {
+            get { return MenuShortcuts.IndexOf(Shortcut4); }
+            set { Shortcut4 = MenuShortcuts.NameAt(value); }
+        }
+
+        /// <summary>The four places, from bottom to top.</summary>
+        public string[] Shortcuts
+        {
+            get { return new string[] { Shortcut1, Shortcut2, Shortcut3, Shortcut4 }; }
+        }
     }
 }
