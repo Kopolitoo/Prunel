@@ -197,13 +197,15 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   ouvre une barre centrée en bas de l'écran (boutons seuls, sans fond, espacés de 100 px sur
   un écran 4K : issue #54), uniquement depuis les modes mouvement et pause
   (et plus tard jeu, depuis l'étape 6 ; c'est le `ModeManager` qui surveille). La loupe, le
-  choix d'action et le glisser-déposer ont leur bouton « retour ». Boutons : Paramètres, Jeu, Clavier
-  (le clavier au regard, étape 12), Pause (ou Reprendre si l'on vient de la pause), Suivi souris (interrupteur, bord vert
-  quand il est activé), Quitter Prunel (avec confirmation « Oui » / « Non »), et, seul près du coin en bas à droite, Raccourcis
+  choix d'action et le glisser-déposer ont leur bouton « retour ». Boutons : Paramètres, Clavier
+  (le clavier au regard, étape 12), Pause (ou Reprendre si l'on vient de la pause), Quitter
+  Prunel (avec confirmation « Oui » / « Non »), et, seul près du coin en bas à droite, Raccourcis
   (étape shortcuts-menu, interrupteur, `_shortcuts`) : il déplie au-dessus de lui une colonne de
   raccourcis (`PlaceShortcuts`, étiquettes à gauche) : Windows + Tab (vue des tâches, issue #151,
-  envoyé par `KeyboardInjector.TypeKey`, puis mode mouvement), Jeu, Appeler, Suivi souris. Le
-  bouton et la colonne comptent comme « dans la barre ».
+  envoyé par `KeyboardInjector.TypeKey`, puis mode mouvement), Jeu (ou Quitter le jeu), Appeler,
+  Suivi souris (interrupteur, bord vert quand il est activé). Le dépliage est animé
+  (`GazeButton.SlideFrom`, 300 ms, EaseOut) : les boutons sortent de sous le bouton Raccourcis.
+  Le bouton et la colonne comptent comme « dans la barre ».
   Regarder hors de la barre pendant `MenuCloseDelay` (1 s) la ferme et ramène au mode
   d'avant. Un petit cercle montre où est le regard.
 - `Modes/SettingsMode` et `SettingsWindow` (étape 7) : bouton « Paramètres » du menu. Une

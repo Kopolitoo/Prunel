@@ -101,16 +101,27 @@ well-spaced buttons, with no background behind them. It opens from movement mode
 game mode. Buttons:
 
 - **Settings**: see below.
-- **Game**: game mode (see below).
 - **Keyboard**: the gaze keyboard.
-- **Call** (bell): rings to call someone. With the **computer bell** (on at first), a loud
-  "ding-dong" rings on this computer for a few seconds (through its speakers, or a Bluetooth
-  speaker if Windows plays its sounds there). The menu stays open and shows "Call sent". A
-  second call within 5 seconds is ignored ("Call already sent"). The bell is not in the pause
-  bar: first choose "Resume", then open the menu again. Settings, "Actions" category, "Bell"
-  tab.
-- **Pause** / **Resume**: nothing follows your gaze any more, until you open the menu again
-  and choose "Resume".
+- **Pause** / **Resume**: see below.
+- **Quit Prunel**: asks "Yes" or "No" first.
+- **Shortcuts**: a button on its own near the bottom-right corner, shown with the bar. Look
+  at it: a column of shortcuts comes out from under it and slides up (green border); look at
+  it again to fold it. This column will grow over time. From bottom to top:
+  - **Windows + Tab**: shows all the open windows (Task View): the menu closes, look at the
+    window you want and click it with the gaze as usual.
+  - **Game**: game mode (see below). From game mode, it becomes **Quit the game**.
+  - **Call** (bell): rings to call someone. With the **computer bell** (on at first), a loud
+    "ding-dong" rings on this computer for a few seconds (through its speakers, or a Bluetooth
+    speaker if Windows plays its sounds there). The menu stays open and shows "Call sent". A
+    second call within 5 seconds is ignored ("Call already sent"). The bell is not in the pause
+    bar: first choose "Resume", then open the menu again. Settings, "Actions" category, "Bell"
+    tab.
+  - **Mouse tracking**: on / off (green border when on).
+
+Look away from the bar and the column for one second to close the menu.
+
+**Pause** / **Resume**: nothing follows your gaze any more, until you open the menu again
+and choose "Resume".
 
 **Automatic pause**: when the eyetracker no longer sees your eyes for 10 seconds (eyes closed,
 head turned, away from the computer), Prunel pauses by itself, so that nothing is clicked when
@@ -119,15 +130,6 @@ to go back to movement mode (the menu's "Resume" and Escape work too). It only s
 movement mode and fixed gaze, never during the action choice, the magnifier, scrolling, the
 game or the settings. Looking below or beside the screen does not count. To change the delay
 or turn it off: Settings, "Gaze" category, "Pause" tab.
-- **Mouse tracking**: on / off (green border when on).
-- **Shortcuts**: a button on its own near the bottom-right corner, shown with the bar. Look
-  at it: a column of shortcuts unfolds above it (green border); look at it again to fold it.
-  **Windows + Tab** shows all the open windows (Task View): the menu closes, look at the window
-  you want and click it with the gaze as usual. **Game**, **Call** and **Mouse tracking** work
-  as in the bar. This column will grow over time.
-- **Quit Prunel**: asks "Yes" or "No" first.
-
-Look away from the bar for one second to close it.
 
 ## Gaze keyboard
 
@@ -168,8 +170,8 @@ already open, it stays open: this is how you move to another field.
 
 ## Game mode
 
-Menu, "Game". Nothing is drawn; the mouse cursor follows your gaze directly (made for games like
-Mindball Play). Clicks are made with an external switch or voice recognition. Open the menu and
+Menu, "Shortcuts", "Game". Nothing is drawn; the mouse cursor follows your gaze directly (made for games like
+Mindball Play). Clicks are made with an external switch or voice recognition. Open the menu, "Shortcuts", and
 choose "Quit the game" to go back. The "Game" tab of the settings has the game options,
 including its own "Game smoothing" and "Game anti-jitter": they change only game mode (and
 "Hold left / right"), not movement mode. The game anti-jitter moves by 0.05 % steps, to aim

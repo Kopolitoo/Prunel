@@ -107,16 +107,28 @@ boutons bien espacés, sans fond derrière eux. Elle s'ouvre depuis le mode mouv
 le mode jeu. Boutons :
 
 - **Paramètres** : voir plus bas.
-- **Jeu** : mode jeu (voir plus bas).
 - **Clavier** : le clavier du regard.
-- **Appeler** (sonnette) : sonne pour appeler quelqu'un. Avec la **sonnette de l'ordinateur**
-  (activée au départ), un « ding-dong » fort sonne sur cet ordinateur pendant quelques secondes
-  (par ses haut-parleurs, ou une enceinte Bluetooth si Windows y joue ses sons). Le menu reste
-  ouvert et affiche « Appel envoyé ». Un deuxième appel dans les 5 secondes est ignoré (« Appel
-  déjà envoyé »). La sonnette n'est pas dans la barre de la pause : choisir d'abord
-  « Reprendre », puis rouvrir le menu. Paramètres, catégorie « Actions », onglet « Sonnette ».
-- **Pause** / **Reprendre** : plus rien ne suit le regard, jusqu'à ce qu'on rouvre le menu et
-  qu'on choisisse « Reprendre ».
+- **Pause** / **Reprendre** : voir plus bas.
+- **Quitter Prunel** : demande d'abord « Oui » ou « Non ».
+- **Raccourcis** : un bouton seul près du coin en bas à droite, qui apparaît avec la barre. On
+  le regarde : une colonne de raccourcis sort de sous lui et monte (bord vert) ; on le regarde
+  de nouveau pour la replier. Cette colonne s'enrichira avec le temps. De bas en haut :
+  - **Windows + Tab** : affiche toutes les fenêtres ouvertes (vue des tâches) : le menu se
+    ferme, on regarde la fenêtre voulue et on clique dessus au regard comme d'habitude.
+  - **Jeu** : mode jeu (voir plus bas). Depuis le mode jeu, il devient **Quitter le jeu**.
+  - **Appeler** (sonnette) : sonne pour appeler quelqu'un. Avec la **sonnette de
+    l'ordinateur** (activée au départ), un « ding-dong » fort sonne sur cet ordinateur pendant
+    quelques secondes (par ses haut-parleurs, ou une enceinte Bluetooth si Windows y joue ses
+    sons). Le menu reste ouvert et affiche « Appel envoyé ». Un deuxième appel dans les 5
+    secondes est ignoré (« Appel déjà envoyé »). La sonnette n'est pas dans la barre de la
+    pause : choisir d'abord « Reprendre », puis rouvrir le menu. Paramètres, catégorie
+    « Actions », onglet « Sonnette ».
+  - **Suivi souris** : activé / désactivé (bord vert quand il est activé).
+
+Regarder hors de la barre et de la colonne pendant une seconde ferme le menu.
+
+**Pause** / **Reprendre** : plus rien ne suit le regard, jusqu'à ce qu'on rouvre le menu et
+qu'on choisisse « Reprendre ».
 
 **Pause automatique** : quand l'eyetracker ne voit plus les yeux pendant 10 secondes (yeux
 fermés, tête tournée, absence), Prunel se met en pause tout seul, pour que rien ne soit cliqué au
@@ -125,16 +137,6 @@ ramène au mode mouvement (le « Reprendre » du menu et Échap marchent aussi).
 depuis le mode mouvement et le regard fixe, jamais pendant le choix d'action, la loupe, le
 défilement, le jeu ou les paramètres. Regarder sous l'écran ou à côté ne compte pas. Pour changer
 le délai ou la désactiver : Paramètres, catégorie « Regard », onglet « Pause ».
-- **Suivi souris** : activé / désactivé (bord vert quand il est activé).
-- **Raccourcis** : un bouton seul près du coin en bas à droite, qui apparaît avec la barre. On
-  le regarde : une colonne de raccourcis se déplie au-dessus (bord vert) ; on le regarde de
-  nouveau pour la replier. **Windows + Tab** affiche toutes les fenêtres ouvertes (vue des
-  tâches) : le menu se ferme, on regarde la fenêtre voulue et on clique dessus au regard comme
-  d'habitude. **Jeu**, **Appeler** et **Suivi souris** marchent comme dans la barre. Cette
-  colonne s'enrichira avec le temps.
-- **Quitter Prunel** : demande d'abord « Oui » ou « Non ».
-
-Regarder hors de la barre pendant une seconde la ferme.
 
 ## Clavier du regard
 
@@ -180,9 +182,9 @@ clavier est déjà ouvert, il reste ouvert : c'est ainsi que l'on passe à un au
 
 ## Mode jeu
 
-Menu, « Jeu ». Rien n'est dessiné ; le curseur suit directement le regard (prévu pour des jeux
+Menu, « Raccourcis », « Jeu ». Rien n'est dessiné ; le curseur suit directement le regard (prévu pour des jeux
 comme Mindball Play). Les clics se font avec un contacteur externe ou la reconnaissance vocale.
-On ouvre le menu et on choisit « Quitter le jeu » pour revenir. L'onglet « Jeu » des paramètres
+On ouvre le menu, « Raccourcis », et on choisit « Quitter le jeu » pour revenir. L'onglet « Jeu » des paramètres
 contient les options du jeu, dont son propre « Lissage du jeu » et son propre « Anti-tremblement
 du jeu » : ils ne changent que le mode jeu (et « Gauche / Droit maintenu »), pas le mode
 mouvement. L'anti-tremblement du jeu avance par pas de 0,05 %, pour viser finement.

@@ -2,6 +2,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
 namespace Prunel
@@ -340,6 +341,47 @@ namespace Prunel
 
         private Point _centerWpf;
         private double _ringRadius;
+
+        /// <summary>
+        /// Animates the button (after Place): its drawing starts from (fromX, fromY), in screen
+        /// pixels, and slides to its place in [durationMs] ms, fast at first and slow at the end
+        /// ("EaseOut"), while going from transparent to opaque. Used by the shortcuts column of
+        /// the menu: the buttons come out from under the shortcuts button.
+        /// Only the drawing moves: the activation zone is at its final place at once (the
+        /// activation delay is much longer than the animation).
+        /// </summary>
+        public void SlideFrom(OverlayWindow layer, double fromX, double fromY, double durationMs)
+        {
+            Point start = layer.ToWpf(fromX, fromY);
+
+            // One TranslateTransform shared by all the parts of the button: they move together.
+            TranslateTransform offset = new TranslateTransform();
+            Duration duration = new Duration(TimeSpan.FromMilliseconds(durationMs));
+            CubicEase slowed = new CubicEase();
+            slowed.EasingMode = EasingMode.EaseOut;
+
+            DoubleAnimation moveX = new DoubleAnimation(start.X - _centerWpf.X, 0, duration);
+            moveX.EasingFunction = slowed;
+            DoubleAnimation moveY = new DoubleAnimation(start.Y - _centerWpf.Y, 0, duration);
+            moveY.EasingFunction = slowed;
+            // Smoother on a fast screen (as for the opening of the magnifier, issue #154).
+            Timeline.SetDesiredFrameRate(moveX, 144);
+            Timeline.SetDesiredFrameRate(moveY, 144);
+
+            foreach (UIElement part in new UIElement[] { _background, _configBadge, _ring, _label })
+            {
+                if (part == null)
+                {
+                    continue;
+                }
+                part.RenderTransform = offset;
+                DoubleAnimation fade = new DoubleAnimation(0, 1, duration);
+                fade.EasingFunction = slowed;
+                part.BeginAnimation(UIElement.OpacityProperty, fade);
+            }
+            offset.BeginAnimation(TranslateTransform.XProperty, moveX);
+            offset.BeginAnimation(TranslateTransform.YProperty, moveY);
+        }
 
         /// <summary>
         /// Size of the ACTIVATION ZONE (the zone where the gaze "touches" the button), relative
