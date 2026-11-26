@@ -168,7 +168,8 @@ DLL a été trouvée. Comment un utilisateur les récupère : voir le
   glisser). Elles s'éteignent après chaque action, et à chaque retour au mode mouvement.
 - Glisser-déposer (étape 6) : depuis la couronne du choix d'action, en trois temps.
   1. `Modes/DragTargetMode` : le cercle suit le regard, une ligne blanche en pointillés part
-     du point de départ ; une fixation choisit l'arrivée.
+     du point de départ ; une fixation choisit l'arrivée. Elle compte dès l'entrée, sans zone
+     ignorée : un regard qui reste là où était l'icône de la couronne suffit (issue #179).
   2. `Modes/MagnifierMode` : la loupe affine l'arrivée. Une petite croix (`Ui/Cross`,
      partagée avec le choix d'action) marque le point de départ quand il est sur la photo
      visible (issue #170).

@@ -52,7 +52,9 @@ choose "Drag left" (four arrows, badge L), look at the destination folder (the d
 line follows), stare at it, refine in the magnifier: the file is moved. The "back" button on the
 right cancels. Drop point close to the start (a neighbouring file): in the magnifier, a small
 cross (smaller than the one of the action choice) marks the start point; a fixation on it is
-a normal drop point. Drop point far away: no cross.
+a normal drop point. Drop point far away: no cross. After choosing "Drag left", keep the gaze
+still where the icon was: after the fixation delay, the magnifier opens there, without looking
+away first (issue #179).
 
 ## 6. Settings
 

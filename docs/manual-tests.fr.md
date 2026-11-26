@@ -57,7 +57,9 @@ pastille G), on regarde le dossier d'arrivée (la ligne en pointillés suit), on
 dans la loupe : le fichier est déplacé. Le bouton « retour » à droite annule. Arrivée proche du
 départ (un fichier voisin) : dans la loupe, une petite croix (plus petite que celle du choix
 d'action) marque le point de départ ; un regard fixe dessus est une arrivée normale. Arrivée
-lointaine : pas de croix.
+lointaine : pas de croix. Après le choix de « glisser-déposer gauche », on garde le regard fixe
+là où était l'icône : après le délai de fixation, la loupe s'ouvre à cet endroit, sans avoir à
+détourner le regard (issue #179).
 
 ## 6. Paramètres
 
