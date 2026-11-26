@@ -158,7 +158,8 @@ DLL was found. How a user gets them: see the [user guide](user-guide.md#eyetrack
   turn off after each action, and at each return to movement mode.
 - Drag and drop (step 6): from the crown of the action choice, in three stages.
   1. `Modes/DragTargetMode`: the circle follows the gaze, a dotted white line starts from the
-     starting point; a fixation chooses the end point.
+     starting point; a fixation chooses the end point. It counts from the entry, with no
+     ignored zone: a gaze that stays where the crown icon was is enough (issue #179).
   2. `Modes/MagnifierMode`: the magnifier refines the end point. A small cross (`Ui/Cross`,
      shared with the action choice) marks the start point when it is on the visible photo
      (issue #170).

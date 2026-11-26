@@ -27,10 +27,10 @@ namespace Prunel
     /// (MagnifierMode, with this drag and drop in progress). The cursor has not moved: it is
     /// still on the start point.
     ///
-    /// Two precautions, as in the magnifier:
-    ///  - on entry, the gaze is still where the crown icon just activated was. A fixation is
-    ///    only recognized once the gaze has left that place (radius [CircleRadius]);
-    ///  - a fixation on the "back" button does not count as a drop point.
+    /// The fixation counts from the entry, with no ignored zone (issue #179, as in the
+    /// magnifier, issue #91): if the gaze stays still where the crown icon was, that place
+    /// becomes the drop point after the usual delay, with no need to look away first.
+    /// A fixation on the "back" button does not count as a drop point.
     ///
     /// The menu does not open during this mode: the way out is the
     /// "back" button (or the caregiver's Escape key).
@@ -52,12 +52,6 @@ namespace Prunel
         // as it has no position.
         private readonly Smoother _smoothed = new Smoother();
         private bool _placed;
-
-        // Ignored zone: where the gaze was on entry (see the class comment).
-        private bool _ignoredZone;
-        private bool _ignoredZoneKnown;
-        private double _zoneX;
-        private double _zoneY;
 
         // The path line: a solid black line underneath and a dotted white line on top, so
         // that it can be seen on every background.
@@ -87,13 +81,6 @@ namespace Prunel
                 Manager.ChangeMode(new MovementMode());
                 return;
             }
-
-            // The ignored zone is centered on the current gaze (if it is on the screen),
-            // otherwise on the first on-screen measure to come.
-            _ignoredZone = true;
-            _ignoredZoneKnown = gaze.OnScreen;
-            _zoneX = gaze.X;
-            _zoneY = gaze.Y;
 
             // The circle starts from the gaze (the action choice had hidden it: no visible
             // jump), brought back into the screen if it is outside.
@@ -130,26 +117,11 @@ namespace Prunel
                 _smoothed.Follow(gaze.XScreen, gaze.YScreen, gaze.NowMs);
             }
 
-            if (gaze.OnScreen)
-            {
-                // 3. The ignored zone: has the gaze left it? (Real on-screen gaze only.)
-                if (!_ignoredZoneKnown)
-                {
-                    _zoneX = gaze.X;
-                    _zoneY = gaze.Y;
-                    _ignoredZoneKnown = true;
-                }
-                else if (_ignoredZone && Distance(gaze.X, gaze.Y, _zoneX, _zoneY) > p.CircleRadiusPx)
-                {
-                    _ignoredZone = false;
-                }
-            }
-
-            // 4. The fixation, outside the ignored zone and outside the "back" button.
+            // 3. The fixation, from the entry (reset in Enter), outside the "back" button.
             //    No progress ring, as in movement mode.
             _fixation.Add(gaze);
             bool onBack = gaze.OnScreen && _buttons.Count > 0 && _buttons[0].Contains(gaze.X, gaze.Y);
-            if (_ignoredZone || onBack)
+            if (onBack)
             {
                 _fixation.Reset();
             }
@@ -161,7 +133,7 @@ namespace Prunel
                 return;
             }
 
-            // 5. Drawing: the circle and the path line.
+            // 4. Drawing: the circle and the path line.
             if (_placed)
             {
                 Manager.Layer.ShowCircle(_smoothed.X, _smoothed.Y, p.CircleRadiusPx, false);
@@ -253,13 +225,6 @@ namespace Prunel
                 stroke.Y2 = arrival.Y;
                 stroke.Visibility = Visibility.Visible;
             }
-        }
-
-        private static double Distance(double x1, double y1, double x2, double y2)
-        {
-            double dx = x1 - x2;
-            double dy = y1 - y2;
-            return Math.Sqrt(dx * dx + dy * dy);
         }
     }
 }
