@@ -621,8 +621,8 @@ jeton).
 2. Regarder « Raccourcis » : il prend un bord vert et une colonne se déplie au-dessus, de bas en
    haut : Windows + Tab, Jeu, Appeler, Suivi souris. Les boutons sortent de sous « Raccourcis »
    et montent, vite au départ et lentement à l'arrivée (environ 0,3 s), et arrivent tous
-   ensemble. Ils ne rejouent pas l'animation quand on utilise « Appeler » ou « Suivi souris ». Avec le réglage « Libellés », les
-   libellés sont à gauche des boutons.
+   ensemble. Ils ne rejouent pas l'animation quand on utilise « Appeler » ou « Suivi souris ».
+   Avec le réglage « Libellés », les libellés sont à gauche des boutons.
 3. Le bouton reste sous le regard : il ne replie PAS la colonne tant que le regard ne l'a pas
    quitté puis n'y est pas revenu. Le regarder de nouveau replie la colonne.
 4. En regardant la colonne, le menu ne se ferme pas et aucun cercle ne s'affiche. Regarder hors
