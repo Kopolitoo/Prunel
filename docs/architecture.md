@@ -49,7 +49,7 @@ The three biggest classes are "partial" classes: one class written in several fi
 | `Settings` | the settings file, profiles and settings window: `AppSettings`, `SettingsCatalog`, `SettingsProfiles`, `SettingsWindow`, `SettingTarget` |
 | `Ui` | windows and gaze buttons: `OverlayWindow`, `DiagnosticWindow`, `CursorSampler`, `GazeButton`, `ButtonAimer`, `IGazeTarget`, `Texts`, `CircleColors`, `Palette`, `Cross` |
 | `Bell` | the call bell: `IBell`, `BellRinger`, `ComputerBell`, `VoiceMonkeyBell`, `SecretStore` |
-| `Platform` | calls to Windows: `NativeMethods`, `MouseInjector`, `KeyboardInjector`, `KeyboardHook`, `MouseClickHook`, `WheelScroller`, `CursorWaker`, `ScreenCapture`, `ScreenMetrics`, `WindowsStartup`, `UiAccess`, `SoundFeedback`, `WindowsVolume` |
+| `Platform` | calls to Windows: `NativeMethods`, `MouseInjector`, `KeyboardInjector`, `KeyboardHook`, `MouseClickHook`, `WheelScroller`, `CursorWaker`, `ScreenCapture`, `ScreenMetrics`, `WindowsStartup`, `UiAccess`, `SoundFeedback`, `WindowsVolume`, `ForegroundWatch` |
 | `Languages`, `Keyboards`, `Dictionaries` | data files copied next to `Prunel.exe` (texts, keyboard layouts, prediction dictionaries) |
 | `Resources` | the program icon |
 | `Install` | the installer of the full installation (UI access): `Prunel.iss` (Inno Setup) and `setup-certificate.ps1` |
@@ -480,6 +480,10 @@ To add a language: copy `en.json` to `xx.json` and translate the values (never t
   errors (always); `App.LogDetail` writes the frequent events (modes, actions, keys, menu…)
   only when the "Detailed log" setting is on. At 5 MB the file becomes `prunel.old.log` and a
   new one starts. Never write gaze coordinates or typed text to the log.
+- `ForegroundWatch` (folder `Platform`) writes "Active window: program (class)" to the detailed
+  log each time another window becomes active (Windows `SetWinEventHook`, foreground event). It
+  helps to see whether Prunel or another program took the keyboard (Dragon's shortcuts go to
+  the active window). Program name and class only: never the window title.
 - `DiagnosticWindow` ("Tools" tab of the settings) shows the cursor and the gaze live;
   `CursorSampler` (1000 reads per second) only runs while this window is open.
 - `GazeStability` (folder `Gaze`), shown in the Diagnostic window, counts how steady the gaze is

@@ -601,6 +601,19 @@ Needs the Voice Monkey setup of the user guide (skill, routine trigger, Alexa ro
    tracking. In `settings.json`, "Shortcut2": "zorglub" → that place becomes None.
 8. Same in French and English (tab « Raccourcis », « Place 1 (en bas) », « Aucun »…).
 
+## 43. Which window has the keyboard (Dragon shortcuts)
+
+1. "Detailed log" on. Start Prunel, open a browser, click in a page.
+2. In the log, a line "Active window: chrome (Chrome_WidgetWin_1)" (or msedge, firefox…) when the
+   browser becomes active. No window title and no position in these lines.
+3. Movement, fixed gaze, magnifier, action choice, menu, gaze keyboard: no line "Active window:
+   PRUNEL" appears (the overlay never takes the keyboard).
+4. Settings opened from the menu: "Active window: PRUNEL (…)"; closing them: a line names the
+   program that became active next.
+5. Scroll mode on another window than the active one: a line names that window's program.
+6. When Dragon's "page back" / "page forward" fail, note the time and read the last "Active
+   window" lines before it: they tell which program had the keyboard.
+
 ## Full installation (Setup.exe, UI access)
 
 Use the `Prunel-setup-…` zip of the automatic build (Actions page of the pull request,
